@@ -1,20 +1,24 @@
 :root {
     --primary-color: #0d6efd;
+    --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #00d4ff 100%);
     --secondary-color: #6c757d;
     --dark-color: #212529;
     --light-color: #f8f9fa;
     --card-bg: #ffffff;
     --text-color: #212529;
     --body-bg: #ffffff;
+    --glow-shadow: 0 0 20px rgba(13, 110, 253, 0.4);
 }
 
 [data-theme="dark"] {
     --primary-color: #3d8bfd;
+    --primary-gradient: linear-gradient(135deg, #3d8bfd 0%, #00f2fe 100%);
     --dark-color: #f8f9fa;
     --light-color: #212529;
-    --card-bg: #2b3035;
+    --card-bg: #1e2227;
     --text-color: #f8f9fa;
-    --body-bg: #121212;
+    --body-bg: #0f1215;
+    --glow-shadow: 0 0 25px rgba(61, 139, 253, 0.5);
 }
 
 body {
@@ -24,18 +28,12 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Navbar */
+/* Navbar Gradient */
 .navbar {
     background: rgba(var(--body-bg), 0.85);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     transition: all 0.3s ease;
-}
-
-.nav-link {
-    font-weight: 500;
-    color: var(--text-color) !important;
-    position: relative;
-    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(13, 110, 253, 0.1);
 }
 
 .nav-link.active::after {
@@ -44,44 +42,141 @@ body {
     bottom: 0;
     left: 1rem;
     right: 1rem;
-    height: 2px;
-    background: var(--primary-color);
+    height: 3px;
+    background: var(--primary-gradient);
+    border-radius: 10px;
 }
 
-/* Hero Section */
-.hero-section {
-    min-height: 100vh;
-    padding-top: 80px;
+/* Buttons with Gradient */
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    transition: all 0.3s ease;
 }
 
-.hero-img-blob {
-    animation: blobMorph 8s infinite ease-in-out;
+.btn-primary:hover {
+    box-shadow: var(--glow-shadow);
+    transform: translateY(-2px);
+    background: var(--primary-gradient);
+    opacity: 0.9;
 }
 
-@keyframes blobMorph {
-    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-}
-
-/* Decorations */
+/* Decoration Underline */
 .underline {
-    width: 60px;
-    height: 4px;
-    background: var(--primary-color);
-    border-radius: 2px;
+    width: 80px;
+    height: 5px;
+    background: var(--primary-gradient);
+    border-radius: 10px;
     margin-top: 10px;
 }
 
-/* Cards */
-.skill-card, .project-card, .achievement-card, .bg-white {
+/* Cards with Gradient Glow Effect */
+.skill-card, .project-card, .achievement-card, .education-timeline, .bg-white {
     background-color: var(--card-bg) !important;
     color: var(--text-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(13, 110, 253, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    z-index: 1;
 }
 
-.skill-card:hover, .project-card:hover {
+.skill-card:hover, .project-card:hover, .achievement-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1) !important;
+    box-shadow: var(--glow-shadow) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Gradient Border Glow for Specific Cards */
+.achievement-card::before, .project-card::before {
+    content: "";
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: var(--primary-gradient);
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-card:hover::before, .project-card:hover::before {
+    opacity: 0.3;
+}
+
+/* Image Hover Glow */
+.achievement-img-container, .project-img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-img-container::after, .project-img-container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(0deg, rgba(13, 110, 253, 0.3) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-card:hover .achievement-img-container::after,
+.project-card:hover .project-img-container::after {
+    opacity: 1;
+}
+
+/* Progress Bars with Gradient */
+.progress-bar {
+    background: var(--primary-gradient) !important;
+}
+
+/* Hero Section Specifics */
+.text-primary {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+/* Timeline specific glow */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-gradient);
+    position: absolute;
+    left: -7px;
+    top: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Section Headings */
+h2.fw-bold {
+    letter-spacing: -1px;
+}
+
+/* Dark mode toggle glow */
+#theme-toggle:hover {
+    box-shadow: var(--glow-shadow);
+    border-color: var(--primary-color);
+}
+
+.hero-img-blob img {
+    width: min(400px, 100%);
+    height: min(400px, 100%);
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+/* Keep fixed navbar on top and prevent hero content from hiding behind it */
+#mainNav {
+    z-index: 1030;
+}
+
+.hero-section {
+    padding-top: 90px; /* space for fixed navbar */
 }
 
 /* Project Badge */
@@ -94,47 +189,4 @@ body {
     color: white;
     font-size: 0.8rem;
     font-weight: 600;
-}
-
-/* Progress Bars */
-.progress {
-    background-color: rgba(var(--primary-color), 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-/* Animations */
-.animate-fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Hero profile image: enforce perfect circle shape */
-.hero-img-blob img {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 991px) {
-    .hero-section {
-        text-align: center;
-        padding-top: 120px;
-    }
-
-    .hero-img-blob img {
-        width: 220px;
-        height: 220px;
-    }
 }
