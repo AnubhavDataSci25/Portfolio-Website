@@ -6,6 +6,7 @@
     --light-color: #f8f9fa;
     --card-bg: #ffffff;
     --text-color: #212529;
+    --text-secondary: #6c757d;
     --body-bg: #ffffff;
     --glow-shadow: 0 0 20px rgba(13, 110, 253, 0.4);
 }
@@ -17,6 +18,7 @@
     --light-color: #212529;
     --card-bg: #1e2227;
     --text-color: #f8f9fa;
+    --text-secondary: #adb5bd;
     --body-bg: #0f1215;
     --glow-shadow: 0 0 25px rgba(61, 139, 253, 0.5);
 }
@@ -28,12 +30,42 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Fix for Secondary Text in Dark Mode */
+.text-secondary, .text-muted {
+    color: var(--text-secondary) !important;
+}
+
 /* Navbar Gradient */
 .navbar {
     background: rgba(var(--body-bg), 0.85);
     backdrop-filter: blur(15px);
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(13, 110, 253, 0.1);
+}
+
+.navbar-brand {
+    color: var(--text-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-color) !important; /* Forces light color in dark mode */
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-toggler {
+    border-color: rgba(13, 110, 253, 0.5);
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.navbar-toggler-icon {
+    filter: invert(var(--theme-invert, 0)); /* Helps toggle visibility */
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
 }
 
 .nav-link.active::after {
@@ -59,6 +91,17 @@ body {
     transform: translateY(-2px);
     background: var(--primary-gradient);
     opacity: 0.9;
+}
+
+/* Fix for "Download Resume" (btn-outline-dark) in Dark Mode */
+.btn-outline-dark {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--text-color);
+    color: var(--body-bg);
 }
 
 /* Decoration Underline */
