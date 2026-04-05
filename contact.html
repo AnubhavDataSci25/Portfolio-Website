@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me | Anubhav Yadav</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="py-5 mt-5">
+        <div class="container">
+            <div class="text-center mb-5 animate-fade-in">
+                <h2 class="fw-bold">Contact Me</h2>
+                <p class="text-secondary mx-auto" style="max-width: 600px;">
+                    Have an opportunity, collaboration idea, or just want to connect? Feel free to reach out. I typically respond within 24 hours.
+                </p>
+                <div class="underline mx-auto"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 animate-fade-in">
+                    <!-- Contact Form Card -->
+                    <div class="achievement-card p-4 p-md-5 bg-white rounded-4 shadow-sm">
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <!-- Full Name -->
+                                <div class="col-md-6">
+                                    <label for="fullName" class="form-label small fw-bold">Full Name</label>
+                                    <input name="name" class="form-control rounded-pill px-3" id="fullName" placeholder="Enter your name" required>
+                                </div>
+                                <!-- Email Address -->
+                                <div class="col-md-6">
+                                    <label for="emailAddr" class="form-label small fw-bold">Email Address</label>
+                                    <input name="email" type="email" class="form-control rounded-pill px-3" id="emailAddr" placeholder="name@example.com" required>
+                                </div>
+                                <!-- Purpose Dropdown -->
+                                <div class="col-12">
+                                    <label for="purpose" class="form-label small fw-bold">Purpose</label>
+                                    <select name="purpose" class="form-select rounded-pill px-3" id="purpose" required>
+                                        <option value="" selected disabled>Choose a purpose...</option>
+                                        <option value="hiring">Hiring Opportunity</option>
+                                        <option value="collaboration">Collaboration</option>
+                                        <option value="freelance">Freelance Work</option>
+                                        <option value="general">General Query</option>
+                                    </select>
+                                </div>
+                                <!-- Message Textarea -->
+                                <div class="col-12">
+                                    <label for="message" class="form-label small fw-bold">Message</label>
+                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                                </div>
+                                <!-- Submit Button -->
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill shadow">
+                                        Send Message <i class="fas fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Direct Contact Information -->
+                    <div class="mt-5 text-center animate-fade-in">
+                        <h5 class="fw-bold mb-4">Direct Connectivity</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-4">
+                            <a href="mailto:yadavanubhav2024@gmail.com" class="text-decoration-none text-secondary hover-primary">
+                                <i class="fas fa-envelope text-primary me-2"></i>yadavanubhav2024@gmail.com
+                            </a>
+                            <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" class="text-decoration-none text-secondary hover-primary">
+                                <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn Profile
+                            </a>
+                            <a href="https://github.com/AnubhavDataSci25" target="_blank" class="text-decoration-none text-secondary hover-primary">
+                                <i class="fab fa-github text-primary me-2"></i>GitHub Portfolio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

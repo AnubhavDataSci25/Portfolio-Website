@@ -85,3 +85,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+event.preventDefault();
+
+// Basic Frontend Validation
+const name = document.getElementById('fullName').value.trim();
+const email = document.getElementById('emailAddr').value.trim();
+const message = document.getElementById('message').value.trim();
+
+if (name && email && message) {
+    // Success feedback using a custom UI alert (replacing browser alerts)
+    const successMsg = document.createElement('div');
+    successMsg.className = 'alert alert-success mt-4 animate-fade-in shadow-sm rounded-pill py-2';
+    successMsg.innerHTML = '<i class="fas fa-check-circle me-2"></i> Thank you, ' + name + '! Your message has been sent successfully.';
+    
+    const form = document.getElementById('contactForm');
+    form.parentElement.appendChild(successMsg);
+    
+    // Clear form
+    form.reset();
+    
+    // Remove alert after 5 seconds
+    setTimeout(() => {
+        successMsg.style.opacity = '0';
+        setTimeout(() => successMsg.remove(), 6000);
+    }, 5000);
+}
+});
+
+// EmailJS Integration for Contact Form
+(function(){
+emailjs.init("bHA0zHbNhtt2JnLH1");
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+e.preventDefault();
+
+emailjs.sendForm("service_oa59x3h", "template_yf1rj3k", this)
+    .then(function() {
+    alert("Message sent successfully!");
+    }, function(error) {
+    alert("Failed to send message. Try again.");
+    });
+});
