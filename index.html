@@ -61,8 +61,14 @@
                         Transforming complex data into actionable insights. I specialize in identifying patterns and solving real-world problems through data-driven strategies.
                     </p>
                     <div class="hero-btns">
-                        <a href="projects.html" class="btn btn-primary btn-lg px-4 me-3 rounded-pill shadow">View Projects</a>
-                        <a href="/docs/Anubhav Yadav DS Resume Updated.pdf" class="btn btn-outline-dark btn-lg px-4 rounded-pill">Download Resume</a>
+                        <a href="projects.html" class="btn btn-primary btn-lg px-4 me-3 rounded-pill shadow" onclick="gtag('event', 'view_projects_click', {
+                        event_category: 'engagement',
+                        event_label: 'hero_section'
+                        }); setTimeout(() => { window.location.href='projects.html'; }, 150); return false;">View Projects</a>
+                        <a href="/docs/Anubhav Yadav DS Resume Updated.pdf" class="btn btn-outline-dark btn-lg px-4 rounded-pill" onclick="gtag('event', 'resume_download', {
+                        event_category: 'engagement',
+                        event_label: 'hero_section'
+                        });">Download Resume</a>
                     </div>
                 </div>
                 <div class="col-lg-5 mt-5 mt-lg-0 text-center animate-fade-in">
