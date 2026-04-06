@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         EDUCATION & ACADEMIC EXCELLENCE:
         - Post Graduate in MCA (Data Science): Chandigarh University (Current).
         - BCA in Data Science: SRM Institute of Science and Technology, Delhi NCR.
-        - Academic Standing: CGPA 9.67 (Rank 1 in Batch).
+        - Academic Standing: CGPA 9.67 (Rank 1 in Batch) in BCA at SRM Institute.
         - Recognition: Awarded on Prerna Diwas for academic excellence.
 
         TECHNICAL EXPERTISE:
