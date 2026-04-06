@@ -62,30 +62,44 @@ export default async function handler(req, res) {
         
     `;
 
+    // Helper function for retries (Exponential Backoff)
+    const fetchWithRetry = async (url, options, retries = 3, backoff = 1000) => {
+        const response = await fetch(url, options);
+        const data = await response.json();
+
+        if (response.status === 429 && retries > 0) {
+            // API is rate limited, wait and try again
+            await new Promise(resolve => setTimeout(resolve, backoff));
+            return fetchWithRetry(url, options, retries - 1, backoff * 1.5);
+        }
+
+        return { response, data };
+    };
+
     try {
         const payload = {
             contents: [{ parts: [{ text: message }] }],
             systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
         };
 
-        const response = await fetch(API_URL, {
+        const { response, data } = await fetchWithRetry(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
-            const errorBody = await response.text();
-            throw new Error(`Gemini API Error: ${errorBody}`);
+            if (response.status === 429) {
+                return res.status(429).json({ error: "The assistant is receiving too many requests. Please wait a few seconds and try again." });
+            }
+            return res.status(response.status).json({ error: data.error?.message || "Gemini API Error" });
         }
 
-        const data = await response.json();
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I'm having trouble thinking right now.";
-        
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response.";
         return res.status(200).json({ reply });
 
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "AI Service Error" });
+        console.error("Crash:", error.message);
+        return res.status(500).json({ error: "Server is temporarily busy. Try again in a moment." });
     }
 }
