@@ -2,7 +2,7 @@
 
 A personal portfolio website for **Anubhav Yadav**, a Data Science & AI builder. Built with vanilla HTML, CSS, and JavaScript, deployed on Vercel, and powered by an AI chatbot assistant using the Gemini API.
 
-🌐 **Live Site:** [anubhavyadav.vercel.app](https://anubhavyadav.vercel.app) *(or the Vercel deployment URL)*
+🌐 **Live Site:** [anubhav-yadav-portfolio-website.vercel.app](https://anubhav-yadav-portfolio-website.vercel.app) *(or the Vercel deployment URL)*
 
 ---
 
