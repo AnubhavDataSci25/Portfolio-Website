@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
-    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -31,6 +31,22 @@
             }
         })();
     </script>
+    <style>
+        /* Scoped style for the contact banner to match chatbot info box */
+        .contact-notice-box {
+            background-color: rgba(13, 110, 253, 0.1);
+            border: 1px solid #0d6efd;
+            color: #084298;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        [data-theme="dark"] .contact-notice-box {
+            background-color: rgba(13, 110, 253, 0.2);
+            color: #cfe2ff;
+        }
+    </style>
 </head>
 <body>
 
@@ -59,9 +75,24 @@
         </div>
     </nav>
 
-    <!-- Header Section -->
+    <!-- Main Content -->
     <section class="py-5 mt-5">
         <div class="container">
+            
+            <!-- Service Status Notice (Positioned above Heading) -->
+            <div class="row justify-content-center mb-5 animate-fade-in">
+                <div class="col-lg-8">
+                    <div class="contact-notice-box d-flex align-items-center shadow-sm">
+                        <i class="fas fa-info-circle fs-4 me-3"></i>
+                        <div>
+                            <strong>Service Update:</strong> The automated email service is currently under maintenance. 
+                            Please reach out via <strong>LinkedIn</strong> or direct <strong>Email</strong> for a guaranteed response.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Section -->
             <div class="text-center mb-5 animate-fade-in">
                 <h2 class="fw-bold">Contact Me</h2>
                 <p class="text-secondary mx-auto" style="max-width: 600px;">
