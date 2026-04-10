@@ -223,6 +223,21 @@
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
+        <style>
+            [data-theme="dark"] #chat-input {
+                background-color: #2c3138 !important;
+                color: #f8f9fa !important;
+            }
+            [data-theme="dark"] #chat-input:focus {
+                background-color: #2c3138 !important;
+                color: #f8f9fa !important;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+                outline: none;
+            }
+            [data-theme="dark"] #chat-input::placeholder {
+                color: #adb5bd !important;
+            }
+        </style>
         <button id="chat-trigger" class="btn shadow-lg rounded-circle">
             <i class="fas fa-comment-dots"></i>
         </button>
@@ -249,6 +264,14 @@
 
             <div id="typing-indicator" class="px-3 py-1 d-none">
                 <small class="text-muted italic">Assistant is typing...</small>
+            </div>
+
+            <!-- Development Notice Banner -->
+            <div class="chat-info-banner px-3 py-1" style="background-color: rgba(13, 110, 253, 0.1); border-top: 1px solid rgba(13, 110, 253, 0.1);">
+                <div class="d-flex align-items-center" style="font-size: 10px; color: #0d6efd;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span>AI Portfolio Assistant still under development. Responses may occasionally fail due to high traffic.</span>
+                </div>
             </div>
 
             <div class="chat-footer p-2 border-top">
