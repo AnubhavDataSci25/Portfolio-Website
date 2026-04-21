@@ -44,7 +44,7 @@ export default async function handler(req, res) {
         - House Price Prediction: A comprehensive ML solution for real estate market analysis.
         - Introvert vs Extrovert Classification: An AI-powered web application that predicts personality types based on behavioral traits using Python, Flask, and Generative AI for personalized suggestions.
         - Student Habit vs Academic Performance: A ML model analyzing the correlation between student habits and academic performance, predicting scores based on lifestyle factors using Python, Scikit-learn, and data visualization tools.
-
+        - Kaushal AI: An AI-powered career recommendation system that analyzes user profiles—including education, skills, certifications and etc. —to suggest optimal career paths. Trained on a 20,000-row synthetic dataset with multi-model evaluation for performance tracking.
         ACHIEVEMENTS:
         - GenAI Award: Winner of the HackHound 3.0 Hackathon for Generative AI innovation.
         - Global Ranking: Ranked in the Top 98 globally in a Google Cloud Hackathon.
