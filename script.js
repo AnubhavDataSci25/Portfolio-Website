@@ -90,18 +90,103 @@ document.addEventListener('DOMContentLoaded', () => {
             links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Kaushal-AI", icon: "fab fa-github" }]
         },
         'personality-prediction': {
-            title: "Personality Prediction System",
-            tagline: "NLP-based Behavioral Analysis Tool",
-            description: "A research-driven project that utilizes Natural Language Processing to classify personality types (Introvert vs Extrovert) based on digital footprints.",
+            title: "Introvert vs Extrovert Classification",
+            tagline: "ML Model for Personality Type Prediction",
+            description: "A research-driven project that utilizes Machine Learning to classify personality types (Introvert vs Extrovert) based on digital footprints.",
             objectives: [
-                "Extract meaningful linguistic patterns from textual input.",
-                "Build a classification model using advanced NLP techniques.",
+                "Extract meaningful linguistic patterns from input user data.",
+                "Build a classification model using advanced ML techniques.",
                 "Integrate Generative AI to provide personalized improvement tips."
             ],
-            approach: "Utilized NLTK and SpaCy for deep text preprocessing. We implemented a Flask-based backend to serve the model and used the Gemini API for feedback generation.",
+            approach: "Utilized Machine Learning preprocessing and prediction techniques. We implemented a Flask-based backend to serve the model and used the Gemini API for feedback generation.",
             results: "Delivered a user-friendly application that provides instant psychological insights with high predictive reliability.",
-            stack: ["NLP", "Flask", "NLTK", "GenAI", "Python"],
+            stack: ["Python", "Flask", "Scikit-Learn", "GenAI", "Gemini API"],
             links: [{ label: "View Code", url: "https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project", icon: "fab fa-github" }]
+        },
+        'student-performance': {
+            title: "Student Habit vs Academic Performance Prediction",
+            tagline: "Predictive Analytics for Student Success",
+            description: "This project analyzes the correlation between student habits (like study time, sleep patterns) and their academic performance using machine learning techniques.",
+            objectives: [
+                "Identify key habits that influence academic success.",
+                "Build a predictive model to forecast student performance.",
+                "Provide actionable insights for students and educators."
+            ],
+            approach: "We adopted a modular coding approach, starting with data collection and preprocessing. We then trained various regression models and implemented a form which allows users to input their habits and receive performance predictions (marks).",
+            results: "The model achieved an R² score of 0.85, indicating strong predictive power. The project has been well-received for its practical application in educational settings.",
+            stack: ["Python", "Scikit-Learn", "Pandas", "Matplotlib", "Flask", "HTML/CSS/Bootstrap", "Docker"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Prediction", icon: "fab fa-github" }]
+        },
+        'aurora-ai': {
+            title: "Aurora AI",
+            tagline: "AI-Powered Data Analysis and Visualization Tool",
+            description: "Aurora AI is a comprehensive data analysis and visualization tool that leverages AI to provide insights and recommendations based on user-uploaded datasets.",
+            objectives: [
+                "Develop an intuitive interface for data upload and analysis.",
+                "Utilize pandas cleaning and preprocessing techniques to handle diverse datasets.",
+                "Implement visualization capabilities using Matplotlib and Seaborn for insightful data representation, without writing custom code.",
+                "LLM and RAG integration for natural language querying and insights generation."
+            ],
+            approach: "We developed a user-friendly interface for data upload and analysis. Utilizing pandas for data cleaning and preprocessing, we implemented visualization capabilities using Matplotlib and Seaborn. Additionally, we integrated LLM and RAG technologies for natural language querying and insights generation.",
+            results: "Aurora AI successfully provides actionable insights from diverse datasets, enhancing the data analysis process with AI-driven automation.",
+            stack: ["Python", "Pandas", "Matplotlib", "Seaborn", "Streamlit", "Gemini API", "RAG"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Aurora-AI-Project", icon: "fab fa-github" }]
+        },
+        'capbot': {
+            title: "CapBot",
+            tagline: "AI-Powered Caption Generation for Images",
+            description: "AI-driven caption generator for social media. Generates creative content from images using image-to-text models. Built with Gemini AI Model and Streamlit for a seamless user experience.",
+            objectives: [
+                "Implement image-to-text models to generate captions from user-uploaded images.",
+                "Create a user-friendly interface using Streamlit for easy image upload and caption retrieval.",
+                "Integrate Gemini AI Model to enhance caption creativity and relevance."
+            ],
+            approach: "We utilized image-to-text models to generate captions from user-uploaded images. A user-friendly interface was created using Streamlit for easy image upload and caption retrieval. The Gemini AI Model was integrated to enhance caption creativity and relevance.",
+            results: "CapBot successfully generates creative and relevant captions for a wide range of images, providing users with engaging content for their social media posts.",
+            stack: ["Python", "Gemini AI Model", "Streamlit", "PIL"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Caption-Generator-Project", icon: "fab fa-github" }]
+        },
+        'salary-analysis': {
+            title: "Data Professionals Salary Analysis",
+            tagline: "Interactive Salary Analysis Dashboard for Data Professionals",
+            description: "Analysis of data professional salaries (2020-2023) featuring interactive Power BI and Streamlit dashboards.",
+            objectives: [
+                "Create interactive dashboards to visualize salary trends and insights.",
+                "Utilize Power BI for data visualization and reporting.",
+                "Implement Streamlit for a user-friendly interface for exploring salary data."
+            ],
+            approach: "Collected data from kaggle and developed interactive dashboards using Power BI and Streamlit to visualize salary trends and insights. The dashboards allow users to explore salary data across different dimensions such as experience, location, and industry.",
+            results: "The salary analysis dashboard provides valuable insights into data professional compensation trends, enabling informed decision-making for career development and negotiation.",
+            stack: ["Python", "Power BI", "Streamlit", "Pandas", "Plotly"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis", icon: "fab fa-github" }]
+        },
+        'spam-classification': {
+            title: "Spam vs Ham Classification",
+            tagline: "ML Model for Spam Detection in Emails",
+            description: "A machine learning project that classifies emails as spam or ham (not spam) using natural language processing techniques.",
+            objectives: [
+                "Preprocess email text data for feature extraction.",
+                "Train a classification model to distinguish between spam and ham emails.",
+                "Evaluate model performance and optimize for accuracy."
+            ],
+            approach: "We utilized natural language processing techniques to preprocess email text data, including tokenization and vectorization. A classification model was trained using algorithms such as Naive Bayes and Support Vector Machines. Model performance was evaluated using metrics like accuracy, precision, and recall.",
+            results: "The spam classification model achieved an accuracy of 95%, effectively distinguishing between spam and ham emails. This project demonstrates the application of machine learning in email filtering and cybersecurity.",
+            stack: ["Python", "Scikit-Learn", "NLTK", "Pandas", "Matplotlib", "Streamlit"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Spam-Classification-Project", icon: "fab fa-github" }]
+        },
+        'house-price-prediction': {
+            title: "House Price Prediction",
+            tagline: "Predictive Model for Real Estate Valuation",
+            description: "Leveraging King County dataset to identify key market factors and predict sale prices using advanced regression techniques.",
+            objectives: [
+                "Collect and preprocess real estate data.",
+                "Develop a predictive model for house price estimation.",
+                "Evaluate model performance and refine for accuracy."
+            ],
+            approach: "We utilized the King County dataset to analyze key market factors influencing house prices. A regression model was developed using advanced techniques to predict sale prices. Model performance was evaluated using metrics like RMSE and R².",
+            results: "The house price prediction model achieved a high level of accuracy in estimating sale prices, providing valuable insights for real estate professionals and homebuyers.",
+            stack: ["Python", "Scikit-Learn", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/House-Price-Prediction", icon: "fab fa-github" }]
         }
     };
 
