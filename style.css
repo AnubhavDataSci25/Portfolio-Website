@@ -332,3 +332,104 @@ body.modal-open {
         right: 15px;
     }
 }
+
+/* --- Live Project Pulse Indicator --- */
+.pulse-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #ff4d4d;
+    border-radius: 50%;
+    margin-right: 12px;
+    vertical-align: middle;
+    box-shadow: 0 0 0 rgba(255, 77, 77, 0.4);
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+
+/* --- Infinite Sliding Window (Marquee) --- */
+.project-slider-wrapper {
+    overflow: hidden;
+    padding: 30px 0;
+    position: relative;
+    width: 100%;
+}
+
+.project-slider-track {
+    display: flex;
+    /* width calculation: (Card Width + Margins) * Total Items (including duplicates) */
+    width: calc(580px * 4); 
+    animation: scroll-left 35s linear infinite;
+}
+
+.project-slider-track:hover {
+    animation-play-state: paused;
+}
+
+.slider-item {
+    flex: 0 0 550px; /* Increased Card Size */
+    margin: 0 15px;
+    height: 480px; /* Height increased to accommodate image */
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    /* Scroll past exactly the unique items (2 items * width) */
+    100% { transform: translateX(calc(-580px * 2)); } 
+}
+
+/* Gradient Masking for Edges */
+.project-slider-wrapper::before,
+.project-slider-wrapper::after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project-slider-wrapper::before {
+    left: 0; top: 0;
+    background: linear-gradient(to right, var(--body-bg) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.project-slider-wrapper::after {
+    right: 0; top: 0;
+    transform: rotateZ(180deg);
+    background: linear-gradient(to right, var(--body-bg) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Mobile Responsiveness for Slider */
+@media (max-width: 991px) {
+    .slider-item {
+        flex: 0 0 450px;
+        height: 440px;
+    }
+    .project-slider-track {
+        width: calc(480px * 4);
+    }
+    @keyframes scroll-left {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-480px * 2)); }
+    }
+}
+
+@media (max-width: 576px) {
+    .slider-item {
+        flex: 0 0 320px;
+        height: 420px;
+    }
+    .project-slider-track {
+        width: calc(350px * 4);
+    }
+    @keyframes scroll-left {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-350px * 2)); }
+    }
+}

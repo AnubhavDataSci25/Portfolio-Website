@@ -56,6 +56,7 @@
         </div>
     </nav>
 
+    <!-- LIVE PROJECTS SECTION -->
     <section class="py-5 mt-5">
         <div class="container">
             <div class="text-center mb-5 animate-fade-in">
@@ -63,70 +64,117 @@
                 <p class="text-primary fw-semibold">"From Raw Data to Technical Mastery"</p>
                 <div class="underline mx-auto"></div>
             </div>
+            <div class="mb-4 animate-fade-in">
+                <h4 class="fw-bold d-flex align-items-center">
+                    <span class="pulse-circle"></span> Live Projects
+                </h4>
+                <div class="underline mb-4"></div>
+            </div>
 
-            <div class="row g-4">
-
-                <!-- NEW PROJECT: Kaushal AI (Featured Flagship) -->
-                <div class="col-12 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-lg-5">
-                                <div class="project-img-container position-relative" style="height: 100%; min-height: 300px;">
-                                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80" alt="Kaushal AI" class="img-fluid h-100 w-100" style="object-fit: cover;">
-                                    <div class="project-badge bg-primary">Flagship AI Project</div>
-                                </div>
+            <!-- Sliding Window Wrapper -->
+            <div class="project-slider-wrapper">
+                <div class="project-slider-track">
+                    <!-- Kaushal AI Item -->
+                    <div class="slider-item">
+                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
+                            <div class="project-img-container" style="height: 220px;">
+                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80" alt="Kaushal AI" class="img-fluid w-100 h-100" style="object-fit: cover;">
                             </div>
-                            <div class="col-lg-7">
-                                <div class="p-4 p-md-5">
-                                    <div class="d-flex align-items-center gap-2 mb-3">
-                                        <h3 class="fw-bold mb-0">Kaushal AI</h3>
-                                        <span class="badge bg-warning text-dark rounded-pill shadow-sm"><i class="fas fa-hammer me-1"></i> Ongoing</span>
-                                        <span class="badge bg-info text-white rounded-pill shadow-sm"><i class="fas fa-users me-1"></i> Team Project</span>
-                                    </div>
-                                    <p class="text-secondary mb-4">
-                                        An ML-powered career recommendation system that analyzes user profiles—including education, skills, certifications and etc. —to suggest optimal career paths. Trained on a <strong>20,000-row synthetic dataset</strong> with multi-model evaluation for performance tracking.
-                                    </p>
-                                    <div class="row g-2 mb-4">
-                                        <div class="col-auto"><span class="badge rounded-pill bg-light text-dark border">Python</span></div>
-                                        <div class="col-auto"><span class="badge rounded-pill bg-light text-dark border">Machine Learning</span></div>
-                                        <div class="col-auto"><span class="badge rounded-pill bg-light text-dark border">Data Processing</span></div>
-                                        <div class="col-auto"><span class="badge rounded-pill bg-light text-dark border">Model Evaluation</span></div>
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-3">
-                                        <a href="https://github.com/AnubhavDataSci25/Kaushal-AI" target="_blank" class="btn btn-primary rounded-pill px-4 shadow">
-                                            <i class="fab fa-github me-2"></i>View Repository
-                                        </a>
-                                        <button class="btn btn-primary rounded-pill px-4 shadow open-case-study" data-project="kaushal-ai">
-                                            <i class="fas fa-file-alt me-2"></i>View Details
-                                        </button>
-                                        <div class="text-muted small d-flex align-items-center">
-                                            <i class="fas fa-sync fa-spin me-2"></i> Actively being enhanced
-                                        </div>
-                                    </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-hammer me-1"></i> In Development</span>
+                                    <span class="badge bg-primary">AI Career Engine</span>
                                 </div>
+                                <h5 class="fw-bold">Kaushal AI</h5>
+                                <p class="text-secondary small">Career recommendation system leveraging ML models and a massive 20,000-row synthetic dataset.</p>
+                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="kaushal-ai">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Production ML Integration -->
+                    <div class="slider-item">
+                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
+                            <div class="project-img-container" style="height: 220px;">
+                                <img src="https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?auto=format&fit=crop&w=1200&q=80" alt="MLOps" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-sync fa-spin me-1"></i> Scaling Up</span>
+                                    <span class="badge bg-info">AI Data Analytics Tool</span>
+                                </div>
+                                <h5 class="fw-bold">Arthlytics AI</h5>
+                                <p class="text-secondary small">Building AI Powered Data Analytics Tools for Data Cleaning, Transformation, and Visualization.</p>
+                                <button class="btn btn-sm btn-primary rounded-pill">Coming Soon</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duplicate Kaushal for loop -->
+                    <div class="slider-item">
+                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
+                            <div class="project-img-container" style="height: 220px;">
+                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80" alt="Kaushal AI" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-hammer me-1"></i> In Development</span>
+                                    <span class="badge bg-primary">AI Career Engine</span>
+                                </div>
+                                <h5 class="fw-bold">Kaushal AI</h5>
+                                <p class="text-secondary small">Career recommendation system leveraging ML models and a massive 20,000-row synthetic dataset.</p>
+                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="kaushal-ai">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duplicate MLOps for loop -->
+                    <div class="slider-item">
+                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
+                            <div class="project-img-container" style="height: 220px;">
+                                <img src="https://images.unsplash.com/photo-1608222351212-18fe0ec7b13b?auto=format&fit=crop&w=1200&q=80" alt="MLOps" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-sync fa-spin me-1"></i> Scaling Up</span>
+                                    <span class="badge bg-info">AI Data Analytics Tool</span>
+                                </div>
+                                <h5 class="fw-bold">Arthlytics AI</h5>
+                                <p class="text-secondary small">Building AI Powered Data Analytics Tools for Data Cleaning, Transformation, and Visualization.</p>
+                                <button class="btn btn-sm btn-primary rounded-pill">Coming Soon</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- PREVIOUS PROJECTS SECTION -->
+    <section class="py-5">
+        <div class="container">
+            <div class="mb-5 animate-fade-in">
+                <h4 class="fw-bold"><i class="fas fa-history text-secondary me-2"></i> Previous Projects</h4>
+                <div class="underline"></div>
+            </div>
+
+            <div class="row g-4">
                 <!-- Project 1: Introvert vs Extrovert -->
                 <div class="col-lg-6 animate-fade-in">
                     <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
                         <div class="project-img-container position-relative">
-                            <img src="/images/introvert-extrovert-project.png" alt="Introvert vs Extrovert" class="img-fluid w-100" style="height: 365px;">
+                            <img src="/images/introvert-extrovert-project.png" alt="Introvert vs Extrovert" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
                             <div class="project-badge bg-primary">AI & Psychology</div>
                         </div>
                         <div class="p-4">
-                            <h4 class="fw-bold">Introvert vs Extrovert Classification</h4>
-                            <p class="text-secondary small">An AI-powered web application that predicts personality types based on behavioral traits using Python, Flask, and Generative AI for personalized suggestions.</p>
+                            <h5 class="fw-bold">Introvert vs Extrovert Classification</h5>
+                            <p class="text-secondary small">Predicts personality types using NLP and Generative AI for personalized suggestions.</p>
                             <div class="mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">Python</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Flask</span>
-                                <span class="badge rounded-pill bg-light text-dark border">GenAI</span>
-                                <span class="badge rounded-pill bg-light text-dark border">ML</span>
+                                <span class="badge rounded-pill bg-light text-dark border">NLP</span>
                             </div>
-                            <a href="https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fab fa-github me-1"></i> View Code</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="personality-prediction">View Details</button>
+                            <div class="d-flex gap-2">
+                                <a href="https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3">Code</a>
+                                <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="personality-prediction">Details</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,104 +183,70 @@
                 <div class="col-lg-6 animate-fade-in">
                     <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
                         <div class="project-img-container position-relative">
-                            <img src="/images/student-habit-project.png" alt="Student Habit" class="img-fluid w-100" style="height: 365px;">
+                            <img src="/images/student-habit-project.png" alt="Student Habit" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
                             <div class="project-badge bg-success">Predictive Analytics</div>
                         </div>
                         <div class="p-4">
-                            <h4 class="fw-bold">Student Habit vs Academic Performance</h4>
-                            <p class="text-secondary small">Investigates how habits like sleep and study hours impact grades. Built using CatBoost to predict exam scores and deployed as an interactive web app.</p>
+                            <h5 class="fw-bold">Student Habit Analysis</h5>
+                            <p class="text-secondary small">Built using CatBoost to predict exam scores based on study habits and sleep patterns.</p>
                             <div class="mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">CatBoost</span>
-                                <span class="badge rounded-pill bg-light text-dark border">Data Analysis</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Python</span>
                             </div>
-                            <a href="https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fab fa-github me-1"></i> View Code</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="student-performance">View Details</button>
+                            <a href="https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3">View Code</a>
+                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="student-performance">Details</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3: Aurora -->
-                <div class="col-lg-4 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
-                        <div class="p-4">
-                            <div class="text-primary mb-3"><i class="fas fa-magic fa-2x"></i></div>
-                            <h4 class="fw-bold">Aurora AI</h4>
-                            <p class="text-secondary small">Automation tool for statistical analysis and visualization. Powered by Streamlit and Gemini API for intelligent querying.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-light text-dark border">Streamlit</span>
-                                <span class="badge bg-light text-dark border">Gemini API</span>
-                            </div>
-                            <a href="https://github.com/AnubhavDataSci25/Aurora-AI-Project" target="_blank" class="text-primary text-decoration-none small fw-bold">GitHub Repository →</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="aurora-ai">View Details</button>
-                        </div>
+                <!-- Aurora, CapBot, etc (Small Grid) -->
+                <div class="col-md-4 col-sm-6 animate-fade-in">
+                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
+                        <i class="fas fa-magic text-primary mb-3 fs-3"></i>
+                        <h6 class="fw-bold">Aurora AI</h6>
+                        <p class="text-secondary small mb-3">Automation tool for statistical analysis powered by Streamlit.</p>
+                        <a href="https://github.com/AnubhavDataSci25/Aurora-AI-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="aurora-ai">Details</button>
                     </div>
                 </div>
 
-                <!-- Project 4: CapBot -->
-                <div class="col-lg-4 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
-                        <div class="p-4">
-                            <div class="text-info mb-3"><i class="fas fa-robot fa-2x"></i></div>
-                            <h4 class="fw-bold">CapBot</h4>
-                            <p class="text-secondary small">AI-driven caption generator for social media. Generates creative content from images using image-to-text models.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-light text-dark border">AI</span>
-                                <span class="badge bg-light text-dark border">API Integration</span>
-                            </div>
-                            <a href="https://github.com/AnubhavDataSci25/Caption-Generator-Project" target="_blank" class="text-primary text-decoration-none small fw-bold">GitHub Repository →</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="capbot">View Details</button>
-                        </div>
+                <div class="col-md-4 col-sm-6 animate-fade-in">
+                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
+                        <i class="fas fa-robot text-info mb-3 fs-3"></i>
+                        <h6 class="fw-bold">CapBot</h6>
+                        <p class="text-secondary small mb-3">AI-driven creative caption generator for social media platforms.</p>
+                        <a href="https://github.com/AnubhavDataSci25/Caption-Generator-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="capbot">Details</button>
                     </div>
                 </div>
 
-                <!-- Project 5: Salary Analysis -->
-                <div class="col-lg-4 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
-                        <div class="p-4">
-                            <div class="text-warning mb-3"><i class="fas fa-money-bill-wave fa-2x"></i></div>
-                            <h4 class="fw-bold">Data Professionals Salary Analysis</h4>
-                            <p class="text-secondary small">Analysis of data professional salaries (2020-2023) featuring interactive Power BI and Streamlit dashboards.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-light text-dark border">Power BI</span>
-                                <span class="badge bg-light text-dark border">EDA</span>
-                            </div>
-                            <a href="https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis" target="_blank" class="text-primary text-decoration-none small fw-bold">GitHub Repository →</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="salary-analysis">View Details</button>
-                        </div>
+                <div class="col-md-4 col-sm-6 animate-fade-in">
+                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
+                        <i class="fas fa-money-bill-wave text-warning mb-3 fs-3"></i>
+                        <h6 class="fw-bold">Data Professionals Salary Analysis</h6>
+                        <p class="text-secondary small mb-3">Data Professional salary dashboards (2020-2023) using Power BI.</p>
+                        <a href="https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="salary-analysis">Details</button>
                     </div>
                 </div>
 
-                <!-- Project 6: Spam Classification -->
-                <div class="col-lg-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
-                        <div class="p-4">
-                            <h4 class="fw-bold"><i class="fas fa-envelope-open-text me-2 text-danger"></i>Spam Classification</h4>
-                            <p class="text-secondary small">NLP-based classification of SMS messages using NLTK and Python. Includes a full web app for real-time ham/spam prediction.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-light text-dark border">NLP</span>
-                                <span class="badge bg-light text-dark border">NLTK</span>
-                                <span class="badge bg-light text-dark border">Preprocessing</span>
-                            </div>
-                            <a href="https://github.com/AnubhavDataSci25/Spam-Classification-Project" target="_blank" class="btn btn-sm btn-outline-danger rounded-pill">View Repository</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="spam-classification">View Details</button>
-                        </div>
+                <div class="col-md-4 col-sm-6 animate-fade-in">
+                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
+                        <i class="fas fa-envelope-open-text me-2 text-danger"></i>
+                        <h6 class="fw-bold">Spam Classification</h6>
+                        <p class="text-secondary small mb-3">Email spam detection model using machine learning techniques.</p>
+                        <a href="https://github.com/AnubhavDataSci25/Spam-Classification-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="spam-classification">Details</button>
                     </div>
                 </div>
 
-                <!-- Project 7: House Price -->
-                <div class="col-lg-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100">
-                        <div class="p-4">
-                            <h4 class="fw-bold"><i class="fas fa-home me-2 text-dark"></i>House Price Prediction</h4>
-                            <p class="text-secondary small">Leveraging King County dataset to identify key market factors and predict sale prices using advanced regression techniques.</p>
-                            <div class="mb-3">
-                                <span class="badge bg-light text-dark border">Regression</span>
-                                <span class="badge bg-light text-dark border">ML Pipeline</span>
-                            </div>
-                            <a href="https://github.com/AnubhavDataSci25/House-Price-Prediction" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill">View Repository</a>
-                            <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="house-price-prediction">View Details</button>
-                        </div>
+                <div class="col-md-4 col-sm-6 animate-fade-in">
+                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
+                        <i class="fas fa-home me-2 text-success"></i>
+                        <h6 class="fw-bold">House Price Prediction</h6>
+                        <p class="text-secondary small mb-3">Machine learning model for predicting house prices based on various features.</p>
+                        <a href="https://github.com/AnubhavDataSci25/House-Price-Prediction" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="house-price-prediction">Details</button>
                     </div>
                 </div>
             </div>
@@ -289,7 +303,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
