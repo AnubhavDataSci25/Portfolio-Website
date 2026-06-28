@@ -89,6 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
             stack: ["Python", "Scikit-Learn", "XGBoost", "Pandas", "MLflow"],
             links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Kaushal-AI", icon: "fab fa-github" }]
         },
+        'arthlytics-ai': {
+            title: "Arthlytics AI",
+            tagline: "AI-Powered Data Analytics & Reporting Platform",
+            description: "Arthlytics AI is a full-stack AI-powered analytics platform that transforms raw datasets into actionable insights through automated data cleaning, intelligent visualizations, conversational analytics, AI-generated reports, and collaborative workspaces. The platform is currently under active development with a modular and scalable architecture.",
+            objectives: [
+                "Build a unified platform for automated data cleaning, visualization, reporting, and AI-assisted analytics.",
+                "Integrate Large Language Models to enable natural language data exploration and intelligent report generation.",
+                "Design a scalable, production-ready architecture supporting collaboration and future AutoML capabilities."
+            ],
+            approach: "The platform follows a modular full-stack architecture built with React and FastAPI. It combines AI orchestration using LangChain with Gemini, Groq, and Hugging Face APIs, while leveraging Pandas, Scikit-learn, Chart.js, Matplotlib, and Seaborn for data processing, visualization, and analytics.",
+            results: "Successfully developed core modules including CleanStats, AutoViz, SmartQuery, Report Generation, Workspace, OAuth Authentication, and User Profiles. The platform provides an intuitive AI-driven analytics workflow and is currently progressing toward Beta deployment.",
+            stack: ["React", "FastAPI", "Python", "PostgreSQL", "LangChain", "Gemini API", "Groq", "Hugging Face"],
+            links: [{ label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Arthlytics-AI", icon: "fab fa-github" }]
+        },
         'personality-prediction': {
             title: "Introvert vs Extrovert Classification",
             tagline: "ML Model for Personality Type Prediction",
