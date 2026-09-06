@@ -29,11 +29,11 @@ export default async function handler(req, res) {
         - Recognition: Awarded on Prerna Diwas for academic excellence.
 
         TECHNICAL EXPERTISE:
-        - AI/ML: Machine Learning, Deep Learning, NLP, Generative AI.
-        - Programming: Python (Pandas, NumPy, Scikit-learn), TensorFlow, Keras, NLTK.
+        - AI/ML: Machine Learning, Deep Learning, NLP, Generative AI, RAG, VectorDB, LLM.
+        - Programming: Python (Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn), TensorFlow, Keras, NLTK, FastAPI (for backend).
         - MLOps & Tools: MLflow, DagsHub, Docker, Git, GitHub.
-        - Visualization & Deployment: Power BI, Tableau, Streamlit, Flask, HTML, CSS, Bootstrap.
-        - Databases: SQL, PostgreSQL, Google BigQuery.
+        - Visualization & Deployment: Ploty, Power BI, Tableau, Streamlit, Flask, HTML, CSS, Bootstrap.
+        - Databases: SQL, PostgreSQL, Google BigQuery, MySQL, MongoDB.
 
         KEY PROJECTS & IMPACT:
         - Personality Prediction System: An NLP-based intelligent system for behavioral analysis.
@@ -46,6 +46,9 @@ export default async function handler(req, res) {
         - Student Habit vs Academic Performance: A ML model analyzing the correlation between student habits and academic performance, predicting scores based on lifestyle factors using Python, Scikit-learn, and data visualization tools.
         - Kaushal AI: An AI-powered career recommendation system that analyzes user profiles—including education, skills, certifications and etc. —to suggest optimal career paths. Trained on a 20,000-row synthetic dataset with multi-model evaluation for performance tracking.
         - Arthlytics AI: Arthlytics AI is a full-stack AI-powered analytics platform that transforms raw datasets into actionable insights through automated data cleaning, intelligent visualizations, conversational analytics, AI-generated reports, and collaborative workspaces. The platform is currently under active development with a modular and scalable architecture.
+        - CLAT Oracle AI (Flagship Showcase): Full-stack open-source RAG exam prep platform for CLAT aspirants generating passage-based questions across all 5 syllabus sections. Tech: FastAPI, Next.js 14, TypeScript, Tailwind CSS, Qdrant (Vector DB), Groq (Llama 3.1 LLM inference), Cohere embeddings. Free-tier zero-cost architecture deployed on Vercel and Render.
+        - Legal & HR Policy Assistant (Live / In Development): Document Q&A RAG app with hybrid retrieval (semantic + BM25 keyword) and local Cross-Encoder reranking (ms-marco-MiniLM-L-6-v2) with strict page-citation guardrails. Evaluated with RAGAs framework (0.91 faithfulness, 0.87 answer relevancy). Built with React, FastAPI, ChromaDB, and Groq.
+        - Victor AI (Live / In Development): Local system voice-based AI assistant combining LLM reasoning, speech recognition, and autonomous local tool execution / function calling.
 
         ACHIEVEMENTS:
         - GenAI Award: Winner of the HackHound 3.0 Hackathon for Generative AI innovation.
@@ -53,7 +56,7 @@ export default async function handler(req, res) {
         - Leadership: Student Coordinator of the IT Club; organized TechFusion, QuizMantra, and the CodeJam Hackathon.
 
         CAREER GOAL:
-        - To become a Data Scientist / ML Engineer / AI Engineer building impactful, production-ready AI systems.
+        - To become a Data Scientist / Data Analyst / ML Engineer / AI Engineer building impactful, production-ready AI systems.
 
         RESPONSE RULES:
         1. Tone: Confident, professional, and recruiter-friendly.

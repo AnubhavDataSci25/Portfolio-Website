@@ -75,6 +75,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Project Case Study Logic ---
     const projectData = {
+        'victor-ai': {
+            title: "Victor AI",
+            tagline: "Local Voice-Driven AI Assistant & Autonomous Tool Orchestrator",
+            description: "A local system voice-based AI assistant harnessing LLM reasoning for conversational voice interaction and automated local tool execution, command handling, and desktop routines.",
+            objectives: [
+                "Implement low-latency voice capture, speech recognition, and synthesized audio feedback.",
+                "Develop an extensible function-calling framework to run system-level utilities and routines.",
+                "Ensure local execution capability prioritizing user privacy and system efficiency."
+            ],
+            approach: "Constructed a multi-threaded Python pipeline connecting speech-to-text processing with conversational LLM endpoints. Implemented structured schema parsing to route recognized intents into local system tools and automation scripts.",
+            results: "Provides hands-free voice operations and an easily extensible modular interface for adding custom OS automation tasks.",
+            stack: ["Python", "SpeechRecognition", "TTS", "LLM APIs", "System Automation", "Function Calling"],
+            links: [
+                { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Victor-AI-Assistant", icon: "fab fa-github" }
+            ]
+        },
+        'legal-hr-assistant': {
+            title: "Legal & HR Policy Assistant",
+            tagline: "Enterprise Document Q&A with Hybrid RAG & Cross-Encoder Reranking",
+            description: "A production-grade Retrieval-Augmented Generation (RAG) system that allows users to upload PDF contracts and HR policies to query them in natural language, generating faithful answers backed by exact page citations.",
+            objectives: [
+                "Implement hybrid retrieval fusing semantic vector similarity search with BM25 lexical search.",
+                "Integrate a local Cross-Encoder reranker to re-score candidate chunks without API rate limits.",
+                "Build confidence guardrails that refuse to answer gracefully when retrieved document evidence is insufficient.",
+                "Quantitatively benchmark retrieval faithfulness and context precision using the RAGAs framework."
+            ],
+            approach: "Extracted and parsed PDFs using PyMuPDF into 600-token chunks with 100-token overlap. Indexed embeddings locally with ChromaDB and BM25. Filtered candidates through an ms-marco Cross-Encoder, passing context into Llama 3.1 via Groq with strict citation constraints.",
+            results: "Attained a 0.91 faithfulness score and 0.87 answer relevancy score during RAGAs evaluation, eliminating hallucinations on unmentioned policy topics.",
+            stack: ["FastAPI", "Python", "React", "ChromaDB", "Groq (Llama 3.1)", "BM25", "Cross-Encoder", "RAGAs"],
+            links: [
+                { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Legal-HR-Policy-Assistant", icon: "fab fa-github" }
+            ]
+        },
+        'clat-oracle-ai': {
+            title: "CLAT Oracle AI",
+            tagline: "AI-Powered Exam Preparation & Passage Generation Platform",
+            description: "A full-stack, open-source RAG exam preparation platform engineered for CLAT (Common Law Admission Test) aspirants. Generates unlimited practice questions across all 5 exam sections in authentic passage-based format.",
+            objectives: [
+                "Construct a specialized Retrieval-Augmented Generation (RAG) pipeline ingesting past exam papers and current affairs into a vector database.",
+                "Engineer section-specific prompt strategies to yield authentic passage-question clusters instead of generic standalone MCQs.",
+                "Implement dynamic date-range filtering and repeat-avoidance logic for adaptive practice sessions.",
+                "Architect a sustainable, zero-cost production stack leveraging hosted free-tier APIs (Groq, Cohere, Qdrant, Vercel, Render)."
+            ],
+            approach: "Engineered a modular FastAPI Python backend handling document chunking, semantic retrieval with Cohere embeddings, and Qdrant vector indexing. Integrated Groq LLM inference for near-instant question synthesis. Created a responsive Next.js 14 frontend with TypeScript and Tailwind CSS deployed on Vercel.",
+            results: "Successfully replicated official CLAT passage-question structures across all 5 syllabus sections with sub-second retrieval times and zero infrastructure hosting expense.",
+            stack: ["FastAPI", "Python", "Next.js 14", "TypeScript", "Tailwind CSS", "Qdrant Vector DB", "Groq API", "Cohere", "RAG Architecture"],
+            links: [
+                { label: "Live Platform", url: "https://clat-oracle-ai.vercel.app", icon: "fas fa-external-link-alt" },
+                { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/CLAT-Oracle-AI", icon: "fab fa-github" }
+            ]
+        },
         'kaushal-ai': {
             title: "Kaushal AI",
             tagline: "Flagship AI Career Recommendation System",
