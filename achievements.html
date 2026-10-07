@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements | Anubhav Yadav</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover Anubhav Yadav's academic achievements, Batch Rank 1 honours at SRM, hackathon awards (HackHound 3.0, Hack-Code, Google Cloud AI For Impact), and leadership roles.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/achievements.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/achievements.html">
+    <meta property="og:title" content="Achievements & Awards | Anubhav Yadav">
+    <meta property="og:description" content="Explore Anubhav Yadav's achievements: Overall Batch Rank 1 (BCA Data Science), HackHound 3.0 Best Use of GenAI, Hack-Code runner-up, and leadership milestones.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/achievements.html">
+    <meta name="twitter:title" content="Achievements & Awards | Anubhav Yadav">
+    <meta name="twitter:description" content="Explore Anubhav Yadav's achievements: Overall Batch Rank 1 (BCA Data Science), HackHound 3.0 Best Use of GenAI, Hack-Code runner-up, and leadership milestones.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,6 +32,7 @@
     <link rel="stylesheet" href="chatbot.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -28,6 +50,104 @@
             }
         })();
     </script>
+
+    <!-- Scoped Styles for Achievements Page -->
+    <style>
+        /* Stats Box Styles */
+        .stat-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-shadow) !important;
+        }
+        .stat-number {
+            font-size: 2.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Academic Vertical Timeline */
+        .academic-timeline {
+            position: relative;
+            max-width: 860px;
+            margin: 2.5rem auto 0 auto;
+            padding-left: 2rem;
+            border-left: 3px solid rgba(220, 53, 69, 0.3);
+        }
+        .academic-timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .academic-timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .academic-timeline-item.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .academic-timeline-dot {
+            position: absolute;
+            left: -2rem;
+            transform: translateX(-50%);
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #dc3545;
+            border: 3px solid var(--card-bg);
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+        }
+
+        /* Achievement Card Image & Placeholder */
+        .achievement-img-container {
+            height: 200px;
+            background-color: rgba(13, 110, 253, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .achievement-img-placeholder {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(0, 212, 255, 0.04) 100%);
+        }
+        [data-theme="dark"] .achievement-img-placeholder {
+            background: linear-gradient(135deg, rgba(61, 139, 253, 0.12) 0%, rgba(0, 242, 254, 0.06) 100%);
+        }
+
+        /* CTA Banner */
+        .achievement-cta-card {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.06) 0%, rgba(0, 212, 255, 0.03) 100%) !important;
+            border: 1px solid rgba(13, 110, 253, 0.18) !important;
+        }
+        .achievement-cta-card h3 {
+            color: var(--text-color) !important;
+        }
+        [data-theme="dark"] .achievement-cta-card {
+            background: linear-gradient(135deg, rgba(61, 139, 253, 0.12) 0%, rgba(0, 242, 254, 0.04) 100%) !important;
+            border: 1px solid rgba(61, 139, 253, 0.25) !important;
+        }
+        [data-theme="dark"] .achievement-cta-card h3 {
+            color: #f8f9fa !important;
+        }
+
+        /* Dark Mode Badges */
+        [data-theme="dark"] .badge.bg-light {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-color) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        /* Accessibility: Prefers reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .academic-timeline-item,
+            .stat-box {
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -35,7 +155,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,9 +165,11 @@
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link active" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -62,171 +184,390 @@
             <div class="text-center mb-5 animate-fade-in">
                 <h2 class="fw-bold">My Achievements</h2>
                 <p class="text-primary fw-semibold">"Celebrating Milestones and Successes"</p>
-                <div class="underline mx-auto"></div>
+                <div class="underline mx-auto mb-4"></div>
+            </div>
+
+            <!-- Animated Stats Row -->
+            <div class="row g-3 g-md-4 mb-5 text-center stats-row justify-content-center animate-fade-in">
+                <div class="col-6 col-lg-3">
+                    <div class="p-4 bg-white rounded-4 shadow-sm border h-100 stat-box">
+                        <div class="d-inline-flex p-3 rounded-circle bg-danger-subtle text-danger mb-3">
+                            <i class="fas fa-medal fa-2x"></i>
+                        </div>
+                        <h2 class="fw-bold mb-1 stat-number text-danger" data-target="3" data-suffix="">0</h2>
+                        <p class="text-secondary small fw-medium mb-0">Academic Rank 1s</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="p-4 bg-white rounded-4 shadow-sm border h-100 stat-box">
+                        <div class="d-inline-flex p-3 rounded-circle bg-primary-subtle text-primary mb-3">
+                            <i class="fas fa-laptop-code fa-2x"></i>
+                        </div>
+                        <h2 class="fw-bold mb-1 stat-number text-primary" data-target="4" data-suffix="+">0</h2>
+                        <p class="text-secondary small fw-medium mb-0">Hackathons</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="p-4 bg-white rounded-4 shadow-sm border h-100 stat-box">
+                        <div class="d-inline-flex p-3 rounded-circle bg-warning-subtle text-warning mb-3">
+                            <i class="fas fa-trophy fa-2x"></i>
+                        </div>
+                        <h2 class="fw-bold mb-1 stat-number text-warning" data-target="1" data-suffix="">0</h2>
+                        <p class="text-secondary small fw-medium mb-0">National Award</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="p-4 bg-white rounded-4 shadow-sm border h-100 stat-box">
+                        <div class="d-inline-flex p-3 rounded-circle bg-info-subtle text-info mb-3">
+                            <i class="fas fa-users-cog fa-2x"></i>
+                        </div>
+                        <h2 class="fw-bold mb-1 stat-number text-info" data-target="2" data-suffix="">0</h2>
+                        <p class="text-secondary small fw-medium mb-0">Events Coordinated</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Academic Excellence Section -->
-            <div class="row g-4 mb-5">
-                <div class="col-12 mb-2">
+            <div class="mb-5">
+                <div class="mb-4">
                     <h4 class="fw-bold border-start border-danger border-4 ps-3">Academic Excellence</h4>
                 </div>
                 
-                <!-- Overall Batch Rank 1 -->
-                <div class="col-12 animate-fade-in mb-3">
-                    <div class="achievement-card overflow-hidden bg-white rounded-4 shadow-sm border-start border-danger border-5">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-md-4">
-                                <div class="achievement-img-container" style="height: 250px;">
-                                    <img src="https://images.unsplash.com/photo-1491309055486-24ae511c15c7?auto=format&fit=crop&w=800&q=80" alt="Academic Excellence" class="img-fluid h-100 w-100" style="object-fit: cover;">
+                <!-- Overall Batch Rank 1 Flagship Card -->
+                <div class="achievement-card overflow-hidden bg-white rounded-4 shadow-sm border-start border-danger border-5 mb-4 animate-fade-in">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-4">
+                            <div class="achievement-img-container" style="height: 250px;">
+                                <img src="images/achievements/overall-batch-rank-1.png" alt="Overall Batch Rank 1 academic excellence award certificate and medal" class="img-fluid h-100 w-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fas fa-medal text-danger fs-1 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">Overall Batch Rank 1</h6>
+                                    <span class="badge bg-danger rounded-pill px-3 py-1 small">Session 2022 — 2025</span>
                                 </div>
                             </div>
-                            <div class="col-md-8 p-4">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-medal text-danger fs-3 me-2"></i>
-                                    <h3 class="fw-bold text-danger mb-0">Overall Batch Rank 1</h3>
-                                </div>
-                                <h5 class="fw-semibold text-secondary mb-3">BCA Data Science | Session 2022 — 2025</h5>
-                                <p class="mb-0">Recognized for outstanding scholastic performance and maintaining the <strong>highest academic standing</strong> throughout the entire batch of 2022-2025 at SRM Institute of Science and Technology.</p>
+                        </div>
+                        <div class="col-md-8 p-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-medal text-danger fs-3 me-2"></i>
+                                <h3 class="fw-bold text-danger mb-0">Overall Batch Rank 1</h3>
                             </div>
+                            <h5 class="fw-semibold text-secondary mb-3">BCA Data Science | Session 2022 — 2025</h5>
+                            <p class="mb-0 text-secondary">
+                                Recognized for outstanding scholastic performance and maintaining the <strong>highest academic standing (CGPA: 9.67/10)</strong> throughout the entire batch of 2022–2025 at SRM Institute of Science and Technology.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Session 24-25 -->
-                <div class="col-md-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm overflow-hidden border-top border-danger border-5 h-100 text-center p-4">
-                        <div class="badge bg-danger mb-3">Session 24-25</div>
-                        <h5 class="fw-bold mb-2">Academic Rank 1</h5>
-                        <p class="text-secondary small mb-0">Secured 1st Rank in the final year for academic excellence.</p>
+                <!-- Academic Vertical Timeline (Session 22-23, 23-24, 24-25) -->
+                <div class="academic-timeline">
+                    <!-- Session 22-23 -->
+                    <div class="academic-timeline-item">
+                        <div class="academic-timeline-dot"></div>
+                        <div class="p-3 p-md-4 bg-white rounded-4 shadow-sm border">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
+                                <h5 class="fw-bold mb-0">Academic Rank 1</h5>
+                                <span class="badge bg-danger rounded-pill px-3 py-1 small">Session 22-23</span>
+                            </div>
+                            <p class="text-danger small fw-semibold mb-2">First Year • BCA Data Science</p>
+                            <p class="text-secondary small mb-0">Secured 1st Rank in the first academic year with distinction, establishing academic leadership across foundational mathematics and programming.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Session 23-24 -->
-                <div class="col-md-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm overflow-hidden border-top border-danger border-5 h-100 text-center p-4">
-                        <div class="badge bg-danger mb-3">Session 23-24</div>
-                        <h5 class="fw-bold mb-2">Academic Rank 1</h5>
-                        <p class="text-secondary small mb-0">Secured 1st Rank in the 2nd Year for outstanding performance.</p>
+                    <!-- Session 23-24 -->
+                    <div class="academic-timeline-item">
+                        <div class="academic-timeline-dot"></div>
+                        <div class="p-3 p-md-4 bg-white rounded-4 shadow-sm border">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
+                                <h5 class="fw-bold mb-0">Academic Rank 1</h5>
+                                <span class="badge bg-danger rounded-pill px-3 py-1 small">Session 23-24</span>
+                            </div>
+                            <p class="text-danger small fw-semibold mb-2">Second Year • BCA Data Science</p>
+                            <p class="text-secondary small mb-0">Secured 1st Rank in the second academic year for outstanding performance across advanced machine learning, databases, and statistical modeling.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Session 22-23 -->
-                <div class="col-md-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm overflow-hidden border-top border-danger border-5 h-100 text-center p-4">
-                        <div class="badge bg-danger mb-3">Session 22-23</div>
-                        <h5 class="fw-bold mb-2">Academic Rank 1</h5>
-                        <p class="text-secondary small mb-0">Secured 1st Rank in the 1st Year with top-tier marks.</p>
+                    <!-- Session 24-25 -->
+                    <div class="academic-timeline-item">
+                        <div class="academic-timeline-dot"></div>
+                        <div class="p-3 p-md-4 bg-white rounded-4 shadow-sm border">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
+                                <h5 class="fw-bold mb-0">Academic Rank 1</h5>
+                                <span class="badge bg-danger rounded-pill px-3 py-1 small">Session 24-25</span>
+                            </div>
+                            <p class="text-danger small fw-semibold mb-2">Final Year • BCA Data Science</p>
+                            <p class="text-secondary small mb-0">Secured 1st Rank in the final academic year for sustained scholastic excellence, capstone research, and top-tier GPA performance.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Hackathons & Awards Section -->
-            <div class="row g-4 mb-5">
-                <div class="col-12 mb-2">
+            <div class="mb-5">
+                <div class="mb-4">
                     <h4 class="fw-bold border-start border-primary border-4 ps-3">Hackathons & Competitions</h4>
                 </div>
 
-                <!-- HackHound 3.0 -->
-                <div class="col-md-6 col-lg-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-warning border-4 overflow-hidden h-100">
-                        <div class="achievement-img-container">
-                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="HackHound 3.0" class="img-fluid">
-                        </div>
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-microchip text-warning me-2"></i>
-                                <h6 class="fw-bold mb-0">HackHound 3.0</h6>
+                <div class="row g-4">
+                    <!-- HackHound 3.0 -->
+                    <div class="col-md-6 col-lg-4 animate-fade-in">
+                        <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-warning border-4 overflow-hidden h-100 d-flex flex-column">
+                            <div class="achievement-img-container">
+                                <img src="images/achievements/hackhound-3.png" alt="HackHound 3.0 Best Use of GenAI award certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fas fa-microchip text-warning fs-2 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">HackHound 3.0</h6>
+                                    <span class="badge bg-warning text-dark rounded-pill px-2 py-1 small">Feb 2025</span>
+                                </div>
                             </div>
-                            <p class="text-dark fw-bold mb-1">Award: Best Use of GenAI</p>
-                            <p class="text-muted small">Recognized for innovative implementation of Generative AI models in a competitive environment.</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold mb-0"><i class="fas fa-microchip text-warning me-2"></i>HackHound 3.0</h6>
+                                    <span class="badge bg-light text-dark border small">Feb 2025</span>
+                                </div>
+                                <p class="text-dark fw-bold mb-2 small"><span class="badge bg-warning text-dark">Award: Best Use of GenAI</span></p>
+                                <p class="text-secondary small mb-3 flex-grow-1">
+                                    <strong>What I built:</strong> Margdarshak.AI — AI-driven platform assists students in selecting the best courses for career advancement using Generative AI.
+                                </p>
+                                <div class="pt-2 mt-auto">
+                                    <a href="https://drive.google.com/file/d/1ImFnzL3CheN6ug079Pw5kwU5C3ecCdpJ/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-sm btn-outline-warning rounded-pill px-3">
+                                        <i class="fas fa-certificate me-1"></i> View Certificate ↗
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Hack-Code 2024 -->
-                <div class="col-md-6 col-lg-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-primary border-4 overflow-hidden h-100">
-                        <div class="achievement-img-container">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Hack-Code 2024" class="img-fluid">
-                        </div>
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-trophy text-primary me-2"></i>
-                                <h6 class="fw-bold mb-0">Hack-Code 2024</h6>
+                    <!-- Hack-Code 2024 -->
+                    <div class="col-md-6 col-lg-4 animate-fade-in">
+                        <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-primary border-4 overflow-hidden h-100 d-flex flex-column">
+                            <div class="achievement-img-container">
+                                <img src="images/achievements/hack-code-2024.png" alt="Hack-Code 2024 2nd Position runner-up certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fas fa-trophy text-primary fs-2 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">Hack-Code 2024</h6>
+                                    <span class="badge bg-primary text-white rounded-pill px-2 py-1 small">Feb 2024</span>
+                                </div>
                             </div>
-                            <p class="text-dark fw-bold mb-1">Result: 2nd Position</p>
-                            <p class="text-muted small">Secured runner-up position among numerous teams for a high-performance software solution.</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold mb-0"><i class="fas fa-trophy text-primary me-2"></i>Hack-Code 2024</h6>
+                                    <span class="badge bg-light text-dark border small">Feb 2024</span>
+                                </div>
+                                <p class="text-dark fw-bold mb-2 small"><span class="badge bg-primary text-white">Result: 2nd Position</span></p>
+                                <p class="text-secondary small mb-3 flex-grow-1">
+                                    <strong>What I built:</strong> EcoTracker — Monitor Carbon Footprint with this platform.
+                                </p>
+                                <div class="pt-2 mt-auto">
+                                    <a href="https://drive.google.com/file/d/10w2yG7JC_inW4I-BxwrQSIoL1cgs7L8p/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                        <i class="fas fa-certificate me-1"></i> View Certificate ↗
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- AI For Impact -->
-                <div class="col-md-6 col-lg-4 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-success border-4 overflow-hidden h-100">
-                        <div class="achievement-img-container">
-                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" alt="AI For Impact" class="img-fluid">
-                        </div>
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fab fa-google text-success me-2"></i>
-                                <h6 class="fw-bold mb-0">AI For Impact APAC</h6>
+                    <!-- AI For Impact APAC -->
+                    <div class="col-md-6 col-lg-4 animate-fade-in">
+                        <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-success border-4 overflow-hidden h-100 d-flex flex-column">
+                            <div class="achievement-img-container">
+                                <img src="images/achievements/ai-for-impact.png" alt="Google Cloud AI For Impact APAC participant certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fab fa-google text-success fs-2 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">AI For Impact APAC</h6>
+                                    <span class="badge bg-success text-white rounded-pill px-2 py-1 small">Dec 2024</span>
+                                </div>
                             </div>
-                            <p class="text-dark fw-bold mb-1">Google Cloud Participant</p>
-                            <p class="text-muted small">Built AI solutions for social good using Google Cloud technologies in the APAC region.</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold mb-0"><i class="fab fa-google text-success me-2"></i>AI For Impact APAC</h6>
+                                    <span class="badge bg-light text-dark border small">Dec 2024</span>
+                                </div>
+                                <p class="text-dark fw-bold mb-2 small"><span class="badge bg-success text-white">Google Cloud Participant</span></p>
+                                <p class="text-secondary small mb-3 flex-grow-1">
+                                    <strong>What I built:</strong> "DostAI", our AI-powered mental health assistant designed to empower healthcare workers.
+                                </p>
+                                <div class="pt-2 mt-auto">
+                                    <a href="https://drive.google.com/file/d/1nleEItBEEnnxN9z9yvXTkDlGiA5AtFEB/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                                        <i class="fas fa-certificate me-1"></i> View Certificate ↗
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Leadership Section -->
-            <div class="row g-4 mb-5">
-                <div class="col-12 mb-2">
+            <!-- Leadership & Coordination Section -->
+            <div class="mb-5">
+                <div class="mb-4">
                     <h4 class="fw-bold border-start border-info border-4 ps-3">Leadership & Coordination</h4>
                 </div>
 
-                <div class="col-md-6 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100">
-                        <div class="achievement-img-container">
-                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="CodeJam 2025" class="img-fluid">
-                        </div>
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-users-cog text-info me-2"></i>
-                                <h6 class="fw-bold mb-0">CodeJam Hackathon 2025</h6>
+                <div class="row g-4">
+                    <!-- CodeJam Hackathon 2025 -->
+                    <div class="col-md-6 animate-fade-in">
+                        <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100 d-flex flex-column">
+                            <div class="achievement-img-container">
+                                <img src="images/achievements/codejam-2025.png" alt="CodeJam Hackathon 2025 event coordination and student teams" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fas fa-users-cog text-info fs-2 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">CodeJam Hackathon 2025</h6>
+                                    <span class="badge bg-info text-dark rounded-pill px-2 py-1 small">120+ Participants</span>
+                                </div>
                             </div>
-                            <p class="text-dark fw-bold mb-1">Role: Event Coordinator</p>
-                            <p class="text-muted small">Managed logistics and technical support for a departmental hackathon.</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold mb-0"><i class="fas fa-users-cog text-info me-2"></i>CodeJam Hackathon 2025</h6>
+                                    <span class="badge bg-light text-dark border small">Role: Event Coordinator</span>
+                                </div>
+                                <p class="text-primary fw-semibold small mb-2"><i class="fas fa-user-friends me-1"></i> Scale: 120+ Participants • 30+ Competing Teams</p>
+                                <p class="text-secondary small mb-0 flex-grow-1">
+                                    Supervised event logistics, mentorship scheduling, and technical evaluation for a department-wide hackathon, leading an organizing committee of 8 team members.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-6 animate-fade-in">
-                    <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100">
-                        <div class="achievement-img-container">
-                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Quiz Mantra" class="img-fluid">
-                        </div>
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-bullhorn text-info me-2"></i>
-                                <h6 class="fw-bold mb-0">Quiz Mantra Event</h6>
+                    <!-- Quiz Mantra Event -->
+                    <div class="col-md-6 animate-fade-in">
+                        <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100 d-flex flex-column">
+                            <div class="achievement-img-container">
+                                <img src="images/achievements/quiz-mantra.png" alt="Quiz Mantra technical quiz event coordination and participant audience" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                    <i class="fas fa-bullhorn text-info fs-2 mb-2"></i>
+                                    <h6 class="fw-bold mb-1">Quiz Mantra Event</h6>
+                                    <span class="badge bg-info text-dark rounded-pill px-2 py-1 small">50+ Participants</span>
+                                </div>
                             </div>
-                            <p class="text-dark fw-bold mb-1">Role: Event Coordinator</p>
-                            <p class="text-muted small">Led the planning and execution of a technical quiz for 50+ participants.</p>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold mb-0"><i class="fas fa-bullhorn text-info me-2"></i>Quiz Mantra Event</h6>
+                                    <span class="badge bg-light text-dark border small">Role: Event Coordinator</span>
+                                </div>
+                                <p class="text-primary fw-semibold small mb-2"><i class="fas fa-user-friends me-1"></i> Scale: 50+ Participants • 25 Teams</p>
+                                <p class="text-secondary small mb-0 flex-grow-1">
+                                    Spearheaded the planning and execution of a competitive technical quiz covering algorithms and data science concepts, orchestrating question sets and live score tabulation.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Call-To-Action Banner -->
+            <div class="mt-5 pt-3 animate-fade-in">
+                <div class="card border-0 rounded-4 shadow-sm p-4 p-md-5 text-center position-relative overflow-hidden achievement-cta-card">
+                    <div class="position-relative" style="z-index: 2;">
+                        <div class="d-inline-flex p-3 rounded-circle bg-primary-subtle text-primary mb-3">
+                            <i class="fas fa-rocket fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-2">Want this kind of drive on your project?</h3>
+                        <p class="text-secondary mx-auto mb-4" style="max-width: 650px;">
+                            Whether you need a dedicated data scientist, hackathon-proven problem solver, or AI automation engineer with a track record of top-tier execution, let's collaborate.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <a href="contact.html" class="btn btn-primary rounded-pill px-4 py-2 shadow">
+                                <i class="fas fa-paper-plane me-2"></i>Get in Touch
+                            </a>
+                            <a href="projects.html" class="btn btn-outline-primary rounded-pill px-4 py-2">
+                                <i class="fas fa-laptop-code me-2"></i>Explore Projects
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap and Core Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Achievements Interactive Enhancements Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Animated Stats Counter
+            const stats = document.querySelectorAll('.stat-number');
+            let statsCounted = false;
+
+            const runCounter = () => {
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                stats.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const suffix = counter.getAttribute('data-suffix') || '';
+
+                    if (prefersReducedMotion) {
+                        counter.textContent = target + suffix;
+                        return;
+                    }
+
+                    const duration = 1200;
+                    const startTime = performance.now();
+
+                    const updateCount = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const ease = 1 - Math.pow(1 - progress, 2);
+                        const current = Math.floor(ease * target);
+
+                        counter.textContent = current + suffix;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.textContent = target + suffix;
+                        }
+                    };
+                    requestAnimationFrame(updateCount);
+                });
+            };
+
+            if ('IntersectionObserver' in window) {
+                const statsRow = document.querySelector('.stats-row');
+                if (statsRow) {
+                    const statsObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting && !statsCounted) {
+                                statsCounted = true;
+                                runCounter();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.2 });
+                    statsObserver.observe(statsRow);
+                } else {
+                    runCounter();
+                }
+
+                // 2. Academic Timeline Staggered Reveal
+                const timelineItems = document.querySelectorAll('.academic-timeline-item');
+                const timelineObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry, idx) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-revealed');
+                            }, idx * 140);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                timelineItems.forEach(item => timelineObserver.observe(item));
+            } else {
+                runCounter();
+                document.querySelectorAll('.academic-timeline-item').forEach(el => el.classList.add('is-revealed'));
+            }
+        });
+    </script>
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
@@ -245,7 +586,7 @@
                 color: #adb5bd !important;
             }
         </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI chat assistant">
             <i class="fas fa-comment-dots"></i>
         </button>
 
@@ -258,7 +599,7 @@
                         <small class="status-dot">Online</small>
                     </div>
                 </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0">
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close chat assistant">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -284,7 +625,7 @@
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
                     <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>

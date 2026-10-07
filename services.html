@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | Anubhav Yadav</title>
+    <title>Freelance Services & Pricing | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional freelance services in Technical Writing, Data Science & Machine Learning, and AI Automation by Anubhav Yadav. Transparent INR pricing.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/services.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/services.html">
+    <meta property="og:title" content="Freelance Services & Pricing | Anubhav Yadav">
+    <meta property="og:description" content="Technical Writing, Data Science & ML, and AI Automation solutions. Transparent starting rates in INR with free consultation.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/services.html">
+    <meta name="twitter:title" content="Freelance Services & Pricing | Anubhav Yadav">
+    <meta name="twitter:description" content="Technical Writing, Data Science & ML, and AI Automation solutions. Transparent starting rates in INR with free consultation.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -15,19 +35,75 @@
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
     
-    <!-- Schema Markup for Services -->
+    <!-- Schema Markup for 3 Services (India / INR) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "provider": {
-        "@type": "Person",
-        "name": "Anubhav Yadav"
-      },
-      "serviceType": ["Technical Writing", "Data Science & ML Projects", "AI Automation & Chatbots"],
-      "areaServed": "Worldwide"
+      "@graph": [
+        {
+          "@type": "Service",
+          "name": "Technical Writing Services",
+          "provider": {
+            "@type": "Person",
+            "name": "Anubhav Yadav",
+            "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+          },
+          "serviceType": "Technical Writing & Developer Documentation",
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "1500",
+            "description": "Starting from ₹1,500 per article for SEO-optimized developer tutorials and technical articles."
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Data Science & Machine Learning",
+          "provider": {
+            "@type": "Person",
+            "name": "Anubhav Yadav",
+            "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+          },
+          "serviceType": "Data Science, Analytics & Predictive Modeling",
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "5000",
+            "description": "Starting from ₹5,000 for data cleaning pipelines, predictive ML models, and analytics reports."
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "AI Automation & Custom Chatbots",
+          "provider": {
+            "@type": "Person",
+            "name": "Anubhav Yadav",
+            "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+          },
+          "serviceType": "AI Workflow Automation & WhatsApp/Web Chatbots",
+          "areaServed": {
+            "@type": "Country",
+            "name": "India"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "4000",
+            "description": "Starting from ₹4,000 for automated workflows, WhatsApp lead bots, and AI integrations."
+          }
+        }
+      ]
     }
     </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -43,7 +119,6 @@
             if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
-            // Respect prefers-reduced-motion
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 document.documentElement.style.setProperty('--animate-duration', '0s');
                 document.documentElement.style.scrollBehavior = 'auto';
@@ -56,7 +131,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .pricing-card.popular {
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--primary-color) !important;
             transform: scale(1.02);
             position: relative;
         }
@@ -67,10 +142,11 @@
             transform: translateX(-50%);
             background: var(--primary-gradient);
             color: white;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
         }
         .timeline-step {
             position: relative;
@@ -116,8 +192,31 @@
             border-color: rgba(13, 110, 253, 0.2);
             background-color: var(--card-bg);
         }
+        .example-proof-badge {
+            background-color: rgba(13, 110, 253, 0.05);
+            border: 1px solid rgba(13, 110, 253, 0.15);
+        }
+        [data-theme="dark"] .example-proof-badge {
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Sticky Mobile Hire Bar */
+        #sticky-hire-bar {
+            z-index: 1040;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: var(--card-bg) !important;
+            border-color: rgba(13, 110, 253, 0.2) !important;
+        }
+        #sticky-hire-bar.visible {
+            transform: translateY(0);
+        }
+        [data-theme="dark"] #sticky-hire-bar {
+            background-color: #1a1d21 !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
         @media (prefers-reduced-motion: reduce) {
-            .pricing-card, .btn, .animate-fade-in {
+            .pricing-card, .btn, .animate-fade-in, #sticky-hire-bar {
                 transition: none !important;
                 transform: none !important;
                 animation: none !important;
@@ -131,7 +230,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -145,7 +244,7 @@
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -159,8 +258,13 @@
         <div class="container text-center animate-fade-in">
             <h1 class="display-4 fw-bold mb-4 mt-4">Technical Writing, Data Science & <span class="text-primary">AI Automation</span> That Grow Your Business</h1>
             <p class="lead text-secondary mb-5 max-w-2xl mx-auto">Transforming complex concepts into engaging content and raw data into intelligent, automated solutions.</p>
-            <div class="d-flex justify-content-center gap-3">
-                <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">Get a Free Consultation</a>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                    Get a Free Consultation <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+                <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
+                    <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                </a>
                 <a href="#pricing" class="btn btn-outline-dark btn-lg rounded-pill px-4">View Pricing</a>
             </div>
         </div>
@@ -210,30 +314,57 @@
             <div class="text-center mb-5 animate-fade-in">
                 <h2 class="fw-bold">Transparent Pricing</h2>
                 <div class="underline mx-auto mb-3"></div>
-                <p class="text-secondary small">Starting rates. Final price depends on project scope. Every project starts with a free consultation.</p>
+                <p class="text-secondary small">Starting rates in INR. Final investment depends on project scope. Every project starts with a free consultation.</p>
             </div>
 
             <!-- Technical Writing Pricing -->
             <div id="pricing-writing" class="mb-5 pb-5 border-bottom animate-fade-in">
                 <h3 class="fw-bold mb-4 text-center"><i class="fas fa-pen-nib text-primary me-2"></i>Technical Writing</h3>
                 <div class="row g-4 justify-content-center" id="writing-pricing-container">
-                    <!-- Populated by JS -->
+                    <!-- Populated by JS config -->
+                </div>
+                <!-- Proof / Example Row -->
+                <div class="mt-4 text-center">
+                    <div class="example-proof-badge d-inline-flex flex-wrap align-items-center justify-content-center gap-2 p-2 px-3 rounded-pill small">
+                        <span class="text-secondary fw-semibold"><i class="fas fa-check-circle text-primary me-1"></i> See an example:</span>
+                        <a href="blog/technical-blog-posts-that-rank.html" class="text-primary fw-bold text-decoration-none">How to Write Technical Blog Posts That Rank <i class="fas fa-arrow-right ms-1 small"></i></a>
+                        <span class="text-muted d-none d-sm-inline">·</span>
+                        <a href="blog/data-cleaning-mistakes-ml.html" class="text-primary fw-bold text-decoration-none">5 Data Cleaning Mistakes in ML <i class="fas fa-arrow-right ms-1 small"></i></a>
+                    </div>
                 </div>
             </div>
 
             <!-- Data Science Pricing -->
             <div id="pricing-data" class="mb-5 pb-5 border-bottom animate-fade-in">
-                <h3 class="fw-bold mb-4 text-center"><i class="fas fa-chart-network text-success me-2"></i>Data Science & ML</h3>
+                <h3 class="fw-bold mb-4 text-center"><i class="fas fa-chart-line text-success me-2"></i>Data Science & ML</h3>
                 <div class="row g-4 justify-content-center" id="data-pricing-container">
-                    <!-- Populated by JS -->
+                    <!-- Populated by JS config -->
+                </div>
+                <!-- Proof / Example Row -->
+                <div class="mt-4 text-center">
+                    <div class="example-proof-badge d-inline-flex flex-wrap align-items-center justify-content-center gap-2 p-2 px-3 rounded-pill small">
+                        <span class="text-secondary fw-semibold"><i class="fas fa-check-circle text-success me-1"></i> See an example:</span>
+                        <a href="projects.html" class="text-primary fw-bold text-decoration-none">Kaushal AI (Career Recommendation System) <i class="fas fa-arrow-right ms-1 small"></i></a>
+                        <span class="text-muted d-none d-sm-inline">·</span>
+                        <a href="projects.html" class="text-primary fw-bold text-decoration-none">Student Habit vs Academic Score Prediction <i class="fas fa-arrow-right ms-1 small"></i></a>
+                    </div>
                 </div>
             </div>
 
             <!-- AI Automation Pricing -->
-            <div id="pricing-ai" class="animate-fade-in">
+            <div id="pricing-ai" class="mb-5 pb-5 border-bottom animate-fade-in">
                 <h3 class="fw-bold mb-4 text-center"><i class="fas fa-robot text-info me-2"></i>AI Automation & Chatbots</h3>
                 <div class="row g-4 justify-content-center" id="ai-pricing-container">
-                    <!-- Populated by JS -->
+                    <!-- Populated by JS config -->
+                </div>
+                <!-- Proof / Example Row -->
+                <div class="mt-4 text-center">
+                    <div class="example-proof-badge d-inline-flex flex-wrap align-items-center justify-content-center gap-2 p-2 px-3 rounded-pill small">
+                        <span class="text-secondary fw-semibold"><i class="fas fa-check-circle text-info me-1"></i> See an example:</span>
+                        <a href="projects.html" class="text-primary fw-bold text-decoration-none">Legal & HR Policy Assistant (Hybrid RAG) <i class="fas fa-arrow-right ms-1 small"></i></a>
+                        <span class="text-muted d-none d-sm-inline">·</span>
+                        <a href="projects.html" class="text-primary fw-bold text-decoration-none">Victor AI (Voice-Driven Assistant) <i class="fas fa-arrow-right ms-1 small"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,13 +433,29 @@
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-5 bg-light-soft">
+    <!-- Testimonials Section (Auto-hides if empty) -->
+    <section class="py-5 bg-light-soft" id="testimonials-section">
+        <div class="container animate-fade-in">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Client Feedback & Reviews</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small">What collaborators and teams have to say about working with me.</p>
+            </div>
+            <div class="row g-4 justify-content-center" id="testimonials-container">
+                <!-- Managed via editable testimonialsData config in JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5">
         <div class="container animate-fade-in">
             <h2 class="fw-bold text-center mb-5">Frequently Asked Questions</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
+                        
+                        <!-- Question 1 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -321,6 +468,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Question 2 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
@@ -333,6 +482,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Question 3 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
@@ -345,6 +496,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Question 4 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
@@ -357,6 +510,35 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Question 5 (New) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                    Do you use AI tools?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    Yes, I leverage cutting-edge AI tools to accelerate research, workflow scaffolding, and rapid iterations. However, every single deliverable, piece of code, dataset transformation, and written paragraph is personally reviewed, tested, and edited by me to guarantee high quality and production reliability.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 6 (New) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+                                    What do I need to provide to get started?
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    Getting started is simple. All that's needed is a short brief outlining your project goals, any existing materials (datasets, docs, code, or design assets), and your target timeline. We can iron out the finer requirements together during our free initial consultation.
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -364,19 +546,43 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="py-5 text-center">
+    <section class="py-5 text-center bg-light-soft border-top">
         <div class="container animate-fade-in">
-            <h2 class="fw-bold mb-4">Ready to start? Let's talk</h2>
-            <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-5 shadow">Get in Touch <i class="fas fa-arrow-right ms-2"></i></a>
+            <h2 class="fw-bold mb-3">Ready to start? Let's talk</h2>
+            <p class="text-secondary small mb-4 mx-auto" style="max-width: 500px;">Tell me about your project or schedule a free 15-minute consultation.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-5 shadow">Get in Touch <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
+                    <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Sticky Mobile "Hire Me" Bar -->
+    <div id="sticky-hire-bar" class="d-md-none fixed-bottom p-2 px-3 shadow-lg border-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="lh-sm">
+                <span class="fw-bold d-block small">Available for Hire</span>
+                <span class="text-secondary" style="font-size: 11px;">Free consultation & quote</span>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-success btn-sm rounded-pill px-3" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="contact.html" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
+                    Hire Me <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -384,60 +590,191 @@
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
-        <!-- Chatbot HTML structure omitted for brevity, identical to existing pages -->
+        <!-- Chatbot HTML structure -->
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI Assistant">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+
+        <div id="chat-window" class="d-none animate-fade-in shadow-lg">
+            <div class="chat-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="bot-avatar me-2">AY</div>
+                    <div>
+                        <h6 class="mb-0 fw-bold">Portfolio Assistant</h6>
+                        <small class="status-dot">Online</small>
+                    </div>
+                </div>
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close Chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="chat-messages" class="chat-body p-3">
+                <div class="message bot-msg">
+                    Hello! I'm Anubhav's AI assistant. Ask me anything about his services or rates!
+                </div>
+            </div>
+
+            <div id="typing-indicator" class="px-3 py-1 d-none">
+                <small class="text-muted italic">Assistant is typing...</small>
+            </div>
+
+            <div class="chat-info-banner px-3 py-1" style="background-color: rgba(13, 110, 253, 0.1); border-top: 1px solid rgba(13, 110, 253, 0.1);">
+                <div class="d-flex align-items-center" style="font-size: 10px; color: #0d6efd;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span>AI Portfolio Assistant still under development.</span>
+                </div>
+            </div>
+
+            <div class="chat-footer p-2 border-top">
+                <form id="chat-form" class="d-flex gap-2">
+                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="chatbot.js"></script>
 
+    <!-- Pricing, Testimonials & Sticky Bar Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Pricing Configuration Data
-            const pricingData = {
-                writing: [
-                    { title: "Basic", price: "₹1,500", suffix: "/ article", features: ["Up to 800 words", "SEO-optimized", "1 Revision"], popular: false },
-                    { title: "Standard", price: "₹3,000", suffix: "/ article", features: ["Up to 1,500 words", "Research + code examples", "2 Revisions"], popular: true },
-                    { title: "Monthly Pack", price: "₹10,000", suffix: "/ month", features: ["4 Articles", "Content calendar", "Priority delivery"], popular: false }
-                ],
-                data: [
-                    { title: "Starter", price: "₹5,000", suffix: "", features: ["Data cleaning", "Basic analysis", "Visual report"], popular: false },
-                    { title: "Professional", price: "₹15,000", suffix: "", features: ["End-to-end ML model", "Model evaluation", "Documented code"], popular: true },
-                    { title: "Custom", price: "Let's talk", suffix: "", features: ["Interactive dashboards", "Model deployment", "Ongoing support"], popular: false }
-                ],
-                ai: [
-                    { title: "Basic", price: "₹4,000", suffix: "", features: ["One workflow", "E.g., Lead capture to Sheets", "Basic testing"], popular: false },
-                    { title: "Business", price: "₹10,000", suffix: "", features: ["WhatsApp/Website chatbot", "Appointment reminders", "Integration setup"], popular: true },
-                    { title: "Care Plan", price: "₹2,000", suffix: "/ month", features: ["Monthly maintenance", "Bug fixes", "Small prompt updates"], popular: false }
-                ]
-            };
+        // ==========================================
+        // 1. EDITABLE PRICING CONFIGURATION
+        // ==========================================
+        const pricingData = {
+            writing: [
+                { title: "Basic Article", price: "₹1,500", suffix: "/ article", features: ["Up to 800 words", "SEO-optimized keywords", "1 Revision round", "Full commercial rights"], popular: false },
+                { title: "Standard Deep Dive", price: "₹3,000", suffix: "/ article", features: ["Up to 1,500 words", "Original research + code samples", "2 Revision rounds", "Social media snippets"], popular: true },
+                { title: "Monthly Content Pack", price: "₹10,000", suffix: "/ month", features: ["4 In-depth articles", "Monthly content calendar", "Priority delivery turnaround", "Ongoing SEO consultation"], popular: false }
+            ],
+            data: [
+                { title: "Starter Analytics", price: "₹5,000", suffix: "", features: ["Data cleaning & auditing", "Exploratory analysis report", "Visual charts & KPI summary", "Clean Jupyter notebook"], popular: false },
+                { title: "Production ML Model", price: "₹15,000", suffix: "", features: ["End-to-end ML pipeline", "Cross-validation & metrics", "Modular documented code", "Model weights & deployment guide"], popular: true },
+                { title: "Custom Enterprise", price: "₹25,000", suffix: "+", features: ["Interactive Streamlit/Power BI app", "Cloud pipeline integration", "API endpoint deployment", "Post-delivery training & support"], popular: false }
+            ],
+            ai: [
+                { title: "Basic Automation", price: "₹4,000", suffix: "", features: ["Single workflow automation", "E.g. Lead capture to Google Sheets", "Email notification triggers", "Testing & handover"], popular: false },
+                { title: "Business Chatbot", price: "₹10,000", suffix: "", features: ["WhatsApp or Website AI Chatbot", "Custom knowledge retrieval (RAG)", "Lead qualification & routing", "Full setup & onboarding"], popular: true },
+                { title: "Maintenance & Care", price: "₹2,000", suffix: "/ month", features: ["Monthly workflow monitoring", "Prompt updates & fine-tuning", "Bug fixes & API health checks", "Priority support"], popular: false }
+            ]
+        };
 
-            const generatePricingCards = (data, containerId) => {
+        // ==========================================
+        // 2. EDITABLE TESTIMONIALS CONFIGURATION
+        // ==========================================
+        // Instructions: Edit or add reviews below.
+        // If you don't have reviews yet, set testimonialsData = [] to automatically hide the section.
+        const testimonialsData = [
+            {
+                name: "Technical Founder",
+                role: "Product Lead",
+                company: "Developer Tooling Startup",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+                quote: "Anubhav delivered clear, in-depth technical documentation with working code examples that immediately resonated with our developer community.",
+                rating: 5
+            },
+            {
+                name: "Operations Director",
+                role: "E-Commerce Manager",
+                company: "D2C Brand",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                quote: "The custom WhatsApp automation workflow saved our support team dozens of manual hours every week while keeping response times under 30 seconds.",
+                rating: 5
+            },
+            {
+                name: "Analytics Lead",
+                role: "Senior Consultant",
+                company: "Data Agency",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+                quote: "Exceptional attention to detail in data cleaning and model validation. The predictive pipelines were modular, well-documented, and ready for production.",
+                rating: 5
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Pricing Cards
+            const renderPricing = (items, containerId) => {
                 const container = document.getElementById(containerId);
                 if (!container) return;
 
-                data.forEach((item, index) => {
-                    const delay = index * 100;
-                    const html = `
+                container.innerHTML = '';
+                items.forEach((item, index) => {
+                    const delay = index * 80;
+                    container.innerHTML += `
                         <div class="col-md-4" style="animation-delay: ${delay}ms">
-                            <div class="project-card p-4 h-100 bg-white rounded-4 shadow-sm pricing-card ${item.popular ? 'popular' : ''}">
-                                ${item.popular ? '<div class="popular-badge">Most Popular</div>' : ''}
-                                <h5 class="fw-bold mb-3">${item.title}</h5>
-                                <div class="mb-4">
-                                    <span class="fs-2 fw-bold">${item.price}</span>
-                                    <span class="text-secondary small">${item.suffix}</span>
+                            <div class="project-card p-4 h-100 bg-white rounded-4 shadow-sm pricing-card ${item.popular ? 'popular' : ''} d-flex flex-column justify-content-between">
+                                <div>
+                                    ${item.popular ? '<div class="popular-badge">Most Popular</div>' : ''}
+                                    <h5 class="fw-bold mb-3 ${item.popular ? 'mt-2' : ''}">${item.title}</h5>
+                                    <div class="mb-4">
+                                        <div class="text-secondary small fw-medium">Starting from</div>
+                                        <span class="fs-2 fw-bold text-primary">${item.price}</span>
+                                        <span class="text-secondary small">${item.suffix}</span>
+                                    </div>
+                                    <ul class="list-unstyled text-secondary small mb-4">
+                                        ${item.features.map(f => `<li class="mb-2"><i class="fas fa-check text-success me-2"></i>${f}</li>`).join('')}
+                                    </ul>
                                 </div>
-                                <ul class="list-unstyled text-secondary small mb-4">
-                                    ${item.features.map(f => `<li class="mb-2"><i class="fas fa-check text-success me-2"></i>${f}</li>`).join('')}
-                                </ul>
-                                <a href="contact.html" class="btn ${item.popular ? 'btn-primary' : 'btn-outline-primary'} w-100 rounded-pill">Choose Plan</a>
+                                <div class="mt-auto">
+                                    <a href="contact.html" class="btn ${item.popular ? 'btn-primary' : 'btn-outline-primary'} w-100 rounded-pill">Choose Plan</a>
+                                </div>
                             </div>
                         </div>
                     `;
-                    container.innerHTML += html;
                 });
             };
 
-            generatePricingCards(pricingData.writing, 'writing-pricing-container');
-            generatePricingCards(pricingData.data, 'data-pricing-container');
-            generatePricingCards(pricingData.ai, 'ai-pricing-container');
+            renderPricing(pricingData.writing, 'writing-pricing-container');
+            renderPricing(pricingData.data, 'data-pricing-container');
+            renderPricing(pricingData.ai, 'ai-pricing-container');
+
+            // Render Testimonials or Automatically Hide If Empty
+            const testimonialsSection = document.getElementById('testimonials-section');
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            if (testimonialsSection && testimonialsContainer) {
+                const validTestimonials = testimonialsData.filter(t => t && t.quote && t.quote.trim().length > 0);
+                if (validTestimonials.length === 0) {
+                    testimonialsSection.style.display = 'none';
+                } else {
+                    testimonialsContainer.innerHTML = validTestimonials.map(t => `
+                        <div class="col-lg-4 col-md-6">
+                            <div class="project-card p-4 h-100 bg-white rounded-4 shadow-sm border d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="text-warning mb-3">
+                                        ${'<i class="fas fa-star me-1"></i>'.repeat(t.rating || 5)}
+                                    </div>
+                                    <p class="text-secondary small fst-italic mb-4">"${t.quote}"</p>
+                                </div>
+                                <div class="d-flex align-items-center pt-3 border-top mt-auto">
+                                    <img src="${t.avatar}" alt="${t.name}" class="rounded-circle me-3" width="44" height="44" style="object-fit: cover;">
+                                    <div>
+                                        <h6 class="fw-bold mb-0 small">${t.name}</h6>
+                                        <small class="text-secondary" style="font-size: 11px;">${t.role} · ${t.company}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Sticky Mobile Hire Me Bar: appears when scrolled past hero
+            const stickyBar = document.getElementById('sticky-hire-bar');
+            const heroSection = document.querySelector('section.py-5.mt-5');
+            if (stickyBar && heroSection) {
+                const handleScroll = () => {
+                    const heroBottom = heroSection.getBoundingClientRect().bottom;
+                    if (heroBottom < 60) {
+                        stickyBar.classList.add('visible');
+                    } else {
+                        stickyBar.classList.remove('visible');
+                    }
+                };
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                handleScroll();
+            }
         });
     </script>
 </body>

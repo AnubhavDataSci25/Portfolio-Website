@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qualifications | Anubhav Yadav</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore Anubhav Yadav's academic qualifications, MCA and BCA in Data Science, industry internship experience, certifications from IBM, Google, DeepLearning.AI, and technical expertise.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/qualifications.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/qualifications.html">
+    <meta property="og:title" content="Qualifications & Certifications | Anubhav Yadav">
+    <meta property="og:description" content="Explore Anubhav Yadav's education in Data Science (MCA at Chandigarh University, Rank 1 BCA at SRM), internship experience, and professional certifications.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/qualifications.html">
+    <meta name="twitter:title" content="Qualifications & Certifications | Anubhav Yadav">
+    <meta name="twitter:description" content="Explore Anubhav Yadav's education in Data Science (MCA at Chandigarh University, Rank 1 BCA at SRM), internship experience, and professional certifications.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,6 +32,7 @@
     <link rel="stylesheet" href="chatbot.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -28,6 +50,106 @@
             }
         })();
     </script>
+
+    <!-- Scoped Styles for Qualifications Page -->
+    <style>
+        /* Certification Filter Buttons */
+        .cert-filter-btn {
+            border-radius: 50rem;
+            padding: 0.4rem 1.15rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(13, 110, 253, 0.25);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .cert-filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: var(--glow-shadow);
+        }
+        .cert-filter-btn.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: #ffffff !important;
+            box-shadow: var(--glow-shadow);
+        }
+
+        /* Certification Groups and Cards Animation */
+        .cert-group {
+            transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: center top;
+        }
+        .cert-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .cert-hidden {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        /* Certification Card Styling & Link Interaction */
+        .cert-item-card {
+            background-color: var(--card-bg) !important;
+            color: var(--text-color) !important;
+            border: 1px solid rgba(13, 110, 253, 0.12) !important;
+            border-left: 4px solid var(--primary-color) !important;
+            text-decoration: none !important;
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .cert-item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-shadow) !important;
+            border-color: var(--primary-color) !important;
+        }
+        .cert-item-card:hover .cert-verify-badge {
+            background: var(--primary-gradient) !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+        }
+        .cert-verify-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.65rem;
+            transition: all 0.25s ease;
+        }
+
+        /* Subtle Fade-Up Reveal for Education & Experience */
+        .edu-fade-card {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .edu-fade-card.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dark mode badge adjustments */
+        [data-theme="dark"] .badge.bg-light {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-color) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        [data-theme="dark"] .cert-verify-badge {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--primary-color) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        /* Accessibility: Respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .cert-group,
+            .cert-item-card,
+            .edu-fade-card {
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -35,7 +157,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,9 +167,11 @@
                     <li class="nav-item"><a class="nav-link active" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -62,48 +186,61 @@
             <div class="text-center mb-5 animate-fade-in">
                 <h2 class="fw-bold">Experience & Education</h2>
                 <p class="text-muted small">A journey of continuous learning and professional growth.</p>
-                <div class="underline mx-auto"></div>
+                <div class="underline mx-auto mb-3"></div>
+                <div class="mt-3">
+                    <a href="docs/Anubhav Yadav DS Resume Updated.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline-dark rounded-pill px-3 shadow-sm" onclick="gtag('event', 'resume_download', { event_category: 'engagement', event_label: 'qualifications_header' });">
+                        <i class="fas fa-file-arrow-down me-2 text-primary"></i>Download Resume
+                    </a>
+                </div>
             </div>
 
             <div class="row g-5">
                 <!-- Education Timeline -->
                 <div class="col-lg-6 animate-fade-in">
                     <h4 class="fw-bold mb-4"><i class="fas fa-graduation-cap text-primary me-2"></i> Education</h4>
-                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative">
+                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative edu-fade-card">
                         <div class="timeline-dot"></div>
-                        <h5 class="fw-bold mb-1">MCA in Data Science</h5>
-                        <p class="text-primary mb-2">Chandigarh University • 2025 — 2027</p>
-                        <p class="text-secondary small">CGPA: 8.55/10</p>
-                        <p class="text-secondary small">Pursuing advanced studies in data science, focusing on deep learning, big data, and AI ethics.</p>
+                        <div class="p-4 bg-white rounded-4 shadow-sm border">
+                            <h5 class="fw-bold mb-1">MCA in Data Science</h5>
+                            <p class="text-primary mb-2">Chandigarh University • 2025 — 2027</p>
+                            <p class="text-secondary small mb-1">CGPA: 8.55/10</p>
+                            <p class="text-secondary small mb-0">Pursuing advanced studies in data science, focusing on deep learning, big data, and AI ethics.</p>
+                        </div>
                     </div>
-                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative">
+                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative edu-fade-card">
                         <div class="timeline-dot"></div>
-                        <h5 class="fw-bold mb-1">BCA in Data Science</h5>
-                        <p class="text-primary mb-2">SRM Institute of Science and Technology • 2022 — 2025</p>
-                        <p class="text-secondary small">CGPA: 9.67/10</p>
-                        <p class="text-secondary small">Focused on statistics, machine learning, and data visualization. Ranked 1st in the academic sessions 2022-23 and 2023-24.</p>
+                        <div class="p-4 bg-white rounded-4 shadow-sm border">
+                            <h5 class="fw-bold mb-1">BCA in Data Science</h5>
+                            <p class="text-primary mb-2">SRM Institute of Science and Technology • 2022 — 2025</p>
+                            <p class="text-secondary small mb-1">CGPA: 9.67/10</p>
+                            <p class="text-secondary small mb-0">Focused on statistics, machine learning, and data visualization. Ranked 1st in the academic sessions 2022-23 and 2023-24.</p>
+                        </div>
                     </div>
-                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative">
+                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative edu-fade-card">
                         <div class="timeline-dot"></div>
-                        <h5 class="fw-bold mb-1">Higher Secondary Education</h5>
-                        <p class="text-primary mb-2">Science Stream • 2020 — 2022</p>
-                        <p class="text-secondary small">Percentage: 85.4%</p>
-                        <p class="text-secondary small">Completed with a focus on Mathematics and Computer Science, building a strong analytical foundation.</p>
+                        <div class="p-4 bg-white rounded-4 shadow-sm border">
+                            <h5 class="fw-bold mb-1">Higher Secondary Education</h5>
+                            <p class="text-primary mb-2">Science Stream • 2020 — 2022</p>
+                            <p class="text-secondary small mb-1">Percentage: 85.4%</p>
+                            <p class="text-secondary small mb-0">Completed with a focus on Mathematics and Computer Science, building a strong analytical foundation.</p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Experience Timeline -->
                 <div class="col-lg-6 animate-fade-in">
                     <h4 class="fw-bold mb-4"><i class="fas fa-briefcase text-primary me-2"></i> Experience</h4>
-                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative">
+                    <div class="timeline-item ps-4 border-start border-primary border-2 pb-4 position-relative edu-fade-card">
                         <div class="timeline-dot"></div>
-                        <h5 class="fw-bold mb-1">Data Science Intern</h5>
-                        <p class="text-primary mb-2">Uniconverge Technologies • Internship</p>
-                        <ul class="text-secondary small">
-                            <li>Conducted Exploratory Data Analysis (EDA) on diverse datasets.</li>
-                            <li>Built and evaluated classification models to improve prediction accuracy.</li>
-                            <li>Designed interactive Power BI dashboards for business stakeholders.</li>
-                        </ul>
+                        <div class="p-4 bg-white rounded-4 shadow-sm border">
+                            <h5 class="fw-bold mb-1">Data Science Intern</h5>
+                            <p class="text-primary mb-2">Uniconverge Technologies • 1st June 2023 — 15th July 2023</p>
+                            <ul class="text-secondary small mb-0 ps-3">
+                                <li class="mb-2">Conducted Exploratory Data Analysis (EDA) on diverse datasets.</li>
+                                <li class="mb-2">Built and evaluated multiple machine learning models including Linear Regression, Random Forest, and Support Vector Regression, improving model accuracy by 25% through hyperparameter tuning.</li>
+                                <li>Designed interactive Power BI dashboards for business stakeholders.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +253,7 @@
                 </div>
                 
                 <div class="row g-4">
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="p-4 bg-white rounded-4 shadow-sm h-100">
                             <h6 class="fw-bold text-primary mb-3"><i class="fas fa-code me-2"></i>Languages & Analysis</h6>
                             <div class="d-flex flex-wrap gap-2">
@@ -131,7 +268,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="p-4 bg-white rounded-4 shadow-sm h-100">
                             <h6 class="fw-bold text-primary mb-3"><i class="fas fa-brain me-2"></i>ML & Visualization</h6>
                             <div class="d-flex flex-wrap gap-2">
@@ -147,7 +284,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="p-4 bg-white rounded-4 shadow-sm h-100">
                             <h6 class="fw-bold text-primary mb-3"><i class="fas fa-tools me-2"></i>Dev & Databases</h6>
                             <div class="d-flex flex-wrap gap-2">
@@ -161,72 +298,154 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                            <h6 class="fw-bold text-primary mb-3"><i class="fas fa-pen-nib me-2"></i>Writing & Automation</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-light text-dark border">Technical Writing</span>
+                                <span class="badge bg-light text-dark border">SEO Writing</span>
+                                <span class="badge bg-light text-dark border">n8n</span>
+                                <span class="badge bg-light text-dark border">Zapier</span>
+                                <span class="badge bg-light text-dark border">Google Apps Script</span>
+                                <span class="badge bg-light text-dark border">Streamlit</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Certifications Section -->
-            <div class="mt-5 pt-4 animate-fade-in">
-                <div class="text-center mb-5">
+            <div class="mt-5 pt-4 animate-fade-in" id="certifications">
+                <div class="text-center mb-4">
                     <h2 class="fw-bold">Licenses & Certifications</h2>
-                    <div class="underline mx-auto"></div>
+                    <div class="underline mx-auto mb-4"></div>
+                    
+                    <!-- Filter Row -->
+                    <div class="d-flex flex-wrap justify-content-center gap-2 cert-filter-row" role="tablist" aria-label="Filter certifications">
+                        <button type="button" class="cert-filter-btn active" data-filter="all" aria-pressed="true">
+                            All
+                        </button>
+                        <button type="button" class="cert-filter-btn" data-filter="data-analytics" aria-pressed="false">
+                            Data &amp; Analytics
+                        </button>
+                        <button type="button" class="cert-filter-btn" data-filter="machine-learning" aria-pressed="false">
+                            Machine Learning
+                        </button>
+                        <button type="button" class="cert-filter-btn" data-filter="genai-cv" aria-pressed="false">
+                            GenAI &amp; Computer Vision
+                        </button>
+                    </div>
                 </div>
-                <div class="row g-3">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center h-100 p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fa-solid fa-database text-primary me-3 fs-4 flex-shrink-0"></i>
-                            <div class="d-flex align-items-baseline justify-content-between flex-grow-1 gap-2">
-                                <span class="small fw-bold">SQL (Basic)</span>
-                                <p class="text-secondary small mb-0 text-end">Issued by HackerRank • 2024</p>
+
+                <div id="certifications-container">
+                    <!-- Group 1: Data & Analytics -->
+                    <div class="cert-group mb-4 cert-visible" data-category="data-analytics">
+                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                            <i class="fa-solid fa-chart-line text-primary me-2"></i>Data &amp; Analytics
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://coursera.org/share/2053d9ac732bb56b8618057fbc7e0ecc" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fa-solid fa-chart-pie text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">IBM Data Science Professional</span>
+                                            <span class="text-secondary small d-block">Issued by IBM &amp; Coursera • 2025</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://www.credly.com/badges/1f5485ee-284d-4f44-9b8b-28f85a829103/public_url" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fab fa-google text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">Google Data Analytics Professional</span>
+                                            <span class="text-secondary small d-block">Issued by Google &amp; Coursera • 2024</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://www.hackerrank.com/certificates/63fbf23d97df" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fa-solid fa-database text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">SQL (Basic)</span>
+                                            <span class="text-secondary small d-block">Issued by HackerRank • 2024</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://www.udemy.com/certificate/UC-3c6185b0-b57e-4905-8b81-d8f61da03749/" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fab fa-python text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">Python &amp; SQL Bootcamp</span>
+                                            <span class="text-secondary small d-block">Issued by Udemy • 2023 &amp; 2024</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fab fa-google text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">Google Data Analytics Professional</span>
-                            <p class="text-secondary small">Issued by Google & Coursera • 2024</p>
+
+                    <!-- Group 2: Machine Learning -->
+                    <div class="cert-group mb-4 cert-visible" data-category="machine-learning">
+                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                            <i class="fa-solid fa-brain text-primary me-2"></i>Machine Learning
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://coursera.org/share/4fa15fdff7bffa0906e077fce46dddb1" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fas fa-brain text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">Machine Learning Specialization</span>
+                                            <span class="text-secondary small d-block">Issued by DeepLearning.AI &amp; Coursera • 2024</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://coursera.org/share/91b06e719a88ac682bf04dcbacc47ce4" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fa-solid fa-brain text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">IBM Machine Learning Professional</span>
+                                            <span class="text-secondary small d-block">Issued by IBM &amp; Coursera • 2026</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fas fa-brain text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">Machine Learning Specialization</span>
-                            <p class="text-secondary small">Issued by DeepLearning.AI & Coursera • 2024</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fab fa-python text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">Python & SQL Bootcamp</span>
-                            <p class="text-secondary small">Issued by Udemy • 2023 & 2024</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fas fa-eye text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">Computer Vision with OpenCV</span>
-                            <p class="text-secondary small">Issued by Udemy • 2024</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fas fa-robot text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">Career Essentials in GenAI</span>
-                            <p class="text-secondary small">Issued by LinkedIn Learning • 2023</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fa-solid fa-chart-pie text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">IBM Data Science Professional</span>
-                            <p class="text-secondary small">Issued by IBM & Coursera • 2025</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="d-flex align-items-center p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
-                            <i class="fa-solid fa-brain text-primary me-3 fs-4"></i>
-                            <span class="small fw-bold">IBM Machine Learning Professional</span>
-                            <p class="text-secondary small">Issued by IBM & Coursera • 2026</p>
+
+                    <!-- Group 3: GenAI & Computer Vision -->
+                    <div class="cert-group mb-4 cert-visible" data-category="genai-cv">
+                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                            <i class="fas fa-eye text-primary me-2"></i>GenAI &amp; Computer Vision
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <a href="https://www.udemy.com/certificate/UC-b4598723-b93c-4337-92fa-894cfd681029/" target="_blank" rel="noopener" class="cert-item-card d-flex align-items-center justify-content-between p-3 rounded-3 shadow-sm h-100">
+                                    <div class="d-flex align-items-center me-2">
+                                        <i class="fas fa-eye text-primary me-3 fs-4 flex-shrink-0"></i>
+                                        <div>
+                                            <span class="small fw-bold d-block">Computer Vision with OpenCV</span>
+                                            <span class="text-secondary small d-block">Issued by Udemy • 2024</span>
+                                        </div>
+                                    </div>
+                                    <span class="cert-verify-badge badge bg-light text-primary border flex-shrink-0 ms-2">Verify ↗</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -236,12 +455,73 @@
 
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Interactive Qualifications Enhancements -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Certification Filter Logic
+            const filterButtons = document.querySelectorAll('.cert-filter-btn');
+            const certGroups = document.querySelectorAll('.cert-group');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
+
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-pressed', 'true');
+
+                    certGroups.forEach(group => {
+                        const groupCategory = group.getAttribute('data-category');
+                        const shouldShow = (filterValue === 'all' || filterValue === groupCategory);
+
+                        if (shouldShow) {
+                            group.classList.remove('d-none');
+                            void group.offsetWidth; // trigger reflow for smooth CSS animation
+                            group.classList.remove('cert-hidden');
+                            group.classList.add('cert-visible');
+                        } else {
+                            group.classList.remove('cert-visible');
+                            group.classList.add('cert-hidden');
+                            setTimeout(() => {
+                                if (group.classList.contains('cert-hidden')) {
+                                    group.classList.add('d-none');
+                                }
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Education & Experience Subtle Fade-Up Reveal
+            const revealCards = document.querySelectorAll('.edu-fade-card');
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry, idx) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-revealed');
+                            }, idx * 90);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                revealCards.forEach(card => revealObserver.observe(card));
+            } else {
+                revealCards.forEach(card => card.classList.add('is-revealed'));
+            }
+        });
+    </script>
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
@@ -260,7 +540,7 @@
                 color: #adb5bd !important;
             }
         </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI chat assistant">
             <i class="fas fa-comment-dots"></i>
         </button>
 
@@ -273,7 +553,7 @@
                         <small class="status-dot">Online</small>
                     </div>
                 </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0">
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close chat assistant">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -299,7 +579,7 @@
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
                     <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>

@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Anubhav Yadav</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore Anubhav Yadav's portfolio of Data Science, GenAI & RAG, Machine Learning, and AI Automation projects including CLAT Oracle AI, Legal & HR Assistant, and Victor AI.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/projects.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/projects.html">
+    <meta property="og:title" content="Projects | Anubhav Yadav - Data Science, GenAI & AI Automation">
+    <meta property="og:description" content="Explore production-grade RAG systems, machine learning pipelines, and automation tools built by Anubhav Yadav with full case studies and metrics.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/projects.html">
+    <meta name="twitter:title" content="Projects | Anubhav Yadav - Data Science, GenAI & AI Automation">
+    <meta name="twitter:description" content="Explore production-grade RAG systems, machine learning pipelines, and automation tools built by Anubhav Yadav with full case studies and metrics.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,6 +32,7 @@
     <link rel="stylesheet" href="chatbot.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -28,6 +50,138 @@
             }
         })();
     </script>
+
+    <!-- Scoped Styles for Projects Page -->
+    <style>
+        /* Project Filter Buttons */
+        .project-filter-btn {
+            border-radius: 50rem;
+            padding: 0.45rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(13, 110, 253, 0.25);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .project-filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: var(--glow-shadow);
+        }
+        .project-filter-btn.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: #ffffff !important;
+            box-shadow: var(--glow-shadow);
+        }
+
+        /* Project Cards Transitions */
+        .project-item-col {
+            transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: center center;
+        }
+        .project-item-col.project-hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .project-item-col.project-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Image Container & Placeholder Fallback */
+        .project-img-container {
+            height: 200px;
+            background-color: rgba(13, 110, 253, 0.04);
+            border-bottom: 1px solid rgba(13, 110, 253, 0.1);
+        }
+        .project-img-placeholder {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(0, 212, 255, 0.04) 100%);
+        }
+        [data-theme="dark"] .project-img-placeholder {
+            background: linear-gradient(135deg, rgba(61, 139, 253, 0.12) 0%, rgba(0, 242, 254, 0.06) 100%);
+            border-bottom: 1px solid rgba(61, 139, 253, 0.15);
+        }
+
+        /* CTA Card */
+        .project-cta-card {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.06) 0%, rgba(0, 212, 255, 0.03) 100%) !important;
+            border: 1px solid rgba(13, 110, 253, 0.18) !important;
+        }
+        .project-cta-card h3 {
+            color: var(--text-color) !important;
+        }
+        [data-theme="dark"] .project-cta-card {
+            background: linear-gradient(135deg, rgba(61, 139, 253, 0.12) 0%, rgba(0, 242, 254, 0.04) 100%) !important;
+            border: 1px solid rgba(61, 139, 253, 0.25) !important;
+        }
+        [data-theme="dark"] .project-cta-card h3 {
+            color: #f8f9fa !important;
+        }
+
+        /* Modal Overlay & Animation */
+        .case-study-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.3s;
+        }
+        .case-study-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .case-study-container {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 28px;
+            position: relative;
+            overflow-y: auto;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(13, 110, 253, 0.2);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .case-study-overlay.is-active .case-study-container {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Dark mode badges */
+        [data-theme="dark"] .badge.bg-light {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--text-color) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        /* Accessibility: Prefers reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .project-item-col,
+            .project-filter-btn,
+            .case-study-overlay,
+            .case-study-container {
+                transition: none !important;
+                transform: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -35,7 +189,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,9 +199,11 @@
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -56,326 +212,587 @@
         </div>
     </nav>
 
-    <!-- LIVE PROJECTS SECTION -->
+    <!-- Main Projects Section -->
     <section class="py-5 mt-5">
         <div class="container">
-            <div class="text-center mb-5 animate-fade-in">
+            <!-- Section Header -->
+            <div class="text-center mb-4 animate-fade-in">
                 <h2 class="fw-bold">My Projects</h2>
                 <p class="text-primary fw-semibold">"From Raw Data to Technical Mastery"</p>
-                <div class="underline mx-auto"></div>
-            </div>
-            <div class="mb-4 animate-fade-in">
-                <h4 class="fw-bold d-flex align-items-center">
-                    <span class="pulse-circle"></span> Live Projects
-                </h4>
-                <div class="underline mb-4"></div>
+                <div class="underline mx-auto mb-4"></div>
+
+                <!-- Category Filter Chips -->
+                <div class="d-flex flex-wrap justify-content-center gap-2 project-filter-row" role="tablist" aria-label="Filter projects by category">
+                    <button type="button" class="project-filter-btn active" data-filter="all" aria-pressed="true">
+                        All
+                    </button>
+                    <button type="button" class="project-filter-btn" data-filter="genai-rag" aria-pressed="false">
+                        GenAI &amp; RAG
+                    </button>
+                    <button type="button" class="project-filter-btn" data-filter="ml" aria-pressed="false">
+                        Machine Learning
+                    </button>
+                    <button type="button" class="project-filter-btn" data-filter="data-analysis" aria-pressed="false">
+                        Data Analysis
+                    </button>
+                    <button type="button" class="project-filter-btn" data-filter="automation" aria-pressed="false">
+                        Automation
+                    </button>
+                </div>
             </div>
 
-            <!-- Sliding Window Wrapper -->
-            <div class="project-slider-wrapper">
-                <div class="project-slider-track">
-                    <!-- Project 1: Legal & HR Policy Assistant -->
-                    <div class="slider-item">
-                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
-                            <div class="project-img-container" style="height: 220px;">
-                                <img src="https://images.unsplash.com/photo-1527874594978-ee4f8a05b4c1?auto=format&fit=crop&w=800&q=80" alt="Petition to file for bankruptcy" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <div class="p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <span class="badge bg-warning text-dark"><i class="fas fa-hammer me-1"></i> In Development</span>
-                                    <span class="badge bg-primary">RAG Document Q&A</span>
+            <!-- Unified Project Grid -->
+            <div class="row g-4" id="projectsGrid">
+
+                <!-- 1. Legal & HR Policy Assistant -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/legal-hr-assistant.png" alt="Legal &amp; HR Policy Assistant interface displaying enterprise document Q&amp;A and citations" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-file-contract text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Legal &amp; HR Policy Assistant</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">FastAPI</span>
+                                    <span class="badge bg-light text-dark border small">ChromaDB</span>
+                                    <span class="badge bg-light text-dark border small">Llama 3.1</span>
                                 </div>
-                                <h5 class="fw-bold">Legal & HR Policy Assistant</h5>
-                                <p class="text-secondary small">Production-grade RAG web app with hybrid search (BM25 + vector), local Cross-Encoder reranking, and Llama 3.1 on Groq.</p>
-                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="legal-hr-assistant">View Details</button>
                             </div>
                         </div>
-                    </div>
-                    <!-- Project 2: Victor AI -->
-                    <div class="slider-item">
-                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
-                            <div class="project-img-container" style="height: 220px;">
-                                <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=800&q=80" alt="Victor AI" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Legal &amp; HR Policy Assistant</h5>
+                                <span class="badge bg-warning text-dark rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-hammer me-1"></i> In Development</span>
                             </div>
-                            <div class="p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <span class="badge bg-warning text-dark"><i class="fas fa-microphone me-1"></i> In Development</span>
-                                    <span class="badge bg-info text-dark">Voice & Tool AI</span>
-                                </div>
-                                <h5 class="fw-bold">Victor AI</h5>
-                                <p class="text-secondary small">A local system voice-based AI assistant harnessing LLM intelligence for conversational interaction and automated local tool calling.</p>
-                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="victor-ai">View Details</button>
+                            <p class="text-secondary small mb-3 flex-grow-1">Production-grade RAG web app with hybrid search (BM25 + vector), local Cross-Encoder reranking, and Llama 3.1 on Groq.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">React</span>
+                                <span class="badge rounded-pill bg-light text-dark border">ChromaDB</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Groq (Llama 3.1)</span>
+                                <span class="badge rounded-pill bg-light text-dark border">BM25</span>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Duplicate Project 1 for seamless infinite loop -->
-                    <div class="slider-item">
-                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
-                            <div class="project-img-container" style="height: 220px;">
-                                <img src="https://images.unsplash.com/photo-1527874594978-ee4f8a05b4c1?auto=format&fit=crop&w=800&q=80" alt="Petition to file for bankruptcy" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <div class="p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <span class="badge bg-warning text-dark"><i class="fas fa-hammer me-1"></i> In Development</span>
-                                    <span class="badge bg-primary">RAG Document Q&A</span>
-                                </div>
-                                <h5 class="fw-bold">Legal & HR Policy Assistant</h5>
-                                <p class="text-secondary small">Production-grade RAG web app with hybrid search (BM25 + vector), local Cross-Encoder reranking, and Llama 3.1 on Groq.</p>
-                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="legal-hr-assistant">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Duplicate Project 2 for seamless infinite loop -->
-                    <div class="slider-item">
-                        <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 border">
-                            <div class="project-img-container" style="height: 220px;">
-                                <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=800&q=80" alt="Victor AI" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <div class="p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <span class="badge bg-warning text-dark"><i class="fas fa-microphone me-1"></i> In Development</span>
-                                    <span class="badge bg-info text-dark">Voice & Tool AI</span>
-                                </div>
-                                <h5 class="fw-bold">Victor AI</h5>
-                                <p class="text-secondary small">A local system voice-based AI assistant harnessing LLM intelligence for conversational interaction and automated local tool calling.</p>
-                                <button class="btn btn-sm btn-primary rounded-pill open-case-study" data-project="victor-ai">View Details</button>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Legal-HR-Policy-Assistant" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="legal-hr-assistant">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- PREVIOUS PROJECTS SECTION -->
-    <section class="py-5">
-        <div class="container">
-            <div class="mb-5 animate-fade-in">
-                <h4 class="fw-bold"><i class="fas fa-history text-secondary me-2"></i> Previous Projects</h4>
-                <div class="underline"></div>
-            </div>
-
-            <div class="row g-4">
-                <!-- Flagship 1: CLAT Oracle AI (Col 1 of 2) -->
-                <div class="col-lg-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100 d-flex flex-column">
-                        <div class="project-img-container position-relative">
-                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80" alt="CLAT Oracle AI" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
-                            <div class="project-badge bg-primary">RAG & GenAI Platform</div>
+                <!-- 2. Victor AI -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="automation">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/victor-ai.png" alt="Victor AI local voice-driven desktop assistant and tool execution workflow" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-microphone text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Victor AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">SpeechRec</span>
+                                    <span class="badge bg-light text-dark border small">Tool Calling</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h5 class="fw-bold mb-0">CLAT Oracle AI</h5>
-                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small"><i class="fas fa-bolt me-1"></i> Live Production</span>
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Victor AI</h5>
+                                <span class="badge bg-warning text-dark rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-microphone me-1"></i> In Development</span>
                             </div>
-                            <p class="text-primary small fw-semibold mb-2">AI-Powered Exam Preparation & Passage Generation</p>
-                            <p class="text-secondary small mb-3 flex-grow-1">
-                                A full-stack, open-source RAG exam prep engine for CLAT aspirants. Ingests past papers and current affairs into a Qdrant vector database to generate authentic passage-based question clusters across 5 exam sections with Groq and Cohere inference.
-                            </p>
-                            <div class="d-flex flex-wrap gap-2 mb-3">
+                            <p class="text-secondary small mb-3 flex-grow-1">A local system voice-based AI assistant harnessing LLM reasoning for conversational interaction and automated local tool execution.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">SpeechRecognition</span>
+                                <span class="badge rounded-pill bg-light text-dark border">TTS</span>
+                                <span class="badge rounded-pill bg-light text-dark border">LLM APIs</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Tool Calling</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Victor-AI-Assistant" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="victor-ai">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. CLAT Oracle AI -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/clat-oracle-ai.png" alt="CLAT Oracle AI platform showing passage-based exam preparation and question generator" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-gavel text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">CLAT Oracle AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">FastAPI</span>
+                                    <span class="badge bg-light text-dark border small">Next.js 14</span>
+                                    <span class="badge bg-light text-dark border small">Qdrant</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">CLAT Oracle AI</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-bolt me-1"></i> Live Production</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Full-stack, open-source RAG exam prep engine for CLAT aspirants generating authentic passage question clusters with Qdrant and Groq.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Next.js 14</span>
                                 <span class="badge rounded-pill bg-light text-dark border">TypeScript</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Qdrant Vector DB</span>
-                                <span class="badge rounded-pill bg-light text-dark border">Groq & Cohere</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Groq &amp; Cohere</span>
                             </div>
-                            <div class="d-flex gap-2 pt-2">
-                                <a href="https://clat-oracle-ai.vercel.app" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 shadow-sm">
-                                    <i class="fas fa-external-link-alt me-1"></i> Live Demo
-                                </a>
-                                <button class="btn btn-sm btn-outline-primary rounded-pill px-3 open-case-study" data-project="clat-oracle-ai">
-                                    <i class="fas fa-file-alt me-1"></i> Case Study
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Flagship 2: Arthlytics AI (Col 2 of 2) -->
-                <div class="col-lg-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100 d-flex flex-column">
-                        <div class="project-img-container position-relative">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Arthlytics AI data analytics dashboard" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
-                            <div class="project-badge bg-info text-white">Analysis & Production AI</div>
-                        </div>
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h5 class="fw-bold mb-0">Arthlytics AI</h5>
-                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small"><i class="fas fa-check-circle me-1"></i> Completed</span>
-                            </div>
-                            <p class="text-primary small fw-semibold mb-2">Production Machine Learning & Experiment Tracking Pipeline</p>
-                            <p class="text-secondary small mb-3 flex-grow-1">
-                                Production machine learning architecture featuring automated experiment tracking, model registry governance, artifact versioning, and continuous containerized deployment pipelines using MLflow, DagsHub, and Docker.
-                            </p>
-                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
-                                <span class="badge rounded-pill bg-light text-dark border">ReactJS</span>
-                                <span class="badge rounded-pill bg-light text-dark border">AWS</span>
-                                <span class="badge rounded-pill bg-light text-dark border">Docker</span>
-                                <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
-                            </div>
-                            <div class="d-flex gap-2 pt-2">
-                                <a href="https://github.com/AnubhavDataSci25" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/CLAT-Oracle-AI" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
                                     <i class="fab fa-github me-1"></i> Code
                                 </a>
-                                <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="arthlytics-ai">
-                                    <i class="fas fa-file-alt me-1"></i> Case Study
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="clat-oracle-ai">
+                                    <i class="fas fa-info-circle me-1"></i> Details
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project: Kaushal AI -->
-                <div class="col-lg-4 col-md-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100 d-flex flex-column">
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h5 class="fw-bold mb-0">Kaushal AI</h5>
+                <!-- 4. Arthlytics AI -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="data-analysis">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/arthlytics-ai.png" alt="Arthlytics AI dashboard showing automated data analytics and interactive visualizations" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-chart-line text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Arthlytics AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">React</span>
+                                    <span class="badge bg-light text-dark border small">FastAPI</span>
+                                    <span class="badge bg-light text-dark border small">LangChain</span>
+                                </div>
                             </div>
-                            <p class="text-secondary small mb-3 flex-grow-1">AI-powered career recommendation platform analyzing education, experience, and certifications on a 20,000-row synthetic dataset with dynamic model evaluation.</p>
-                            <div class="mb-3">
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Arthlytics AI</h5>
+                                <span class="badge bg-primary text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-code-branch me-1"></i> Beta Pipeline</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Full-stack AI analytics platform automating data cleaning, exploratory statistics, interactive visualizations, and natural language reports.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">React</span>
+                                <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">PostgreSQL</span>
+                                <span class="badge rounded-pill bg-light text-dark border">LangChain</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Arthlytics-AI" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="arthlytics-ai">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Kaushal AI -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/kaushal-ai.png" alt="Kaushal AI career recommendation platform matching user profiles to job pathways" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-user-graduate text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Kaushal AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">Scikit-Learn</span>
+                                    <span class="badge bg-light text-dark border small">XGBoost</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Kaushal AI</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Intelligent career recommendation engine mapping qualifications and skills against 20,000+ career data points with dynamic ML models.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">Python</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
                                 <span class="badge rounded-pill bg-light text-dark border">XGBoost</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Pandas</span>
                                 <span class="badge rounded-pill bg-light text-dark border">MLflow</span>
                             </div>
-                            <div class="d-flex gap-2">
-                                <a href="https://github.com/AnubhavDataSci25/Kaushal-AI" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3"><i class="fab fa-github me-1"></i> Code</a>
-                                <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="kaushal-ai">Case Study</button>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Kaushal-AI" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="kaushal-ai">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project: Student Habit -->
-                <div class="col-lg-4 col-md-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100 d-flex flex-column">
+                <!-- 6. Student Habit vs Score Analysis -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/student-performance.png" alt="Student habit vs academic performance prediction interface and regression analytics" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-book-reader text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Student Habit vs Score</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">CatBoost</span>
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">Flask</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
-                            <h5 class="fw-bold mb-2">Student Habit vs Score Analysis</h5>
-                            <p class="text-secondary small mb-3 flex-grow-1">Built using CatBoost regression to predict student exam scores based on study routines, habits, and sleep patterns.</p>
-                            <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Student Habit vs Score</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Machine learning regression pipeline using CatBoost to forecast exam marks based on study routines, sleep habits, and lifestyle factors.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">CatBoost</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Python</span>
-                                <span class="badge rounded-pill bg-light text-dark border">EDA</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Flask</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Docker</span>
                             </div>
-                            <div class="d-flex gap-2">
-                                <a href="https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3"><i class="fab fa-github me-1"></i> Code</a>
-                                <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="student-performance">Case Study</button>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Project" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="student-performance">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project: Introvert vs Extrovert -->
-                <div class="col-lg-4 col-md-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow overflow-hidden h-100 d-flex flex-column">
+                <!-- 7. Personality Prediction -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/personality-prediction.png" alt="Introvert vs Extrovert personality prediction app analyzing behavioral language patterns" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-brain text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Personality Prediction</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">NLP</span>
+                                    <span class="badge bg-light text-dark border small">Gemini API</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
-                            <h5 class="fw-bold mb-2">Personality Prediction</h5>
-                            <p class="text-secondary small mb-3 flex-grow-1">Predicts personality types using NLP and Generative AI for personalized improvement suggestions and behavioral analysis.</p>
-                            <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Personality Prediction</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Supervised NLP classification web app predicting Introvert vs Extrovert traits, providing personalized communication insights via Gemini API.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
                                 <span class="badge rounded-pill bg-light text-dark border">Python</span>
                                 <span class="badge rounded-pill bg-light text-dark border">Flask</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
                                 <span class="badge rounded-pill bg-light text-dark border">NLP</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Gemini API</span>
                             </div>
-                            <div class="d-flex gap-2">
-                                <a href="https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3"><i class="fab fa-github me-1"></i> Code</a>
-                                <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="personality-prediction">Details</button>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="personality-prediction">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Aurora, CapBot, etc (Small Grid) -->
-                <div class="col-md-4 col-sm-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
-                        <i class="fas fa-magic text-primary mb-3 fs-3"></i>
-                        <h6 class="fw-bold">Aurora AI</h6>
-                        <p class="text-secondary small mb-3">Automation tool for statistical analysis powered by Streamlit.</p>
-                        <a href="https://github.com/AnubhavDataSci25/Aurora-AI-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
-                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="aurora-ai">Details</button>
+                <!-- 8. Aurora AI -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="automation">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/aurora-ai.png" alt="Aurora AI automated statistical analysis and data visualization tool interface" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-magic text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Aurora AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Streamlit</span>
+                                    <span class="badge bg-light text-dark border small">Pandas</span>
+                                    <span class="badge bg-light text-dark border small">RAG</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Aurora AI</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Interactive automation workspace for automated statistical analysis, chart generation, and natural language dataset exploration.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Streamlit</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Pandas</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Matplotlib</span>
+                                <span class="badge rounded-pill bg-light text-dark border">RAG</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Aurora-AI-Project" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="aurora-ai">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
-                        <i class="fas fa-robot text-info mb-3 fs-3"></i>
-                        <h6 class="fw-bold">CapBot</h6>
-                        <p class="text-secondary small mb-3">AI-driven creative caption generator for social media platforms.</p>
-                        <a href="https://github.com/AnubhavDataSci25/Caption-Generator-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
-                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="capbot">Details</button>
+                <!-- 9. CapBot -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/capbot.png" alt="CapBot creative caption generator generating social media content from images" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-robot text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">CapBot</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">Gemini Vision</span>
+                                    <span class="badge bg-light text-dark border small">Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">CapBot</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">AI-driven creative caption generator producing context-tailored social media copy from user-uploaded images using Gemini Vision.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Gemini Vision AI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Streamlit</span>
+                                <span class="badge rounded-pill bg-light text-dark border">PIL</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Caption-Generator-Project" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="capbot">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
-                        <i class="fas fa-money-bill-wave text-warning mb-3 fs-3"></i>
-                        <h6 class="fw-bold">Data Professionals Salary Analysis</h6>
-                        <p class="text-secondary small mb-3">Data Professional salary dashboards (2020-2023) using Power BI.</p>
-                        <a href="https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
-                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="salary-analysis">Details</button>
+                <!-- 10. Data Professionals Salary Analysis -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="data-analysis">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/salary-analysis.png" alt="Data Professionals Salary Analysis interactive Power BI dashboard (2020-2023)" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-money-bill-wave text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Salary Analysis</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Power BI</span>
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Salary Analysis</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Interactive Power BI and Streamlit dashboards analyzing compensation trends (2020–2023) across global data science and analyst roles.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Power BI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Streamlit</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Pandas</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Plotly</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="salary-analysis">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
-                        <i class="fas fa-envelope-open-text me-2 text-danger"></i>
-                        <h6 class="fw-bold">Spam Classification</h6>
-                        <p class="text-secondary small mb-3">Email spam detection model using machine learning techniques.</p>
-                        <a href="https://github.com/AnubhavDataSci25/Spam-Classification-Project" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
-                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="spam-classification">Details</button>
+                <!-- 11. Spam Classification -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/spam-classification.png" alt="Email spam vs ham classification tool showing text NLP and prediction results" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-envelope-open-text text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Spam Classification</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Scikit-Learn</span>
+                                    <span class="badge bg-light text-dark border small">NLTK</span>
+                                    <span class="badge bg-light text-dark border small">Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Spam Classification</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">High-accuracy email spam detection model engineered with natural language processing, TF-IDF vectorization, and Naive Bayes.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
+                                <span class="badge rounded-pill bg-light text-dark border">NLTK</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Pandas</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Streamlit</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/Spam-Classification-Project" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="spam-classification">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 animate-fade-in">
-                    <div class="project-card bg-white rounded-4 shadow-sm p-4 h-100 border">
-                        <i class="fas fa-home me-2 text-success"></i>
-                        <h6 class="fw-bold">House Price Prediction</h6>
-                        <p class="text-secondary small mb-3">Machine learning model for predicting house prices based on various features.</p>
-                        <a href="https://github.com/AnubhavDataSci25/House-Price-Prediction" class="text-primary small text-decoration-none fw-bold">GitHub →</a>
-                        <button class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="house-price-prediction">Details</button>
+                <!-- 12. House Price Prediction -->
+                <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden">
+                            <img src="images/projects/house-price-prediction.png" alt="House Price Prediction regression analysis dashboard based on King County housing data" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-home text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">House Price Prediction</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Scikit-Learn</span>
+                                    <span class="badge bg-light text-dark border small">NumPy</span>
+                                    <span class="badge bg-light text-dark border small">Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">House Price Prediction</h5>
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Completed</span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">Advanced regression model leveraging King County real estate features to predict house values with refined residual evaluation.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Pandas</span>
+                                <span class="badge rounded-pill bg-light text-dark border">NumPy</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Streamlit</span>
+                            </div>
+                            <div class="d-flex gap-2 pt-2 mt-auto">
+                                <a href="https://github.com/AnubhavDataSci25/House-Price-Prediction" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                                <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 open-case-study" data-project="house-price-prediction">
+                                    <i class="fas fa-info-circle me-1"></i> Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Call-To-Action Card -->
+            <div class="mt-5 pt-3 animate-fade-in">
+                <div class="card border-0 rounded-4 shadow-sm p-4 p-md-5 text-center position-relative overflow-hidden project-cta-card">
+                    <div class="position-relative" style="z-index: 2;">
+                        <div class="d-inline-flex p-3 rounded-circle bg-primary-subtle text-primary mb-3">
+                            <i class="fas fa-handshake fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-2">Need something similar for your business?</h3>
+                        <p class="text-secondary mx-auto mb-4" style="max-width: 650px;">
+                            Whether you need an enterprise RAG assistant, a predictive machine learning pipeline, automated statistical reporting, or bespoke workflow automation, let's build solutions that deliver measurable impact.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <a href="services.html" class="btn btn-primary rounded-pill px-4 py-2 shadow">
+                                <i class="fas fa-briefcase me-2"></i>Explore Services
+                            </a>
+                            <a href="contact.html" class="btn btn-outline-primary rounded-pill px-4 py-2">
+                                <i class="fas fa-paper-plane me-2"></i>Get in Touch
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- CASE STUDY MODAL STRUCTURE (ADD THIS HERE) -->
-    <div id="caseStudyModal" class="case-study-overlay d-none">
-        <div class="case-study-container animate-scale-up">
-            <button id="closeCaseStudy" class="modal-close-btn">
+    <!-- CASE STUDY MODAL STRUCTURE -->
+    <div id="caseStudyModal" class="case-study-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+        <div class="case-study-container" role="document">
+            <button id="closeCaseStudy" class="modal-close-btn" aria-label="Close project details">
                 <i class="fas fa-times"></i>
             </button>
             <div class="modal-content-wrapper">
                 <div id="modalHeader" class="modal-section-header mb-4">
-                    <h2 id="modalTitle" class="fw-bold mb-1 text-primary">Project Title</h2>
-                    <p id="modalTagline" class="text-secondary small">Project Type & Status</p>
+                    <h2 id="modalTitle" class="fw-bold mb-1 text-primary"></h2>
+                    <p id="modalTagline" class="text-secondary small"></p>
                 </div>
                 
                 <div class="row g-4">
                     <div class="col-lg-8">
+                        <!-- Problem & Context -->
                         <div class="modal-section mb-4">
-                            <h5 class="fw-bold"><i class="fas fa-align-left text-primary me-2"></i> Description</h5>
-                            <p id="modalDescription" class="text-secondary">Project detailed description goes here...</p>
+                            <h5 class="fw-bold"><i class="fas fa-exclamation-circle text-primary me-2"></i> Problem</h5>
+                            <p id="modalProblem" class="text-secondary small"></p>
                         </div>
+
+                        <!-- Approach & Methodology -->
                         <div class="modal-section mb-4">
-                            <h5 class="fw-bold"><i class="fas fa-bullseye text-primary me-2"></i> Objectives</h5>
-                            <ul id="modalObjectives" class="text-secondary small"></ul>
-                        </div>
-                        <div class="modal-section mb-4">
-                            <h5 class="fw-bold"><i class="fas fa-route text-primary me-2"></i> Approach & Methodology</h5>
+                            <h5 class="fw-bold"><i class="fas fa-route text-primary me-2"></i> Approach</h5>
                             <p id="modalApproach" class="text-secondary small"></p>
                         </div>
+
+                        <!-- Results & Metrics -->
                         <div class="modal-section">
-                            <h5 class="fw-bold"><i class="fas fa-poll text-primary me-2"></i> Results & Impact</h5>
+                            <h5 class="fw-bold"><i class="fas fa-chart-line text-primary me-2"></i> Results</h5>
                             <p id="modalResults" class="text-secondary small"></p>
                         </div>
+
+                        <!-- Backward compatibility hidden elements for script.js -->
+                        <div id="modalDescription" class="d-none"></div>
+                        <ul id="modalObjectives" class="d-none"></ul>
                     </div>
                     <div class="col-lg-4">
                         <div class="modal-sidebar p-3 rounded-4 bg-light-soft">
@@ -390,8 +807,276 @@
             </div>
         </div>
     </div>
+
+    <!-- Core Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Interactive Projects Filter & Enhanced Modal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Enhanced Project Details Data (Problem, Approach, Stack, Results with Metrics, Links)
+            const comprehensiveProjectData = {
+                'legal-hr-assistant': {
+                    title: "Legal & HR Policy Assistant",
+                    tagline: "Enterprise Document Q&A with Hybrid RAG & Cross-Encoder Reranking",
+                    problem: "Enterprise legal contracts and HR policies are dense and multi-paged, making manual policy verification slow and exposing conventional LLM chatbots to hallucinations and inaccurate citations.",
+                    approach: "Parsed PDFs into 600-token chunks with 100-token overlap using PyMuPDF. Engineered hybrid retrieval combining ChromaDB vector embeddings with BM25 lexical keyword matching, passed candidates through an ms-marco Cross-Encoder reranker, and queried Llama 3.1 via Groq with strict document citation guardrails.",
+                    results: "Attained a 0.91 faithfulness score and 0.87 answer relevancy score on RAGAs benchmarks; achieved sub-1.2s end-to-end response latency while eliminating hallucinations on unmentioned policy topics.",
+                    stack: ["FastAPI", "Python", "React", "ChromaDB", "Groq (Llama 3.1)", "BM25", "Cross-Encoder", "RAGAs"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Legal-HR-Policy-Assistant", icon: "fab fa-github" }
+                    ]
+                },
+                'victor-ai': {
+                    title: "Victor AI",
+                    tagline: "Local Voice-Driven AI Assistant & Autonomous Tool Orchestrator",
+                    problem: "Desktop users often struggle with fragmented OS tasks and lack hands-free, natural voice interactions capable of executing system commands with privacy and low latency.",
+                    approach: "Engineered a multi-threaded Python pipeline uniting low-latency speech recognition, synthesized auditory feedback, and LLM structured schema parsing to route recognized intents into local system utilities and OS automation scripts.",
+                    results: "Achieved < 800ms intent recognition latency and 98% execution accuracy across 15+ automated desktop routines with zero cloud data transmission for local actions.",
+                    stack: ["Python", "SpeechRecognition", "TTS", "LLM APIs", "System Automation", "Function Calling"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Victor-AI-Assistant", icon: "fab fa-github" }
+                    ]
+                },
+                'clat-oracle-ai': {
+                    title: "CLAT Oracle AI",
+                    tagline: "AI-Powered Exam Preparation & Passage Generation Platform",
+                    problem: "Aspirants preparing for the Common Law Admission Test (CLAT) lack access to unlimited, high-quality passage-based practice question sets without expensive coaching subscription fees.",
+                    approach: "Constructed an open-source RAG pipeline ingesting past exam papers and current affairs into a Qdrant vector database via Cohere embeddings. Engineered section-specific prompt logic with Groq LLM inference, served via FastAPI and a Next.js 14 frontend.",
+                    results: "Replicated 100% of official CLAT passage formats across all 5 syllabus sections with sub-second retrieval times (< 650ms) and $0 infrastructure hosting overhead.",
+                    stack: ["FastAPI", "Python", "Next.js 14", "TypeScript", "Tailwind CSS", "Qdrant Vector DB", "Groq API", "Cohere"],
+                    links: [
+                        { label: "Live Platform", url: "https://clat-oracle-ai.vercel.app", icon: "fas fa-external-link-alt" },
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/CLAT-Oracle-AI", icon: "fab fa-github" }
+                    ]
+                },
+                'arthlytics-ai': {
+                    title: "Arthlytics AI",
+                    tagline: "AI-Powered Data Analytics & Automated Reporting Platform",
+                    problem: "Business users and non-technical stakeholders often find raw tabular datasets overwhelming, requiring laborious manual cleaning, complex formulas, and repetitive dashboard builds.",
+                    approach: "Developed a full-stack platform with React and FastAPI that combines LangChain AI orchestration with Gemini, Groq, and Hugging Face APIs, utilizing Pandas and Scikit-Learn for automated profiling, missing value imputation, and Chart.js visuals.",
+                    results: "Decreased initial exploratory data analysis time by 70%, successfully processing datasets with up to 100,000+ records and generating automated executive summary briefs.",
+                    stack: ["React", "FastAPI", "Python", "PostgreSQL", "LangChain", "Gemini API", "Groq", "Chart.js"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Arthlytics-AI", icon: "fab fa-github" }
+                    ]
+                },
+                'kaushal-ai': {
+                    title: "Kaushal AI",
+                    tagline: "Flagship AI Career Recommendation System",
+                    problem: "Students and career transitioners experience choice paralysis and uncertainty when evaluating how their academic background aligns with dynamic tech job market demands.",
+                    approach: "Preprocessed a 20,000+ record profile dataset, extracted key technical skill vectors, and trained a voting ensemble combining Random Forest, XGBoost, and SVM with MLflow experiment tracking.",
+                    results: "Achieved 92.4% validation accuracy in career path matching, providing personalized multi-phase skill roadmaps to accelerate graduate placement readiness.",
+                    stack: ["Python", "Scikit-Learn", "XGBoost", "Pandas", "MLflow"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Kaushal-AI", icon: "fab fa-github" }
+                    ]
+                },
+                'student-performance': {
+                    title: "Student Habit vs Academic Performance",
+                    tagline: "Predictive Analytics for Student Learning Habits",
+                    problem: "Educators and students need quantitative clarity on how daily lifestyle habits—study duration, sleep cycles, and recreational habits—statistically influence final marks.",
+                    approach: "Conducted exploratory data analysis to isolate influential variables, normalized feature distributions, and trained CatBoost regression models with k-fold cross-validation and a Flask web interface.",
+                    results: "Attained an R² score of 0.85 and RMSE of 4.12, identifying study consistency and sleep regularity as the top 2 statistical drivers of academic success.",
+                    stack: ["Python", "CatBoost", "Scikit-Learn", "Pandas", "Flask", "Docker"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Student-Habit-vs-Academic-Performance-Project", icon: "fab fa-github" }
+                    ]
+                },
+                'personality-prediction': {
+                    title: "Introvert vs Extrovert Personality Prediction",
+                    tagline: "NLP Behavioral Classification & Psychological Insights",
+                    problem: "Traditional psychological self-assessments are lengthy and prone to cognitive bias, whereas natural linguistic expressions offer direct behavioral indicators.",
+                    approach: "Extracted linguistic tokens and TF-IDF vectors from user text samples, trained classification algorithms to predict Introvert vs Extrovert tendencies, and connected Gemini API for constructive feedback.",
+                    results: "Delivered 89.2% classification accuracy and 0.88 F1-score, providing instantaneous personality insights and customized communication suggestions.",
+                    stack: ["Python", "Flask", "Scikit-Learn", "NLP", "Gemini API"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Introvert-vs-Extrovert-Classification-Project", icon: "fab fa-github" }
+                    ]
+                },
+                'aurora-ai': {
+                    title: "Aurora AI",
+                    tagline: "Automated Data Analysis and Statistical Visualization Tool",
+                    problem: "Data analysts frequently rewrite repetitive boilerplate scripts for exploratory data visualization, correlation checks, and distribution tests on ad-hoc spreadsheets.",
+                    approach: "Created a Streamlit analytics workspace featuring automatic distribution profiling, outlier detection, correlation heatmaps, and natural language query generation using LLM orchestration.",
+                    results: "Automated comprehensive summary statistics across 30+ tabular data formats in under 3 seconds per file, eliminating manual exploratory scripting overhead.",
+                    stack: ["Python", "Streamlit", "Pandas", "Matplotlib", "Seaborn", "RAG"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Aurora-AI-Project", icon: "fab fa-github" }
+                    ]
+                },
+                'capbot': {
+                    title: "CapBot",
+                    tagline: "AI-Powered Caption Generation for Social Media",
+                    problem: "Content creators and social media marketers expend considerable time drafting engaging, platform-specific captions that match the context and mood of their images.",
+                    approach: "Engineered an image-to-text pipeline utilizing Gemini Vision models within a lightweight Streamlit interface, allowing instantaneous tone selection and hashtag generation.",
+                    results: "Generates creative multi-tone captions in under 2 seconds per image, maintaining high contextual relevance across diverse visual themes.",
+                    stack: ["Python", "Gemini Vision AI", "Streamlit", "PIL"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Caption-Generator-Project", icon: "fab fa-github" }
+                    ]
+                },
+                'salary-analysis': {
+                    title: "Data Professionals Salary Analysis",
+                    tagline: "Interactive Global Salary Analytics & Benchmark Dashboard",
+                    problem: "Salary disparity and lack of transparent compensation benchmarks create friction for data analysts and data scientists during career planning and salary negotiation.",
+                    approach: "Aggregated, normalized, and cleaned global compensation data (2020–2023) using Python and Pandas; built dynamic multi-dimensional slicers in Power BI and interactive Streamlit charts.",
+                    results: "Benchmarked compensation trends across 6,000+ data positions worldwide, clearly exposing salary variance by experience level, tech stack, and remote employment status.",
+                    stack: ["Python", "Power BI", "Streamlit", "Pandas", "Plotly"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Data-Professionals-Salaries-2020-to-2023-Analysis", icon: "fab fa-github" }
+                    ]
+                },
+                'spam-classification': {
+                    title: "Spam vs Ham Classification",
+                    tagline: "Natural Language Processing Email Filtering Model",
+                    problem: "Unsolicited spam and phishing communications pose significant cybersecurity risks and cause operational productivity loss in workplace mailboxes.",
+                    approach: "Applied NLTK preprocessing (tokenization, stopword removal, stemming) and TF-IDF feature extraction, evaluating Naive Bayes and Support Vector Machine classifiers with cross-validation.",
+                    results: "Achieved 95.6% overall accuracy and 98.2% precision on spam identification, minimizing critical false positives in real-time classification.",
+                    stack: ["Python", "Scikit-Learn", "NLTK", "Pandas", "Streamlit"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/Spam-Classification-Project", icon: "fab fa-github" }
+                    ]
+                },
+                'house-price-prediction': {
+                    title: "House Price Prediction",
+                    tagline: "Advanced Regression Model for Real Estate Valuation",
+                    problem: "Estimating home valuation requires accounting for complex, non-linear interactions across geographical location, physical square footage, renovation condition, and age.",
+                    approach: "Analyzed 21,000+ real estate transactions from the King County dataset, performed feature engineering, and tuned Gradient Boosting and Random Forest regression algorithms.",
+                    results: "Reached an R² score of 0.88 and reduced Mean Absolute Error (MAE) by 18% over baseline benchmarks through hyperparameter optimization.",
+                    stack: ["Python", "Scikit-Learn", "Pandas", "NumPy", "Streamlit"],
+                    links: [
+                        { label: "GitHub Repository", url: "https://github.com/AnubhavDataSci25/House-Price-Prediction", icon: "fab fa-github" }
+                    ]
+                }
+            };
+
+            // Category Filtering Logic with Smooth Animation
+            const filterButtons = document.querySelectorAll('.project-filter-btn');
+            const projectCards = document.querySelectorAll('.project-item-col');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-pressed', 'true');
+
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        const isMatch = (filter === 'all' || category === filter);
+
+                        if (isMatch) {
+                            card.classList.remove('d-none');
+                            void card.offsetWidth; // Reflow for transition
+                            card.classList.remove('project-hidden');
+                            card.classList.add('project-visible');
+                        } else {
+                            card.classList.remove('project-visible');
+                            card.classList.add('project-hidden');
+                            setTimeout(() => {
+                                if (card.classList.contains('project-hidden')) {
+                                    card.classList.add('d-none');
+                                }
+                            }, 280);
+                        }
+                    });
+                });
+            });
+
+            // Enhanced Modal Management
+            const modalOverlay = document.getElementById('caseStudyModal');
+            const closeBtn = document.getElementById('closeCaseStudy');
+            const detailsBtns = document.querySelectorAll('.open-case-study');
+
+            const openProjectModal = (projectId) => {
+                const data = comprehensiveProjectData[projectId];
+                if (!data || !modalOverlay) return;
+
+                document.getElementById('modalTitle').textContent = data.title;
+                document.getElementById('modalTagline').textContent = data.tagline;
+                document.getElementById('modalProblem').textContent = data.problem;
+                document.getElementById('modalApproach').textContent = data.approach;
+                document.getElementById('modalResults').textContent = data.results;
+
+                const stackContainer = document.getElementById('modalStack');
+                stackContainer.innerHTML = '';
+                data.stack.forEach(tech => {
+                    const badge = document.createElement('span');
+                    badge.className = 'badge rounded-pill bg-light text-dark border px-3 py-2 small';
+                    badge.textContent = tech;
+                    stackContainer.appendChild(badge);
+                });
+
+                const linksContainer = document.getElementById('modalLinks');
+                linksContainer.innerHTML = '';
+                data.links.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.className = 'btn btn-sm btn-outline-primary rounded-pill text-start w-100 mb-2';
+                    a.innerHTML = `<i class="${link.icon} me-2"></i> ${link.label}`;
+                    linksContainer.appendChild(a);
+                });
+
+                modalOverlay.classList.remove('d-none');
+                modalOverlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+
+                // Trigger smooth fade & scale in
+                requestAnimationFrame(() => {
+                    modalOverlay.classList.add('is-active');
+                });
+            };
+
+            const closeProjectModal = () => {
+                if (!modalOverlay) return;
+                modalOverlay.classList.remove('is-active');
+                modalOverlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+
+                setTimeout(() => {
+                    modalOverlay.classList.add('d-none');
+                }, 300);
+            };
+
+            detailsBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const projectId = btn.getAttribute('data-project');
+                    openProjectModal(projectId);
+                });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    closeProjectModal();
+                });
+            }
+
+            // Close on overlay outside click
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeProjectModal();
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay && !modalOverlay.classList.contains('d-none')) {
+                    closeProjectModal();
+                }
+            });
+        });
+    </script>
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
@@ -410,7 +1095,7 @@
                 color: #adb5bd !important;
             }
         </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI chat assistant">
             <i class="fas fa-comment-dots"></i>
         </button>
 
@@ -423,7 +1108,7 @@
                         <small class="status-dot">Online</small>
                     </div>
                 </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0">
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close chat assistant">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -449,7 +1134,7 @@
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
                     <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>

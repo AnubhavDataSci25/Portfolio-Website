@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Write Technical Blog Posts That Rank on Google | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Master developer-focused SEO and technical writing. Learn how to craft skimmable, code-rich articles that rank on Google and engage engineers.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/technical-blog-posts-that-rank.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/technical-blog-posts-that-rank.html">
+    <meta property="og:title" content="How to Write Technical Blog Posts That Rank on Google">
+    <meta property="og:description" content="Combine developer-friendly code snippets with SEO best practices to create authoritative content that drives organic traffic.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/technical-blog-posts-that-rank.html">
+    <meta name="twitter:title" content="How to Write Technical Blog Posts That Rank on Google">
+    <meta name="twitter:description" content="Combine developer-friendly code snippets with SEO best practices to create authoritative content that drives organic traffic.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to Write Technical Blog Posts That Rank on Google",
+      "description": "Master developer-focused SEO and technical writing. Learn how to craft skimmable, code-rich articles that rank on Google and engage engineers.",
+      "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-09-15",
+      "dateModified": "2026-09-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/technical-blog-posts-that-rank.html"
+      }
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">Technical Writing That Ranks</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">Technical Writing</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> September 15, 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 5 min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="display-5 fw-bold mb-4">How to Write Technical Blog Posts That Rank on Google</h1>
+
+            <!-- Cover Image -->
+            <div class="mb-5 overflow-hidden rounded-4 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Desk setup with laptop showing code and notebook" 
+                     loading="lazy" 
+                     class="img-fluid post-cover-img">
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+                <p class="lead">
+                    Writing for software engineers and technical decision-makers is fundamentally different from standard B2B copywriting. Developers have exceptionally high standards, zero tolerance for corporate jargon, and an acute ability to spot shallow AI-generated content. If you want technical articles that rank at the top of Google and earn high developer praise, you need to combine deep engineering precision with strategic SEO architecture.
+                </p>
+
+                <h2 id="target-high-intent-long-tail-queries">1. Target High-Intent, Long-Tail Developer Queries</h2>
+                <p>
+                    Trying to rank a new tech blog for broad keywords like "Docker tutorial" or "Python basics" is nearly impossible against established documentation sites like Mozilla Developer Network or Official Python Docs. Instead, target highly specific, solution-oriented long-tail queries:
+                </p>
+                <ul>
+                    <li><strong>Generic query:</strong> "React Router" (extremely high competition, low conversion)</li>
+                    <li><strong>High-intent query:</strong> "How to pass state with useNavigate in React Router v6" (targeted, immediate developer intent)</li>
+                </ul>
+                <p>
+                    Engineers searching for exact error traces or specialized architectural patterns are looking for an immediate answer. When your article delivers that answer in the first three paragraphs, you earn bookmarks, GitHub stars, and top SERP ranking signals.
+                </p>
+
+                <h2 id="structure-content-for-developer-skimmability">2. Structure Content for Developer Skimmability</h2>
+                <p>
+                    Developers almost never read articles linearly from start to finish. They open multiple browser tabs from Google or Stack Overflow, skim headings, locate code blocks, and check whether your solution matches their runtime version.
+                </p>
+                <p>
+                    To optimize for both search engine crawlers and human skimmers:
+                </p>
+                <ul>
+                    <li><strong>Provide a TL;DR or Quick Solution:</strong> Place the working code snippet right after the introduction.</li>
+                    <li><strong>Maintain H2/H3 Semantic Hierarchy:</strong> Every heading should describe a discrete, actionable step.</li>
+                    <li><strong>Include Version Annotations:</strong> Explicitly mention package versions (e.g., <code>Python 3.12+</code>, <code>Node.js 20</code>) so readers know the snippet isn't deprecated.</li>
+                </ul>
+
+                <h2 id="treat-code-snippets-as-first-class-citizens">3. Treat Code Snippets as First-Class Citizens</h2>
+                <p>
+                    A single untested or broken code snippet will instantly ruin your article's credibility. Never embed code as screenshot images—search crawlers cannot parse pixel text effectively, and developers will bounce immediately if they cannot copy the snippet.
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-4"><code># Example of a well-annotated, copyable technical snippet
+import requests
+from typing import Dict, Any
+
+def fetch_weather_report(city: str, api_key: str) -> Dict[str, Any]:
+    """
+    Fetches temperature and humidity metrics for a given city.
+    Requires OpenWeatherMap API v2.5+.
+    """
+    endpoint = "https://api.openweathermap.org/data/2.5/weather"
+    params = {"q": city, "appid": api_key, "units": "metric"}
+    
+    response = requests.get(endpoint, params=params, timeout=5.0)
+    response.raise_for_status()  # Automatically catches 4xx/5xx HTTP errors
+    return response.json()</code></pre>
+
+                <h2 id="incorporate-article-json-ld-structured-data">4. Incorporate Article JSON-LD Structured Data</h2>
+                <p>
+                    Google heavily rewards technical content marked up with structured semantic schemas. Implementing schema types like <code>BlogPosting</code>, <code>TechArticle</code>, or <code>HowTo</code> helps search engines parse authors, publish timestamps, and code solutions directly for Google's rich snippets and knowledge panels.
+                </p>
+
+                <h2 id="build-contextual-internal-links">5. Build Contextual Internal Links</h2>
+                <p>
+                    Never let an article sit as an isolated content island. Connect related tutorials together through meaningful internal links. When an article solves a prerequisite problem (like data cleaning), link it directly to downstream tutorials (like training a model) or relevant service offerings.
+                </p>
+            </div>
+
+            <!-- Call to Action Banner -->
+            <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                <div class="mb-3">
+                    <i class="fas fa-pen-nib fa-3x text-primary"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Looking for High-Quality Technical Content?</h3>
+                <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                    I write in-depth technical blog posts, developer tutorials, and engineering documentation that rank organically and earn trust from developers.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">Explore Writing Packages</a>
+                    <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Request a Sample</a>
+                </div>
+            </div>
+
+            <!-- Related Posts Row -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-4 text-center">Related Articles</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">AI Automation</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="whatsapp-automation-small-business.html" class="text-decoration-none text-dark">How Small Businesses Can Automate WhatsApp Replies for Free</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Learn how to capture leads and save hours of manual replying using simple, low-cost AI automation.</p>
+                            <a href="whatsapp-automation-small-business.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">Data Science</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="data-cleaning-mistakes-ml.html" class="text-decoration-none text-dark">5 Data Cleaning Mistakes That Ruin Your ML Model</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Garbage in, garbage out. Discover the preprocessing errors that secretly destroy accuracy.</p>
+                            <a href="data-cleaning-mistakes-ml.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

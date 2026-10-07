@@ -341,8 +341,8 @@ if (contactForm) {
             emailjs.sendForm("service_oa59x3h", "template_yf1rj3k", this)
                 .then(() => {
                     const successMsg = document.createElement('div');
-                    successMsg.className = 'alert alert-success mt-4 animate-fade-in shadow-sm rounded-pill py-2';
-                    successMsg.innerHTML = `<i class="fas fa-check-circle me-2"></i> Thank you, ${name}! Your message has been sent.`;
+                    successMsg.className = 'alert alert-success mt-4 animate-fade-in shadow-sm rounded-pill py-2 text-center';
+                    successMsg.innerHTML = `<i class="fas fa-check-circle me-2 text-success"></i> <span class="alert-message">Thank you, ${name}! Your message has been sent.</span>`;
                     contactForm.parentElement.appendChild(successMsg);
                     contactForm.reset();
                     setTimeout(() => successMsg.remove(), 5000);

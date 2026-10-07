@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Data Cleaning Mistakes That Ruin Your ML Model | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover the 5 critical data cleaning mistakes that secretly ruin ML model accuracy and learn how to prevent data leakage and skewed predictions.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/data-cleaning-mistakes-ml.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/data-cleaning-mistakes-ml.html">
+    <meta property="og:title" content="5 Data Cleaning Mistakes That Ruin Your ML Model">
+    <meta property="og:description" content="Garbage in, garbage out. Explore the subtle preprocessing and imputation traps that sabotage predictive models in production.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/data-cleaning-mistakes-ml.html">
+    <meta name="twitter:title" content="5 Data Cleaning Mistakes That Ruin Your ML Model">
+    <meta name="twitter:description" content="Garbage in, garbage out. Explore the subtle preprocessing and imputation traps that sabotage predictive models in production.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "5 Data Cleaning Mistakes That Ruin Your ML Model",
+      "description": "Discover the 5 critical data cleaning mistakes that secretly ruin ML model accuracy and learn how to prevent data leakage and skewed predictions.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-09-28",
+      "dateModified": "2026-09-28",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/data-cleaning-mistakes-ml.html"
+      }
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">Data Cleaning Mistakes</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">Data Science</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> September 28, 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 6 min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="display-5 fw-bold mb-4">5 Data Cleaning Mistakes That Ruin Your ML Model</h1>
+
+            <!-- Cover Image -->
+            <div class="mb-5 overflow-hidden rounded-4 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Data visualization dashboards and analytics graphs" 
+                     loading="lazy" 
+                     class="img-fluid post-cover-img">
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+                <p class="lead">
+                    In applied machine learning, 80% of model failure is rarely caused by choosing the wrong neural network architecture or sub-optimal hyperparameter tuning. The culprit is almost always compromised preprocessing. When corrupt, leaked, or poorly imputed data enters your feature matrix, even the most sophisticated gradient booster will learn noise instead of real signal.
+                </p>
+
+                <h2 id="mistake-1-data-leakage-during-scaling">1. Data Leakage During Feature Scaling</h2>
+                <p>
+                    The most common mistake among practitioners is applying transformation estimators—such as <code>StandardScaler</code> or <code>MinMaxScaler</code>—across the entire dataset before calling <code>train_test_split()</code>. When you compute the mean and standard deviation of your entire dataset prior to splitting, information from the test set bleeds into the training features.
+                </p>
+                <p>
+                    The consequence? Your cross-validation metrics look exceptionally high, but the model degrades significantly when presented with truly unseen real-world observations.
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-4"><code># ❌ WRONG: Fits on entire dataset (causes data leakage)
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y)
+
+# ✅ CORRECT: Encapsulate transformations in a Pipeline
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('model', RandomForestClassifier(random_state=42))
+])
+
+# Transformations fit STRICTLY on training split
+pipeline.fit(X_train, y_train)
+test_accuracy = pipeline.score(X_test, y_test)</code></pre>
+
+                <h2 id="mistake-2-blindly-imputing-missing-values">2. Blindly Imputing Missing Values</h2>
+                <p>
+                    Filling empty values with the column mean or median is convenient, but it destroys natural variance and disregards the underlying missingness mechanism. In statistics, missing data generally falls into three categories:
+                </p>
+                <ul>
+                    <li><strong>Missing Completely at Random (MCAR):</strong> The missingness has no relationship with any observed values.</li>
+                    <li><strong>Missing at Random (MAR):</strong> Missing values depend systematically on other known variables.</li>
+                    <li><strong>Missing Not at Random (MNAR):</strong> The absence of the value is tied directly to the unobserved value itself (e.g., high-income earners skipping salary questions).</li>
+                </ul>
+                <p>
+                    Always add a binary <code>missing_indicator</code> column before imputation so tree-based algorithms can learn whether the absence of a measurement is itself a strong predictor.
+                </p>
+
+                <h2 id="mistake-3-treating-outliers-as-pure-noise">3. Treating Outliers as Pure Noise</h2>
+                <p>
+                    Automatically trimming the top and bottom 1% of values using arbitrary IQR thresholds can remove your most critical signal. In applications like financial fraud detection, credit default analysis, or industrial machinery failure, the outliers are the exact phenomena the business needs you to identify. Verify whether an extreme value represents a telemetry glitch or an authentic edge case before discarding it.
+                </p>
+
+                <h2 id="mistake-4-high-cardinality-one-hot-encoding">4. High-Cardinality One-Hot Encoding Blowups</h2>
+                <p>
+                    One-hot encoding a categorical feature with hundreds or thousands of distinct values (e.g., zip codes or device identifiers) causes dimensionality explosion. This produces extremely sparse matrices that drastically slow training and lead tree-based algorithms to split on uninformative low-frequency dummy variables. Consider frequency encoding, target encoding with smoothing, or CatBoost embeddings instead.
+                </p>
+
+                <h2 id="mistake-5-disregarding-temporal-order">5. Disregarding Temporal Ordering</h2>
+                <p>
+                    If your data was collected sequentially over time, shuffling rows randomly before model evaluation destroys temporal dependency. A standard k-fold cross-validation will train on future events to predict past events. Always implement a <code>TimeSeriesSplit</code> or rolling out-of-time validation holdout to mirror production conditions accurately.
+                </p>
+            </div>
+
+            <!-- Call to Action Banner -->
+            <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                <div class="mb-3">
+                    <i class="fas fa-chart-line fa-3x text-primary"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Need End-to-End Data Science & ML Solutions?</h3>
+                <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                    From robust data ingestion and automated cleaning pipelines to high-accuracy predictive ML models and interactive dashboards, I deliver production-ready data science.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">Explore Data Science Services</a>
+                    <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Discuss Your Dataset</a>
+                </div>
+            </div>
+
+            <!-- Related Posts Row -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-4 text-center">Related Articles</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">AI Automation</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="whatsapp-automation-small-business.html" class="text-decoration-none text-dark">How Small Businesses Can Automate WhatsApp Replies for Free</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Learn how to capture leads and save hours of manual replying using simple, low-cost AI automation.</p>
+                            <a href="whatsapp-automation-small-business.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">Technical Writing</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="technical-blog-posts-that-rank.html" class="text-decoration-none text-dark">How to Write Technical Blog Posts That Rank on Google</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Combine developer-friendly code snippets with SEO best practices to drive organic traffic.</p>
+                            <a href="technical-blog-posts-that-rank.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Me | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get in touch with Anubhav Yadav for freelance Data Science, Machine Learning, Technical Writing, and AI Automation projects. Fast 24-hour response.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/contact.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/contact.html">
+    <meta property="og:title" content="Contact Anubhav Yadav | Freelance Data Science & AI Automation">
+    <meta property="og:description" content="Have a project in mind? Reach out for freelance Data Science, Technical Writing, and AI Automation consultations.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/contact.html">
+    <meta name="twitter:title" content="Contact Anubhav Yadav | Freelance Data Science & AI Automation">
+    <meta name="twitter:description" content="Have a project in mind? Reach out for freelance Data Science, Technical Writing, and AI Automation consultations.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
@@ -12,8 +32,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
-    <script src="/_vercel/speed-insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -32,19 +53,126 @@
         })();
     </script>
     <style>
-        /* Scoped style for the contact banner to match chatbot info box */
-        .contact-notice-box {
-            background-color: rgba(13, 110, 253, 0.1);
-            border: 1px solid #0d6efd;
-            color: #084298;
-            border-radius: 12px;
-            padding: 12px 20px;
-            font-size: 13px;
-            line-height: 1.5;
+        /* Dark mode inputs and scoped styling */
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: #2c3138;
+            color: #f8f9fa;
+            border-color: rgba(255, 255, 255, 0.15);
         }
-        [data-theme="dark"] .contact-notice-box {
-            background-color: rgba(13, 110, 253, 0.2);
-            color: #cfe2ff;
+        [data-theme="dark"] .form-control:focus,
+        [data-theme="dark"] .form-select:focus {
+            background-color: #2c3138;
+            color: #f8f9fa;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        [data-theme="dark"] .form-control::placeholder {
+            color: #adb5bd;
+        }
+        /* Alert Feedback Visibility */
+        .alert-success {
+            background-color: #d1e7dd !important;
+            border: 1px solid #badbcc !important;
+            color: #0f5132 !important;
+        }
+        .alert-success h6 {
+            color: #0f5132 !important;
+        }
+        .alert-success .alert-message,
+        .alert-success p {
+            color: #146c43 !important;
+        }
+        [data-theme="dark"] .alert-success {
+            background-color: rgba(25, 135, 84, 0.18) !important;
+            border: 1px solid rgba(40, 167, 69, 0.4) !important;
+            color: #d1e7dd !important;
+        }
+        [data-theme="dark"] .alert-success h6 {
+            color: #ffffff !important;
+        }
+        [data-theme="dark"] .alert-success .alert-message,
+        [data-theme="dark"] .alert-success p {
+            color: #c7e8d7 !important;
+        }
+        [data-theme="dark"] .alert-success .text-success {
+            color: #20c997 !important;
+        }
+        .alert-danger {
+            background-color: #f8d7da !important;
+            border: 1px solid #f5c2c7 !important;
+            color: #842029 !important;
+        }
+        .alert-danger .alert-message,
+        .alert-danger p {
+            color: #842029 !important;
+        }
+        [data-theme="dark"] .alert-danger {
+            background-color: rgba(220, 53, 69, 0.18) !important;
+            border: 1px solid rgba(220, 53, 69, 0.4) !important;
+            color: #f8d7da !important;
+        }
+        [data-theme="dark"] .alert-danger .alert-message,
+        [data-theme="dark"] .alert-danger p {
+            color: #f1aeb5 !important;
+        }
+        [data-theme="dark"] .alert-danger .text-danger {
+            color: #ea868f !important;
+        }
+        .connect-badge {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid rgba(13, 110, 253, 0.15);
+        }
+        .connect-badge:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-shadow);
+            border-color: var(--primary-color);
+        }
+        .step-card {
+            border: 1px solid rgba(13, 110, 253, 0.1) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--glow-shadow) !important;
+            border-color: var(--primary-color) !important;
+        }
+        .step-badge {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-gradient);
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+        }
+        .next-step-item {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition-delay: calc(var(--step-delay, 0) * 110ms);
+        }
+        .next-step-item.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .next-step-item {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .step-card, .connect-badge {
+                transition: none !important;
+                transform: none !important;
+            }
+            .step-card:hover, .connect-badge:hover {
+                transform: none !important;
+            }
         }
     </style>
 </head>
@@ -54,7 +182,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -64,9 +192,11 @@
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -78,25 +208,12 @@
     <!-- Main Content -->
     <section class="py-5 mt-5">
         <div class="container">
-            
-            <!-- Service Status Notice (Positioned above Heading) -->
-            <div class="row justify-content-center mb-5 animate-fade-in">
-                <div class="col-lg-8">
-                    <div class="contact-notice-box d-flex align-items-center shadow-sm">
-                        <i class="fas fa-info-circle fs-4 me-3"></i>
-                        <div>
-                            <strong>Service Update:</strong> The automated email service is currently under maintenance. 
-                            Please reach out via <strong>LinkedIn</strong> or direct <strong>Email</strong> for a guaranteed response.
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Header Section -->
             <div class="text-center mb-5 animate-fade-in">
                 <h2 class="fw-bold">Contact Me</h2>
                 <p class="text-secondary mx-auto" style="max-width: 600px;">
-                    Have an opportunity, collaboration idea, or just want to connect? Feel free to reach out. I typically respond within 24 hours.
+                    Have an opportunity, collaboration idea, or want to discuss a project? Feel free to reach out. I typically respond within 24 hours.
                 </p>
                 <div class="underline mx-auto"></div>
             </div>
@@ -105,59 +222,137 @@
                 <div class="col-lg-8 col-md-10 animate-fade-in">
                     <!-- Contact Form Card -->
                     <div class="achievement-card p-4 p-md-5 bg-white rounded-4 shadow-sm">
-                        <form id="contactForm">
+                        <!-- Formspree Endpoint: https://formspree.io/f/xaeqqdlv -->
+                        <form id="contactForm" action="https://formspree.io/f/xaeqqdlv" method="POST" novalidate>
+                            
+                            <!-- Hidden Honeypot Field to Block Spam Bots -->
+                            <input type="text" name="_gotcha" id="honeypot" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                            
+                            <!-- Hidden Subject Field for Formspree Notification -->
+                            <input type="hidden" name="_subject" value="New Portfolio Inquiry - Anubhav Yadav">
+
                             <div class="row g-3">
                                 <!-- Full Name -->
                                 <div class="col-md-6">
-                                    <label for="fullName" class="form-label small fw-bold">Full Name</label>
+                                    <label for="fullName" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label>
                                     <input name="name" class="form-control rounded-pill px-3" id="fullName" placeholder="Enter your name" required>
+                                    <div class="text-danger small mt-1 d-none" id="fullNameError">Please enter your name.</div>
                                 </div>
+
                                 <!-- Email Address -->
                                 <div class="col-md-6">
-                                    <label for="emailAddr" class="form-label small fw-bold">Email Address</label>
+                                    <label for="emailAddr" class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
                                     <input name="email" type="email" class="form-control rounded-pill px-3" id="emailAddr" placeholder="name@example.com" required>
+                                    <div class="text-danger small mt-1 d-none" id="emailAddrError">Please enter a valid email address.</div>
                                 </div>
+
                                 <!-- Purpose Dropdown -->
-                                <div class="col-12">
-                                    <label for="purpose" class="form-label small fw-bold">Purpose</label>
+                                <div class="col-md-6">
+                                    <label for="purpose" class="form-label small fw-bold">Purpose <span class="text-danger">*</span></label>
                                     <select name="purpose" class="form-select rounded-pill px-3" id="purpose" required>
                                         <option value="" selected disabled>Choose a purpose...</option>
-                                        <option value="hiring">Hiring Opportunity</option>
-                                        <option value="collaboration">Collaboration</option>
-                                        <option value="freelance">Freelance Work</option>
-                                        <option value="general">General Query</option>
+                                        <option value="Hiring Opportunity">Hiring Opportunity</option>
+                                        <option value="Freelance Project">Freelance Project</option>
+                                        <option value="Collaboration">Collaboration</option>
+                                        <option value="General Query">General Query</option>
                                     </select>
+                                    <div class="text-danger small mt-1 d-none" id="purposeError">Please select a purpose.</div>
                                 </div>
+
+                                <!-- Service Interested In Dropdown -->
+                                <div class="col-md-6">
+                                    <label for="service" class="form-label small fw-bold">Service interested in <span class="text-danger">*</span></label>
+                                    <select name="service" class="form-select rounded-pill px-3" id="service" required>
+                                        <option value="" selected disabled>Choose a service...</option>
+                                        <option value="Technical Writing">Technical Writing</option>
+                                        <option value="Data Science & ML">Data Science & ML</option>
+                                        <option value="AI Automation & Chatbots">AI Automation</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <div class="text-danger small mt-1 d-none" id="serviceError">Please select a service of interest.</div>
+                                </div>
+
                                 <!-- Message Textarea -->
                                 <div class="col-12">
-                                    <label for="message" class="form-label small fw-bold">Message</label>
-                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                                    <label for="message" class="form-label small fw-bold">Message <span class="text-danger">*</span></label>
+                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" placeholder="Write your message here (minimum 10 characters)..." required></textarea>
+                                    <div class="text-danger small mt-1 d-none" id="messageError">Please enter a message with at least 10 characters.</div>
                                 </div>
-                                <!-- Submit Button -->
+
+                                <!-- Trust & Location Lines + Submit Button -->
                                 <div class="col-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill shadow">
+                                    <button type="submit" id="submitBtn" class="btn btn-primary btn-lg px-5 rounded-pill shadow">
                                         Send Message <i class="fas fa-paper-plane ms-2"></i>
                                     </button>
+
+                                    <!-- Trust & Location Info -->
+                                    <div class="mt-3 text-secondary small">
+                                        <p class="mb-1 fw-semibold text-primary">
+                                            <i class="fas fa-clock me-1"></i> I reply within 24 hours. Free consultation for every project.
+                                        </p>
+                                        <p class="mb-0 text-muted">
+                                            <i class="fas fa-map-marker-alt me-1 text-danger"></i> Based in Mohali, Punjab, India (IST). Working with clients worldwide.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </form>
+
+                        <!-- Dynamic Feedback Container -->
+                        <div id="formStatus" class="mt-4"></div>
                     </div>
 
                     <!-- Direct Contact Information -->
                     <div class="mt-5 text-center animate-fade-in">
                         <h5 class="fw-bold mb-4">Direct Connectivity</h5>
-                        <div class="d-flex flex-wrap justify-content-center gap-4">
-                            <a href="mailto:yadavanubhav2024@gmail.com" class="text-decoration-none text-secondary hover-primary">
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a href="mailto:anubhavyadav77ff@gmail.com" class="connect-badge btn bg-white shadow-sm rounded-pill px-4 py-2 text-decoration-none text-secondary">
                                 <i class="fas fa-envelope text-primary me-2"></i>Email Me
                             </a>
-                            <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" class="text-decoration-none text-secondary hover-primary">
+                            <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="connect-badge btn bg-white shadow-sm rounded-pill px-4 py-2 text-decoration-none text-secondary">
+                                <i class="fab fa-whatsapp text-success me-2"></i>WhatsApp
+                            </a>
+                            <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="connect-badge btn bg-white shadow-sm rounded-pill px-4 py-2 text-decoration-none text-secondary">
                                 <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn Profile
                             </a>
-                            <a href="https://github.com/AnubhavDataSci25" target="_blank" class="text-decoration-none text-secondary hover-primary">
+                            <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="connect-badge btn bg-white shadow-sm rounded-pill px-4 py-2 text-decoration-none text-secondary">
                                 <i class="fab fa-github text-primary me-2"></i>GitHub Portfolio
                             </a>
                         </div>
                     </div>
+
+                    <!-- What Happens Next? 3-Step Process -->
+                    <div class="mt-5 pt-4 text-center" id="what-happens-next">
+                        <h4 class="fw-bold mb-2">What happens next?</h4>
+                        <div class="underline mx-auto mb-4"></div>
+                        <div class="row g-4 justify-content-center text-center mt-2">
+                            <!-- Step 1 -->
+                            <div class="col-md-4 next-step-item" style="--step-delay: 1;">
+                                <div class="step-card p-4 rounded-4 bg-white shadow-sm h-100 d-flex flex-column align-items-center">
+                                    <div class="step-badge mb-3">1</div>
+                                    <h6 class="fw-bold mb-2">I read your message</h6>
+                                    <p class="text-secondary small mb-0">I review your goals, project scope, and specific technical requirements.</p>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="col-md-4 next-step-item" style="--step-delay: 2;">
+                                <div class="step-card p-4 rounded-4 bg-white shadow-sm h-100 d-flex flex-column align-items-center">
+                                    <div class="step-badge mb-3">2</div>
+                                    <h6 class="fw-bold mb-2">I reply within 24 hours</h6>
+                                    <p class="text-secondary small mb-0">You'll receive a thoughtful, direct response with preliminary thoughts and next steps.</p>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="col-md-4 next-step-item" style="--step-delay: 3;">
+                                <div class="step-card p-4 rounded-4 bg-white shadow-sm h-100 d-flex flex-column align-items-center">
+                                    <div class="step-badge mb-3">3</div>
+                                    <h6 class="fw-bold mb-2">Free consultation call</h6>
+                                    <p class="text-secondary small mb-0">We jump on a quick call or chat to align on deliverables, timeline, and pricing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -166,14 +361,171 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Form Validation & Formspree Handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+
+            const fullName = document.getElementById('fullName');
+            const emailAddr = document.getElementById('emailAddr');
+            const purpose = document.getElementById('purpose');
+            const service = document.getElementById('service');
+            const message = document.getElementById('message');
+            const honeypot = document.getElementById('honeypot');
+
+            // Email validation regex helper
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            // Realtime error clear on user input
+            [fullName, emailAddr, purpose, service, message].forEach(field => {
+                if (field) {
+                    ['input', 'change'].forEach(evt => {
+                        field.addEventListener(evt, () => {
+                            field.classList.remove('is-invalid');
+                            const errEl = document.getElementById(`${field.id}Error`);
+                            if (errEl) errEl.classList.add('d-none');
+                        });
+                    });
+                }
+            });
+
+            if (form) {
+                // Capturing phase ensures this listener executes before any generic submit handlers
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    // Check Honeypot spam block
+                    if (honeypot && honeypot.value.trim() !== '') {
+                        formStatus.innerHTML = '<div class="alert alert-success animate-fade-in rounded-pill py-2 text-center shadow-sm"><i class="fas fa-check-circle me-2 text-success"></i> <span class="alert-message">Thank you! Your message has been sent.</span></div>';
+                        form.reset();
+                        return;
+                    }
+
+                    let isValid = true;
+
+                    // 1. Validate Name
+                    if (!fullName.value.trim()) {
+                        fullName.classList.add('is-invalid');
+                        document.getElementById('fullNameError').classList.remove('d-none');
+                        isValid = false;
+                    }
+
+                    // 2. Validate Email
+                    if (!emailAddr.value.trim() || !isValidEmail(emailAddr.value.trim())) {
+                        emailAddr.classList.add('is-invalid');
+                        document.getElementById('emailAddrError').classList.remove('d-none');
+                        isValid = false;
+                    }
+
+                    // 3. Validate Purpose
+                    if (!purpose.value) {
+                        purpose.classList.add('is-invalid');
+                        document.getElementById('purposeError').classList.remove('d-none');
+                        isValid = false;
+                    }
+
+                    // 4. Validate Service
+                    if (!service.value) {
+                        service.classList.add('is-invalid');
+                        document.getElementById('serviceError').classList.remove('d-none');
+                        isValid = false;
+                    }
+
+                    // 5. Validate Message (>= 10 characters)
+                    if (!message.value.trim() || message.value.trim().length < 10) {
+                        message.classList.add('is-invalid');
+                        document.getElementById('messageError').classList.remove('d-none');
+                        isValid = false;
+                    }
+
+                    if (!isValid) return;
+
+                    // Loading State
+                    const originalBtnContent = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...';
+                    formStatus.innerHTML = '';
+
+                    const formData = new FormData(form);
+
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            formStatus.innerHTML = `
+                                <div class="alert alert-success animate-fade-in rounded-4 p-4 text-center shadow-sm">
+                                    <i class="fas fa-check-circle fs-3 text-success d-block mb-2"></i>
+                                    <h6 class="fw-bold mb-1">Thank you, ${fullName.value.trim()}!</h6>
+                                    <p class="mb-0 small alert-message">Your message has been sent successfully. I will get back to you within 24 hours.</p>
+                                </div>
+                            `;
+                            form.reset();
+                            [fullName, emailAddr, purpose, service, message].forEach(f => f.classList.remove('is-invalid'));
+                        } else {
+                            const data = await response.json().catch(() => null);
+                            const errMsg = (data && data.errors && data.errors.map(err => err.message).join(', ')) || 'There was an issue sending your message. Please try again or reach out directly.';
+                            formStatus.innerHTML = `
+                                <div class="alert alert-danger animate-fade-in rounded-4 p-3 text-center shadow-sm">
+                                    <i class="fas fa-exclamation-triangle fs-4 text-danger d-block mb-2"></i>
+                                    <p class="mb-0 small alert-message">${errMsg}</p>
+                                </div>
+                            `;
+                        }
+                    } catch (err) {
+                        formStatus.innerHTML = `
+                            <div class="alert alert-danger animate-fade-in rounded-4 p-3 text-center shadow-sm">
+                                <i class="fas fa-exclamation-triangle fs-4 text-danger d-block mb-2"></i>
+                                <p class="mb-0 small alert-message">Connection error. Please check your network or email directly at <a href="mailto:anubhavyadav77ff@gmail.com" class="fw-bold text-danger">anubhavyadav77ff@gmail.com</a>.</p>
+                            </div>
+                        `;
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnContent;
+                    }
+                }, true);
+            }
+
+            // Staggered reveal for "What Happens Next" 3-step row
+            const stepItems = document.querySelectorAll('.next-step-item');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion) {
+                stepItems.forEach(item => item.classList.add('is-revealed'));
+            } else if ('IntersectionObserver' in window) {
+                const stepObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                stepItems.forEach(item => stepObserver.observe(item));
+            } else {
+                stepItems.forEach(item => item.classList.add('is-revealed'));
+            }
+        });
+    </script>
 
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
@@ -192,7 +544,7 @@
                 color: #adb5bd !important;
             }
         </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI Assistant">
             <i class="fas fa-comment-dots"></i>
         </button>
 
@@ -205,7 +557,7 @@
                         <small class="status-dot">Online</small>
                     </div>
                 </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0">
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close Chat">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -231,7 +583,7 @@
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
                     <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>

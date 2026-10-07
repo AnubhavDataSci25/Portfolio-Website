@@ -3,14 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me | Anubhav Yadav</title>
+    <title>About Me | Anubhav Yadav - Data Science & AI</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about Anubhav Yadav, Data Science & AI Automation specialist with an MCA from Chandigarh University and 1st rank BCA from SRM. View journey and background.">
+    <meta name="author" content="Anubhav Yadav">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/about.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/about.html">
+    <meta property="og:title" content="About Me | Anubhav Yadav - Data Science & AI">
+    <meta property="og:description" content="Discover Anubhav Yadav's background, education at Chandigarh University & SRM (Batch Rank 1), hackathon wins, and professional journey.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/about.html">
+    <meta name="twitter:title" content="About Me | Anubhav Yadav - Data Science & AI">
+    <meta name="twitter:description" content="Discover Anubhav Yadav's background, education at Chandigarh University & SRM (Batch Rank 1), hackathon wins, and professional journey.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/profile.jpg">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
     <script>
@@ -28,6 +52,75 @@
             }
         })();
     </script>
+    <style>
+        /* Journey Vertical Timeline */
+        .journey-timeline {
+            position: relative;
+            max-width: 820px;
+            margin: 0 auto;
+            padding-left: 2.75rem;
+        }
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 15px;
+            bottom: 25px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-color) 0%, rgba(13, 110, 253, 0.15) 100%);
+        }
+        .journey-item {
+            position: relative;
+            margin-bottom: 2.25rem;
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition-delay: calc(var(--item-delay, 0) * 100ms);
+        }
+        .journey-item.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .journey-item:last-child {
+            margin-bottom: 0;
+        }
+        .journey-dot {
+            position: absolute;
+            left: -2.75rem;
+            top: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            box-shadow: 0 0 12px rgba(13, 110, 253, 0.4);
+            z-index: 2;
+        }
+        .journey-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(13, 110, 253, 0.12) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .journey-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-shadow) !important;
+            border-color: var(--primary-color) !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .journey-item {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .journey-card:hover, .project-card:hover {
+                transform: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -35,7 +128,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,9 +138,11 @@
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -56,12 +151,13 @@
         </div>
     </nav>
 
+    <!-- Main About Section -->
     <section class="py-5 mt-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-lg-0 animate-fade-in">
-                    <div class="position-relative">
-                        <img src="/images/profile.jpg" alt="Anubhav Yadav" class="img-fluid rounded-4 shadow-lg">
+                <div class="col-lg-5 mb-4 mb-lg-0 animate-fade-in text-center text-lg-start">
+                    <div class="position-relative d-inline-block">
+                        <img src="images/profile.jpg" alt="Portrait photo of Anubhav Yadav, Data Science and AI specialist" class="img-fluid rounded-4 shadow-lg" loading="lazy">
                         <div class="position-absolute bottom-0 start-0 bg-primary text-white p-3 rounded-end shadow-sm">
                             <p class="mb-0 fw-bold">MCA Data Science</p>
                         </div>
@@ -69,23 +165,27 @@
                 </div>
                 <div class="col-lg-7 ps-lg-5 animate-fade-in">
                     <h5 class="text-primary fw-bold mb-2">ABOUT ME</h5>
-                    <h2 class="fw-bold mb-4">"Harnessing the Power of Data to Innovate and Inspire"</h2>
+                    <!-- Single H1 for SEO -->
+                    <h1 class="display-6 fw-bold mb-4">Harnessing the Power of Data to Innovate and Inspire</h1>
                     <p class="text-secondary mb-4">
-                        Hello, I’m <strong>Anubhav Yadav</strong>, pursuing Master's of Computer Applications in Data Science from <strong>Chandigarh University, Mohali Campus, Punjab</strong>. I’m passionate about uncovering insights from data and applying machine learning to solve real-world problems.
+                        Hello, I’m <strong>Anubhav Yadav</strong>, a data science practitioner and AI automation specialist based in <strong>Mohali, Punjab, India</strong>. I specialize in identifying hidden patterns in complex datasets, building predictive ML pipelines, and designing production-ready automated systems.
                     </p>
                     <p class="text-secondary mb-4">
-                        With hands-on experience in data analysis, model building, and visualization, I aim to bridge the gap between raw data and strategic decision-making. I thrive on the challenge of turning complex datasets into actionable narratives.
+                        With hands-on experience in analytical storytelling, model evaluation, and modern AI architectures like RAG and agentic workflows, I bridge the gap between raw unstructured data and high-impact business decisions.
                     </p>
                     
-                    <div class="row g-4 mb-5">
+                    <!-- Education & Experience Overview -->
+                    <div class="row g-4 mb-4">
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
                                 <div class="bg-light p-3 rounded-3 me-3 text-primary">
-                                    <i class="fas fa-university fa-lg"></i>
+                                    <i class="fas fa-graduation-cap fa-lg"></i>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Education & Background</h6>
-                                    <p class="small text-muted mb-0">Graduated with a strong foundation in statistics and ML. SRM Institute Alumnus.</p>
+                                    <p class="small text-muted mb-0">
+                                        Pursuing MCA in Data Science at Chandigarh University. Completed BCA in Data Science from SRM Institute of Science and Technology, graduating ranked 1st in the batch. Built a strong foundation across mathematics, statistics, and machine learning.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -96,20 +196,22 @@
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Professional Experience</h6>
-                                    <p class="small text-muted mb-0">Data Science Intern at Uniconverge Technologies (EDA, classification, Power BI).</p>
+                                    <p class="small text-muted mb-0">
+                                        Data Science Intern at Uniconverge Technologies, specializing in exploratory data analysis (EDA), predictive classification modeling, and interactive Power BI business dashboards.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <h5 class="fw-bold mb-3">Beyond the Data</h5>
-                    <p class="text-secondary">
-                        I’m a tech enthusiast who enjoys exploring emerging tools like <strong>GenAI, Streamlit, and Flask</strong>. Outside the world of data, I enjoy watching movies, listening to music, and playing cricket — always balancing tech passion with creativity and fun.
+                    <h5 class="fw-bold mb-2">Beyond the Data</h5>
+                    <p class="text-secondary mb-4">
+                        I am an avid explorer of generative AI paradigms, conversational agents, and full-stack integration frameworks (FastAPI, React, Streamlit). Outside work, I enjoy listening to music, watching cinema, and playing cricket—always balancing technical rigor with curiosity and creative problem-solving.
                     </p>
 
-                    <div class="mt-5">
-                        <a href="https://docs.google.com/document/d/1PoMsLgjC7ynoUG090CrEHAjo02uz1GaU/edit" target="_blank" class="btn btn-primary rounded-pill px-4 py-2 me-3 shadow">
-                            <i class="fas fa-file-download me-2"></i>View My Resume
+                    <div class="mt-4 d-flex flex-wrap gap-3">
+                        <a href="docs/Anubhav Yadav DS Resume Updated.pdf" target="_blank" rel="noopener" class="btn btn-primary rounded-pill px-4 py-2 shadow">
+                            <i class="fas fa-file-pdf me-2"></i>View My Resume
                         </a>
                         <a href="projects.html" class="btn btn-outline-dark rounded-pill px-4 py-2">
                             Explore Projects
@@ -120,38 +222,219 @@
         </div>
     </section>
 
-    <!-- Highlights Section -->
-    <section class="py-5 bg-light-soft">
-        <div class="container">
-            <div class="row text-center g-4">
-                <div class="col-md-4 animate-fade-in">
-                    <h2 class="fw-bold text-primary mb-1">4+</h2>
-                    <p class="text-muted">Hackathons Participated</p>
+    <!-- How I Can Help You Section -->
+    <section class="py-5 bg-light-soft" id="how-i-can-help">
+        <div class="container animate-fade-in">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">How I Can Help You</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small mx-auto" style="max-width: 600px;">
+                    Translating complex technical concepts and raw datasets into high-performing, business-ready deliverables.
+                </p>
+            </div>
+            <div class="row g-4 text-center">
+                <!-- Service 1 -->
+                <div class="col-md-4">
+                    <div class="project-card p-4 p-lg-5 h-100 bg-white rounded-4 shadow-sm border d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="mb-3"><i class="fas fa-pen-nib fa-2x text-primary"></i></div>
+                            <h5 class="fw-bold mb-2">Technical Articles That Rank</h5>
+                            <p class="text-secondary small mb-4">
+                                In-depth developer guides, SEO tutorials, and API documentation designed to rank organically on Google and engage engineers.
+                            </p>
+                        </div>
+                        <div>
+                            <a href="services.html" class="text-primary fw-bold small text-decoration-none">
+                                Explore Writing Services <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 animate-fade-in">
-                    <h2 class="fw-bold text-primary mb-1">National</h2>
-                    <p class="text-muted">Level Hackathon GenAI Award Winner</p>
+                <!-- Service 2 -->
+                <div class="col-md-4">
+                    <div class="project-card p-4 p-lg-5 h-100 bg-white rounded-4 shadow-sm border d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="mb-3"><i class="fas fa-brain fa-2x text-primary"></i></div>
+                            <h5 class="fw-bold mb-2">ML & Data Projects</h5>
+                            <p class="text-secondary small mb-4">
+                                End-to-end data pipelines, custom predictive machine learning models, and interactive KPI analytics dashboards.
+                            </p>
+                        </div>
+                        <div>
+                            <a href="services.html" class="text-primary fw-bold small text-decoration-none">
+                                Explore Data Science Services <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 animate-fade-in">
-                    <h2 class="fw-bold text-primary mb-1">Top 98</h2>
-                    <p class="text-muted">International Hackathon Team Rank</p>
+                <!-- Service 3 -->
+                <div class="col-md-4">
+                    <div class="project-card p-4 p-lg-5 h-100 bg-white rounded-4 shadow-sm border d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="mb-3"><i class="fas fa-robot fa-2x text-info"></i></div>
+                            <h5 class="fw-bold mb-2">Chatbots & Automation for Small Businesses</h5>
+                            <p class="text-secondary small mb-4">
+                                Custom WhatsApp and web chatbots, automated lead qualification, and CRM workflows that save hours every week.
+                            </p>
+                        </div>
+                        <div>
+                            <a href="services.html" class="text-primary fw-bold small text-decoration-none">
+                                Explore Automation Services <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- My Journey Vertical Timeline Section -->
+    <section class="py-5" id="my-journey">
+        <div class="container animate-fade-in">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">My Journey</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small">Key milestones across academics, industry experience, and hackathon achievements.</p>
+            </div>
+            
+            <div class="journey-timeline">
+                <!-- Milestone 1 -->
+                <div class="journey-item" style="--item-delay: 1;">
+                    <div class="journey-dot"><i class="fas fa-award"></i></div>
+                    <div class="journey-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold mb-0">BCA in Data Science — SRM Institute of Science and Technology</h5>
+                            <span class="badge bg-light text-primary border rounded-pill">2022</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Graduated <strong>ranked 1st in the batch</strong>, establishing rigorous foundations in probability, statistical analysis, computer science, and algorithmic problem-solving.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="journey-item" style="--item-delay: 2;">
+                    <div class="journey-dot"><i class="fas fa-laptop-code"></i></div>
+                    <div class="journey-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold mb-0">Data Science Intern — Uniconverge Technologies</h5>
+                            <span class="badge bg-light text-primary border rounded-pill">Industry Experience</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Spearheaded exploratory data analysis on real-world datasets, trained supervised classification algorithms, and designed interactive Power BI dashboards for operational stakeholders.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="journey-item" style="--item-delay: 3;">
+                    <div class="journey-dot"><i class="fas fa-trophy"></i></div>
+                    <div class="journey-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold mb-0">Hackathon Wins & GenAI Recognition</h5>
+                            <span class="badge bg-light text-primary border rounded-pill">National & Global</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Won the <strong>National Level Hackathon GenAI Award</strong> and secured <strong>Top 98 international rank</strong> in the Google Cloud APAC AI for Impact Hackathon, developing scalable solutions under rapid time constraints.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="journey-item" style="--item-delay: 4;">
+                    <div class="journey-dot"><i class="fas fa-user-graduate"></i></div>
+                    <div class="journey-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold mb-0">MCA in Data Science — Chandigarh University</h5>
+                            <span class="badge bg-light text-primary border rounded-pill">2025</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Pursuing Master's degree with a focus on advanced deep learning, Retrieval-Augmented Generation (RAG) pipelines, and end-to-end full-stack AI deployment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights / Stats Section -->
+    <section class="py-5 bg-light-soft border-top border-bottom">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4 animate-fade-in">
+                    <h2 class="fw-bold text-primary mb-1">4+</h2>
+                    <p class="text-muted fw-semibold mb-0">Hackathons Participated</p>
+                </div>
+                <div class="col-md-4 animate-fade-in">
+                    <h2 class="fw-bold text-primary mb-1">National</h2>
+                    <p class="text-muted fw-semibold mb-0">Level Hackathon GenAI Award Winner</p>
+                </div>
+                <div class="col-md-4 animate-fade-in">
+                    <h2 class="fw-bold text-primary mb-1">Top 98</h2>
+                    <p class="text-muted fw-semibold mb-0">Google Cloud APAC AI for Impact International Hackathon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-5 text-center">
+        <div class="container animate-fade-in">
+            <div class="p-4 p-md-5 bg-white rounded-4 shadow-sm border mx-auto" style="max-width: 760px;">
+                <h2 class="fw-bold mb-3">Let's Work Together</h2>
+                <p class="text-secondary mb-4 mx-auto" style="max-width: 580px;">
+                    Have an upcoming project, data challenge, or technical writing requirement? Let's connect to discuss how I can help bring your ideas to life.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="services.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                        Explore Services <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-dark btn-lg rounded-pill px-4">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
+    <!-- Scroll Animation for Journey Timeline -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const journeyItems = document.querySelectorAll('.journey-item');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion) {
+                journeyItems.forEach(item => item.classList.add('is-revealed'));
+            } else if ('IntersectionObserver' in window) {
+                const journeyObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                journeyItems.forEach(item => journeyObserver.observe(item));
+            } else {
+                journeyItems.forEach(item => item.classList.add('is-revealed'));
+            }
+        });
+    </script>
+
     <!-- AI Chatbot Widget -->
     <div id="portfolio-chatbot">
-        <!-- Scoped style fix for Chatbot Input visibility in Dark Mode -->
         <style>
             [data-theme="dark"] #chat-input {
                 background-color: #2c3138 !important;
@@ -167,7 +450,7 @@
                 color: #adb5bd !important;
             }
         </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI Assistant">
             <i class="fas fa-comment-dots"></i>
         </button>
 
@@ -180,14 +463,14 @@
                         <small class="status-dot">Online</small>
                     </div>
                 </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0">
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close Chat">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <div id="chat-messages" class="chat-body p-3">
                 <div class="message bot-msg">
-                    Hello! I'm Anubhav's AI assistant. Ask me anything about his skills or projects!
+                    Hello! I'm Anubhav's AI assistant. Ask me anything about his skills or background!
                 </div>
             </div>
 
@@ -199,14 +482,14 @@
             <div class="chat-info-banner px-3 py-1" style="background-color: rgba(13, 110, 253, 0.1); border-top: 1px solid rgba(13, 110, 253, 0.1);">
                 <div class="d-flex align-items-center" style="font-size: 10px; color: #0d6efd;">
                     <i class="fas fa-info-circle me-2"></i>
-                    <span>AI Portfolio Assistant still under development. Responses may occasionally fail due to high traffic.</span>
+                    <span>AI Portfolio Assistant still under development.</span>
                 </div>
             </div>
 
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
                     <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
