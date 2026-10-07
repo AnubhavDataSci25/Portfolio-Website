@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Anubhav Yadav</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.style.setProperty('--animate-duration', '0s');
+                document.documentElement.style.scrollBehavior = 'auto';
+            }
+        })();
+    </script>
+    <style>
+        .filter-chip {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(13, 110, 253, 0.2);
+            color: var(--text-color);
+            background: transparent;
+        }
+        .filter-chip:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        .filter-chip.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+        .blog-card.hidden {
+            display: none;
+        }
+        .search-input {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(13, 110, 253, 0.35);
+        }
+        .search-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 1;
+        }
+        .search-input + .input-group-text,
+        .input-group-text:has(+ .search-input) {
+            border-color: rgba(13, 110, 253, 0.35);
+        }
+        .search-input:focus {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        [data-theme="dark"] .search-input,
+        [data-theme="dark"] .input-group-text:has(+ .search-input) {
+            border-color: rgba(61, 139, 253, 0.75);
+        }
+        /* Simple Modal for Reading Posts within the same file */
+        .post-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .post-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .post-content-container {
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 20px;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .post-modal.show .post-content-container {
+            transform: scale(1);
+        }
+        .post-header-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .post-body {
+            padding: 40px;
+        }
+        .post-body p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .post-body h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .close-post-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .close-post-btn:hover {
+            background: var(--primary-color);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .blog-card, .filter-chip, .post-modal, .post-content-container {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 mt-5 bg-light-soft">
+        <div class="container text-center animate-fade-in">
+            <h1 class="display-4 fw-bold mb-3 mt-4">Insights & <span class="text-primary">Articles</span></h1>
+            <p class="lead text-secondary max-w-2xl mx-auto">Thoughts on AI automation, data science methodologies, and effective technical writing.</p>
+        </div>
+    </section>
+
+    <!-- Blog Controls -->
+    <section class="py-4 border-bottom">
+        <div class="container animate-fade-in">
+            <div class="row align-items-center justify-content-between g-3">
+                <div class="col-lg-8">
+                    <div class="d-flex flex-wrap gap-2" id="filter-container">
+                        <button class="filter-chip rounded-pill px-3 py-1 active" data-filter="all">All</button>
+                        <button class="filter-chip rounded-pill px-3 py-1" data-filter="ai">AI Automation</button>
+                        <button class="filter-chip rounded-pill px-3 py-1" data-filter="data">Data Science</button>
+                        <button class="filter-chip rounded-pill px-3 py-1" data-filter="writing">Technical Writing</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-end-0 text-secondary"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control search-input border-start-0 ps-0" id="search-input" placeholder="Search articles...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4" id="blog-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Reading Modal -->
+    <div id="postModal" class="post-modal">
+        <div class="post-content-container shadow-lg">
+            <button id="closePostModal" class="close-post-btn"><i class="fas fa-times"></i></button>
+            <img id="modalCoverImg" src="" alt="Cover Image" class="post-header-img">
+            <div class="post-body">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <span id="modalCategory" class="badge bg-primary rounded-pill"></span>
+                    <span id="modalDate" class="text-secondary small"><i class="far fa-calendar me-1"></i> </span>
+                    <span id="modalTime" class="text-secondary small"><i class="far fa-clock me-1"></i> </span>
+                </div>
+                <h1 id="modalTitle" class="fw-bold mb-4"></h1>
+                
+                <div id="modalContent" class="text-secondary">
+                    <!-- Content injected here -->
+                </div>
+
+                <div class="mt-5 p-4 bg-light-soft rounded-4 text-center border">
+                    <h4 class="fw-bold mb-2">Need help implementing this?</h4>
+                    <p class="small text-secondary mb-3">Check out my services or get in touch for a free consultation.</p>
+                    <a href="services.html" class="btn btn-primary rounded-pill px-4">View Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulated MDX/Markdown data structure
+            const blogPosts = [
+                {
+                    id: 'automate-whatsapp',
+                    title: "How Small Businesses Can Automate WhatsApp Replies",
+                    category: "ai",
+                    categoryLabel: "AI Automation",
+                    date: "Oct 2, 2026",
+                    readTime: "4 min read",
+                    excerpt: "Learn how to capture leads and save hours of manual replying using simple, low-cost AI automation workflows.",
+                    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80",
+                    content: `
+                        <p>In today's fast-paced digital landscape, small businesses often struggle to keep up with customer inquiries on platforms like WhatsApp. Responding manually is time-consuming and can lead to missed leads if replies are delayed. Fortunately, AI automation provides a scalable, low-cost solution.</p>
+                        
+                        <h3>Why Automate WhatsApp?</h3>
+                        <p>Customers expect near-instant responses. By automating initial replies, you guarantee that a lead is acknowledged immediately. You can use automation to answer FAQs, provide business hours, or collect initial contact information before a human steps in.</p>
+                        
+                        <h3>The Tech Stack</h3>
+                        <p>You don't need a massive engineering team. Tools like <strong>ManyChat</strong>, <strong>Make.com (formerly Integromat)</strong>, and the <strong>WhatsApp Business API</strong> make it possible to string together workflows without writing complex code. For example, you can set up a webhook that triggers an OpenAI prompt whenever a specific keyword is detected in an incoming message.</p>
+
+                        <h3>A Simple Lead Capture Workflow</h3>
+                        <p>A highly effective workflow involves parsing the incoming message, using AI to extract intent (e.g., "looking for pricing"), and then automatically inserting that structured data into a Google Sheet for your sales team. This turns WhatsApp from a chaotic inbox into an organized CRM funnel.</p>
+                    `
+                },
+                {
+                    id: 'data-cleaning-mistakes',
+                    title: "5 Data Cleaning Mistakes That Ruin Your ML Model",
+                    category: "data",
+                    categoryLabel: "Data Science",
+                    date: "Sep 28, 2026",
+                    readTime: "6 min read",
+                    excerpt: "Garbage in, garbage out. Discover the most common preprocessing errors that secretly destroy predictive accuracy.",
+                    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=800&q=80",
+                    content: `
+                        <p>We've all heard the adage "garbage in, garbage out." In Machine Learning, the quality of your preprocessing pipeline often dictates the success of your model far more than the specific algorithm you choose. Yet, data cleaning is frequently rushed.</p>
+
+                        <h3>1. Data Leakage During Scaling</h3>
+                        <p>One of the most insidious errors is applying transformations like <code>StandardScaler</code> to the entire dataset <em>before</em> performing the train/test split. This allows information from the test set to "leak" into the training set, resulting in artificially high validation scores that crash in production.</p>
+
+                        <h3>2. Blindly Imputing Missing Values</h3>
+                        <p>Replacing missing values with the mean or median is easy, but it destroys variance and ignores the underlying reason the data is missing. Is the data Missing Completely At Random (MCAR), or Missing Not At Random (MNAR)? Treating them the same ruins predictive power.</p>
+
+                        <h3>3. Ignoring Outliers Context</h3>
+                        <p>Not all outliers are errors. Sometimes, the outlier is the most important signal in the dataset (e.g., fraud detection). Dropping the top 1% of values automatically without domain knowledge is a major pitfall.</p>
+
+                        <p>Proper data hygiene takes time, but skipping it guarantees technical debt down the line.</p>
+                    `
+                },
+                {
+                    id: 'write-tech-blogs',
+                    title: "How to Write Technical Blog Posts That Rank on Google",
+                    category: "writing",
+                    categoryLabel: "Technical Writing",
+                    date: "Sep 15, 2026",
+                    readTime: "5 min read",
+                    excerpt: "Combine developer-friendly code snippets with SEO best practices to create content that drives organic traffic.",
+                    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
+                    content: `
+                        <p>Writing for software engineers is uniquely challenging. Developers have high standards, a low tolerance for fluff, and use specific terminology. However, if you want your content found, you must also satisfy Google's search algorithms.</p>
+
+                        <h3>Structure for Skimmability</h3>
+                        <p>Developers rarely read linearly; they skim for the solution. Use clear, semantic headings (H2, H3). Provide a Table of Contents for longer posts, and put the "TL;DR" or final code block near the top.</p>
+
+                        <h3>Code Snippets as First-Class Citizens</h3>
+                        <p>Ensure your code blocks are properly formatted, syntax-highlighted, and most importantly, copy-pasteable. Avoid putting code inside images. Search engines can't read the text inside an image efficiently, and users hate having to retype your solution.</p>
+
+                        <h3>Target Long-Tail Developer Keywords</h3>
+                        <p>Instead of trying to rank for "React Router," try to rank for specific errors or implementations like "How to pass state with React Router v6 navigate." These long-tail keywords have lower volume but incredibly high intent, bringing highly qualified traffic directly to your site.</p>
+                    `
+                }
+            ];
+
+            const grid = document.getElementById('blog-grid');
+            const searchInput = document.getElementById('search-input');
+            const filterChips = document.querySelectorAll('.filter-chip');
+            const modal = document.getElementById('postModal');
+            const closeBtn = document.getElementById('closePostModal');
+
+            // Render cards
+            const renderPosts = (posts) => {
+                grid.innerHTML = '';
+                if(posts.length === 0) {
+                    grid.innerHTML = '<div class="col-12 text-center text-secondary py-5">No articles found matching your criteria.</div>';
+                    return;
+                }
+                posts.forEach((post, index) => {
+                    const delay = index * 80;
+                    grid.innerHTML += `
+                        <div class="col-md-6 col-lg-4 blog-card-wrapper" style="animation-delay: ${delay}ms">
+                            <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 blog-card d-flex flex-column cursor-pointer" data-id="${post.id}">
+                                <img src="${post.image}" alt="${post.title}" loading="lazy" class="img-fluid w-100" style="height: 200px; object-fit: cover;">
+                                <div class="p-4 d-flex flex-column flex-grow-1">
+                                    <span class="badge bg-light text-primary border rounded-pill align-self-start mb-3">${post.categoryLabel}</span>
+                                    <h5 class="fw-bold mb-2">${post.title}</h5>
+                                    <p class="text-secondary small mb-3 flex-grow-1">${post.excerpt}</p>
+                                    <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
+                                        <div class="text-secondary small">
+                                            <i class="far fa-calendar me-1"></i> ${post.date}
+                                        </div>
+                                        <span class="text-primary small fw-bold">Read more →</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Attach click listeners to new cards
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', () => openPost(card.dataset.id));
+                });
+            };
+
+            // Filtering Logic
+            let currentFilter = 'all';
+            let currentSearch = '';
+
+            const applyFilters = () => {
+                const filtered = blogPosts.filter(post => {
+                    const matchCategory = currentFilter === 'all' || post.category === currentFilter;
+                    const matchSearch = post.title.toLowerCase().includes(currentSearch.toLowerCase());
+                    return matchCategory && matchSearch;
+                });
+                renderPosts(filtered);
+            };
+
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', (e) => {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.filter;
+                    applyFilters();
+                });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value;
+                applyFilters();
+            });
+
+            // Modal Logic
+            const openPost = (id) => {
+                const post = blogPosts.find(p => p.id === id);
+                if (!post) return;
+
+                document.getElementById('modalCoverImg').src = post.image;
+                document.getElementById('modalCategory').textContent = post.categoryLabel;
+                document.getElementById('modalDate').textContent = post.date;
+                document.getElementById('modalTime').textContent = post.readTime;
+                document.getElementById('modalTitle').textContent = post.title;
+                document.getElementById('modalContent').innerHTML = post.content;
+
+                modal.classList.add('show');
+                document.body.classList.add('modal-open');
+            };
+
+            const closePost = () => {
+                modal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            };
+
+            closeBtn.addEventListener('click', closePost);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closePost();
+            });
+
+            // Initial render
+            renderPosts(blogPosts);
+        });
+    </script>
+</body>
+</html>

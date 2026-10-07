@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Anubhav Yadav</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Schema Markup for Services -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "provider": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "serviceType": ["Technical Writing", "Data Science & ML Projects", "AI Automation & Chatbots"],
+      "areaServed": "Worldwide"
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            // Respect prefers-reduced-motion
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.style.setProperty('--animate-duration', '0s');
+                document.documentElement.style.scrollBehavior = 'auto';
+            }
+        })();
+    </script>
+    <style>
+        .pricing-card {
+            border: 1px solid rgba(13, 110, 253, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.02);
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gradient);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .timeline-step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 30px;
+            bottom: -20px;
+            width: 2px;
+            background: rgba(13, 110, 253, 0.2);
+        }
+        .timeline-step:last-child::before {
+            display: none;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(13, 110, 253, 0.05);
+            color: var(--primary-color);
+        }
+        [data-theme="dark"] .accordion-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        [data-theme="dark"] .accordion-item {
+            border-color: rgba(13, 110, 253, 0.2);
+            background-color: var(--card-bg);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pricing-card, .btn, .animate-fade-in {
+                transition: none !important;
+                transform: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 mt-5">
+        <div class="container text-center animate-fade-in">
+            <h1 class="display-4 fw-bold mb-4 mt-4">Technical Writing, Data Science & <span class="text-primary">AI Automation</span> That Grow Your Business</h1>
+            <p class="lead text-secondary mb-5 max-w-2xl mx-auto">Transforming complex concepts into engaging content and raw data into intelligent, automated solutions.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">Get a Free Consultation</a>
+                <a href="#pricing" class="btn btn-outline-dark btn-lg rounded-pill px-4">View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-5 bg-light-soft">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-lg-4 animate-fade-in">
+                    <div class="project-card p-5 h-100 bg-white rounded-4 shadow-sm">
+                        <div class="mb-4">
+                            <i class="fas fa-pen-nib fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Technical Writing</h4>
+                        <p class="text-secondary small mb-4">High-quality articles, tutorials, and documentation that rank on Google and engage developers.</p>
+                        <a href="#pricing-writing" class="text-primary fw-bold text-decoration-none small">Learn more →</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-fade-in">
+                    <div class="project-card p-5 h-100 bg-white rounded-4 shadow-sm">
+                        <div class="mb-4">
+                            <i class="fas fa-brain fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Data Science & ML</h4>
+                        <p class="text-secondary small mb-4">End-to-end data pipelines, predictive models, and interactive dashboards to drive decisions.</p>
+                        <a href="#pricing-data" class="text-primary fw-bold text-decoration-none small">Learn more →</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-fade-in">
+                    <div class="project-card p-5 h-100 bg-white rounded-4 shadow-sm">
+                        <div class="mb-4">
+                            <i class="fas fa-robot fa-3x text-info"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">AI Automation</h4>
+                        <p class="text-secondary small mb-4">Custom chatbots and automated workflows to save time, capture leads, and scale your business.</p>
+                        <a href="#pricing-ai" class="text-primary fw-bold text-decoration-none small">Learn more →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5 animate-fade-in">
+                <h2 class="fw-bold">Transparent Pricing</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small">Starting rates. Final price depends on project scope. Every project starts with a free consultation.</p>
+            </div>
+
+            <!-- Technical Writing Pricing -->
+            <div id="pricing-writing" class="mb-5 pb-5 border-bottom animate-fade-in">
+                <h3 class="fw-bold mb-4 text-center"><i class="fas fa-pen-nib text-primary me-2"></i>Technical Writing</h3>
+                <div class="row g-4 justify-content-center" id="writing-pricing-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Data Science Pricing -->
+            <div id="pricing-data" class="mb-5 pb-5 border-bottom animate-fade-in">
+                <h3 class="fw-bold mb-4 text-center"><i class="fas fa-chart-network text-success me-2"></i>Data Science & ML</h3>
+                <div class="row g-4 justify-content-center" id="data-pricing-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- AI Automation Pricing -->
+            <div id="pricing-ai" class="animate-fade-in">
+                <h3 class="fw-bold mb-4 text-center"><i class="fas fa-robot text-info me-2"></i>AI Automation & Chatbots</h3>
+                <div class="row g-4 justify-content-center" id="ai-pricing-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How I Work -->
+    <section class="py-5 bg-light-soft">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0 animate-fade-in">
+                    <h2 class="fw-bold mb-4">How I Work</h2>
+                    <p class="text-secondary">A streamlined, transparent process designed to deliver high-quality results on time, every time.</p>
+                </div>
+                <div class="col-lg-6 offset-lg-1 animate-fade-in">
+                    <div class="timeline-step">
+                        <div class="timeline-icon">1</div>
+                        <h5 class="fw-bold mb-1">Discuss</h5>
+                        <p class="text-secondary small mb-0">Free consultation to understand your goals, target audience, and specific requirements.</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">2</div>
+                        <h5 class="fw-bold mb-1">Plan & Quote</h5>
+                        <p class="text-secondary small mb-0">I provide a detailed proposal, timeline, and transparent pricing structure.</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">3</div>
+                        <h5 class="fw-bold mb-1">Build & Review</h5>
+                        <p class="text-secondary small mb-0">Iterative development or drafting with regular check-ins and opportunities for feedback.</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">4</div>
+                        <h5 class="fw-bold mb-1">Deliver & Support</h5>
+                        <p class="text-secondary small mb-0">Final delivery of the product or content, followed by a period of post-delivery support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Work With Me -->
+    <section class="py-5">
+        <div class="container text-center animate-fade-in">
+            <h2 class="fw-bold mb-5">Why Work With Me?</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <i class="fas fa-bolt fa-2x text-warning mb-3"></i>
+                    <h6 class="fw-bold">AI-Assisted Speed</h6>
+                    <p class="text-secondary small">Leveraging modern AI tools to accelerate delivery while ensuring rigorous human quality checks.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-comments fa-2x text-primary mb-3"></i>
+                    <h6 class="fw-bold">Clear Communication</h6>
+                    <p class="text-secondary small">No technical jargon unless required. I keep you updated at every stage of the project.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-file-invoice-dollar fa-2x text-success mb-3"></i>
+                    <h6 class="fw-bold">Transparent Pricing</h6>
+                    <p class="text-secondary small">No hidden fees. You'll know exactly what you're paying for before work begins.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-life-ring fa-2x text-info mb-3"></i>
+                    <h6 class="fw-bold">Post-Delivery Support</h6>
+                    <p class="text-secondary small">I don't just hand over the files and disappear. I offer support to ensure everything works smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-5 bg-light-soft">
+        <div class="container animate-fade-in">
+            <h2 class="fw-bold text-center mb-5">Frequently Asked Questions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    What is your typical turnaround time?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    Turnaround time varies by scope. A standard 1,000-word technical article usually takes 3-5 business days. Small automation workflows take 1-2 weeks, while custom ML projects take 3+ weeks.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    How many revisions do you include?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    Most standard packages include 1-2 rounds of revisions to ensure the final deliverable perfectly aligns with your expectations. Additional revisions can be accommodated at an hourly rate.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    What are your payment terms?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    For projects under ₹10,000, 100% upfront is standard. For larger projects, I require a 50% deposit to commence work, with the remaining 50% due upon project completion and your final approval.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                    Do you sign NDAs (Non-Disclosure Agreements)?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary small">
+                                    Absolutely. I respect your privacy and the confidentiality of your proprietary data and business processes. I am happy to sign a standard NDA before discussing project specifics.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5 text-center">
+        <div class="container animate-fade-in">
+            <h2 class="fw-bold mb-4">Ready to start? Let's talk</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-5 shadow">Get in Touch <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- AI Chatbot Widget -->
+    <div id="portfolio-chatbot">
+        <!-- Chatbot HTML structure omitted for brevity, identical to existing pages -->
+    </div>
+    <script src="chatbot.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pricing Configuration Data
+            const pricingData = {
+                writing: [
+                    { title: "Basic", price: "₹1,500", suffix: "/ article", features: ["Up to 800 words", "SEO-optimized", "1 Revision"], popular: false },
+                    { title: "Standard", price: "₹3,000", suffix: "/ article", features: ["Up to 1,500 words", "Research + code examples", "2 Revisions"], popular: true },
+                    { title: "Monthly Pack", price: "₹10,000", suffix: "/ month", features: ["4 Articles", "Content calendar", "Priority delivery"], popular: false }
+                ],
+                data: [
+                    { title: "Starter", price: "₹5,000", suffix: "", features: ["Data cleaning", "Basic analysis", "Visual report"], popular: false },
+                    { title: "Professional", price: "₹15,000", suffix: "", features: ["End-to-end ML model", "Model evaluation", "Documented code"], popular: true },
+                    { title: "Custom", price: "Let's talk", suffix: "", features: ["Interactive dashboards", "Model deployment", "Ongoing support"], popular: false }
+                ],
+                ai: [
+                    { title: "Basic", price: "₹4,000", suffix: "", features: ["One workflow", "E.g., Lead capture to Sheets", "Basic testing"], popular: false },
+                    { title: "Business", price: "₹10,000", suffix: "", features: ["WhatsApp/Website chatbot", "Appointment reminders", "Integration setup"], popular: true },
+                    { title: "Care Plan", price: "₹2,000", suffix: "/ month", features: ["Monthly maintenance", "Bug fixes", "Small prompt updates"], popular: false }
+                ]
+            };
+
+            const generatePricingCards = (data, containerId) => {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                data.forEach((item, index) => {
+                    const delay = index * 100;
+                    const html = `
+                        <div class="col-md-4" style="animation-delay: ${delay}ms">
+                            <div class="project-card p-4 h-100 bg-white rounded-4 shadow-sm pricing-card ${item.popular ? 'popular' : ''}">
+                                ${item.popular ? '<div class="popular-badge">Most Popular</div>' : ''}
+                                <h5 class="fw-bold mb-3">${item.title}</h5>
+                                <div class="mb-4">
+                                    <span class="fs-2 fw-bold">${item.price}</span>
+                                    <span class="text-secondary small">${item.suffix}</span>
+                                </div>
+                                <ul class="list-unstyled text-secondary small mb-4">
+                                    ${item.features.map(f => `<li class="mb-2"><i class="fas fa-check text-success me-2"></i>${f}</li>`).join('')}
+                                </ul>
+                                <a href="contact.html" class="btn ${item.popular ? 'btn-primary' : 'btn-outline-primary'} w-100 rounded-pill">Choose Plan</a>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                });
+            };
+
+            generatePricingCards(pricingData.writing, 'writing-pricing-container');
+            generatePricingCards(pricingData.data, 'data-pricing-container');
+            generatePricingCards(pricingData.ai, 'ai-pricing-container');
+        });
+    </script>
+</body>
+</html>
