@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="The requested page could not be found. Explore Anubhav Yadav's portfolio projects, freelance services, and technical blog.">
+    <meta name="author" content="Anubhav Yadav">
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Theme Initialization Script -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.style.setProperty('--animate-duration', '0s');
+                document.documentElement.style.scrollBehavior = 'auto';
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container position-relative">
+            <a class="navbar-brand fw-bold" href="index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="py-5 mt-5">
+        <div class="container py-5 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!-- 404 Visual Indicator -->
+                    <div class="d-inline-flex align-items-center justify-content-center p-4 rounded-circle bg-primary-subtle text-primary mb-4" style="width: 110px; height: 110px;">
+                        <i class="fas fa-compass fa-3x fa-spin" style="animation-duration: 8s;"></i>
+                    </div>
+
+                    <h1 class="display-1 fw-bold text-primary mb-2">404</h1>
+                    <h2 class="fw-bold mb-3">Page Not Found</h2>
+                    <p class="lead text-secondary mb-4 mx-auto" style="max-width: 540px;">
+                        The page you are looking for might have been moved, renamed, or is temporarily unavailable. Let's get you back on track!
+                    </p>
+
+                    <!-- Navigation Action Buttons -->
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+                        <a href="index.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                            <i class="fas fa-home me-2"></i>Back to Home
+                        </a>
+                        <a href="projects.html" class="btn btn-outline-primary btn-lg rounded-pill px-4">
+                            <i class="fas fa-laptop-code me-2"></i>Explore Projects
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                            <i class="fas fa-envelope me-2"></i>Contact Me
+                        </a>
+                    </div>
+
+                    <!-- Helpful Suggestions Card -->
+                    <div class="card p-4 rounded-4 shadow-sm border bg-white text-start mx-auto" style="max-width: 620px;">
+                        <h6 class="fw-bold mb-3 text-secondary text-uppercase tracking-wider small">
+                            <i class="fas fa-lightbulb text-warning me-2"></i>Looking for something specific?
+                        </h6>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <a href="services.html" class="d-flex align-items-center p-2 rounded-3 text-decoration-none text-reset bg-light-soft">
+                                    <i class="fas fa-briefcase text-primary me-2"></i>
+                                    <div>
+                                        <div class="fw-semibold small">Freelance Services</div>
+                                        <div class="text-secondary" style="font-size: 11px;">Transparent INR pricing</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="blog.html" class="d-flex align-items-center p-2 rounded-3 text-decoration-none text-reset bg-light-soft">
+                                    <i class="fas fa-newspaper text-info me-2"></i>
+                                    <div>
+                                        <div class="fw-semibold small">Technical Blog</div>
+                                        <div class="text-secondary" style="font-size: 11px;">Guides & tutorials</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="qualifications.html" class="d-flex align-items-center p-2 rounded-3 text-decoration-none text-reset bg-light-soft">
+                                    <i class="fas fa-graduation-cap text-success me-2"></i>
+                                    <div>
+                                        <div class="fw-semibold small">Qualifications</div>
+                                        <div class="text-secondary" style="font-size: 11px;">Degrees & certifications</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="achievements.html" class="d-flex align-items-center p-2 rounded-3 text-decoration-none text-reset bg-light-soft">
+                                    <i class="fas fa-trophy text-warning me-2"></i>
+                                    <div>
+                                        <div class="fw-semibold small">Achievements</div>
+                                        <div class="text-secondary" style="font-size: 11px;">Rank 1 & hackathon wins</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div id="portfolio-chatbot">
+        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI Assistant">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+
+        <div id="chat-window" class="d-none animate-fade-in shadow-lg">
+            <div class="chat-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="bot-avatar me-2">AY</div>
+                    <div>
+                        <h6 class="mb-0 fw-bold">Portfolio Assistant</h6>
+                        <small class="status-dot">Online</small>
+                    </div>
+                </div>
+                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close Chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="chat-messages" class="chat-body p-3">
+                <div class="message bot-msg">
+                    Hello! I'm Anubhav's AI assistant. Ask me anything about his skills or projects!
+                </div>
+            </div>
+
+            <div id="typing-indicator" class="px-3 py-1 d-none">
+                <small class="text-muted italic">Assistant is typing...</small>
+            </div>
+
+            <div class="chat-footer p-2 border-top">
+                <form id="chat-form" class="d-flex gap-2">
+                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." maxlength="500" autocomplete="off">
+                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
+</body>
+</html>

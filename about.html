@@ -32,8 +32,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -147,40 +150,47 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Main About Section -->
-    <section class="py-5 mt-5">
+    <section class="py-5 mt-5" id="main-content">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-4 mb-lg-0 animate-fade-in text-center text-lg-start">
                     <div class="position-relative d-inline-block">
-                        <img src="images/profile.jpg" alt="Portrait photo of Anubhav Yadav, Data Science and AI specialist" class="img-fluid rounded-4 shadow-lg" loading="lazy">
+                        <img src="images/profile.jpg" alt="Portrait photo of Anubhav Yadav, Data Science and AI specialist" class="img-fluid rounded-4 shadow-lg" width="450" height="450" loading="lazy">
                         <div class="position-absolute bottom-0 start-0 bg-primary text-white p-3 rounded-end shadow-sm">
                             <p class="mb-0 fw-bold">MCA Data Science</p>
                         </div>
@@ -311,6 +321,87 @@
         </div>
     </section>
 
+    <!-- Skill Mastery & Proficiency Progress Bars -->
+    <section class="py-5" id="skill-proficiency">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-semibold small text-uppercase tracking-wider">Proficiency</span>
+                <h2 class="fw-bold mt-1">Core Competencies</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small mx-auto" style="max-width: 600px;">
+                    Hands-on engineering expertise across model training, data analysis, generative AI architectures, and technical communication.
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <h5 class="fw-bold mb-4"><i class="fas fa-brain text-primary me-2"></i>Data &amp; AI Modeling</h5>
+                        <div class="skill-bar-container">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">Python (NumPy, Pandas, Matplotlib)</span>
+                                <span class="small text-secondary fw-semibold">90%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-container">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">Machine Learning (Scikit-Learn, XGBoost)</span>
+                                <span class="small text-secondary fw-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-container mb-0">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">Generative AI &amp; RAG (LangChain, Groq, ChromaDB)</span>
+                                <span class="small text-secondary fw-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-6">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <h5 class="fw-bold mb-4"><i class="fas fa-tools text-primary me-2"></i>Analytics, Ops &amp; Writing</h5>
+                        <div class="skill-bar-container">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">Technical Writing &amp; Developer Guides</span>
+                                <span class="small text-secondary fw-semibold">92%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="92"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-container">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">SQL Queries &amp; Power BI Analytics</span>
+                                <span class="small text-secondary fw-semibold">88%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-container mb-0">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-semibold">API Engineering &amp; Automation (FastAPI, n8n)</span>
+                                <span class="small text-secondary fw-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar-track">
+                                <div class="skill-bar-fill" data-percent="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- My Journey Vertical Timeline Section -->
     <section class="py-5" id="my-journey">
         <div class="container animate-fade-in">
@@ -380,6 +471,50 @@
         </div>
     </section>
 
+    <!-- Beyond the Code / Personal Interests Section -->
+    <section class="py-5" id="beyond-code">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-semibold small text-uppercase tracking-wider">Beyond The Data</span>
+                <h2 class="fw-bold mt-1">Interests &amp; Creative Pursuits</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small mx-auto" style="max-width: 600px;">
+                    How diverse passions outside development fuel continuous curiosity, strategic thinking, and creative problem-solving.
+                </p>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <div class="mb-3"><i class="fas fa-robot fa-2x text-primary"></i></div>
+                        <h6 class="fw-bold mb-2">GenAI Paradigms</h6>
+                        <p class="text-secondary small mb-0">Testing novel autonomous agent frameworks, local inference models, and modern tool calling.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <div class="mb-3"><i class="fas fa-baseball-ball fa-2x text-success"></i></div>
+                        <h6 class="fw-bold mb-2">Cricket</h6>
+                        <p class="text-secondary small mb-0">Playing and following cricket—appreciating tactical strategy, team field awareness, and competitive spirit.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <div class="mb-3"><i class="fas fa-film fa-2x text-info"></i></div>
+                        <h6 class="fw-bold mb-2">Cinema &amp; Stories</h6>
+                        <p class="text-secondary small mb-0">Immersing in world cinema, innovative storytelling arcs, and compelling audiovisual pacing.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card p-4 rounded-4 shadow-sm border h-100 bg-white">
+                        <div class="mb-3"><i class="fas fa-headphones-alt fa-2x text-warning"></i></div>
+                        <h6 class="fw-bold mb-2">Music &amp; Focus</h6>
+                        <p class="text-secondary small mb-0">Listening to music to anchor deep focus and spark inspiration during intensive debugging sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Highlights / Stats Section -->
     <section class="py-5 bg-light-soft border-top border-bottom">
         <div class="container">
@@ -421,9 +556,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -520,5 +700,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

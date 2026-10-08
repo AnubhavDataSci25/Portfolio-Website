@@ -32,8 +32,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -177,16 +180,17 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
@@ -194,19 +198,23 @@
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item"><a class="nav-link active" href="contact.html" aria-current="page">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <section class="py-5 mt-5">
+    <section class="py-5 mt-5" id="main-content">
         <div class="container">
 
             <!-- Header Section -->
@@ -274,8 +282,11 @@
 
                                 <!-- Message Textarea -->
                                 <div class="col-12">
-                                    <label for="message" class="form-label small fw-bold">Message <span class="text-danger">*</span></label>
-                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" placeholder="Write your message here (minimum 10 characters)..." required></textarea>
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <label for="message" class="form-label small fw-bold mb-0">Message <span class="text-danger">*</span></label>
+                                        <span class="char-counter-text small"><span id="charCount">0</span>/500</span>
+                                    </div>
+                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" maxlength="500" placeholder="Write your message here (minimum 10 characters)..." required></textarea>
                                     <div class="text-danger small mt-1 d-none" id="messageError">Please enter a message with at least 10 characters.</div>
                                 </div>
 
@@ -359,9 +370,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -473,12 +529,17 @@
                         if (response.ok) {
                             formStatus.innerHTML = `
                                 <div class="alert alert-success animate-fade-in rounded-4 p-4 text-center shadow-sm">
-                                    <i class="fas fa-check-circle fs-3 text-success d-block mb-2"></i>
-                                    <h6 class="fw-bold mb-1">Thank you, ${fullName.value.trim()}!</h6>
+                                    <svg class="checkmark mb-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style="width: 52px; height: 52px; display: inline-block;">
+                                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                    </svg>
+                                    <h5 class="fw-bold mb-1">Thank you, ${fullName.value.trim()}!</h5>
                                     <p class="mb-0 small alert-message">Your message has been sent successfully. I will get back to you within 24 hours.</p>
                                 </div>
                             `;
                             form.reset();
+                            const charCountEl = document.getElementById('charCount');
+                            if (charCountEl) charCountEl.textContent = '0';
                             [fullName, emailAddr, purpose, service, message].forEach(f => f.classList.remove('is-invalid'));
                         } else {
                             const data = await response.json().catch(() => null);
@@ -591,5 +652,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

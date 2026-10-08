@@ -58,8 +58,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../chatbot.css">
+    <link rel="stylesheet" href="../polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -141,35 +144,42 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
                     <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="../blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html" aria-current="page">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="../services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Post Article Header -->
-    <article class="py-5 mt-5">
+    <article class="py-5 mt-5" id="main-content">
         <div class="container post-container">
             
             <!-- Breadcrumbs -->
@@ -195,6 +205,7 @@
             <div class="mb-5 overflow-hidden rounded-4 shadow-sm">
                 <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80" 
                      alt="WhatsApp messaging on mobile screen" 
+                     width="1200" height="630"
                      loading="lazy" 
                      class="img-fluid post-cover-img">
             </div>
@@ -288,6 +299,40 @@ async def handle_incoming(request: Request):
                 </p>
             </div>
 
+            <!-- Share Buttons Bar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4 p-3 rounded-4 border" style="background-color: var(--card-bg);">
+                <span class="fw-semibold text-secondary small"><i class="fas fa-share-alt text-primary me-2"></i>Found this helpful? Share with your network:</span>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="blog-share-btn" data-share="linkedin" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="x" target="_blank" rel="noopener" aria-label="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="whatsapp" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button type="button" class="blog-share-btn" data-share="copy" aria-label="Copy link to clipboard"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+
+            <!-- Author Bio Card -->
+            <div class="blog-author-card d-flex align-items-center gap-3 my-4">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;">
+                <div>
+                    <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
+                    <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer & AI Automation Developer. Crafting practical AI workflows and high-ranking developer guides.</p>
+                    <div class="d-flex gap-3 small">
+                        <a href="../about.html" class="text-primary fw-semibold text-decoration-none">About Me →</a>
+                        <a href="../contact.html" class="text-primary fw-semibold text-decoration-none">Get in Touch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prev / Next Post Navigation -->
+            <div class="d-flex justify-content-between align-items-center my-4 py-3 border-top border-bottom">
+                <a href="../blog.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="fas fa-arrow-left me-1"></i> All Articles
+                </a>
+                <a href="data-cleaning-mistakes-ml.html" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                    Next Article: 5 Data Cleaning Mistakes <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+
             <!-- Call to Action Banner -->
             <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
                 <div class="mb-3">
@@ -334,9 +379,54 @@ async def handle_incoming(request: Request):
     </article>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="../index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="../index.html" class="footer-link">Home</a>
+                        <a href="../about.html" class="footer-link">About</a>
+                        <a href="../qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="../projects.html" class="footer-link">Projects</a>
+                        <a href="../achievements.html" class="footer-link">Achievements</a>
+                        <a href="../services.html" class="footer-link">Services</a>
+                        <a href="../blog.html" class="footer-link">Blog</a>
+                        <a href="../contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -367,5 +457,6 @@ async def handle_incoming(request: Request):
             }
         });
     </script>
+    <script defer src="../polish.js"></script>
 </body>
 </html>

@@ -130,3 +130,34 @@
         bottom: 70px;
     }
 }
+
+/* Quick Suggestion Pills */
+.chat-suggestions {
+    padding: 2px 4px;
+}
+
+.chat-suggestion-chip {
+    font-size: 11px !important;
+    padding: 3px 10px !important;
+    border-color: rgba(13, 110, 253, 0.35) !important;
+    background-color: var(--card-bg, #ffffff) !important;
+    color: var(--primary-color, #0d6efd) !important;
+    transition: all 0.2s ease !important;
+}
+
+.chat-suggestion-chip:hover {
+    background-color: var(--primary-color, #0d6efd) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .chat-suggestion-chip {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: #6ea8fe !important;
+    border-color: rgba(110, 168, 254, 0.3) !important;
+}
+
+[data-theme="dark"] .chat-suggestion-chip:hover {
+    background-color: var(--primary-color, #0d6efd) !important;
+    color: #ffffff !important;
+}

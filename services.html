@@ -32,8 +32,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
     
     <!-- Schema Markup for 3 Services (India / INR) -->
     <script type="application/ld+json">
@@ -226,35 +229,42 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="services.html" aria-current="page">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item d-lg-none">
+                        <a href="#pricing" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="py-5 mt-5">
+    <section class="py-5 mt-5" id="main-content">
         <div class="container text-center animate-fade-in">
             <h1 class="display-4 fw-bold mb-4 mt-4">Technical Writing, Data Science & <span class="text-primary">AI Automation</span> That Grow Your Business</h1>
             <p class="lead text-secondary mb-5 max-w-2xl mx-auto">Transforming complex concepts into engaging content and raw data into intelligent, automated solutions.</p>
@@ -364,6 +374,111 @@
                         <a href="projects.html" class="text-primary fw-bold text-decoration-none">Legal & HR Policy Assistant (Hybrid RAG) <i class="fas fa-arrow-right ms-1 small"></i></a>
                         <span class="text-muted d-none d-sm-inline">·</span>
                         <a href="projects.html" class="text-primary fw-bold text-decoration-none">Victor AI (Voice-Driven Assistant) <i class="fas fa-arrow-right ms-1 small"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Recommendation Quiz -->
+    <section class="py-5 bg-light-soft" id="service-quiz-section">
+        <div class="container animate-fade-in">
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-semibold mb-2">Interactive Matcher</span>
+                <h2 class="fw-bold">Which Service Is Right for You?</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary small max-w-2xl mx-auto">Answer 3 quick questions to discover the ideal solution for your project, timeline, and goals.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="quiz-container" id="serviceQuizContainer">
+                        <!-- Question 1 -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3"><span class="badge bg-primary me-2">1</span> What is your primary goal?</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="goal" data-value="automation">
+                                        <i class="fas fa-robot text-info fa-lg me-2"></i>
+                                        <span>Build AI tools or Automate workflows</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="goal" data-value="data">
+                                        <i class="fas fa-chart-line text-success fa-lg me-2"></i>
+                                        <span>Analyze data or Train ML models</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="goal" data-value="writing">
+                                        <i class="fas fa-pen-nib text-primary fa-lg me-2"></i>
+                                        <span>Publish tech articles or Documentation</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3"><span class="badge bg-primary me-2">2</span> What is your project timeline?</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="timeline" data-value="urgent">
+                                        <i class="fas fa-bolt text-warning fa-lg me-2"></i>
+                                        <span>Urgent (Within 1 week)</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="timeline" data-value="flexible">
+                                        <i class="fas fa-calendar-check text-primary fa-lg me-2"></i>
+                                        <span>Flexible (2 to 4 weeks)</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="timeline" data-value="exploring">
+                                        <i class="fas fa-compass text-info fa-lg me-2"></i>
+                                        <span>Just exploring / Planning ahead</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3"><span class="badge bg-primary me-2">3</span> What do you have ready?</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="assets" data-value="raw-data">
+                                        <i class="fas fa-database text-success fa-lg me-2"></i>
+                                        <span>Raw data, spreadsheets or code</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="assets" data-value="docs">
+                                        <i class="fas fa-file-alt text-primary fa-lg me-2"></i>
+                                        <span>Outline, topic notes, or specs</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="quiz-option-btn" data-question="assets" data-value="idea">
+                                        <i class="fas fa-lightbulb text-warning fa-lg me-2"></i>
+                                        <span>Just an initial idea / problem</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Result Box (Initially hidden) -->
+                        <div id="quizResultBox" class="mt-4 p-4 rounded-4 bg-light text-center border" style="display: none;">
+                            <div class="d-inline-flex p-3 rounded-circle bg-primary-subtle text-primary mb-3">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <h4 id="quizResultTitle" class="fw-bold mb-2">Recommended Service</h4>
+                            <p id="quizResultDesc" class="text-secondary small mb-4 mx-auto" style="max-width: 600px;"></p>
+                            <a id="quizResultCta" href="contact.html" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm">
+                                Get Started →
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -560,9 +675,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -724,7 +884,7 @@
                                     <p class="text-secondary small fst-italic mb-4">"${t.quote}"</p>
                                 </div>
                                 <div class="d-flex align-items-center pt-3 border-top mt-auto">
-                                    <img src="${t.avatar}" alt="${t.name}" class="rounded-circle me-3" width="44" height="44" style="object-fit: cover;">
+                                    <img src="${t.avatar}" alt="${t.name}" class="rounded-circle me-3" width="44" height="44" loading="lazy" style="object-fit: cover;">
                                     <div>
                                         <h6 class="fw-bold mb-0 small">${t.name}</h6>
                                         <small class="text-secondary" style="font-size: 11px;">${t.role} · ${t.company}</small>
@@ -753,5 +913,6 @@
             }
         });
     </script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

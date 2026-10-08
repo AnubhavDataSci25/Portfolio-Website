@@ -30,8 +30,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -151,34 +154,41 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="achievements.html" aria-current="page">Achievements</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
-    <section class="py-5 mt-5">
+    <section class="py-5 mt-5" id="main-content">
         <div class="container">
             <!-- Header Section -->
             <div class="text-center mb-5 animate-fade-in">
@@ -238,7 +248,7 @@
                     <div class="row g-0 align-items-center">
                         <div class="col-md-4">
                             <div class="achievement-img-container" style="height: 250px;">
-                                <img src="images/achievements/overall-batch-rank-1.png" alt="Overall Batch Rank 1 academic excellence award certificate and medal" class="img-fluid h-100 w-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/overall-batch-rank-1.png" alt="Overall Batch Rank 1 academic excellence award certificate and medal" class="img-fluid h-100 w-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/overall-batch-rank-1.png" data-caption="Overall Batch Rank 1 — BCA Data Science (CGPA 9.67/10)" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fas fa-medal text-danger fs-1 mb-2"></i>
                                     <h6 class="fw-bold mb-1">Overall Batch Rank 1</h6>
@@ -313,7 +323,7 @@
                     <div class="col-md-6 col-lg-4 animate-fade-in">
                         <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-warning border-4 overflow-hidden h-100 d-flex flex-column">
                             <div class="achievement-img-container">
-                                <img src="images/achievements/hackhound-3.png" alt="HackHound 3.0 Best Use of GenAI award certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/hackhound-3.png" alt="HackHound 3.0 Best Use of GenAI award certificate" class="img-fluid w-100 h-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/hackhound-3.png" data-caption="HackHound 3.0 — Best Use of GenAI Award Certificate" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fas fa-microchip text-warning fs-2 mb-2"></i>
                                     <h6 class="fw-bold mb-1">HackHound 3.0</h6>
@@ -342,7 +352,7 @@
                     <div class="col-md-6 col-lg-4 animate-fade-in">
                         <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-primary border-4 overflow-hidden h-100 d-flex flex-column">
                             <div class="achievement-img-container">
-                                <img src="images/achievements/hack-code-2024.png" alt="Hack-Code 2024 2nd Position runner-up certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/hack-code-2024.png" alt="Hack-Code 2024 2nd Position runner-up certificate" class="img-fluid w-100 h-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/hack-code-2024.png" data-caption="Hack-Code 2024 — 2nd Position Runner-Up Certificate" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fas fa-trophy text-primary fs-2 mb-2"></i>
                                     <h6 class="fw-bold mb-1">Hack-Code 2024</h6>
@@ -371,7 +381,7 @@
                     <div class="col-md-6 col-lg-4 animate-fade-in">
                         <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-success border-4 overflow-hidden h-100 d-flex flex-column">
                             <div class="achievement-img-container">
-                                <img src="images/achievements/ai-for-impact.png" alt="Google Cloud AI For Impact APAC participant certificate" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/ai-for-impact.png" alt="Google Cloud AI For Impact APAC participant certificate" class="img-fluid w-100 h-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/ai-for-impact.png" data-caption="Google Cloud AI For Impact APAC — Participant Certificate" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fab fa-google text-success fs-2 mb-2"></i>
                                     <h6 class="fw-bold mb-1">AI For Impact APAC</h6>
@@ -409,7 +419,7 @@
                     <div class="col-md-6 animate-fade-in">
                         <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100 d-flex flex-column">
                             <div class="achievement-img-container">
-                                <img src="images/achievements/codejam-2025.png" alt="CodeJam Hackathon 2025 event coordination and student teams" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/codejam-2025.png" alt="CodeJam Hackathon 2025 event coordination and student teams" class="img-fluid w-100 h-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/codejam-2025.png" data-caption="CodeJam Hackathon 2025 — Event Coordination" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fas fa-users-cog text-info fs-2 mb-2"></i>
                                     <h6 class="fw-bold mb-1">CodeJam Hackathon 2025</h6>
@@ -433,7 +443,7 @@
                     <div class="col-md-6 animate-fade-in">
                         <div class="achievement-card bg-white rounded-4 shadow-sm border-bottom border-info border-4 overflow-hidden h-100 d-flex flex-column">
                             <div class="achievement-img-container">
-                                <img src="images/achievements/quiz-mantra.png" alt="Quiz Mantra technical quiz event coordination and participant audience" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <img src="images/achievements/quiz-mantra.png" alt="Quiz Mantra technical quiz event coordination and participant audience" class="img-fluid w-100 h-100 lightbox-trigger" width="600" height="380" data-lightbox-src="images/achievements/quiz-mantra.png" data-caption="Quiz Mantra — Technical Quiz Coordination" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="achievement-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                     <i class="fas fa-bullhorn text-info fs-2 mb-2"></i>
                                     <h6 class="fw-bold mb-1">Quiz Mantra Event</h6>
@@ -482,9 +492,54 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -633,5 +688,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

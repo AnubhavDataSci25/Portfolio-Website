@@ -32,8 +32,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -125,15 +128,18 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
@@ -142,18 +148,22 @@
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-section d-flex align-items-center">
+    <header class="hero-section d-flex align-items-center" id="main-content">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7 text-center text-lg-start animate-fade-in">
@@ -180,7 +190,7 @@
                 </div>
                 <div class="col-lg-5 mt-5 mt-lg-0 text-center animate-fade-in">
                     <div class="hero-img-blob">
-                        <img src="images/profile.jpg" alt="Anubhav Yadav" class="img-fluid rounded-circle shadow-lg border border-5 border-white">
+                        <img src="images/profile.jpg" alt="Portrait photo of Anubhav Yadav, Data Science Specialist and AI Automation Developer" class="img-fluid rounded-circle shadow-lg border border-5 border-white hero-profile-float" width="400" height="400" loading="eager" fetchpriority="high">
                     </div>
                 </div>
             </div>
@@ -255,6 +265,25 @@
         </div>
     </section>
 
+    <!-- Infinite Tech Marquee Section -->
+    <div class="tech-marquee-wrapper py-3 border-top border-bottom bg-light-soft" aria-label="Technologies and Tools">
+        <div class="tech-marquee-track">
+            <span class="tech-chip"><i class="fab fa-python text-primary"></i> Python</span>
+            <span class="tech-chip"><i class="fas fa-database text-warning"></i> SQL</span>
+            <span class="tech-chip"><i class="fas fa-brain text-success"></i> Scikit-Learn</span>
+            <span class="tech-chip"><i class="fas fa-network-wired text-danger"></i> TensorFlow</span>
+            <span class="tech-chip"><i class="fas fa-bolt text-warning"></i> FastAPI</span>
+            <span class="tech-chip"><i class="fas fa-chart-line text-danger"></i> Streamlit</span>
+            <span class="tech-chip"><i class="fas fa-chart-bar text-warning"></i> Power BI</span>
+            <span class="tech-chip"><i class="fas fa-project-diagram text-info"></i> n8n</span>
+            <span class="tech-chip"><i class="fas fa-link text-primary"></i> LangChain</span>
+            <span class="tech-chip"><i class="fas fa-microchip text-danger"></i> Groq</span>
+            <span class="tech-chip"><i class="fas fa-table text-primary"></i> Pandas</span>
+            <span class="tech-chip"><i class="fab fa-git-alt text-danger"></i> Git &amp; GitHub</span>
+            <span class="tech-chip"><i class="fab fa-docker text-primary"></i> Docker</span>
+        </div>
+    </div>
+
     <!-- Proof Stats Strip Section -->
     <section class="py-5" id="proof-stats">
         <div class="container">
@@ -291,6 +320,155 @@
                         <p class="text-secondary mb-0 fw-semibold">Certifications</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="py-5" id="featured-projects">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-semibold small text-uppercase tracking-wider">Selected Works</span>
+                <h2 class="fw-bold mt-1">Featured Projects</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary mx-auto" style="max-width: 650px;">
+                    Handpicked applications demonstrating production-grade GenAI pipelines, high-fidelity RAG, and machine learning architectures.
+                </p>
+            </div>
+            <div class="row g-4">
+                <!-- 1. Legal & HR Policy Assistant -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden" style="height: 200px;">
+                            <img src="images/projects/legal-hr-assistant.png" alt="Legal and HR Policy Assistant interface" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-file-contract text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Legal &amp; HR Policy Assistant</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">FastAPI</span>
+                                    <span class="badge bg-light text-dark border small">ChromaDB</span>
+                                    <span class="badge bg-light text-dark border small">Llama 3.1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Legal &amp; HR Policy Assistant</h5>
+                                <span class="badge bg-warning text-dark rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-hammer me-1"></i> In Dev</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle small fw-semibold">
+                                     <i class="fas fa-chart-line me-1"></i> 0.91 RAGAs Faithfulness
+                                </span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">
+                                Enterprise RAG system combining vector similarity search with BM25 lexical ranking and a Cross-Encoder for citation-grounded policy Q&amp;A.
+                            </p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">ChromaDB</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Groq</span>
+                                <span class="badge rounded-pill bg-light text-dark border">RAGAs</span>
+                            </div>
+                            <div class="pt-2 mt-auto">
+                                <a href="projects.html" class="btn btn-sm btn-primary rounded-pill px-3 w-100">
+                                    View Project Details <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. CLAT Oracle AI -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden" style="height: 200px;">
+                            <img src="images/projects/clat-oracle-ai.png" alt="CLAT Oracle AI exam preparation platform" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-graduation-cap text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">CLAT Oracle AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Next.js 14</span>
+                                    <span class="badge bg-light text-dark border small">Qdrant</span>
+                                    <span class="badge bg-light text-dark border small">Groq</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">CLAT Oracle AI</h5>
+                                <span class="badge bg-success rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Live</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge bg-success-subtle text-success border border-success-subtle small fw-semibold">
+                                    <i class="fas fa-bolt me-1"></i> Sub-second Passage RAG
+                                </span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">
+                                Full-stack exam preparation engine using modular FastAPI and Qdrant vector retrieval to generate passage-question clusters dynamically.
+                            </p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Next.js 14</span>
+                                <span class="badge rounded-pill bg-light text-dark border">FastAPI</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Qdrant</span>
+                                <span class="badge rounded-pill bg-light text-dark border">TypeScript</span>
+                            </div>
+                            <div class="pt-2 mt-auto">
+                                <a href="projects.html" class="btn btn-sm btn-primary rounded-pill px-3 w-100">
+                                    View Project Details <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Kaushal AI -->
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
+                        <div class="project-img-container position-relative overflow-hidden" style="height: 200px;">
+                            <img src="images/projects/kaushal-ai.png" alt="Kaushal AI career recommendation platform" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
+                                <i class="fas fa-compass text-primary fs-2 mb-2"></i>
+                                <h6 class="fw-bold mb-1">Kaushal AI</h6>
+                                <div class="d-flex flex-wrap gap-1 justify-content-center">
+                                    <span class="badge bg-light text-dark border small">Python</span>
+                                    <span class="badge bg-light text-dark border small">Scikit-Learn</span>
+                                    <span class="badge bg-light text-dark border small">XGBoost</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h5 class="fw-bold mb-0">Kaushal AI</h5>
+                                <span class="badge bg-success rounded-pill px-2 py-1 small flex-shrink-0"><i class="fas fa-check-circle me-1"></i> Complete</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge bg-info-subtle text-info border border-info-subtle small fw-semibold">
+                                    <i class="fas fa-bullseye me-1"></i> 92% Matching Accuracy
+                                </span>
+                            </div>
+                            <p class="text-secondary small mb-3 flex-grow-1">
+                                Predictive career guidance recommendation engine utilizing ensemble classifiers (Random Forest, XGBoost) and MLflow tracking.
+                            </p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge rounded-pill bg-light text-dark border">Python</span>
+                                <span class="badge rounded-pill bg-light text-dark border">Scikit-Learn</span>
+                                <span class="badge rounded-pill bg-light text-dark border">XGBoost</span>
+                                <span class="badge rounded-pill bg-light text-dark border">MLflow</span>
+                            </div>
+                            <div class="pt-2 mt-auto">
+                                <a href="projects.html" class="btn btn-sm btn-primary rounded-pill px-3 w-100">
+                                    View Project Details <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="projects.html" class="btn btn-outline-primary rounded-pill px-4 py-2">
+                    Explore All Projects <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -367,16 +545,173 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <!-- Featured From The Blog Section -->
+    <section class="py-5" id="featured-blog">
         <div class="container">
-            <h3 class="fw-bold mb-4">Let's Connect</h3>
-            <div class="social-links mb-4">
-                <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="text-white mx-3 fs-4" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="text-white mx-3 fs-4" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="mailto:anubhavyadav77ff@gmail.com" class="text-white mx-3 fs-4" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <div class="text-center mb-5">
+                <span class="text-primary fw-semibold small text-uppercase tracking-wider">Engineering &amp; Insights</span>
+                <h2 class="fw-bold mt-1">Featured From The Blog</h2>
+                <div class="underline mx-auto mb-3"></div>
+                <p class="text-secondary mx-auto" style="max-width: 650px;">
+                    Practical guides and engineering breakdowns on workflow automation, reliable ML practices, and developer-centric technical writing.
+                </p>
             </div>
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4">
+                <!-- Post 1: WhatsApp Automation -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 bg-white border rounded-4 shadow-sm overflow-hidden d-flex flex-column">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small">AI Automation</span>
+                                <span class="text-secondary small"><i class="far fa-clock me-1"></i>6 min read</span>
+                            </div>
+                            <h5 class="fw-bold mb-3 mt-1">
+                                <a href="blog/whatsapp-automation-small-business.html" class="text-decoration-none text-reset">
+                                    WhatsApp Automation for Small Business: Step-by-Step Guide
+                                </a>
+                            </h5>
+                            <p class="text-secondary small mb-4 flex-grow-1">
+                                How small businesses can automate customer inquiries, order updates, and lead capture using WhatsApp Business API and low-code workflows.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 mt-auto border-top">
+                                <span class="text-secondary small">Feb 2026</span>
+                                <a href="blog/whatsapp-automation-small-business.html" class="text-primary fw-semibold small text-decoration-none">
+                                    Read Article <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2: Data Cleaning Mistakes -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 bg-white border rounded-4 shadow-sm overflow-hidden d-flex flex-column">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill small">Machine Learning</span>
+                                <span class="text-secondary small"><i class="far fa-clock me-1"></i>5 min read</span>
+                            </div>
+                            <h5 class="fw-bold mb-3 mt-1">
+                                <a href="blog/data-cleaning-mistakes-ml.html" class="text-decoration-none text-reset">
+                                    5 Common Data Cleaning Mistakes in Machine Learning
+                                </a>
+                            </h5>
+                            <p class="text-secondary small mb-4 flex-grow-1">
+                                Data leakage, improper scaling, and missing value imputation pitfalls that quietly ruin model performance in production.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 mt-auto border-top">
+                                <span class="text-secondary small">Jan 2026</span>
+                                <a href="blog/data-cleaning-mistakes-ml.html" class="text-primary fw-semibold small text-decoration-none">
+                                    Read Article <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3: Technical Blog Posts That Rank -->
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="card h-100 bg-white border rounded-4 shadow-sm overflow-hidden d-flex flex-column">
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill small">Technical Writing</span>
+                                <span class="text-secondary small"><i class="far fa-clock me-1"></i>7 min read</span>
+                            </div>
+                            <h5 class="fw-bold mb-3 mt-1">
+                                <a href="blog/technical-blog-posts-that-rank.html" class="text-decoration-none text-reset">
+                                    How to Write Technical Blog Posts That Actually Rank
+                                </a>
+                            </h5>
+                            <p class="text-secondary small mb-4 flex-grow-1">
+                                A proven framework for developer-focused tutorials that address genuine search intent, earn natural backlinks, and rank on Google.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 mt-auto border-top">
+                                <span class="text-secondary small">Dec 2025</span>
+                                <a href="blog/technical-blog-posts-that-rank.html" class="text-primary fw-semibold small text-decoration-none">
+                                    Read Article <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="blog.html" class="btn btn-outline-primary rounded-pill px-4 py-2">
+                    View All Articles <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Call-to-Action Section -->
+    <section class="py-5 bg-light-soft" id="cta-section">
+        <div class="container">
+            <div class="cta-banner-box text-center p-4 p-md-5">
+                <h2 class="display-6 fw-bold mb-3">Have a project in mind? Let's build it together.</h2>
+                <p class="lead text-secondary mx-auto mb-4" style="max-width: 650px;">
+                    Whether you need predictive ML models, custom AI automation, or high-ranking technical articles, let's discuss your goals.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+                        <i class="fas fa-paper-plane me-2"></i>Get in Touch
+                    </a>
+                    <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20have%20a%20project%20in%20mind." target="_blank" rel="noopener" class="btn btn-outline-success btn-lg rounded-pill px-4">
+                        <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -518,5 +853,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

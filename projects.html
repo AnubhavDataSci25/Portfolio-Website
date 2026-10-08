@@ -30,8 +30,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="polish.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
@@ -185,41 +188,54 @@
 </head>
 <body>
 
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
-        <div class="container">
+        <div class="container position-relative">
             <a class="navbar-brand fw-bold" href="index.html">AY.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Me</a></li>
                     <li class="nav-item"><a class="nav-link" href="qualifications.html">Qualifications</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="projects.html" aria-current="page">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
                         <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
                 </ul>
             </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
         </div>
     </nav>
 
     <!-- Main Projects Section -->
-    <section class="py-5 mt-5">
+    <section class="py-5 mt-5" id="main-content">
         <div class="container">
             <!-- Section Header -->
             <div class="text-center mb-4 animate-fade-in">
                 <h1 class="fw-bold h2">My Projects</h1>
                 <p class="text-primary fw-semibold">"From Raw Data to Technical Mastery"</p>
                 <div class="underline mx-auto mb-4"></div>
+
+                <!-- Live Search Input -->
+                <div class="project-search-wrapper mb-4">
+                    <i class="fas fa-search project-search-icon"></i>
+                    <input type="search" id="projectSearchInput" class="form-control project-search-input" placeholder="Search projects by title, tech stack, or keyword..." aria-label="Search projects">
+                </div>
 
                 <!-- Category Filter Chips -->
                 <div class="d-flex flex-wrap justify-content-center gap-2 project-filter-row" role="tablist" aria-label="Filter projects by category">
@@ -248,7 +264,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/legal-hr-assistant.png" alt="Legal &amp; HR Policy Assistant interface displaying enterprise document Q&amp;A and citations" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/legal-hr-assistant.png" alt="Legal &amp; HR Policy Assistant interface displaying enterprise document Q&amp;A and citations" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-file-contract text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Legal &amp; HR Policy Assistant</h6>
@@ -288,7 +304,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="automation">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/victor-ai.png" alt="Victor AI local voice-driven desktop assistant and tool execution workflow" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/victor-ai.png" alt="Victor AI local voice-driven desktop assistant and tool execution workflow" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-microphone text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Victor AI</h6>
@@ -328,7 +344,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/clat-oracle-ai.png" alt="CLAT Oracle AI platform showing passage-based exam preparation and question generator" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/clat-oracle-ai.png" alt="CLAT Oracle AI platform showing passage-based exam preparation and question generator" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-gavel text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">CLAT Oracle AI</h6>
@@ -368,7 +384,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="data-analysis">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/arthlytics-ai.png" alt="Arthlytics AI dashboard showing automated data analytics and interactive visualizations" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/arthlytics-ai.png" alt="Arthlytics AI dashboard showing automated data analytics and interactive visualizations" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-chart-line text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Arthlytics AI</h6>
@@ -408,7 +424,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/kaushal-ai.png" alt="Kaushal AI career recommendation platform matching user profiles to job pathways" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/kaushal-ai.png" alt="Kaushal AI career recommendation platform matching user profiles to job pathways" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-user-graduate text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Kaushal AI</h6>
@@ -448,7 +464,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/student-performance.png" alt="Student habit vs academic performance prediction interface and regression analytics" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/student-performance.png" alt="Student habit vs academic performance prediction interface and regression analytics" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-book-reader text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Student Habit vs Score</h6>
@@ -488,7 +504,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/personality-prediction.png" alt="Introvert vs Extrovert personality prediction app analyzing behavioral language patterns" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/personality-prediction.png" alt="Introvert vs Extrovert personality prediction app analyzing behavioral language patterns" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-brain text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Personality Prediction</h6>
@@ -528,7 +544,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="automation">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/aurora-ai.png" alt="Aurora AI automated statistical analysis and data visualization tool interface" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/aurora-ai.png" alt="Aurora AI automated statistical analysis and data visualization tool interface" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-magic text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Aurora AI</h6>
@@ -568,7 +584,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="genai-rag">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/capbot.png" alt="CapBot creative caption generator generating social media content from images" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/capbot.png" alt="CapBot creative caption generator generating social media content from images" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-robot text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">CapBot</h6>
@@ -607,7 +623,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="data-analysis">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/salary-analysis.png" alt="Data Professionals Salary Analysis interactive Power BI dashboard (2020-2023)" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/salary-analysis.png" alt="Data Professionals Salary Analysis interactive Power BI dashboard (2020-2023)" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-money-bill-wave text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Salary Analysis</h6>
@@ -647,7 +663,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/spam-classification.png" alt="Email spam vs ham classification tool showing text NLP and prediction results" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/spam-classification.png" alt="Email spam vs ham classification tool showing text NLP and prediction results" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-envelope-open-text text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">Spam Classification</h6>
@@ -687,7 +703,7 @@
                 <div class="col-lg-4 col-md-6 project-item-col" data-category="ml">
                     <div class="project-card bg-white rounded-4 shadow-sm overflow-hidden h-100 d-flex flex-column border">
                         <div class="project-img-container position-relative overflow-hidden">
-                            <img src="images/projects/house-price-prediction.png" alt="House Price Prediction regression analysis dashboard based on King County housing data" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="images/projects/house-price-prediction.png" alt="House Price Prediction regression analysis dashboard based on King County housing data" class="img-fluid w-100 h-100" width="600" height="340" style="object-fit: cover;" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="project-img-placeholder w-100 h-100 flex-column justify-content-center align-items-center p-3 text-center" style="display: none;">
                                 <i class="fas fa-home text-primary fs-2 mb-2"></i>
                                 <h6 class="fw-bold mb-1">House Price Prediction</h6>
@@ -724,8 +740,13 @@
                 </div>
 
             </div>
-
-            <!-- Call-To-Action Card -->
+            
+            <!-- Empty State if search / category returns zero projects -->
+            <div id="projectEmptyState" class="text-center py-5 my-4" style="display: none;">
+                <i class="fas fa-folder-open text-secondary fa-3x mb-3"></i>
+                <h5 class="fw-bold">No projects match your filter</h5>
+                <p class="text-secondary small">Try adjusting your search query or selecting a different category above.</p>
+            </div>
             <div class="mt-5 pt-3 animate-fade-in">
                 <div class="card border-0 rounded-4 shadow-sm p-4 p-md-5 text-center position-relative overflow-hidden project-cta-card">
                     <div class="position-relative" style="z-index: 2;">
@@ -752,18 +773,73 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark text-white text-center">
+    <footer class="site-footer py-5 bg-dark text-white">
         <div class="container">
-            <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="projects.html" class="footer-link">Projects</a>
+                        <a href="achievements.html" class="footer-link">Achievements</a>
+                        <a href="services.html" class="footer-link">Services</a>
+                        <a href="blog.html" class="footer-link">Blog</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <!-- CASE STUDY MODAL STRUCTURE -->
     <div id="caseStudyModal" class="case-study-overlay d-none" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
         <div class="case-study-container" role="document">
-            <button id="closeCaseStudy" class="modal-close-btn" aria-label="Close project details">
-                <i class="fas fa-times"></i>
-            </button>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex gap-2">
+                    <button type="button" id="modalPrevBtn" class="modal-nav-btn" aria-label="Previous project">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" id="modalNextBtn" class="modal-nav-btn" aria-label="Next project">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <button id="closeCaseStudy" class="modal-close-btn" aria-label="Close project details">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             <div class="modal-content-wrapper">
                 <div id="modalHeader" class="modal-section-header mb-4">
                     <h2 id="modalTitle" class="fw-bold mb-1 text-primary"></h2>
@@ -952,13 +1028,47 @@
                 }
             };
 
-            // Category Filtering Logic with Smooth Animation
+            // Combined Category Filtering & Live Search Logic
             const filterButtons = document.querySelectorAll('.project-filter-btn');
+            const searchInput = document.getElementById('projectSearchInput');
             const projectCards = document.querySelectorAll('.project-item-col');
+            const emptyState = document.getElementById('projectEmptyState');
+            let currentFilter = 'all';
+            let currentSearch = '';
+
+            const applyFilters = () => {
+                let matchCount = 0;
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const text = (card.textContent || '').toLowerCase();
+                    const matchesCategory = (currentFilter === 'all' || category === currentFilter);
+                    const matchesSearch = !currentSearch || text.includes(currentSearch);
+
+                    if (matchesCategory && matchesSearch) {
+                        card.classList.remove('d-none');
+                        void card.offsetWidth;
+                        card.classList.remove('project-hidden');
+                        card.classList.add('project-visible');
+                        matchCount++;
+                    } else {
+                        card.classList.remove('project-visible');
+                        card.classList.add('project-hidden');
+                        setTimeout(() => {
+                            if (card.classList.contains('project-hidden')) {
+                                card.classList.add('d-none');
+                            }
+                        }, 280);
+                    }
+                });
+
+                if (emptyState) {
+                    emptyState.style.display = matchCount === 0 ? 'block' : 'none';
+                }
+            };
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const filter = button.getAttribute('data-filter');
+                    currentFilter = button.getAttribute('data-filter') || 'all';
 
                     filterButtons.forEach(btn => {
                         btn.classList.remove('active');
@@ -967,36 +1077,33 @@
                     button.classList.add('active');
                     button.setAttribute('aria-pressed', 'true');
 
-                    projectCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        const isMatch = (filter === 'all' || category === filter);
-
-                        if (isMatch) {
-                            card.classList.remove('d-none');
-                            void card.offsetWidth; // Reflow for transition
-                            card.classList.remove('project-hidden');
-                            card.classList.add('project-visible');
-                        } else {
-                            card.classList.remove('project-visible');
-                            card.classList.add('project-hidden');
-                            setTimeout(() => {
-                                if (card.classList.contains('project-hidden')) {
-                                    card.classList.add('d-none');
-                                }
-                            }, 280);
-                        }
-                    });
+                    applyFilters();
                 });
             });
 
-            // Enhanced Modal Management
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    currentSearch = e.target.value.trim().toLowerCase();
+                    applyFilters();
+                });
+            }
+
+            // Enhanced Modal Management with Next / Previous Project Cycling & Focus Trap
             const modalOverlay = document.getElementById('caseStudyModal');
             const closeBtn = document.getElementById('closeCaseStudy');
             const detailsBtns = document.querySelectorAll('.open-case-study');
+            const modalPrevBtn = document.getElementById('modalPrevBtn');
+            const modalNextBtn = document.getElementById('modalNextBtn');
+
+            const projectKeyList = Object.keys(comprehensiveProjectData);
+            let currentActiveProjectId = null;
 
             const openProjectModal = (projectId) => {
                 const data = comprehensiveProjectData[projectId];
                 if (!data || !modalOverlay) return;
+
+                currentActiveProjectId = projectId;
+                modalOverlay.dataset.currentProject = projectId;
 
                 document.getElementById('modalTitle').textContent = data.title;
                 document.getElementById('modalTagline').textContent = data.tagline;
@@ -1032,6 +1139,7 @@
                 // Trigger smooth fade & scale in
                 requestAnimationFrame(() => {
                     modalOverlay.classList.add('is-active');
+                    closeBtn.focus();
                 });
             };
 
@@ -1045,6 +1153,24 @@
                     modalOverlay.classList.add('d-none');
                 }, 300);
             };
+
+            if (modalPrevBtn) {
+                modalPrevBtn.addEventListener('click', () => {
+                    if (!currentActiveProjectId) return;
+                    let idx = projectKeyList.indexOf(currentActiveProjectId);
+                    idx = (idx - 1 + projectKeyList.length) % projectKeyList.length;
+                    openProjectModal(projectKeyList[idx]);
+                });
+            }
+
+            if (modalNextBtn) {
+                modalNextBtn.addEventListener('click', () => {
+                    if (!currentActiveProjectId) return;
+                    let idx = projectKeyList.indexOf(currentActiveProjectId);
+                    idx = (idx + 1) % projectKeyList.length;
+                    openProjectModal(projectKeyList[idx]);
+                });
+            }
 
             detailsBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -1142,5 +1268,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script defer src="polish.js"></script>
 </body>
 </html>

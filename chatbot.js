@@ -21,6 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Render Quick Suggestion Pills
+    if (messagesContainer && !messagesContainer.querySelector('.chat-suggestions')) {
+        const suggestionsDiv = document.createElement('div');
+        suggestionsDiv.className = 'chat-suggestions d-flex flex-wrap gap-1 mt-2';
+        const suggestions = [
+            "What are your services?",
+            "Tell me about your top projects",
+            "How can I contact you?"
+        ];
+        suggestions.forEach(text => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'btn btn-outline-primary btn-sm rounded-pill chat-suggestion-chip';
+            chip.textContent = text;
+            chip.addEventListener('click', () => {
+                if (input) {
+                    input.value = text;
+                    if (form) {
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                }
+            });
+            suggestionsDiv.appendChild(chip);
+        });
+        messagesContainer.appendChild(suggestionsDiv);
+    }
+
     if (closeBtn && windowEl) {
         closeBtn.addEventListener('click', () => {
             windowEl.classList.add('d-none');
