@@ -11,9 +11,13 @@ app.use(express.json());
 
 // API Key and Configuration
 // Ensure your .env file has GEMINI_API_KEY=your_key_here
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GEMINI_MODEL = "gemini-2.5-flash";
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
+const candidateModels = [
+    process.env.GEMINI_MODEL,
+    "gemini-2.5-flash",
+    "gemini-1.5-flash",
+    "gemini-2.0-flash"
+].filter(Boolean);
 
 const SYSTEM_PROMPT = `
 You are the official AI Portfolio Assistant for Anubhav Yadav. Your goal is to represent Anubhav as a high-impact AI Builder and Problem-Solver. Use the following context to answer queries:
@@ -91,25 +95,38 @@ app.post('/chat', async (req, res) => {
         }
     };
 
-    try {
-        const payload = {
-            contents: [{ parts: [{ text: message }] }],
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
-        };
+    let reply = null;
+    let lastError = null;
+    const uniqueModels = [...new Set(candidateModels)];
 
-        const data = await fetchWithRetry(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
+    for (const model of uniqueModels) {
+        try {
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: message }] }],
+                systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
+            };
 
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that right now.";
-        res.json({ reply });
+            const data = await fetchWithRetry(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-    } catch (error) {
-        console.error("Gemini API Error:", error.message);
-        res.status(500).json({ error: "Failed to connect to AI service." });
+            reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (reply) break;
+        } catch (error) {
+            lastError = error.message;
+            console.error(`Gemini model ${model} error:`, error.message);
+        }
     }
+
+    if (reply) {
+        return res.json({ reply });
+    }
+
+    console.error("All Gemini model attempts failed:", lastError);
+    res.status(502).json({ error: "Failed to connect to AI service. Please check API key status.", details: lastError });
 });
 
 app.listen(PORT, () => {

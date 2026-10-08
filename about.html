@@ -52,6 +52,29 @@
             }
         })();
     </script>
+
+    <!-- Structured Data (Person Schema) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Anubhav Yadav",
+      "url": "https://anubhav-yadav-portfolio-website.vercel.app/",
+      "jobTitle": "Data Scientist & AI Automation Freelancer",
+      "sameAs": [
+        "https://www.linkedin.com/in/anubhav-yadav-data-science/",
+        "https://github.com/AnubhavDataSci25"
+      ],
+      "knowsAbout": [
+        "Data Science",
+        "Machine Learning",
+        "Technical Writing",
+        "AI Automation",
+        "Chatbots"
+      ]
+    }
+    </script>
+
     <style>
         /* Journey Vertical Timeline */
         .journey-timeline {
@@ -488,7 +511,7 @@
 
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
-                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." maxlength="500" autocomplete="off">
                     <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>

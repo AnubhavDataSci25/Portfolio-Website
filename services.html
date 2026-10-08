@@ -628,7 +628,7 @@
 
             <div class="chat-footer p-2 border-top">
                 <form id="chat-form" class="d-flex gap-2">
-                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." maxlength="500" autocomplete="off">
                     <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -664,34 +664,10 @@
         // ==========================================
         // 2. EDITABLE TESTIMONIALS CONFIGURATION
         // ==========================================
-        // Instructions: Edit or add reviews below.
-        // If you don't have reviews yet, set testimonialsData = [] to automatically hide the section.
-        const testimonialsData = [
-            {
-                name: "Technical Founder",
-                role: "Product Lead",
-                company: "Developer Tooling Startup",
-                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
-                quote: "Anubhav delivered clear, in-depth technical documentation with working code examples that immediately resonated with our developer community.",
-                rating: 5
-            },
-            {
-                name: "Operations Director",
-                role: "E-Commerce Manager",
-                company: "D2C Brand",
-                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-                quote: "The custom WhatsApp automation workflow saved our support team dozens of manual hours every week while keeping response times under 30 seconds.",
-                rating: 5
-            },
-            {
-                name: "Analytics Lead",
-                role: "Senior Consultant",
-                company: "Data Agency",
-                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
-                quote: "Exceptional attention to detail in data cleaning and model validation. The predictive pipelines were modular, well-documented, and ready for production.",
-                rating: 5
-            }
-        ];
+        // Instructions: Edit or add real client reviews below when available.
+        // Format: { name: "", role: "", company: "", avatar: "", quote: "", rating: 5 }
+        // Setting testimonialsData = [] automatically hides the section completely.
+        const testimonialsData = [];
 
         document.addEventListener('DOMContentLoaded', () => {
             // Render Pricing Cards

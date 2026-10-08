@@ -7,48 +7,75 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesContainer = document.getElementById('chat-messages');
     const typingIndicator = document.getElementById('typing-indicator');
 
-    // Toggle Chat Window
-    trigger.addEventListener('click', () => {
-        windowEl.classList.toggle('d-none');
-        if (!windowEl.classList.contains('d-none')) {
-            input.focus();
-        }
-    });
+    if (input) {
+        input.maxLength = 500;
+    }
 
-    closeBtn.addEventListener('click', () => {
-        windowEl.classList.add('d-none');
-    });
+    // Toggle Chat Window
+    if (trigger && windowEl) {
+        trigger.addEventListener('click', () => {
+            windowEl.classList.toggle('d-none');
+            if (!windowEl.classList.contains('d-none') && input) {
+                input.focus();
+            }
+        });
+    }
+
+    if (closeBtn && windowEl) {
+        closeBtn.addEventListener('click', () => {
+            windowEl.classList.add('d-none');
+        });
+    }
 
     // Handle Form Submission
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const text = input.value.trim();
-        if (!text) return;
+    if (form && input) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
 
-        addMessage(text, 'user');
-        input.value = '';
-        typingIndicator.classList.remove('d-none');
-        scrollToBottom();
+            if (text.length > 500) {
+                addMessage(text, 'user');
+                input.value = '';
+                addMessage("Message is too long. Please keep your message under 500 characters.", 'bot');
+                scrollToBottom();
+                return;
+            }
 
-        try {
-            // UPDATED: Pointing to relative Vercel API path
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text })
-            });
+            addMessage(text, 'user');
+            input.value = '';
+            typingIndicator.classList.remove('d-none');
+            scrollToBottom();
 
-            const data = await response.json();
-            typingIndicator.classList.add('d-none');
-            addMessage(data.reply || data.error, 'bot');
+            try {
+                // Pointing to relative Vercel API path
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
 
-        } catch (error) {
-            typingIndicator.classList.add('d-none');
-            addMessage("The assistant is currently offline. Please try again later.", 'bot');
-        }
-    });
+                const data = await response.json();
+                typingIndicator.classList.add('d-none');
+
+                if (!response.ok) {
+                    const errorMsg = data.error || (response.status === 429 
+                        ? "Too many requests. Please wait a minute before sending another message." 
+                        : "Something went wrong. Please try again later.");
+                    addMessage(errorMsg, 'bot');
+                } else {
+                    addMessage(data.reply || "I'm sorry, I couldn't process that right now.", 'bot');
+                }
+
+            } catch (error) {
+                typingIndicator.classList.add('d-none');
+                addMessage("The assistant is currently offline. Please try again later.", 'bot');
+            }
+        });
+    }
 
     function addMessage(text, sender) {
+        if (!messagesContainer) return;
         const div = document.createElement('div');
         div.className = `message ${sender}-msg`;
         div.textContent = text;
@@ -57,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function scrollToBottom() {
+        if (!messagesContainer) return;
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 });

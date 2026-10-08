@@ -320,35 +320,3 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     }
 });
-
-// --- Contact Form Handling ---
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    // Init EmailJS
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init("bHA0zHbNhtt2JnLH1");
-    }
-
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('fullName').value.trim();
-        const email = document.getElementById('emailAddr').value.trim();
-        const message = document.getElementById('message').value.trim();
-
-        if (name && email && message) {
-            // Send via EmailJS
-            emailjs.sendForm("service_oa59x3h", "template_yf1rj3k", this)
-                .then(() => {
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'alert alert-success mt-4 animate-fade-in shadow-sm rounded-pill py-2 text-center';
-                    successMsg.innerHTML = `<i class="fas fa-check-circle me-2 text-success"></i> <span class="alert-message">Thank you, ${name}! Your message has been sent.</span>`;
-                    contactForm.parentElement.appendChild(successMsg);
-                    contactForm.reset();
-                    setTimeout(() => successMsg.remove(), 5000);
-                }, (error) => {
-                    alert("Failed to send message. Please reach out via LinkedIn.");
-                });
-        }
-    });
-}
