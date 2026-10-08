@@ -1,0 +1,1032 @@
+/* ========================================================
+   MOBILE.CSS - Responsive Mobile UX & Touch Optimization
+   Strictly scoped to mobile media queries: (max-width: 991.98px)
+   DESKTOP (>= 992px) REMAINS 100% UNCHANGED
+   ======================================================== */
+
+/* --------------------------------------------------------
+   1. MOBILE CSS VARIABLES & STACKING SYSTEM
+   -------------------------------------------------------- */
+:root {
+    --mobile-nav-height: 64px;
+    --mobile-hire-bar-height: 58px;
+    --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --mobile-safe-top: env(safe-area-inset-top, 0px);
+    --mobile-safe-left: env(safe-area-inset-left, 0px);
+    --mobile-safe-right: env(safe-area-inset-right, 0px);
+    
+    /* Strict Mobile Z-Index Scale */
+    --z-mob-backdrop: 1025;
+    --z-mob-nav: 1030;
+    --z-mob-sticky-bar: 1040;
+    --z-mob-back-to-top: 1045;
+    --z-mob-chat-trigger: 1050;
+    --z-mob-chat-window: 1060;
+    --z-mob-modal: 2000;
+}
+
+@media (max-width: 991.98px) {
+    /* --------------------------------------------------------
+       2. GLOBAL MOBILE LAYOUT & OVERFLOW PREVENTION (PHASE 2)
+       -------------------------------------------------------- */
+    html {
+        overflow-x: clip !important;
+        scroll-padding-top: calc(var(--mobile-nav-height) + 12px) !important;
+    }
+
+    body {
+        overflow-x: clip !important;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100dvh;
+        padding-bottom: calc(88px + var(--mobile-safe-bottom)) !important;
+    }
+
+    body.has-sticky-hire-bar {
+        padding-bottom: calc(var(--mobile-hire-bar-height) + 24px + var(--mobile-safe-bottom)) !important;
+    }
+
+    /* Universal box-sizing and flex/grid child constraint */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    .col, [class*="col-"], .d-flex > * {
+        min-width: 0 !important;
+        flex-shrink: 1;
+    }
+
+    .container, .container-fluid {
+        padding-left: clamp(14px, 4vw, 20px) !important;
+        padding-right: clamp(14px, 4vw, 20px) !important;
+        max-width: 100% !important;
+    }
+
+    /* Wrap long unbroken strings & URLs to eliminate horizontal blowouts */
+    p, a, span, h1, h2, h3, h4, h5, h6, li, td, th, label {
+        overflow-wrap: anywhere !important;
+        word-break: normal;
+    }
+
+    /* Responsive media: no viewport overflow */
+    img, video, iframe, svg, canvas {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    /* Prevent marquee track blowout on home page */
+    .project-slider-wrapper {
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 0 !important;
+    }
+
+    /* Full-height sections address bar expand/collapse stability */
+    .min-vh-100 {
+        min-height: 100vh !important;
+        min-height: 100svh !important;
+        min-height: 100dvh !important;
+    }
+
+    /* --------------------------------------------------------
+       3. SECTION SPACING RHYTHM & ANCHOR OFFSETS (PHASE 2)
+       -------------------------------------------------------- */
+    section,
+    .section-spacing,
+    .py-5 {
+        padding-top: clamp(2rem, 6vw, 3rem) !important;
+        padding-bottom: clamp(2rem, 6vw, 3rem) !important;
+    }
+
+    /* Hero section top padding accounts for fixed navbar */
+    header.hero-section,
+    .hero-section {
+        padding-top: calc(var(--mobile-nav-height) + clamp(1.25rem, 4vw, 2.25rem)) !important;
+        padding-bottom: clamp(2rem, 5vw, 3rem) !important;
+    }
+
+    /* Subpage main content sections */
+    #main-content.py-5.mt-5,
+    #main-content.mt-5,
+    article#main-content.py-5.mt-5 {
+        margin-top: 0.5rem !important;
+        padding-top: calc(var(--mobile-nav-height) + 1rem) !important;
+    }
+
+    /* Headings and anchor scroll targets never hide behind fixed navbar */
+    h1[id], h2[id], h3[id], h4[id], section[id], article[id], #main-content {
+        scroll-margin-top: calc(var(--mobile-nav-height) + 16px) !important;
+    }
+
+    /* Consistent card vertical margins */
+    .card,
+    .project-card,
+    .achievement-card,
+    .skill-card,
+    .stat-card,
+    .pricing-card,
+    .step-card {
+        margin-bottom: clamp(12px, 3.5vw, 16px);
+    }
+
+    /* --------------------------------------------------------
+       4. FIXED & STICKY ELEMENT COORDINATION (ZERO COLLISIONS)
+       -------------------------------------------------------- */
+    /* Sticky Mobile Hire Me Bar (Services page) */
+    #sticky-hire-bar {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: var(--z-mob-sticky-bar) !important;
+        padding-bottom: calc(8px + var(--mobile-safe-bottom)) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Floating Chatbot Trigger Button (Bottom-Right) */
+    #portfolio-chatbot {
+        position: fixed !important;
+        bottom: calc(16px + var(--mobile-safe-bottom)) !important;
+        right: calc(16px + var(--mobile-safe-right)) !important;
+        z-index: var(--z-mob-chat-trigger) !important;
+        margin: 0 !important;
+    }
+
+    body.has-sticky-hire-bar #portfolio-chatbot {
+        bottom: calc(var(--mobile-hire-bar-height) + 16px + var(--mobile-safe-bottom)) !important;
+    }
+
+    #chat-trigger {
+        width: 52px !important;
+        height: 52px !important;
+        font-size: 20px !important;
+        box-shadow: 0 4px 16px rgba(13, 110, 253, 0.4) !important;
+        touch-action: manipulation;
+    }
+
+    /* Floating Back-To-Top Button (Repositioned to Bottom-Left on Mobile) */
+    #backToTop {
+        position: fixed !important;
+        bottom: calc(16px + var(--mobile-safe-bottom)) !important;
+        left: calc(16px + var(--mobile-safe-left)) !important;
+        right: auto !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 16px !important;
+        z-index: var(--z-mob-back-to-top) !important;
+        touch-action: manipulation;
+    }
+
+    body.has-sticky-hire-bar #backToTop {
+        bottom: calc(var(--mobile-hire-bar-height) + 16px + var(--mobile-safe-bottom)) !important;
+    }
+
+    /* Mobile Chat Window: Full-Width Bottom Sheet Panel */
+    #chat-window {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: min(80dvh, 600px) !important;
+        border-radius: 20px 20px 0 0 !important;
+        margin: 0 !important;
+        z-index: var(--z-mob-chat-window) !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.45) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        touch-action: pan-y;
+    }
+
+    #chat-window.d-none {
+        display: none !important;
+    }
+
+    /* Visual Sheet Handle Bar */
+    .chat-header::before {
+        content: '';
+        display: block;
+        width: 42px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 2px;
+        margin: 0 auto 10px auto;
+        cursor: grab;
+    }
+
+    .chat-header {
+        padding: 12px 18px !important;
+        padding-top: calc(10px + var(--mobile-safe-top)) !important;
+        border-radius: 20px 20px 0 0 !important;
+    }
+
+    #close-chat, #chat-close {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        font-size: 1.25rem !important;
+        touch-action: manipulation;
+    }
+
+    .chat-body {
+        flex: 1 1 auto !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 14px !important;
+    }
+
+    .chat-footer {
+        padding: 10px 14px !important;
+        padding-bottom: calc(12px + var(--mobile-safe-bottom)) !important;
+        background-color: var(--card-bg) !important;
+    }
+
+    .chat-footer input {
+        font-size: 16px !important; /* Prevents iOS auto-zoom */
+        min-height: 44px !important;
+    }
+
+    /* --------------------------------------------------------
+       5. NEAR-FULL-SCREEN MOBILE MODALS & LIGHTBOXES
+       -------------------------------------------------------- */
+    .case-study-overlay {
+        padding: 0 !important;
+        align-items: flex-end !important;
+    }
+
+    .case-study-container {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 92dvh !important;
+        max-height: 92dvh !important;
+        border-radius: 24px 24px 0 0 !important;
+        padding: 1.25rem 1rem !important;
+        margin: 0 !important;
+        transform: translateY(100%) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+    }
+
+    /* Modal drag handle */
+    .case-study-container::before {
+        content: '';
+        display: block;
+        width: 42px;
+        height: 4px;
+        background: rgba(120, 120, 120, 0.35);
+        border-radius: 2px;
+        margin: 0 auto 12px auto;
+        cursor: grab;
+    }
+
+    .case-study-overlay.is-active .case-study-container {
+        transform: translateY(0) !important;
+    }
+
+    .case-study-close, .modal-close-btn {
+        position: sticky !important;
+        top: 10px !important;
+        float: right !important;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        font-size: 1.25rem !important;
+        z-index: 20 !important;
+        margin-bottom: -44px !important;
+        touch-action: manipulation;
+    }
+
+    /* Lightbox Modal Sizing */
+    .image-lightbox-overlay {
+        padding: 12px !important;
+        background: rgba(0, 0, 0, 0.92) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    .image-lightbox-close {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        font-size: 2rem !important;
+        top: calc(14px + var(--mobile-safe-top)) !important;
+        right: calc(14px + var(--mobile-safe-right)) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        touch-action: manipulation;
+    }
+
+    .image-lightbox-img,
+    .achievement-lightbox-img {
+        max-width: 96vw !important;
+        max-height: 80dvh !important;
+        object-fit: contain !important;
+    }
+
+    /* --------------------------------------------------------
+       6. RESPONSIVE MEDIA & CARD IMAGES (PHASE 2)
+       -------------------------------------------------------- */
+    .project-img-container,
+    .achievement-img-container {
+        height: auto !important;
+        aspect-ratio: 16 / 9 !important;
+        width: 100% !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .project-img-container img,
+    .achievement-img-container img,
+    .post-cover-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        aspect-ratio: 16 / 9 !important;
+        display: block !important;
+    }
+
+    /* --------------------------------------------------------
+       7. WIDE CONTENT CONTAINERS (TABLES, CODE BLOCKS)
+       -------------------------------------------------------- */
+    pre.code-snippet,
+    pre,
+    table,
+    .table-responsive {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        position: relative !important;
+        border-radius: 12px !important;
+        scrollbar-width: thin !important;
+    }
+
+    pre.code-snippet {
+        font-size: 0.82rem !important;
+        padding: 14px 16px !important;
+    }
+
+    pre.code-snippet::-webkit-scrollbar {
+        height: 4px !important;
+    }
+    pre.code-snippet::-webkit-scrollbar-thumb {
+        background: rgba(13, 110, 253, 0.4) !important;
+        border-radius: 4px !important;
+    }
+
+    .code-copy-btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 8px 14px !important;
+        font-size: 0.82rem !important;
+        touch-action: manipulation;
+    }
+
+    /* --------------------------------------------------------
+       8. MOBILE TYPOGRAPHY & FLUID SIZING
+       -------------------------------------------------------- */
+    h1.display-3, .display-3 {
+        font-size: clamp(2rem, 7.5vw, 2.75rem) !important;
+        line-height: 1.2 !important;
+    }
+
+    h1.display-4, .display-4 {
+        font-size: clamp(1.85rem, 6.5vw, 2.35rem) !important;
+        line-height: 1.22 !important;
+    }
+
+    h1.display-5, .display-5 {
+        font-size: clamp(1.65rem, 5.5vw, 2.1rem) !important;
+        line-height: 1.25 !important;
+    }
+
+    h1.display-6, .display-6 {
+        font-size: clamp(1.45rem, 5vw, 1.9rem) !important;
+        line-height: 1.28 !important;
+    }
+
+    /* Hero Typing Text Height Reservation */
+    .hero-section h2.h3,
+    .hero-section h2,
+    h2:has(#typing-text),
+    h2.h3:has(#typing-text) {
+        min-height: 2.4em !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* --------------------------------------------------------
+       9. MOBILE NAVBAR & HAMBURGER DRAWER UX (PHASE 3)
+       -------------------------------------------------------- */
+    .navbar {
+        min-height: var(--mobile-nav-height) !important;
+        padding-top: calc(8px + var(--mobile-safe-top)) !important;
+        padding-bottom: 8px !important;
+        z-index: var(--z-mob-nav) !important;
+    }
+
+    /* Backdrop dimming & blur when mobile navbar drawer is open */
+    .navbar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: var(--z-mob-backdrop);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .navbar-backdrop.is-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Morphing Hamburger Button: Transforms into "X" when open */
+    .navbar-toggler {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(13, 110, 253, 0.35) !important;
+        touch-action: manipulation;
+        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        position: relative;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25) !important;
+        outline: none !important;
+    }
+
+    .navbar-toggler:active {
+        transform: scale(0.94) !important;
+    }
+
+    /* Morph hamburger icon into animated 'X' */
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        background-image: none !important;
+        position: relative;
+        width: 22px;
+        height: 22px;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+        content: '';
+        position: absolute;
+        left: 1px;
+        top: 10px;
+        width: 20px;
+        height: 2.5px;
+        background-color: var(--primary-color, #0d6efd);
+        border-radius: 2px;
+        transition: transform 0.25s ease;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+        transform: rotate(45deg);
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+        transform: rotate(-45deg);
+    }
+
+    /* Mobile Drawer Container */
+    #navbarNav {
+        max-height: calc(85dvh - var(--mobile-nav-height)) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 0.75rem !important;
+        padding: 1.25rem 1rem !important;
+        border-radius: 20px !important;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25) !important;
+        background-color: var(--card-bg) !important;
+        border: 1px solid rgba(13, 110, 253, 0.18) !important;
+    }
+
+    #navbarNav .navbar-nav {
+        gap: 6px !important;
+    }
+
+    #navbarNav .nav-item {
+        width: 100% !important;
+    }
+
+    #navbarNav .nav-link {
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1.05rem !important;
+        border-radius: 12px !important;
+        font-weight: 500;
+        transition: background-color 0.2s ease, transform 0.15s ease !important;
+        touch-action: manipulation;
+    }
+
+    #navbarNav .nav-link.active {
+        background-color: rgba(13, 110, 253, 0.12) !important;
+        color: var(--primary-color) !important;
+        font-weight: 700 !important;
+    }
+
+    #navbarNav .nav-link:active {
+        background-color: rgba(13, 110, 253, 0.18) !important;
+        transform: scale(0.98);
+    }
+
+    #navbarNav .theme-toggle-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
+
+    #navbarNav .theme-toggle-item button {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        font-size: 1.15rem !important;
+        touch-action: manipulation;
+    }
+
+    #navbarNav .nav-hire-btn {
+        min-height: 50px !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        margin-top: 8px !important;
+        border-radius: 50rem !important;
+        box-shadow: 0 4px 14px rgba(13, 110, 253, 0.35) !important;
+        touch-action: manipulation;
+    }
+
+    /* --------------------------------------------------------
+       10. TOUCH TARGETS (MINIMUM 44x44px) & FEEDBACK (PHASE 3)
+       -------------------------------------------------------- */
+    .btn,
+    .project-filter-btn,
+    .cert-filter-btn,
+    .blog-filter-btn,
+    .social-links a,
+    .footer-social-icon,
+    .accordion-button,
+    .connect-badge,
+    .quiz-option-btn,
+    .toc-toggle-btn,
+    .code-copy-btn,
+    .blog-share-btn,
+    .breadcrumb-item a,
+    #submitBtn {
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
+    }
+
+    /* Instant active press feedback across interactive elements */
+    .btn:active,
+    .project-filter-btn:active,
+    .cert-filter-btn:active,
+    .blog-filter-btn:active,
+    .connect-badge:active,
+    .quiz-option-btn:active,
+    .footer-social-icon:active,
+    .code-copy-btn:active,
+    .blog-share-btn:active,
+    #chat-trigger:active,
+    #backToTop:active {
+        transform: scale(0.97) !important;
+        transition: transform 0.1s ease !important;
+    }
+
+    .footer-social-icon {
+        width: 44px !important;
+        height: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* --------------------------------------------------------
+       11. HORIZONTALLY SCROLLABLE FILTER CHIPS WITH EDGE FADE (PHASE 3)
+       -------------------------------------------------------- */
+    .project-filter-row,
+    .cert-filter-row,
+    .blog-filter-row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding: 8px 16px 14px 16px !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+        scrollbar-width: none !important;
+        margin-left: -16px;
+        margin-right: -16px;
+        mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+    }
+
+    .project-filter-row::-webkit-scrollbar,
+    .cert-filter-row::-webkit-scrollbar,
+    .blog-filter-row::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .project-filter-btn,
+    .cert-filter-btn,
+    .blog-filter-btn {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start;
+        white-space: nowrap !important;
+        min-height: 44px !important;
+        padding: 10px 20px !important;
+        font-size: 0.92rem !important;
+        font-weight: 600 !important;
+        border-radius: 50rem !important;
+        touch-action: manipulation;
+    }
+
+    /* --------------------------------------------------------
+       12. MOBILE FORMS & INPUTS (PREVENT iOS AUTO-ZOOM)
+       -------------------------------------------------------- */
+    input.form-control,
+    select.form-select,
+    textarea.form-control,
+    .project-search-input,
+    .blog-search-input {
+        font-size: 16px !important; /* Critical: 16px prevents iOS zoom */
+        min-height: 48px !important;
+    }
+
+    textarea.form-control {
+        min-height: 120px !important;
+    }
+
+    #submitBtn {
+        width: 100% !important;
+        min-height: 48px !important;
+    }
+
+    /* --------------------------------------------------------
+       13. PAGE-SPECIFIC MOBILE OPTIMIZATIONS
+       -------------------------------------------------------- */
+    /* Home (index.html) */
+    .hero-profile-float,
+    .hero-img-blob img {
+        width: clamp(170px, 46vw, 220px) !important;
+        height: clamp(170px, 46vw, 220px) !important;
+        margin: 0 auto !important;
+    }
+
+    .hero-btns {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .hero-btns .btn {
+        width: 100% !important;
+        min-height: 48px !important;
+    }
+
+    /* About (about.html) */
+    #main-content img[alt*="Anubhav Yadav"] {
+        max-width: clamp(180px, 50vw, 240px) !important;
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+
+    /* Blog Articles (blog/*.html) */
+    .post-content {
+        font-size: 1.02rem !important;
+        line-height: 1.75 !important;
+    }
+
+    .post-reading-progress {
+        top: var(--mobile-nav-height) !important;
+        height: 3px !important;
+    }
+
+    .blog-share-btn {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+
+    /* Table of Contents Collapsible on Mobile */
+    .toc-card {
+        padding: 1rem !important;
+    }
+
+    .toc-toggle-btn {
+        width: 100%;
+        min-height: 44px !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: transparent;
+        border: none;
+        padding: 10px 0;
+        cursor: pointer;
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1rem;
+        touch-action: manipulation;
+    }
+
+    .toc-toggle-icon {
+        transition: transform 0.25s ease;
+    }
+
+    .toc-toggle-btn[aria-expanded="false"] .toc-toggle-icon {
+        transform: rotate(-90deg);
+    }
+
+    /* Contact (contact.html) Direct connectivity buttons */
+    .connect-badge {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 46px !important;
+    }
+
+    /* --------------------------------------------------------
+       14. MOBILE PERFORMANCE & LOW POWER CONSUMPTION (PHASE 4)
+       -------------------------------------------------------- */
+    /* Remove expensive continuous blur-filter ambient blobs on mobile */
+    .hero-ambient-container,
+    .hero-blob {
+        display: none !important;
+    }
+
+    /* Fast, snappy mobile reveals (200ms fade/translate) */
+    .reveal {
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out !important;
+        transform: translateY(10px) !important;
+        will-change: opacity, transform;
+    }
+
+    .reveal.is-revealed {
+        transform: translateY(0) !important;
+        will-change: auto !important; /* Release GPU layers */
+    }
+
+    /* Offscreen section rendering deferral for 60fps mobile scrolling */
+    #testimonials-section,
+    #faqAccordion,
+    #service-quiz-section,
+    .site-footer {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 400px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn:active,
+        .project-filter-btn:active,
+        .cert-filter-btn:active,
+        .blog-filter-btn:active,
+        .connect-badge:active,
+        .quiz-option-btn:active,
+        .footer-social-icon:active,
+        .navbar-toggler:active {
+            transform: none !important;
+        }
+        .project-slider-track {
+            animation: none !important;
+        }
+    }
+}
+
+/* ========================================================
+   15. MID-SIZE MOBILE DEVICES (<= 767.98px)
+   SINGLE-COLUMN STACKING & TIMELINE FIXES
+   ======================================================== */
+@media (max-width: 767.98px) {
+    /* Proof stats & Achievements Stats: 2-column compact grid */
+    #proof-stats .col-md-3,
+    #proof-stats .col-sm-6,
+    .stats-row .col-6 {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        padding: 6px !important;
+    }
+
+    #proof-stats .stat-card,
+    .stats-row .stat-box {
+        padding: 1.15rem 0.65rem !important;
+    }
+
+    #proof-stats .stat-card .display-5,
+    .stats-row .stat-box h2 {
+        font-size: 2rem !important;
+    }
+
+    /* Pricing cards: single column with clean spacing */
+    #data-pricing-container .col-md-4,
+    #ai-pricing-container .col-md-4,
+    #writing-pricing-container .col-md-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .pricing-card {
+        margin-bottom: 1.25rem !important;
+    }
+
+    /* Most Popular Pricing Card Highlight (Unclipped Badge) */
+    .pricing-card.popular {
+        transform: none !important; /* No horizontal blowouts from transform scaling */
+        margin-top: 20px !important;
+        margin-bottom: 24px !important;
+        overflow: visible !important;
+        box-shadow: 0 8px 25px rgba(13, 110, 253, 0.22) !important;
+    }
+
+    .popular-badge {
+        top: -12px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 5 !important;
+    }
+
+    /* Qualifications Timeline: Education & Experience fit within 320px */
+    .timeline-item {
+        padding-left: 1.25rem !important;
+        border-left-width: 2px !important;
+    }
+
+    .timeline-item .p-4 {
+        padding: 1.15rem 0.95rem !important;
+    }
+
+    .timeline-dot {
+        left: -7px !important;
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    /* Services "How I Work" Process Steps */
+    .timeline-step {
+        padding-left: 2.25rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Contact Form & Steps */
+    .achievement-card.p-4.p-md-5 {
+        padding: 1.25rem 1rem !important;
+    }
+
+    .step-card {
+        padding: 1.25rem 1rem !important;
+    }
+
+    /* Academic Timeline on Achievements page */
+    .academic-timeline-item {
+        padding-left: 1.25rem !important;
+    }
+
+    /* Quiz container options */
+    .quiz-option-btn {
+        width: 100% !important;
+        min-height: 48px !important;
+        padding: 0.75rem 1rem !important;
+    }
+}
+
+/* ========================================================
+   16. EXTRA-SMALL MOBILE DEVICES (<= 575.98px)
+   NARROW VIEWPORT REFINEMENTS (320px - 575px)
+   ======================================================== */
+@media (max-width: 575.98px) {
+    /* Core skills: 2-column compact grid */
+    #core-skills .col-sm-6,
+    #core-skills .skill-card-reveal {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        padding: 6px !important;
+    }
+
+    #core-skills .skill-card {
+        padding: 1rem 0.5rem !important;
+    }
+
+    #core-skills .skill-card i {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    #core-skills .skill-card h5 {
+        font-size: 0.85rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Home Project Slider Card Width Safety (320px support) */
+    .slider-item {
+        flex: 0 0 calc(100vw - 44px) !important;
+        max-width: calc(100vw - 44px) !important;
+        margin: 0 8px !important;
+        height: auto !important;
+        min-height: 400px !important;
+    }
+
+    .project-slider-track {
+        width: calc((100vw - 28px) * 4) !important;
+    }
+
+    @keyframes scroll-left {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc((100vw - 28px) * -2)); }
+    }
+
+    /* 404 Page Action Buttons Full-Width on Narrow Screens */
+    main#main-content .d-flex.flex-wrap.gap-3 a.btn {
+        width: 100% !important;
+        min-height: 48px !important;
+    }
+}
+
+/* ========================================================
+   17. MOBILE LANDSCAPE & LOW-HEIGHT ORIENTATION (PHASE 4)
+   Compact heights (<= 500px) on mobile landscape phones
+   ======================================================== */
+@media (max-width: 991.98px) and (orientation: landscape), (max-height: 500px) and (max-width: 991.98px) {
+    :root {
+        --mobile-nav-height: 50px;
+    }
+
+    .navbar {
+        min-height: 50px !important;
+        padding-top: calc(4px + var(--mobile-safe-top)) !important;
+        padding-bottom: 4px !important;
+    }
+
+    .navbar-toggler {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    #navbarNav {
+        max-height: 78dvh !important;
+    }
+
+    #chat-window {
+        height: 92dvh !important;
+        max-height: 92dvh !important;
+    }
+
+    .case-study-container {
+        height: 92dvh !important;
+        max-height: 92dvh !important;
+    }
+
+    header.hero-section,
+    .hero-section {
+        padding-top: calc(50px + 1rem) !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .hero-profile-float,
+    .hero-img-blob img {
+        width: clamp(120px, 25vw, 150px) !important;
+        height: clamp(120px, 25vw, 150px) !important;
+    }
+}
+

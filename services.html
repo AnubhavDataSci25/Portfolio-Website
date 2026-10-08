@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Freelance Services & Pricing | Anubhav Yadav</title>
     
     <!-- SEO Meta Tags -->
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
     <link rel="stylesheet" href="polish.css">
+    <link rel="stylesheet" href="mobile.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="manifest" href="/manifest.json">
@@ -884,7 +885,7 @@
                                     <p class="text-secondary small fst-italic mb-4">"${t.quote}"</p>
                                 </div>
                                 <div class="d-flex align-items-center pt-3 border-top mt-auto">
-                                    <img src="${t.avatar}" alt="${t.name}" class="rounded-circle me-3" width="44" height="44" loading="lazy" style="object-fit: cover;">
+                                    <img src="${t.avatar}" alt="${t.name}" class="rounded-circle me-3" width="44" height="44" loading="lazy" style="object-fit: cover;" decoding="async">
                                     <div>
                                         <h6 class="fw-bold mb-0 small">${t.name}</h6>
                                         <small class="text-secondary" style="font-size: 11px;">${t.role} · ${t.company}</small>
@@ -914,5 +915,6 @@
         });
     </script>
     <script defer src="polish.js"></script>
+    <script defer src="mobile.js"></script>
 </body>
 </html>

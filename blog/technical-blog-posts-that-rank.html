@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>How to Write Technical Blog Posts That Rank on Google | Anubhav Yadav</title>
     
     <!-- SEO Meta Tags -->
@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../chatbot.css">
     <link rel="stylesheet" href="../polish.css">
+    <link rel="stylesheet" href="../mobile.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="../images/logo.png">
     <link rel="manifest" href="/manifest.json">
@@ -205,7 +206,7 @@
                      alt="Desk setup with laptop showing code and notebook" 
                      width="1200" height="630"
                      loading="lazy" 
-                     class="img-fluid post-cover-img">
+                     class="img-fluid post-cover-img" decoding="async">
             </div>
 
             <!-- Table of Contents -->
@@ -292,7 +293,7 @@ def fetch_weather_report(city: str, api_key: str) -> Dict[str, Any]:
 
             <!-- Author Bio Card -->
             <div class="blog-author-card d-flex align-items-center gap-3 my-4">
-                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;" decoding="async">
                 <div>
                     <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
                     <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer & AI Automation Developer. Crafting practical AI workflows and high-ranking developer guides.</p>
@@ -438,5 +439,6 @@ def fetch_weather_report(city: str, api_key: str) -> Dict[str, Any]:
         });
     </script>
     <script defer src="../polish.js"></script>
+    <script defer src="../mobile.js"></script>
 </body>
 </html>

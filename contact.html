@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Contact Me | Anubhav Yadav</title>
     
     <!-- SEO Meta Tags -->
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
     <link rel="stylesheet" href="polish.css">
+    <link rel="stylesheet" href="mobile.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="manifest" href="/manifest.json">
@@ -243,14 +244,14 @@
                                 <!-- Full Name -->
                                 <div class="col-md-6">
                                     <label for="fullName" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label>
-                                    <input name="name" class="form-control rounded-pill px-3" id="fullName" placeholder="Enter your name" required>
+                                    <input type="text" name="name" class="form-control rounded-pill px-3" id="fullName" placeholder="Enter your name" autocomplete="name" autocapitalize="words" enterkeyhint="next" required>
                                     <div class="text-danger small mt-1 d-none" id="fullNameError">Please enter your name.</div>
                                 </div>
 
                                 <!-- Email Address -->
                                 <div class="col-md-6">
                                     <label for="emailAddr" class="form-label small fw-bold">Email Address <span class="text-danger">*</span></label>
-                                    <input name="email" type="email" class="form-control rounded-pill px-3" id="emailAddr" placeholder="name@example.com" required>
+                                    <input name="email" type="email" inputmode="email" autocomplete="email" enterkeyhint="next" class="form-control rounded-pill px-3" id="emailAddr" placeholder="name@example.com" required>
                                     <div class="text-danger small mt-1 d-none" id="emailAddrError">Please enter a valid email address.</div>
                                 </div>
 
@@ -286,7 +287,7 @@
                                         <label for="message" class="form-label small fw-bold mb-0">Message <span class="text-danger">*</span></label>
                                         <span class="char-counter-text small"><span id="charCount">0</span>/500</span>
                                     </div>
-                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" maxlength="500" placeholder="Write your message here (minimum 10 characters)..." required></textarea>
+                                    <textarea name="message" class="form-control rounded-4 px-3" id="message" rows="5" maxlength="500" placeholder="Write your message here (minimum 10 characters)..." enterkeyhint="done" required></textarea>
                                     <div class="text-danger small mt-1 d-none" id="messageError">Please enter a message with at least 10 characters.</div>
                                 </div>
 
@@ -653,5 +654,6 @@
     </div>
     <script src="chatbot.js"></script>
     <script defer src="polish.js"></script>
+    <script defer src="mobile.js"></script>
 </body>
 </html>

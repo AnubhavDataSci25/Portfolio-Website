@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Blog & Insights | Anubhav Yadav</title>
     
     <!-- SEO Meta Tags -->
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
     <link rel="stylesheet" href="polish.css">
+    <link rel="stylesheet" href="mobile.css">
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="manifest" href="/manifest.json">
@@ -231,7 +232,7 @@
                 <div class="col-lg-4">
                     <div class="blog-search-box d-flex align-items-center rounded-pill px-3 py-1">
                         <i class="fas fa-search search-icon me-2"></i>
-                        <input type="text" class="form-control search-input border-0 bg-transparent shadow-none" id="search-input" placeholder="Search articles by keyword..." aria-label="Search articles by keyword">
+                        <input type="search" class="form-control search-input border-0 bg-transparent shadow-none" id="search-input" placeholder="Search articles by keyword..." aria-label="Search articles by keyword" inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="none">
                     </div>
                 </div>
             </div>
@@ -250,7 +251,7 @@
                             <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" 
                                  alt="WhatsApp messaging interface on mobile device" 
                                  width="800" height="450"
-                                 loading="lazy">
+                                 loading="lazy" decoding="async">
                         </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -282,7 +283,7 @@
                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
                                  alt="Data visualization graphs and analytics charts on screen" 
                                  width="800" height="450"
-                                 loading="lazy">
+                                 loading="lazy" decoding="async">
                         </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -314,7 +315,7 @@
                             <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" 
                                  alt="Modern workspace with laptop code editor and notes" 
                                  width="800" height="450"
-                                 loading="lazy">
+                                 loading="lazy" decoding="async">
                         </div>
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -575,5 +576,6 @@
     </div>
     <script src="chatbot.js"></script>
     <script defer src="polish.js"></script>
+    <script defer src="mobile.js"></script>
 </body>
 </html>
