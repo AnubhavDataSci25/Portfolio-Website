@@ -32,6 +32,16 @@ function checkRateLimit(ip) {
 }
 
 export default async function handler(req, res) {
+    // Set permissive CORS headers for development & cross-origin compatibility
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
     // Only allow POST requests
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -105,8 +115,8 @@ export default async function handler(req, res) {
     // Append current user message
     contents.push({ role: 'user', parts: [{ text: message }] });
 
-    // Read GEMINI_API_KEY from process.env only
-    const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
+    // Read GEMINI_API_KEY from process.env only (supports GEMINI_API_KEY, GOOGLE_API_KEY, GEMINI_KEY)
+    const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || process.env.GEMINI_KEY || "").trim();
     if (!GEMINI_API_KEY) {
         console.error("GEMINI_API_KEY is missing in process.env");
         return res.status(500).json({ 
@@ -174,11 +184,13 @@ export default async function handler(req, res) {
         9. Accuracy: Never invent clients, testimonials, prices, or results that are not in this context.
     `;
 
+    // Candidate models list: prioritizes gemini-3.5-flash-lite, with resilient fallbacks
     const candidateModels = [
         process.env.GEMINI_MODEL,
-        "gemini-2.5-flash",
-        "gemini-1.5-flash",
-        "gemini-2.0-flash"
+        "gemini-3.5-flash-lite",
+        "gemini-3.5-flash",
+        "gemini-3.1-flash-lite",
+        "gemini-3.8-flash"
     ].filter(Boolean);
 
     const uniqueModels = [...new Set(candidateModels)];
@@ -187,7 +199,7 @@ export default async function handler(req, res) {
 
     for (const model of uniqueModels) {
         try {
-            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
             const payload = {
                 contents,
                 systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
@@ -203,20 +215,28 @@ export default async function handler(req, res) {
                 const errorBody = await response.text();
                 lastError = `Model ${model} returned ${response.status}: ${errorBody}`;
                 console.warn(lastError);
-                if (response.status === 404 || response.status === 400 || response.status === 403) {
-                    continue;
-                }
-                break;
+                // Attempt next model on any HTTP error (404, 400, 403, 429, 503, etc.)
+                continue;
             }
 
             const data = await response.json();
-            reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            const candidateParts = data.candidates?.[0]?.content?.parts || [];
+            
+            // In Gemini 3 models, filter out thought parts to retrieve final response text
+            const textParts = candidateParts.filter(p => !p.thought && typeof p.text === 'string' && p.text.trim().length > 0);
+            
+            if (textParts.length > 0) {
+                reply = textParts.map(p => p.text).join('\n').trim();
+            } else if (candidateParts.length > 0 && typeof candidateParts[0].text === 'string') {
+                reply = candidateParts.map(p => p.text).join('\n').trim();
+            }
+
             if (reply) {
                 break;
             }
         } catch (err) {
-            lastError = err.message;
-            console.error(`Attempt with model ${model} failed:`, err);
+            lastError = `Attempt with model ${model} failed: ${err.message}`;
+            console.error(lastError);
         }
     }
 

@@ -834,17 +834,44 @@
             // 3. Send API Request with AbortController Timeout
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+            const isFileProtocol = window.location.protocol === 'file:';
+
+            // Endpoint Resolution:
+            // - file:/// origin blocks relative '/api/chat'; route directly to local backend on port 5000.
+            // - http:/https: uses '/api/chat', falling back to localhost:5000 if running a static dev server (e.g. Live Server).
+            const candidateEndpoints = isFileProtocol
+                ? ['http://localhost:5000/api/chat', 'http://127.0.0.1:5000/api/chat']
+                : ['/api/chat', 'http://localhost:5000/api/chat'];
 
             try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: text,
-                        history: recentHistory
-                    }),
-                    signal: controller.signal
-                });
+                let response = null;
+                let lastFetchError = null;
+
+                for (const endpoint of candidateEndpoints) {
+                    try {
+                        const res = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                message: text,
+                                history: recentHistory
+                            }),
+                            signal: controller.signal
+                        });
+                        if (res.ok || (res.status !== 404 && res.status !== 502)) {
+                            response = res;
+                            break;
+                        }
+                    } catch (fErr) {
+                        lastFetchError = fErr;
+                        if (fErr.name === 'AbortError') throw fErr;
+                    }
+                }
+
+                if (!response) {
+                    if (lastFetchError) throw lastFetchError;
+                    throw new Error("Unable to connect to chatbot server.");
+                }
 
                 clearTimeout(timeoutId);
 
@@ -859,12 +886,9 @@
                 const data = await response.json().catch(() => ({}));
 
                 if (!response.ok) {
-                    let errMsg = "Something went wrong on our end. Please try again.";
-                    if (response.status === 429) {
-                        errMsg = "You're sending messages too fast. Please wait a minute before sending another message.";
-                    } else if (response.status === 400) {
-                        errMsg = data.error || "Message was too long or invalid.";
-                    }
+                    let errMsg = data.error || (response.status === 429 
+                        ? "You're sending messages too fast. Please wait a minute before sending another message." 
+                        : "Something went wrong on our end. Please try again.");
                     renderErrorDOM(errMsg, lastUserMessage);
                     return;
                 }
@@ -917,6 +941,8 @@
                     errorMsg = "The request timed out. Please check your connection and retry.";
                 } else if (!navigator.onLine) {
                     errorMsg = "You appear to be offline. Please check your internet connection.";
+                } else if (isFileProtocol) {
+                    errorMsg = "Local Setup Notice: You are viewing this page directly via local files (`file:///`). Browsers block API requests on `file://`. To chat with the AI assistant locally, run `npm start` in the `chatbot-backend` folder and open http://localhost:5000, or view the live deployed site.";
                 }
                 renderErrorDOM(errorMsg, lastUserMessage);
             }
