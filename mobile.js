@@ -413,6 +413,39 @@
         window.visualViewport.addEventListener('resize', handleViewportResize);
     }
 
+    /* --------------------------------------------------------
+       8. MOBILE PROJECT & ACHIEVEMENT IMAGE RECOVERY
+       -------------------------------------------------------- */
+    function initMobileProjectImages() {
+        if (!isMobile()) return;
+
+        const containers = document.querySelectorAll('.project-img-container, .achievement-img-container');
+        containers.forEach(container => {
+            const img = container.querySelector('img');
+            const placeholder = container.querySelector('.project-img-placeholder, .achievement-img-placeholder');
+            if (!img || !placeholder) return;
+
+            const revealPlaceholder = () => {
+                img.style.display = 'none';
+                placeholder.style.display = 'flex';
+            };
+
+            // If the image already finished loading or failed
+            if (img.complete) {
+                if (img.naturalWidth === 0) {
+                    revealPlaceholder();
+                }
+            } else {
+                img.addEventListener('error', revealPlaceholder, { once: true });
+                img.addEventListener('load', () => {
+                    if (img.naturalWidth === 0) {
+                        revealPlaceholder();
+                    }
+                }, { once: true });
+            }
+        });
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
@@ -424,6 +457,7 @@
             initBlogMobileTOC();
             initMobileInputFocus();
             initVisualViewportSync();
+            initMobileProjectImages();
         });
     } else {
         initStickyHireBarSync();
@@ -434,5 +468,12 @@
         initBlogMobileTOC();
         initMobileInputFocus();
         initVisualViewportSync();
+        initMobileProjectImages();
     }
+
+    window.addEventListener('resize', () => {
+        if (isMobile()) {
+            initMobileProjectImages();
+        }
+    }, { passive: true });
 })();

@@ -69,6 +69,42 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Message is too long. Please keep your message under 500 characters." });
     }
 
+    // Strictly validate optional conversation history (capped at 6 items)
+    const validHistory = [];
+    if (Array.isArray(body?.history)) {
+        const rawHistory = body.history.slice(-6);
+        for (const item of rawHistory) {
+            if (
+                item &&
+                typeof item === 'object' &&
+                (item.role === 'user' || item.role === 'assistant') &&
+                typeof item.text === 'string' &&
+                item.text.trim().length > 0
+            ) {
+                validHistory.push({
+                    role: item.role === 'assistant' ? 'model' : 'user',
+                    parts: [{ text: item.text.trim().slice(0, 500) }]
+                });
+            }
+        }
+    }
+
+    // Format strictly alternating contents for Gemini multi-turn
+    const contents = [];
+    let expectedRole = 'user';
+    for (const turn of validHistory) {
+        if (turn.role === expectedRole) {
+            contents.push(turn);
+            expectedRole = expectedRole === 'user' ? 'model' : 'user';
+        }
+    }
+    // Ensure contents ends before the current user turn
+    if (contents.length > 0 && contents[contents.length - 1].role === 'user') {
+        contents.pop();
+    }
+    // Append current user message
+    contents.push({ role: 'user', parts: [{ text: message }] });
+
     // Read GEMINI_API_KEY from process.env only
     const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
     if (!GEMINI_API_KEY) {
@@ -102,7 +138,7 @@ export default async function handler(req, res) {
         - AI/ML: Machine Learning, Deep Learning, NLP, Generative AI, RAG, VectorDB, LLM.
         - Programming: Python (Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn), TensorFlow, Keras, NLTK, FastAPI (for backend).
         - MLOps & Tools: MLflow, DagsHub, Docker, Git, GitHub.
-        - Visualization & Deployment: Ploty, Power BI, Tableau, Streamlit, Flask, HTML, CSS, Bootstrap.
+        - Visualization & Deployment: Plotly, Power BI, Tableau, Streamlit, Flask, HTML, CSS, Bootstrap.
         - Databases: SQL, PostgreSQL, Google BigQuery, MySQL, MongoDB.
 
         KEY PROJECTS & IMPACT:
@@ -127,14 +163,15 @@ export default async function handler(req, res) {
         - To become a Data Scientist / Data Analyst / ML Engineer / AI Engineer building impactful, production-ready AI systems.
 
         RESPONSE RULES:
-        1. Tone: Confident, professional, and recruiter-friendly.
-        2. Length: Keep responses short and punchy (max 2-3 sentences).
-        3. Positioning: Never use "aspiring." Refer to Anubhav as a "Builder" or "Expert in [Topic]."
-        4. Focus: Highlight specific tools (like MLflow, Docker, or Gemini API) and real-world impact.
-        5. Redirect: If a question is irrelevant, say: "I’d love to discuss Anubhav’s work in AI/ML or his Rank 1 academic journey instead! Ask me about his GenAI award or his latest projects."
-        6. If user say hey, hi, hello or any greeting, just say "Hey! I'm Anubhav's Portfolio AI Assistant, What you want to know about Anubhav?", Nothing else. If they ask anything specific answer them accordingly.
-        7. If someone asks about hiring, pricing, or freelance work, answer briefly and invite them to message on WhatsApp (https://wa.me/919105579003) or use the contact page (contact.html).
-        8. Never invent clients, testimonials, prices, or results that are not in this context.
+        1. Tone: Confident, professional, helpful, and recruiter-friendly.
+        2. Formatting: You may use short Markdown (such as **bold** and bullet lists) for clarity and readability.
+        3. Length: Keep replies concise and impactful (about 3-5 short sentences or a brief bullet list).
+        4. Positioning: Never use "aspiring." Refer to Anubhav as a "Builder" or "Expert in [Topic]."
+        5. Focus: Highlight specific tools (such as FastAPI, ChromaDB, Docker, or Gemini API) and real-world measurable impact.
+        6. Redirect: If a question is irrelevant, say: "I’d love to discuss Anubhav’s work in AI/ML or his Rank 1 academic journey instead! Ask me about his GenAI award or his latest projects."
+        7. Greetings: If the user says hey, hi, hello or a greeting, respond warmly: "Hey! I'm Anubhav's Portfolio AI Assistant. What would you like to know about Anubhav's work, projects, or hiring?"
+        8. Hiring & Pricing: If someone asks about hiring, pricing, or freelance work, clearly mention the starting rates above (e.g. technical writing from ₹1,500, DS/ML from ₹5,000, automation/chatbots from ₹4,000) and invite them to message on WhatsApp (https://wa.me/919105579003) or use the contact form (contact.html).
+        9. Accuracy: Never invent clients, testimonials, prices, or results that are not in this context.
     `;
 
     const candidateModels = [
@@ -152,7 +189,7 @@ export default async function handler(req, res) {
         try {
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
             const payload = {
-                contents: [{ role: "user", parts: [{ text: message }] }],
+                contents,
                 systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
             };
 

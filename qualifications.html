@@ -581,69 +581,8 @@
     </script>
 
     <!-- AI Chatbot Widget -->
-    <div id="portfolio-chatbot">
-        <style>
-            [data-theme="dark"] #chat-input {
-                background-color: #2c3138 !important;
-                color: #f8f9fa !important;
-            }
-            [data-theme="dark"] #chat-input:focus {
-                background-color: #2c3138 !important;
-                color: #f8f9fa !important;
-                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
-                outline: none;
-            }
-            [data-theme="dark"] #chat-input::placeholder {
-                color: #adb5bd !important;
-            }
-        </style>
-        <button id="chat-trigger" class="btn shadow-lg rounded-circle" aria-label="Open AI chat assistant">
-            <i class="fas fa-comment-dots"></i>
-        </button>
-
-        <div id="chat-window" class="d-none animate-fade-in shadow-lg">
-            <div class="chat-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <div class="bot-avatar me-2">AY</div>
-                    <div>
-                        <h6 class="mb-0 fw-bold">Portfolio Assistant</h6>
-                        <small class="status-dot">Online</small>
-                    </div>
-                </div>
-                <button id="close-chat" class="btn btn-sm text-white border-0" aria-label="Close chat assistant">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div id="chat-messages" class="chat-body p-3">
-                <div class="message bot-msg">
-                    Hello! I'm Anubhav's AI assistant. Ask me anything about his skills or projects!
-                </div>
-            </div>
-
-            <div id="typing-indicator" class="px-3 py-1 d-none">
-                <small class="text-muted italic">Assistant is typing...</small>
-            </div>
-
-            <!-- Development Notice Banner -->
-            <div class="chat-info-banner px-3 py-1" style="background-color: rgba(13, 110, 253, 0.1); border-top: 1px solid rgba(13, 110, 253, 0.1);">
-                <div class="d-flex align-items-center" style="font-size: 10px; color: #0d6efd;">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <span>AI Portfolio Assistant still under development. Responses may occasionally fail due to high traffic.</span>
-                </div>
-            </div>
-
-            <div class="chat-footer p-2 border-top">
-                <form id="chat-form" class="d-flex gap-2">
-                    <input type="text" id="chat-input" class="form-control rounded-pill border-0" placeholder="Type a message..." maxlength="500" autocomplete="off">
-                    <button type="submit" class="btn btn-primary rounded-circle" aria-label="Send message">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script src="chatbot.js"></script>
+    <div id="portfolio-chatbot"></div>
+    <script src="chatbot.js" defer></script>
     <script defer src="polish.js"></script>
     <script defer src="mobile.js"></script>
 </body>
