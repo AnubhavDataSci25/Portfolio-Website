@@ -1,0 +1,232 @@
+/* ========================================================
+   CURSOR.CSS - Premium Custom Cursor, Magnetic & Spotlight
+   ======================================================== */
+
+:root {
+    --cursor-accent: var(--primary-color, #0d6efd);
+    --cursor-accent-rgb: 13, 110, 253;
+    --cursor-dot-size: 8px;
+    --cursor-ring-size: 38px;
+    --cursor-ring-border: 1.5px;
+    --cursor-ring-opacity: 0.55;
+    --cursor-glow-size: 460px;
+    --cursor-glow-opacity: 0.06;
+    --cursor-label-color: #ffffff;
+}
+
+[data-theme="dark"] {
+    --cursor-accent: var(--primary-color, #3d8bfd);
+    --cursor-accent-rgb: 61, 139, 253;
+    --cursor-ring-opacity: 0.65;
+    --cursor-glow-opacity: 0.10;
+    --cursor-label-color: #ffffff;
+}
+
+/* --------------------------------------------------------
+   1. NATIVE CURSOR SUPPRESSION ONLY ON DESKTOP FINE POINTERS
+   -------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+    html.has-custom-cursor,
+    html.has-custom-cursor body,
+    html.has-custom-cursor a,
+    html.has-custom-cursor button,
+    html.has-custom-cursor [role="button"],
+    html.has-custom-cursor .btn,
+    html.has-custom-cursor label,
+    html.has-custom-cursor summary {
+        cursor: none !important;
+    }
+
+    /* Never remove native functional cursors where needed */
+    html.has-custom-cursor input,
+    html.has-custom-cursor textarea,
+    html.has-custom-cursor select,
+    html.has-custom-cursor [contenteditable="true"],
+    html.has-custom-cursor pre,
+    html.has-custom-cursor code,
+    html.has-custom-cursor #chat-input,
+    html.has-custom-cursor [data-native-cursor],
+    html.has-custom-cursor .cursor-text,
+    html.has-custom-cursor [style*="cursor: text"],
+    html.has-custom-cursor [style*="cursor: not-allowed"],
+    html.has-custom-cursor [style*="cursor: progress"],
+    html.has-custom-cursor [style*="cursor: wait"],
+    html.has-custom-cursor [style*="cursor: help"] {
+        cursor: auto !important;
+    }
+}
+
+/* --------------------------------------------------------
+   2. SPOTLIGHT GLOW (Single fixed element behind content)
+   -------------------------------------------------------- */
+#cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-glow-size);
+    height: var(--cursor-glow-size);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    will-change: transform, opacity;
+    background: radial-gradient(circle, rgba(var(--cursor-accent-rgb), 0.32) 0%, rgba(var(--cursor-accent-rgb), 0.12) 40%, rgba(var(--cursor-accent-rgb), 0) 70%);
+    transition: opacity 0.4s ease;
+    mix-blend-mode: normal;
+}
+
+html.has-custom-cursor #cursor-glow.is-visible {
+    opacity: var(--cursor-glow-opacity);
+}
+
+/* Disable spotlight inside modals, lightboxes, or when obscured */
+body.modal-open #cursor-glow,
+body.has-modal-open #cursor-glow,
+#cursor-glow.is-disabled {
+    opacity: 0 !important;
+}
+
+/* --------------------------------------------------------
+   3. CURSOR DOT
+   -------------------------------------------------------- */
+#cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-dot-size);
+    height: var(--cursor-dot-size);
+    border-radius: 50%;
+    background-color: var(--cursor-accent);
+    pointer-events: none;
+    z-index: 100000;
+    opacity: 0;
+    will-change: transform, opacity;
+    transform: translate3d(-100px, -100px, 0);
+    transition: opacity 0.25s ease, background-color 0.3s ease;
+}
+
+html.has-custom-cursor #cursor-dot.is-visible {
+    opacity: 1;
+}
+
+#cursor-dot.is-hidden {
+    opacity: 0 !important;
+}
+
+/* --------------------------------------------------------
+   4. TRAILING OUTER RING
+   -------------------------------------------------------- */
+#cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-ring-size);
+    height: var(--cursor-ring-size);
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    will-change: transform, opacity;
+    transform: translate3d(-100px, -100px, 0);
+    transition: opacity 0.25s ease;
+}
+
+html.has-custom-cursor #cursor-ring.is-visible {
+    opacity: 1;
+}
+
+#cursor-ring.is-hidden {
+    opacity: 0 !important;
+}
+
+/* Inner Ring Shape (moves and scales only via transform) */
+.cursor-ring-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: var(--cursor-ring-border) solid rgba(var(--cursor-accent-rgb), var(--cursor-ring-opacity));
+    background-color: rgba(var(--cursor-accent-rgb), 0);
+    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.26s ease,
+                border-color 0.26s ease,
+                box-shadow 0.26s ease;
+    will-change: transform;
+    transform: scale(1);
+    box-sizing: border-box;
+}
+
+/* Ring Hover States */
+#cursor-ring.is-hover-clickable .cursor-ring-shape {
+    transform: scale(1.6);
+    background-color: rgba(var(--cursor-accent-rgb), 0.12);
+    border-color: rgba(var(--cursor-accent-rgb), 0.85);
+}
+
+#cursor-ring.is-pressed .cursor-ring-shape {
+    transform: scale(0.85);
+    background-color: rgba(var(--cursor-accent-rgb), 0.22);
+}
+
+/* --------------------------------------------------------
+   5. CONTEXTUAL CARD LABEL ("VIEW PROJECT ↗" / "READ POST ↗")
+   -------------------------------------------------------- */
+.cursor-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+    opacity: 0;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cursor-label-color);
+    pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+#cursor-ring.is-hover-card .cursor-ring-shape {
+    transform: scale(2.65);
+    background-color: var(--cursor-accent);
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(var(--cursor-accent-rgb), 0.35);
+}
+
+#cursor-ring.is-hover-card .cursor-label {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* When hover-card is active, hide dot */
+#cursor-dot.is-card-hover {
+    opacity: 0 !important;
+}
+
+/* --------------------------------------------------------
+   6. ACCESSIBILITY & COARSE POINTER OVERRIDES
+   -------------------------------------------------------- */
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    #cursor-dot,
+    #cursor-ring,
+    #cursor-glow {
+        display: none !important;
+    }
+    
+    html.has-custom-cursor,
+    html.has-custom-cursor body,
+    html.has-custom-cursor a,
+    html.has-custom-cursor button,
+    html.has-custom-cursor [role="button"],
+    html.has-custom-cursor .btn,
+    html.has-custom-cursor label,
+    html.has-custom-cursor summary {
+        cursor: auto !important;
+    }
+}
