@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Using AI to Draft Technical Docs Without Sounding Like AI | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A practical workflow for drafting technical documentation with AI, then editing and fact-checking it so it reads like a human expert wrote it.">
+    <meta name="author" content="Anubhav Yadav">
+    <meta name="keywords" content="AI technical writing, AI documentation workflow, edit AI generated content, fact-check AI drafts">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/using-ai-to-draft-technical-docs.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/using-ai-to-draft-technical-docs.html">
+    <meta property="og:title" content="Using AI to Draft Technical Docs Without Sounding Like AI">
+    <meta property="og:description" content="A practical workflow for drafting technical documentation with AI, then editing and fact-checking it so it reads like a human expert wrote it.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/using-ai-to-draft-technical-docs.html">
+    <meta name="twitter:title" content="Using AI to Draft Technical Docs Without Sounding Like AI">
+    <meta name="twitter:description" content="A practical workflow for drafting technical documentation with AI, then editing and fact-checking it so it reads like a human expert wrote it.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Using AI to Draft Technical Docs Without Sounding Like AI",
+      "description": "A practical workflow for drafting technical documentation with AI, then editing and fact-checking it so it reads like a human expert wrote it.",
+      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/using-ai-to-draft-technical-docs.html"
+      }
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <link rel="stylesheet" href="../polish.css">
+    <link rel="stylesheet" href="../mobile.css">
+    <link rel="stylesheet" href="../cursor.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        .comparison-box {
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .comparison-bad {
+            background-color: rgba(220, 53, 69, 0.08);
+            border-left: 4px solid #dc3545;
+        }
+        .comparison-good {
+            background-color: rgba(25, 135, 84, 0.08);
+            border-left: 4px solid #198754;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container position-relative">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html" aria-current="page">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="../services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5" id="main-content">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">Drafting Technical Docs with AI</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">Technical Writing</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> 13 Oct 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 7 min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="display-5 fw-bold mb-4">Using AI to Draft Technical Docs Without Sounding Like AI</h1>
+
+            <!-- Cover Image -->
+            <div class="mb-5 overflow-hidden rounded-4 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Writer editing an AI-generated document draft" 
+                     width="1200" height="630"
+                     loading="lazy" 
+                     class="img-fluid post-cover-img" decoding="async">
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+                <p class="lead">
+                    Large language models can produce two thousand words of technical documentation in under thirty seconds. That speed is intoxicating, but unedited drafts carry serious risk. Raw AI output often suffers from generic prose, hollow transitions, invented CLI flags, and confident technical errors that can easily mislead developers.
+                </p>
+                <p>
+                    When a developer reads your documentation, they are trying to solve an immediate problem: install a package, call an endpoint, or debug an unexpected error code. If the page feels like a robotic essay filled with repetitive fluff and hallucinated parameters, they close the tab and check GitHub issues instead.
+                </p>
+                <p>
+                    I use AI tools in my daily technical writing workflow, but I treat them as fast junior drafters rather than final authors. In this post, I will walk you through a repeatable, step-by-step workflow: how to prepare concrete input, generate focused sections, edit out robotic phrasing, verify every technical claim, and weave in genuine developer context.
+                </p>
+
+                <h2 id="step-1-give-the-ai-the-right-input">Step 1: Give the AI the right input</h2>
+                <p>
+                    The quality of an AI draft depends almost entirely on the constraints and raw material you feed it. If you provide a vague prompt, the model falls back on its training averages, producing generic textbook explanations.
+                </p>
+                <p>
+                    To get usable drafts, feed the model four specific items before asking for text:
+                </p>
+                <ul>
+                    <li><strong>Target audience:</strong> Are you writing for junior frontend developers, backend engineers, DevOps specialists, or non-technical project managers?</li>
+                    <li><strong>Specific task goal:</strong> What should the reader be able to run or build by the end of this page?</li>
+                    <li><strong>Tone constraints:</strong> Explicitly state that you want direct, active sentences with no promotional adjectives.</li>
+                    <li><strong>Source material:</strong> Paste your actual schema definitions, CLI terminal output, config files, or raw pull request notes.</li>
+                </ul>
+
+                <p>Consider the difference between a loose prompt and a constrained prompt:</p>
+
+                <div class="comparison-box comparison-bad">
+                    <strong>Vague prompt (Produces generic fluff):</strong><br>
+                    <em>"Write complete developer documentation for our new Python caching middleware."</em>
+                </div>
+
+                <div class="comparison-box comparison-good">
+                    <strong>Constrained prompt (Produces focused drafts):</strong><br>
+                    <em>"Write an installation and quickstart section for Python backend developers using Redis caching middleware with FastAPI. Use Python 3.11+. Keep explanations concise, explain each config flag in one sentence, and use the code snippet provided below."</em>
+                </div>
+
+                <p>Here is the prompt template I keep in my notes when drafting API references and integration guides:</p>
+
+                <pre class="code-snippet overflow-x-auto my-4"><code>### TECHNICAL DOCUMENTATION DRAFTING PROMPT
+
+ROLE:
+You are a senior technical writer drafting software documentation for working developers.
+
+TARGET AUDIENCE:
+Python engineers familiar with FastAPI and asynchronous requests.
+
+GOAL:
+Document the authentication setup for our REST API using bearer tokens.
+
+STYLE RULES:
+- Use direct, second-person imperative voice ("Install the package", "Run the command").
+- Keep sentences between 12 and 22 words where possible.
+- Avoid promotional language, buzzwords, or introductory filler.
+- Do not invent package names, CLI flags, or config options.
+
+SOURCE DATA:
+Endpoint: POST /api/v1/auth/token
+Required headers: Content-Type: application/json
+Payload: {"client_id": string, "client_secret": string}
+Response: 200 OK {"access_token": string, "token_type": "bearer", "expires_in": 3600}
+
+TASK:
+Draft two sections: 'Prerequisites' and 'Obtaining an Access Token' with an example curl command.</code></pre>
+
+                <h2 id="step-2-draft-in-sections-not-all-at-once">Step 2: Draft in sections, not all at once</h2>
+                <p>
+                    One common mistake is asking an AI model to write an entire fifteen-page documentation site or a 2,500-word tutorial in a single prompt. When models attempt broad outputs, two things happen: they skim over intricate edge cases, and their context window drifts toward repetitive filler phrases.
+                </p>
+                <p>
+                    Instead, break the article down into discrete, manageable blocks:
+                </p>
+                <ol>
+                    <li>Draft the environment setup and prerequisites block.</li>
+                    <li>Draft the minimal working code example.</li>
+                    <li>Draft the parameter reference table.</li>
+                    <li>Draft the error handling and troubleshooting section.</li>
+                </ol>
+                <p>
+                    By requesting one section at a time, you can inspect the code snippets and prose immediately. If the model introduces an unnecessary explanation or strays from your project requirements, you can correct the trajectory in the next prompt rather than untangling a massive wall of text later.
+                </p>
+
+                <h2 id="step-3-edit-for-a-human-voice">Step 3: Edit for a human voice</h2>
+                <p>
+                    Once the draft is generated, your role shifts from prompter to editor. Raw AI drafts have recognizable patterns—subtle tells that signal the text was generated rather than written by someone who built the system.
+                </p>
+                <p>Here is a checklist of common tells to remove during your first editing pass:</p>
+                <ul>
+                    <li><strong>Vague openers:</strong> Cut sentences that start with broad throat-clearing, such as <em>"In today's fast-moving software landscape..."</em> or <em>"It is important to remember that..."</em>. Get straight to the action.</li>
+                    <li><strong>Filler transitions:</strong> Strike out transitional crutches like <em>"Furthermore,"</em> <em>"Moreover,"</em> <em>"Additionally,"</em> and <em>"In conclusion,"</em> when a simple new sentence works better.</li>
+                    <li><strong>Repetitive sentence rhythm:</strong> AI models tend to produce uniform sentence lengths. Mix punchy short sentences with occasional longer explanatory sentences to create natural rhythm.</li>
+                    <li><strong>Over-polished adjectives:</strong> Remove words like <em>"seamless,"</em> <em>"robust,"</em> <em>"effortless,"</em> <em>"pivotal,"</em> and <em>"transformative."</em> Replace them with concrete performance metrics or remove them entirely.</li>
+                    <li><strong>Empty summaries:</strong> Avoid ending every single subheading with a generic recap paragraph restating what was just covered two sentences earlier.</li>
+                    <li><strong>Unnecessary bullet lists:</strong> Models love turning simple two-clause thoughts into bulleted lists of three items. If a point fits in one clear sentence, keep it in paragraph form.</li>
+                </ul>
+
+                <p>Here is a typical example from a raw draft compared to its edited version:</p>
+
+                <div class="comparison-box comparison-bad">
+                    <strong>Before (Stiff AI output):</strong><br>
+                    <em>"Furthermore, it is worth noting that configuring the connection pool size serves as a pivotal step in ensuring seamless database interactions during peak operational periods."</em>
+                </div>
+
+                <div class="comparison-box comparison-good">
+                    <strong>After (Human technical voice):</strong><br>
+                    <em>"Set the connection pool to at least 20 connections. This prevents timeout errors when concurrent queries spike."</em>
+                </div>
+
+                <h2 id="step-4-fact-check-everything">Step 4: Fact-check everything</h2>
+                <p>
+                    Editing style makes documentation enjoyable to read, but technical accuracy is what makes it trustworthy. Large language models generate plausible word associations; they do not execute code in their heads or verify live registry entries.
+                </p>
+                <p>
+                    Treat every technical claim in an AI draft as unverified until you confirm it against primary sources. Here is the verification checklist I run through:
+                </p>
+                <ul>
+                    <li><strong>Run the code snippets:</strong> Copy every command, curl call, or code block into a clean terminal or isolated virtual environment. Run it exactly as a reader would.</li>
+                    <li><strong>Check package versions and dependencies:</strong> Confirm that the libraries mentioned are currently supported and that the syntax matches the documented version.</li>
+                    <li><strong>Verify function names and parameter flags:</strong> Check the official documentation to ensure the flags and arguments actually exist. Models frequently invent sensible-sounding flags like <code>--enable-auto-retry</code> or <code>timeout_seconds</code> that do not exist in the official API.</li>
+                    <li><strong>Test all hyperlinks:</strong> Make sure referenced external URLs, RFC references, and repository paths resolve to live pages.</li>
+                    <li><strong>Confirm numbers and limits:</strong> Check documented default timeouts, maximum payload sizes, and rate limits against the actual source code or cloud provider specs.</li>
+                </ul>
+                <p>
+                    As an example, during a recent draft of a data processing guide, a model generated a snippet using <code>df.drop_duplicates(keep='first', ignore_index=True)</code> for a library version where <code>ignore_index</code> was not an accepted parameter. The code looked completely natural, yet it threw a <code>TypeError</code> immediately in Python. Catching errors like this before publication is what preserves your technical credibility.
+                </p>
+
+                <h2 id="step-5-add-what-only-you-know">Step 5: Add what only you know</h2>
+                <p>
+                    This step transforms an accurate technical manual into indispensable engineering documentation. AI models can synthesize public documentation, but they have never spent three hours debugging a race condition on a staging server. They cannot share the practical lessons learned during production incidents.
+                </p>
+                <p>
+                    Inject the real context that only human builders possess:
+                </p>
+                <ul>
+                    <li><strong>Real edge cases:</strong> What breaks if an upstream webhook sends a null payload or an empty string? Mention the exact error message and how to recover.</li>
+                    <li><strong>Architecture decisions:</strong> Why did your team pick Redis over Memcached for this specific service? Explaining the trade-offs helps readers make informed choices.</li>
+                    <li><strong>System prerequisites:</strong> Point out subtle system dependencies, such as required system libraries or kernel memory limits that cause silent failures.</li>
+                    <li><strong>Clear screenshots and annotations:</strong> Include labeled diagrams or console output screenshots that orient the reader in complex cloud dashboards.</li>
+                </ul>
+
+                <h2 id="my-final-checklist-before-publishing">My final checklist before publishing</h2>
+                <p>
+                    Before publishing any technical article or documentation page drafted with AI assistance, I run through this quick pre-publish checklist:
+                </p>
+                <ol>
+                    <li>Did I test every command and code snippet in a clean runtime?</li>
+                    <li>Are all version numbers, package names, and API flags verified against current official documentation?</li>
+                    <li>Did I remove filler openers, empty hype adjectives, and repetitive transitions?</li>
+                    <li>Does the document explain real trade-offs, edge cases, and architectural context?</li>
+                    <li>Are the headings semantic, skimmable, and focused on practical user goals?</li>
+                    <li>Does the page contain a clear next step or relevant service resource for readers who need help?</li>
+                </ol>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    AI tools are among the most capable drafting assistants a technical writer can use. They eliminate the blank-page dilemma and assemble scaffolding in seconds.
+                </p>
+                <p>
+                    However, software documentation is fundamentally about clarity and trust. The model is responsible only for initial drafts. As the author, you are responsible for testing the code, refining the voice, verifying the facts, and delivering docs that developers can depend on.
+                </p>
+            </div>
+
+            <!-- Share Buttons Bar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4 p-3 rounded-4 border" style="background-color: var(--card-bg);">
+                <span class="fw-semibold text-secondary small"><i class="fas fa-share-alt text-primary me-2"></i>Found this helpful? Share with your network:</span>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="blog-share-btn" data-share="linkedin" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="x" target="_blank" rel="noopener" aria-label="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="whatsapp" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button type="button" class="blog-share-btn" data-share="copy" aria-label="Copy link to clipboard"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+
+            <!-- Author Bio Card -->
+            <div class="blog-author-card d-flex align-items-center gap-3 my-4">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;" decoding="async">
+                <div>
+                    <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
+                    <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer & AI Automation Developer. Crafting practical AI workflows and high-ranking developer guides.</p>
+                    <div class="d-flex gap-3 small">
+                        <a href="../about.html" class="text-primary fw-semibold text-decoration-none">About Me →</a>
+                        <a href="../contact.html" class="text-primary fw-semibold text-decoration-none">Get in Touch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prev / Next Post Navigation -->
+            <div class="d-flex justify-content-between align-items-center my-4 py-3 border-top border-bottom">
+                <a href="../blog.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="fas fa-arrow-left me-1"></i> All Articles
+                </a>
+                <a href="whatsapp-automation-small-business.html" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                    Next: WhatsApp Automation <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+
+            <!-- Call to Action Banner -->
+            <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                <div class="mb-3">
+                    <i class="fas fa-file-alt fa-3x text-primary"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Need Clear, Accurate Technical Documentation or Blog Posts?</h3>
+                <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                    Need clear, accurate technical documentation or blog posts for your product? See my Technical Writing services for developer guides, API references, and engineering case studies.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">See Technical Writing Services</a>
+                    <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Contact Me</a>
+                </div>
+            </div>
+
+            <!-- Related Posts Row -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-4 text-center">Related Articles</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">Technical Writing</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="technical-blog-posts-that-rank.html" class="text-decoration-none text-dark">How to Write Technical Blog Posts That Rank on Google</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Combine developer-friendly code snippets with strategic SEO best practices to craft authoritative content that drives organic traffic.</p>
+                            <a href="technical-blog-posts-that-rank.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">AI Automation</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="whatsapp-automation-small-business.html" class="text-decoration-none text-dark">How Small Businesses Can Automate WhatsApp Replies for Free</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Learn how to capture leads and save hours of manual replying using simple, low-cost AI automation workflows and Python webhooks.</p>
+                            <a href="whatsapp-automation-small-business.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="site-footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="../index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="../index.html" class="footer-link">Home</a>
+                        <a href="../about.html" class="footer-link">About</a>
+                        <a href="../qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="../projects.html" class="footer-link">Projects</a>
+                        <a href="../achievements.html" class="footer-link">Achievements</a>
+                        <a href="../services.html" class="footer-link">Services</a>
+                        <a href="../blog.html" class="footer-link">Blog</a>
+                        <a href="../contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+    <script defer src="../polish.js"></script>
+    <script defer src="../mobile.js"></script>
+    <script defer src="../cursor.js"></script>
+</body>
+</html>
