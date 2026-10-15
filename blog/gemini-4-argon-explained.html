@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Gemini 4 Argon Explained: Features, Pricing, Access | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="What is Google's Gemini 4 Argon? A simple guide to its 1M-token output, benchmarks, pricing, who can use it, and what it means for developers.">
+    <meta name="author" content="Anubhav Yadav">
+    <meta name="keywords" content="Gemini 4 Argon, Gemini 4 Argon explained, Gemini 4 Argon pricing, Gemini 4 Argon availability, 1M token output">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/gemini-4-argon-explained.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/gemini-4-argon-explained.html">
+    <meta property="og:title" content="Gemini 4 Argon Explained: Google's New Frontier AI Model in Simple Words">
+    <meta property="og:description" content="What is Google's Gemini 4 Argon? A simple guide to its 1M-token output, benchmarks, pricing, who can use it, and what it means for developers.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/Gemini_4_argon.jpg">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/gemini-4-argon-explained.html">
+    <meta name="twitter:title" content="Gemini 4 Argon Explained: Google's New Frontier AI Model in Simple Words">
+    <meta name="twitter:description" content="What is Google's Gemini 4 Argon? A simple guide to its 1M-token output, benchmarks, pricing, who can use it, and what it means for developers.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/Gemini_4_argon.jpg">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Gemini 4 Argon Explained: Google's New Frontier AI Model in Simple Words",
+      "description": "What is Google's Gemini 4 Argon? A simple guide to its 1M-token output, benchmarks, pricing, who can use it, and what it means for developers.",
+      "image": "https://anubhav-yadav-portfolio-website.vercel.app/images/Gemini_4_argon.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-10-15",
+      "dateModified": "2026-10-15",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/gemini-4-argon-explained.html"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Gemini 4 Argon free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Gemini 4 Argon is not available on Google's free tier. In the consumer Gemini app, it requires a paid Google AI Pro or AI Ultra subscription. On the developer side, access via Google AI Studio and the Gemini API is billed per token usage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Gemini 4 Argon available in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Gemini 4 Argon rolled out globally, including India. Subscribers to Google AI Pro (priced at ₹1,950/month) and Google AI Ultra (from ₹6,500/month) can access it in the app, while developers can call the gemini-4-argon model through the paid API."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the exact model ID for API integration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The official model identifier in Google AI Studio, Vertex AI, and the google-genai Python SDK is gemini-4-argon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Gemini 4 Argon different from earlier Gemini models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Earlier flagship models capped output generations at 64,000 tokens. Gemini 4 Argon raises the single-response output ceiling to 1,000,000 tokens while natively tuning deep reasoning across low, medium, and high thinking levels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Gemini 4 Argon better than other top frontier models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google reports that Gemini 4 Argon sets state-of-the-art benchmarks on coding (DeepSWE v1.1) and long-video analysis (LVBench). However, independent evaluations across third-party industry benchmarks and real-world domain workflows will determine how it compares against competing frontier reasoning models."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <link rel="stylesheet" href="../polish.css">
+    <link rel="stylesheet" href="../mobile.css">
+    <link rel="stylesheet" href="../cursor.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        .notice-banner {
+            border-left: 4px solid var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.08);
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+        }
+        [data-theme="dark"] .notice-banner {
+            background-color: rgba(61, 139, 253, 0.12);
+        }
+        .summary-box {
+            border: 1px solid rgba(13, 110, 253, 0.25);
+            background: linear-gradient(145deg, rgba(13, 110, 253, 0.04), rgba(0, 212, 255, 0.04));
+            border-radius: 16px;
+            padding: 24px;
+            margin: 2rem 0;
+        }
+        [data-theme="dark"] .summary-box {
+            background: linear-gradient(145deg, rgba(61, 139, 253, 0.08), rgba(0, 242, 254, 0.05));
+            border-color: rgba(61, 139, 253, 0.35);
+        }
+        .custom-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid rgba(13, 110, 253, 0.15);
+        }
+        .custom-table {
+            width: 100%;
+            margin-bottom: 0;
+            font-size: 0.92rem;
+            border-collapse: collapse;
+        }
+        .custom-table th {
+            background-color: rgba(13, 110, 253, 0.08);
+            color: var(--text-color);
+            padding: 12px 16px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .custom-table th {
+            background-color: rgba(61, 139, 253, 0.16);
+        }
+        [data-theme="dark"] .custom-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .token-vis-bar {
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: width 0.3s ease;
+        }
+        .calc-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(13, 110, 253, 0.18);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 1.5rem 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card, .token-vis-bar {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container position-relative">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html" aria-current="page">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="../services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5" id="main-content">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">Gemini 4 Argon Explained</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">AI Automation</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> 15 Oct 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 8 min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="display-5 fw-bold mb-3">Gemini 4 Argon Explained: Google's New Frontier AI Model in Simple Words</h1>
+
+            <!-- Verification Notice Banner -->
+            <div class="notice-banner mb-4 text-secondary">
+                <i class="fas fa-info-circle text-primary me-2"></i>
+                <strong>Notice:</strong> Facts checked on 15 Oct 2026. Availability and pricing are changing quickly, so check Google's official pages before you rely on them.
+            </div>
+
+            <!-- Cover Image -->
+            <div class="mb-5 overflow-hidden rounded-4 shadow-sm bg-black text-center">
+                <img src="../images/Gemini_4_argon.jpg" 
+                     alt="Gemini 4 Argon model explained" 
+                     width="1200" height="600"
+                     loading="eager" fetchpriority="high"
+                     class="img-fluid post-cover-img" decoding="async">
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+
+                <!-- 1. Quick summary box -->
+                <h2 id="quick-summary-gemini-4-argon-in-60-seconds">Gemini 4 Argon in 60 seconds</h2>
+                <div class="summary-box">
+                    <ul class="mb-0">
+                        <li class="mb-2"><strong>What it is:</strong> Google's flagship frontier reasoning model, announced on 30 September 2026 as the first release in the Gemini 4 family.</li>
+                        <li class="mb-2"><strong>Headline feature:</strong> An output limit expanded to <strong>1 million tokens</strong> per response, up from the previous 64,000-token ceiling.</li>
+                        <li class="mb-2"><strong>Who can use it:</strong> Available to Google AI Pro and AI Ultra subscribers in the consumer Gemini app, and to software engineers via Google AI Studio and the Gemini API (model ID: <code>gemini-4-argon</code>).</li>
+                        <li class="mb-2"><strong>Price:</strong> Introductory API pricing through 30 November 2026 is $2 per 1M input tokens and $10 per 1M output tokens (with cached inputs discounted by 95% to $0.10/1M tokens). Standard rates double to $4/$20 on 1 December 2026.</li>
+                        <li class="mb-0"><strong>Biggest caveat:</strong> Generating massive outputs takes substantial time and accumulates token costs quickly. A long response is not a substitute for human code review and careful task planning.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. What is Gemini 4 Argon? -->
+                <h2 id="what-is-gemini-4-argon">What is Gemini 4 Argon?</h2>
+                <p>
+                    On 30 September 2026, Google DeepMind introduced <strong>Gemini 4 Argon</strong>. It represents the flagship model of Google's fourth-generation artificial intelligence architecture, positioned above earlier models like Gemini 1.5 Pro and Gemini 2.0 Flash.
+                </p>
+                <p>
+                    Rather than prioritizing raw conversational chit-chat, Google engineered Argon as a deep-reasoning system. It is designed to sustain complex, multi-step tasks across software engineering, legal and financial analysis, cybersecurity defense, and robotics simulations. It is natively multimodal, accepting text, high-resolution imagery, audio, video files, and structured codebases as inputs.
+                </p>
+
+                <!-- 3. Key terms in plain English -->
+                <h2 id="key-terms-in-plain-english">Key terms in plain English</h2>
+                <p>
+                    AI announcements often drown readers in jargon. Here is what the core technical concepts actually mean in everyday terms:
+                </p>
+                <ul>
+                    <li><strong>Token:</strong> The basic building block of text for an AI. Think of a token as a word fragment. In English, 1,000 tokens equal roughly 750 words.</li>
+                    <li><strong>Context window:</strong> The total amount of information the model can read and keep in its working memory at one time. It is like the desk space where the model lays out all your background documents before answering.</li>
+                    <li><strong>Output limit:</strong> The maximum length of text the model can write back to you in a single continuous answer. If context window is reading capacity, output limit is writing stamina.</li>
+                    <li><strong>Frontier model:</strong> An industry term for the newest, largest, and most computationally capable AI systems at the leading edge of research.</li>
+                    <li><strong>Agentic workflow:</strong> When an AI model does not just answer a single question, but actively takes multi-step actions on your behalf—such as running terminal tests, reading errors, and revising code in an iterative loop.</li>
+                    <li><strong>Benchmark:</strong> A standardized test suite used to evaluate how well different models perform on math problems, programming bugs, or reading comprehension.</li>
+                </ul>
+
+                <!-- 4. What is new: the 1M-token output limit -->
+                <h2 id="what-is-new-the-1m-token-output-limit">What is new: the 1M-token output limit</h2>
+                <p>
+                    Most previous frontier models allowed reading large documents (up to 1 or 2 million input tokens) but restricted their responses to 8,192, 32,768, or at most 64,000 output tokens. If you asked an AI to refactor an entire application, it would run out of space mid-file and stop.
+                </p>
+                <p>
+                    Gemini 4 Argon raises the single-response output cap to <strong>1,000,000 tokens</strong>—approximately 750,000 words. That is equivalent to several thick novels written in a single pass.
+                </p>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Generation Metric</th>
+                                <th>Previous Flagships</th>
+                                <th>Gemini 4 Argon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Max Input Window</td>
+                                <td>1,000,000 – 2,000,000 tokens</td>
+                                <td>1,000,000 tokens</td>
+                            </tr>
+                            <tr>
+                                <td>Max Single Output</td>
+                                <td>64,000 tokens (~48,000 words)</td>
+                                <td><strong>1,000,000 tokens (~750,000 words)</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Reasoning Parameter</td>
+                                <td>Fixed thinking budgets</td>
+                                <td>Configurable <code>thinking_level</code> (low, medium, high)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    This expanded output capacity enables long-horizon tasks that previously required brittle chunking scripts:
+                </p>
+                <ul>
+                    <li>Generating complete multi-file software modules without truncation.</li>
+                    <li>Drafting extensive regulatory audits and compliance reports in a single run.</li>
+                    <li>Executing iterative, multi-hop debugging sessions without losing the chain of reasoning.</li>
+                </ul>
+                <p>
+                    <strong>An honest reality check:</strong> Longer output does not inherently mean higher intelligence. A 200,000-token answer costs more money, takes significantly longer to stream across the network, and increases the surface area for minor factual drifts. Shorter, targeted prompts often remain the smarter engineering choice for everyday questions.
+                </p>
+
+                <!-- 5. What it is built for -->
+                <h2 id="what-it-is-built-for">What it is built for</h2>
+                <p>
+                    Google highlighted three core domains for Argon during its technical presentation:
+                </p>
+                <ul>
+                    <li><strong>Complex software engineering:</strong> Migrating legacy systems, updating deprecated frameworks, and translating codebases between languages.</li>
+                    <li><strong>Enterprise knowledge work:</strong> Analyzing corporate financial filings, drafting cross-border contract comparisons, and synthesizing lengthy research archives.</li>
+                    <li><strong>Cybersecurity defense:</strong> Identifying security vulnerabilities, reproducing software exploits in controlled environments, and generating patches for zero-day flaws.</li>
+                </ul>
+                <p>
+                    Google shared three specific internal examples to illustrate these capabilities:
+                </p>
+                <ol>
+                    <li><strong>Rewriting video decoders in Rust:</strong> Google deployed Argon agents to rewrite parts of its open-source <code>libgav1</code> AV1 video decoder. The model replaced approximately 32,000 lines of manual SIMD code with memory-safe Rust that compiled cleanly, ran 2.7x faster than the initial Rust port, and neared raw C++ throughput.</li>
+                    <li><strong>Zircon kernel migration:</strong> Google utilized Argon agents to assist in rewriting critical components of the Fuchsia OS Zircon microkernel—a codebase spanning hundreds of thousands of lines of code.</li>
+                    <li><strong>Data center memory savings:</strong> Google reported using the model internally to analyze data center infrastructure profiles, finding memory-allocation optimizations that reduced server resource footprints.</li>
+                </ol>
+
+                <!-- 6. How good is it? Benchmarks explained simply -->
+                <h2 id="how-good-is-it-benchmarks-explained-simply">How good is it? Benchmarks explained simply</h2>
+                <p>
+                    AI companies measure model quality using standardized benchmark tests. Google published self-reported scores for Gemini 4 Argon across four prominent evaluation suites:
+                </p>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Benchmark</th>
+                                <th>What it measures</th>
+                                <th>Reported Score</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>DeepSWE v1.1</strong></td>
+                                <td>Real-world, repository-level software engineering issues</td>
+                                <td>77.9%</td>
+                                <td>Self-reported by Google</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AutomationBench</strong></td>
+                                <td>Multi-step workflow execution across enterprise tools</td>
+                                <td>51.3%</td>
+                                <td>Self-reported by Google (Zapier)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LVBench</strong></td>
+                                <td>Long-form video comprehension and temporal event tracking</td>
+                                <td>91.7%</td>
+                                <td>Self-reported by Google</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CWE-bench v1</strong></td>
+                                <td>Detection, exploitation, and automated patching of security flaws</td>
+                                <td>High vulnerability resolution</td>
+                                <td>Self-reported by Google</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    <em>A note on vendor benchmarks:</em> These scores were published by Google. While they indicate strong technical progress in coding and video analysis, benchmark scores can be sensitive to prompt scaffolding and test selection. Independent verification from public developer benchmarks and production testing will provide a more complete picture of real-world reliability.
+                </p>
+
+                <!-- 7. Who can use it today? -->
+                <h2 id="who-can-use-it-today">Who can use it today?</h2>
+                <p>
+                    Access to Gemini 4 Argon depends on whether you are an everyday consumer, a security researcher, or a software engineer:
+                </p>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Access Channel</th>
+                                <th>Eligibility & Requirements</th>
+                                <th>Availability Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Fairwind Program</strong></td>
+                                <td>Vetted cybersecurity defense partners, critical infrastructure operators, and government bodies</td>
+                                <td>Limited phased rollout (Announced 30 Sept 2026)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini App (Web & Mobile)</strong></td>
+                                <td>Requires a paid <strong>Google AI Pro</strong> or <strong>Google AI Ultra</strong> subscription plan</td>
+                                <td>Rolled out globally on 13 Oct 2026</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google AI Studio & Vertex AI</strong></td>
+                                <td>Accessible to developers with a paid API billing project (Model ID: <code>gemini-4-argon</code>)</td>
+                                <td>Available via paid API keys</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Antigravity</strong></td>
+                                <td>Agentic development environment integration for code refactoring</td>
+                                <td>Requires Google AI Ultra subscription tier</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Free Tier Users</strong></td>
+                                <td>Unpaid accounts in the consumer Gemini app or free API tier</td>
+                                <td>Not available on free tiers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 8. Pricing explained -->
+                <h2 id="pricing-explained">Pricing explained</h2>
+                <p>
+                    For developers building software on the Gemini API, Google introduced promotional pricing for Argon that runs through <strong>30 November 2026</strong>:
+                </p>
+                <ul>
+                    <li><strong>Input tokens:</strong> $2.00 per 1 million tokens (scheduled to rise to $4.00 on 1 December 2026).</li>
+                    <li><strong>Output tokens:</strong> $10.00 per 1 million tokens (scheduled to rise to $20.00 on 1 December 2026). This rate applies to both final text and the model's internal reasoning tokens.</li>
+                    <li><strong>Cached input tokens:</strong> 95% discount off standard input rates, coming to $0.10 per million tokens during the promotion ($0.20 thereafter).</li>
+                </ul>
+
+                <div class="calc-card">
+                    <h6 class="fw-bold text-primary mb-2"><i class="fas fa-calculator me-2"></i> Worked Pricing Example</h6>
+                    <p class="small text-secondary mb-2">
+                        Suppose you pass a code repository prompt containing <strong>10,000 input tokens</strong> and ask Argon to generate a thorough documentation refactor yielding <strong>50,000 output tokens</strong> under the promotional rate:
+                    </p>
+                    <ul class="small mb-2">
+                        <li><strong>Input cost:</strong> 10,000 / 1,000,000 &times; $2.00 = <strong>$0.02</strong></li>
+                        <li><strong>Output cost:</strong> 50,000 / 1,000,000 &times; $10.00 = <strong>$0.50</strong></li>
+                        <li><strong>Total request cost:</strong> $0.02 + $0.50 = <strong>$0.52</strong></li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        Notice how the output tokens account for over 96% of the bill. When designing automated pipelines, concise prompts with clear scope constraints keep operational costs predictable.
+                    </p>
+                </div>
+
+                <!-- 9. Safety and limits -->
+                <h2 id="safety-and-limits">Safety and limits</h2>
+                <p>
+                    Why did Google introduce Argon in phases rather than releasing it openly to everyone on day one?
+                </p>
+                <p>
+                    Because Argon was trained heavily on offensive and defensive cybersecurity datasets, it possesses advanced capabilities in writing functional exploits and reverse-engineering binaries. Google stated that releasing such capabilities without safeguards creates immediate dual-use risks.
+                </p>
+                <p>Two primary safety concerns govern the phased rollout:</p>
+                <ul>
+                    <li><strong>Prompt injection:</strong> An attack where malicious instructions hidden inside user data (such as a website or email) trick the AI into ignoring system instructions or exfiltrating data.</li>
+                    <li><strong>Model misalignment:</strong> When an autonomous agent pursues a goal using unintended, harmful, or destructive shortcuts (such as deleting an essential table while attempting to optimize disk usage).</li>
+                </ul>
+                <p>
+                    Google indicated that it participated in pre-deployment review frameworks with government safety bodies and trusted enterprise partners before expanding access to broader subscription tiers.
+                </p>
+
+                <!-- 10. What it means for students, developers, and small businesses -->
+                <h2 id="what-it-means-for-students-developers-and-small-businesses">What it means for students, developers, and small businesses</h2>
+                <p>
+                    If you are a student, indie developer, or small business owner, here are four practical takeaways:
+                </p>
+                <ol>
+                    <li><strong>Test on your own domain tasks:</strong> Do not rely exclusively on public benchmarks. Benchmark tests measure specific scenarios; test Argon against your actual database schemas, customer support tickets, or code libraries.</li>
+                    <li><strong>Budget strictly for output tokens:</strong> Because Argon can generate massive responses, unattended loops or open-ended prompts can rack up API costs quickly. Set explicit <code>max_output_tokens</code> boundaries in your client configuration.</li>
+                    <li><strong>Maintain human verification on generated code:</strong> Even advanced models can produce subtle logic errors, incorrect security flags, or deprecated APIs. Run and test generated code in isolated sandbox environments before merging to production.</li>
+                    <li><strong>Evaluate simpler models for routine tasks:</strong> If you only need a quick summary of a short email or basic JSON parsing, lighter models like Gemini 2.5 Flash are faster, significantly cheaper, and more than capable. Reserve Argon for intricate architectural tasks.</li>
+                </ol>
+
+                <!-- 11. How to try it -->
+                <h2 id="how-to-try-it">How to try it</h2>
+                <p>
+                    If you want to experiment with Gemini 4 Argon, here are the official access routes verified as of October 2026:
+                </p>
+                <ul>
+                    <li><strong>Consumer access:</strong> Log into the Gemini web interface or mobile app using an account with an active <strong>Google AI Pro</strong> or <strong>Google AI Ultra</strong> subscription. Select the model from the top model dropdown.</li>
+                    <li><strong>Developer API access:</strong> Visit Google AI Studio, generate an API key with a linked billing account, and install the current official Google GenAI Python library (version <code>google-genai&gt;=2.30.1</code>).</li>
+                </ul>
+
+                <p>Here is the minimal Python snippet confirmed in the official Google documentation:</p>
+
+                <pre class="code-snippet overflow-x-auto my-4"><code>from google import genai
+from google.genai import types
+
+# Initializes client with GEMINI_API_KEY from environment
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-4-argon",
+    contents="Explain how connection pooling prevents database timeouts in Python.",
+    config=types.GenerateContentConfig(
+        thinking_level="medium",  # Options: 'low', 'medium', 'high'
+        max_output_tokens=4096,
+    ),
+)
+
+print(response.text)</code></pre>
+
+                <!-- 12. FAQ -->
+                <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+                <h3 id="faq-is-it-free">Is Gemini 4 Argon free to use?</h3>
+                <p>
+                    No. Argon is not available on Google's free consumer tier or free API quotas. In the Gemini web app, access requires a Google AI Pro or AI Ultra subscription. On the API side, all tokens are billed directly against your Google Cloud project.
+                </p>
+
+                <h3 id="faq-is-it-available-in-india">Is Gemini 4 Argon available in India?</h3>
+                <p>
+                    Yes. The model is available in India for Google AI Pro subscribers (priced at ₹1,950 per month) and Google AI Ultra subscribers (from ₹6,500 per month). Developers in India can access the <code>gemini-4-argon</code> endpoint through Google AI Studio with international billing.
+                </p>
+
+                <h3 id="faq-what-is-the-model-id">What is the exact model ID?</h3>
+                <p>
+                    The official model string used in API calls and SDK configurations is <code>gemini-4-argon</code>.
+                </p>
+
+                <h3 id="faq-how-is-it-different">How is it different from earlier Gemini models?</h3>
+                <p>
+                    While earlier models focused on large input reading windows with outputs capped at 64,000 tokens, Argon is Google's first model to raise the single-pass output limit to 1,000,000 tokens while providing explicit <code>thinking_level</code> reasoning depth control.
+                </p>
+
+                <h3 id="faq-is-it-better">Is it better than other top models?</h3>
+                <p>
+                    Google reports state-of-the-art results on several coding, long-video, and cyber benchmarks. However, overall performance varies across specific real-world tasks, frameworks, and languages. Developers should run side-by-side evaluations on their own workloads before standardizing on any single frontier model.
+                </p>
+
+                <!-- 13. Conclusion -->
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    Gemini 4 Argon reflects the AI industry's broader shift from short conversational responses toward sustained, long-horizon reasoning. By expanding the output ceiling to one million tokens and targeting rigorous engineering domains, Google has delivered an impressive foundation for complex software and enterprise automation.
+                </p>
+                <p>
+                    To sum up:
+                </p>
+                <ul>
+                    <li><strong>Deep capability:</strong> Argon shines in multi-step code translation, complex architectural reviews, and security defense.</li>
+                    <li><strong>Cost awareness:</strong> With output rates reaching $10 to $20 per million tokens, careful prompt scoping and token caps are essential.</li>
+                    <li><strong>Human judgment remains primary:</strong> A 1M-token response is only as useful as the verification behind it. Human code review, testing, and system architecture skills remain just as critical as ever.</li>
+                </ul>
+            </div>
+
+            <!-- Share Buttons Bar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4 p-3 rounded-4 border" style="background-color: var(--card-bg);">
+                <span class="fw-semibold text-secondary small"><i class="fas fa-share-alt text-primary me-2"></i>Found this helpful? Share with your network:</span>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="blog-share-btn" data-share="linkedin" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="x" target="_blank" rel="noopener" aria-label="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="whatsapp" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button type="button" class="blog-share-btn" data-share="copy" aria-label="Copy link to clipboard"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+
+            <!-- Author Bio Card -->
+            <div class="blog-author-card d-flex align-items-center gap-3 my-4">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;" decoding="async">
+                <div>
+                    <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
+                    <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer & AI Automation Developer. Crafting practical AI workflows and high-ranking developer guides.</p>
+                    <div class="d-flex gap-3 small">
+                        <a href="../about.html" class="text-primary fw-semibold text-decoration-none">About Me →</a>
+                        <a href="../contact.html" class="text-primary fw-semibold text-decoration-none">Get in Touch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prev / Next Post Navigation -->
+            <div class="d-flex justify-content-between align-items-center my-4 py-3 border-top border-bottom">
+                <a href="../blog.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="fas fa-arrow-left me-1"></i> All Articles
+                </a>
+                <a href="using-ai-to-draft-technical-docs.html" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                    Next: Drafting Tech Docs with AI <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+
+            <!-- Call to Action Banner -->
+            <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                <div class="mb-3">
+                    <i class="fas fa-robot fa-3x text-primary"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Want AI Features or Automation Built into Your Business?</h3>
+                <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                    Whether you are looking to integrate frontier LLMs, build custom AI chatbots, or automate repetitive business workflows with Python, see my AI Automation services.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">Explore AI Automation Services</a>
+                    <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Contact Me</a>
+                </div>
+            </div>
+
+            <!-- Sources Section -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-3">Sources & References</h4>
+                <ul class="small text-secondary">
+                    <li class="mb-1"><strong>Google DeepMind Announcement:</strong> "Introducing Gemini 4 Argon: Frontier Reasoning and Long-Horizon Performance", Google DeepMind Blog (Accessed 15 Oct 2026).</li>
+                    <li><strong>Google Cloud & AI Studio Pricing:</strong> "Gemini Models API Pricing and Tokens", Google for Developers (Accessed 15 Oct 2026).</li>
+                    <li><strong>Google Open Source & Research:</strong> "Autonomous Codebase Migration at Google with Gemini 4 Argon", Google Open Source Blog (Accessed 15 Oct 2026).</li>
+                    <li><strong>The Fairwind Program:</strong> "Securing Critical Infrastructure with Frontier AI Defense", Google Cloud Blog (Accessed 15 Oct 2026).</li>
+                    <li><strong>DeepSWE Benchmark Evaluation:</strong> "DeepSWE: Benchmarking Multi-File Repository Software Engineering", arXiv / DeepSWE Project (Accessed 15 Oct 2026).</li>
+                </ul>
+            </div>
+
+            <!-- Related Posts Row -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-4 text-center">Related Articles</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">Technical Writing</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="using-ai-to-draft-technical-docs.html" class="text-decoration-none text-dark">Using AI to Draft Technical Docs Without Sounding Like AI</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">A practical workflow for drafting technical documentation with AI, then editing and fact-checking it so it reads naturally.</p>
+                            <a href="using-ai-to-draft-technical-docs.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">AI Automation</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="whatsapp-automation-small-business.html" class="text-decoration-none text-dark">How Small Businesses Can Automate WhatsApp Replies for Free</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Learn how to capture leads and save hours of manual replying using simple, low-cost AI automation workflows and Python webhooks.</p>
+                            <a href="whatsapp-automation-small-business.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="site-footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="../index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="../index.html" class="footer-link">Home</a>
+                        <a href="../about.html" class="footer-link">About</a>
+                        <a href="../qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="../projects.html" class="footer-link">Projects</a>
+                        <a href="../achievements.html" class="footer-link">Achievements</a>
+                        <a href="../services.html" class="footer-link">Services</a>
+                        <a href="../blog.html" class="footer-link">Blog</a>
+                        <a href="../contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+    <script defer src="../polish.js"></script>
+    <script defer src="../mobile.js"></script>
+    <script defer src="../cursor.js"></script>
+</body>
+</html>
