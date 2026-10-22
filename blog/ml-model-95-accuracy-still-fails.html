@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Why Your ML Model Has 95% Accuracy and Still Fails | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="High accuracy can hide a useless model. Learn the 5 common reasons ML models fail in real life, with Python examples and fixes you can apply today.">
+    <meta name="author" content="Anubhav Yadav">
+    <meta name="keywords" content="ML model accuracy paradox, imbalanced dataset accuracy, data leakage in machine learning, why ML models fail in production, precision recall F1">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/ml-model-95-accuracy-still-fails.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/ml-model-95-accuracy-still-fails.html">
+    <meta property="og:title" content="Why Your ML Model Has 95% Accuracy and Still Fails in Real Life">
+    <meta property="og:description" content="High accuracy can hide a useless model. Learn the 5 common reasons ML models fail in real life, with Python examples and fixes you can apply today.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/ml-model-95-accuracy-still-fails.html">
+    <meta name="twitter:title" content="Why Your ML Model Has 95% Accuracy and Still Fails in Real Life">
+    <meta name="twitter:description" content="High accuracy can hide a useless model. Learn the 5 common reasons ML models fail in real life, with Python examples and fixes you can apply today.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Why Your ML Model Has 95% Accuracy and Still Fails in Real Life",
+      "description": "High accuracy can hide a useless model. Learn the 5 common reasons ML models fail in real life, with Python examples and fixes you can apply today.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-10-22",
+      "dateModified": "2026-10-22",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/ml-model-95-accuracy-still-fails.html"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a good accuracy score in machine learning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 'good' accuracy score depends entirely on your class distribution and business baseline. On a balanced 50/50 problem, 85% accuracy may be strong. But on a rare fraud detection problem where 99% of transactions are legitimate, a model with 98% accuracy is actually worse than a dummy baseline that guesses 'no fraud' every time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is accuracy misleading on real-world datasets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Accuracy treats every mistake as equally costly and calculates total correct predictions over total samples. When one class vastly outnumbers another, a model can ignore the rare class entirely, score a sky-high accuracy, and completely fail at the real task."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which metric should I use for imbalanced data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instead of raw accuracy, use Precision, Recall, and F1-score (or PR-AUC / Average Precision). If false negatives are dangerous (such as missed cancer or missed fraud), optimize for high Recall. If false positives are costly (such as blocking good customers), prioritize Precision."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I detect data leakage in my pipeline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Watch for suspiciously perfect validation scores (like 99% or 100%), inspect feature importances for columns recorded after the target event occurs, and always bundle preprocessing scalers and encoders inside a scikit-learn Pipeline so test sets never leak into training calculations."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <link rel="stylesheet" href="../polish.css">
+    <link rel="stylesheet" href="../mobile.css">
+    <link rel="stylesheet" href="../cursor.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        .output-snippet {
+            background-color: #0d1117;
+            color: #7ee787;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.85rem;
+            border-left: 4px solid #238636;
+            margin-bottom: 1.5rem;
+        }
+        .summary-box {
+            border: 1px solid rgba(13, 110, 253, 0.25);
+            background: linear-gradient(145deg, rgba(13, 110, 253, 0.04), rgba(0, 212, 255, 0.04));
+            border-radius: 16px;
+            padding: 24px;
+            margin: 2rem 0;
+        }
+        [data-theme="dark"] .summary-box {
+            background: linear-gradient(145deg, rgba(61, 139, 253, 0.08), rgba(0, 242, 254, 0.05));
+            border-color: rgba(61, 139, 253, 0.35);
+        }
+        .custom-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid rgba(13, 110, 253, 0.15);
+        }
+        .custom-table {
+            width: 100%;
+            margin-bottom: 0;
+            font-size: 0.92rem;
+            border-collapse: collapse;
+        }
+        .custom-table th {
+            background-color: rgba(13, 110, 253, 0.08);
+            color: var(--text-color);
+            padding: 12px 16px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .custom-table th {
+            background-color: rgba(61, 139, 253, 0.16);
+        }
+        [data-theme="dark"] .custom-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container position-relative">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html" aria-current="page">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="../services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5" id="main-content">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">Why ML Models with 95% Accuracy Fail</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">Data Science</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> 22 Oct 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 9 min read</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="display-5 fw-bold mb-4">Why Your ML Model Has 95% Accuracy and Still Fails in Real Life</h1>
+
+            <!-- Cover Image -->
+            <div class="mb-5 overflow-hidden rounded-4 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Machine learning model with high accuracy but poor real-world results" 
+                     width="1200" height="630"
+                     loading="lazy" 
+                     class="img-fluid post-cover-img" decoding="async">
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+
+                <!-- 1. Introduction -->
+                <p class="lead">
+                    You train your model in a Jupyter notebook, hit run on the final cell, and stare at the validation score: <code>Accuracy: 0.9480</code>. You celebrate. You deploy the service to a test endpoint. And within thirty minutes, your team reports that the model is failing on real user requests.
+                </p>
+                <p>
+                    This is one of the most frustrating experiences in machine learning. It makes newcomers feel like the math lied to them. But the math did not lie: accuracy simply answered the specific question you asked it, while the real world was grading something completely different.
+                </p>
+                <p>
+                    In this guide, I will break down the five most common reasons a machine learning model can score 95% accuracy in your notebook and still collapse in production, with runnable Python code and practical fixes you can apply today.
+                </p>
+
+                <!-- 2. Quick summary box -->
+                <h2 id="the-5-reasons-in-30-seconds">The 5 reasons in 30 seconds</h2>
+                <div class="summary-box">
+                    <ul class="mb-0">
+                        <li class="mb-2"><strong>1. Imbalanced data:</strong> When 95% of your samples belong to one class, a dummy model that always guesses that class gets 95% accuracy while catching zero positive events.</li>
+                        <li class="mb-2"><strong>2. Data leakage:</strong> Your training features accidentally peeked at information created after the event or borrowed knowledge from the test set during preprocessing.</li>
+                        <li class="mb-2"><strong>3. Overfitting:</strong> The model memorized subtle noise and quirks in your training set rather than learning generalizable underlying patterns.</li>
+                        <li class="mb-2"><strong>4. Mismatched test data:</strong> Your validation split does not reflect production reality due to random splits on time-series data or live distribution shifts.</li>
+                        <li class="mb-0"><strong>5. Measuring the wrong metric:</strong> Your evaluation metric did not reflect the real business cost of false positives versus false negatives, and you never compared against a simple baseline.</li>
+                    </ul>
+                </div>
+
+                <!-- 3. Reason 1: Imbalanced data -->
+                <h2 id="reason-1-imbalanced-data-the-accuracy-paradox">Reason 1: Imbalanced data (the accuracy paradox)</h2>
+                <p>
+                    Imagine you are building a fraud detection system for an online shop. Out of every 10,000 transactions, roughly 9,500 are legitimate purchases and only 500 are fraudulent.
+                </p>
+                <p>
+                    If an algorithm simply approves every single transaction without looking at a single feature, how accurate is it? It gets 9,500 out of 10,000 correct: exactly <strong>95% accuracy</strong>. But as a fraud detector, it is completely useless. It caught zero thieves.
+                </p>
+                <p>
+                    This trap is called the <strong>accuracy paradox</strong>. Accuracy is defined as total correct predictions divided by total predictions. When one class dominates, accuracy measures how well your model predicts the boring majority, completely ignoring the critical minority class you actually care about.
+                </p>
+                <p>
+                    Let us demonstrate this directly with synthetic data using Python and scikit-learn. We will create an imbalanced binary dataset where 95% of samples are class 0 and 5% are class 1:
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code>from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.dummy import DummyClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# 1. Create a dataset with 95% majority and 5% minority
+X, y = make_classification(
+    n_samples=5000, n_features=10, n_informative=6,
+    weights=[0.95, 0.05], random_state=42
+)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# 2. Evaluate a dummy baseline that always predicts the majority class
+dummy = DummyClassifier(strategy='most_frequent')
+dummy.fit(X_train, y_train)
+y_pred_dummy = dummy.predict(X_test)
+
+print("Dummy Accuracy:", accuracy_score(y_test, y_pred_dummy))
+print("Dummy Confusion Matrix:\n", confusion_matrix(y_test, y_pred_dummy))</code></pre>
+
+                <div class="output-snippet">
+Dummy Accuracy: 0.945
+Dummy Confusion Matrix:
+ [[945   0]
+ [ 55   0]]
+                </div>
+
+                <p>
+                    Notice the output: the dummy model achieved <strong>94.5% accuracy</strong> without learning a single feature. In the confusion matrix, out of 55 actual positive cases (row 2), it predicted exactly 0.
+                </p>
+                <p>
+                    Now look at what happens when we train a standard <code>LogisticRegression</code> model on this exact same data:
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># 3. Train a standard Logistic Regression
+model = LogisticRegression(random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print("Model Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred, digits=4))</code></pre>
+
+                <div class="output-snippet">
+Model Accuracy: 0.948
+Confusion Matrix:
+ [[945   0]
+ [ 52   3]]
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0     0.9478    1.0000    0.9732       945
+           1     1.0000    0.0545    0.1034        55
+
+    accuracy                         0.9480      1000
+   macro avg     0.9739    0.5273    0.5383      1000
+weighted avg     0.9507    0.9480    0.9254      1000
+                </div>
+
+                <p>
+                    The model boasts <strong>94.8% accuracy</strong>. But look at the recall for class 1: just <strong>0.0545 (5.45%)</strong>. Out of 55 real positive events, it missed 52. If you reported only accuracy to your manager, you would claim a 95% success rate on a model that missed 95% of what it was built to catch.
+                </p>
+
+                <h3 id="how-to-fix-imbalanced-data">How to fix it:</h3>
+                <ul>
+                    <li><strong>Switch to Precision and Recall:</strong> <em>Precision</em> tells you: when the model flags a positive, how often is it right? <em>Recall</em> tells you: out of all real positives, how many did it catch? The <em>F1-score</em> balances both.</li>
+                    <li><strong>Use class weights:</strong> Penalize mistakes on the rare class heavily by passing <code>class_weight='balanced'</code>. Here is what happens when we enable it on our model:</li>
+                </ul>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># 4. Train with balanced class weights
+model_balanced = LogisticRegression(class_weight='balanced', random_state=42)
+model_balanced.fit(X_train, y_train)
+y_pred_b = model_balanced.predict(X_test)
+
+print("Balanced Accuracy:", accuracy_score(y_test, y_pred_b))
+print("Balanced Confusion Matrix:\n", confusion_matrix(y_test, y_pred_b))
+print("Class 1 Recall:", classification_report(y_test, y_pred_b, digits=4).splitlines()[3])</code></pre>
+
+                <div class="output-snippet">
+Balanced Accuracy: 0.773
+Balanced Confusion Matrix:
+ [[737 208]
+ [ 19  36]]
+Class 1 Recall:            1     0.1475    0.6545    0.2408        55
+                </div>
+
+                <p>
+                    Notice the trade-off: overall accuracy dropped from 94.8% to <strong>77.3%</strong>, but recall on the rare class jumped from 5.4% to <strong>65.45%</strong> (catching 36 out of 55 cases instead of just 3). That is a much more useful model in production.
+                </p>
+                <ul>
+                    <li><strong>Evaluate PR-AUC (Average Precision):</strong> Instead of ROC-AUC, use Precision-Recall AUC on heavily imbalanced datasets. It focuses on how well the model ranks the rare positive class.</li>
+                    <li><strong>Tune decision thresholds:</strong> By default, classifiers predict positive if probability exceeds 0.5. Lowering that threshold to 0.25 or 0.3 can catch far more minority cases when missing one is expensive.</li>
+                </ul>
+
+                <!-- 4. Reason 2: Data leakage -->
+                <h2 id="reason-2-data-leakage">Reason 2: Data leakage</h2>
+                <p>
+                    Data leakage happens when information from outside the training dataset sneaks into the model during training. It is the machine learning equivalent of studying with a stolen copy of tomorrow's exam paper: you get 100% on the test, but you do not actually understand the subject.
+                </p>
+                <p>
+                    Leakage typically appears in two forms:
+                </p>
+                <ul>
+                    <li><strong>Target leakage:</strong> A feature in your dataset directly or indirectly gives away the target outcome. For example, predicting patient disease diagnosis while including a feature like <code>prescription_issued_date</code>. In historical data, that field only exists for patients who tested positive. In production, when a new patient walks in, that date does not exist yet.</li>
+                    <li><strong>Preprocessing leakage:</strong> Calculating dataset statistics (like mean, variance, imputation medians, or TF-IDF vocabularies) across the entire dataset before calling <code>train_test_split</code>.</li>
+                </ul>
+
+                <p>
+                    Here is a concrete example of preprocessing leakage versus the correct approach using scikit-learn's <code>Pipeline</code>:
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code>import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+np.random.seed(42)
+X = np.random.randn(200, 5) * 10 + 50
+y = np.random.choice([0, 1], size=200)
+
+# WRONG: Fitting scaler on entire dataset before splitting (Leakage!)
+scaler_bad = StandardScaler()
+X_scaled_bad = scaler_bad.fit_transform(X)
+X_tr_b, X_te_b, y_tr_b, y_te_b = train_test_split(X_scaled_bad, y, test_size=0.2, random_state=42)
+
+# RIGHT: Fitting scaler strictly on training split via a Pipeline
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('model', LogisticRegression())
+])
+pipe.fit(X_tr, y_tr)
+
+print("Scaler mean across full data (leaked):", np.round(scaler_bad.mean_[:2], 2))
+print("Pipeline scaler mean on train split only:", np.round(pipe.named_steps['scaler'].mean_[:2], 2))</code></pre>
+
+                <div class="output-snippet">
+Scaler mean across full data (leaked): [49.86 49.77]
+Pipeline scaler mean on train split only: [50.38 49.43]
+                </div>
+
+                <p>
+                    When you fit a scaler or imputer on the full dataset, test data statistics (the 49.86 mean) subtly leak into the training process. When the model encounters fresh production data with a different distribution, performance deteriorates.
+                </p>
+
+                <h3 id="how-to-spot-and-fix-leakage">How to spot and fix data leakage:</h3>
+                <ul>
+                    <li><strong>Investigate suspiciously perfect scores:</strong> If an initial baseline scores 99.8% on complex tabular data, do not celebrate. Check feature importances immediately. You will usually find one feature doing 90% of the work.</li>
+                    <li><strong>Check the timeline of each feature:</strong> For every column in your table, ask: <em>"At the exact moment we need to make this prediction in production, will this number exist?"</em> If the answer is no, delete the feature.</li>
+                    <li><strong>Always use scikit-learn Pipelines:</strong> Wrap your scalers, one-hot encoders, and estimators in a <code>Pipeline</code> so all transformations are strictly fitted on training folds only.</li>
+                </ul>
+
+                <!-- 5. Reason 3: Overfitting -->
+                <h2 id="reason-3-overfitting">Reason 3: Overfitting</h2>
+                <p>
+                    Overfitting happens when a model is too flexible and memorizes the random noise, typos, and outliers in your training set rather than learning true general relationships.
+                </p>
+                <p>
+                    Think of a student preparing for a driver's license test who memorizes the exact answer letters (A, C, B, D) on practice quizzes instead of learning traffic laws. In the classroom, they score 100%. On the actual road, they run through a stop sign.
+                </p>
+                <p>
+                    Here is a quick demonstration of an unconstrained decision tree compared to a regularized tree:
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code>from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+X, y = make_classification(n_samples=500, n_features=20, n_informative=5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Unconstrained tree (memorizes training points)
+tree_deep = DecisionTreeClassifier(random_state=42)
+tree_deep.fit(X_train, y_train)
+print("Unconstrained Tree - Train Accuracy:", round(tree_deep.score(X_train, y_train), 4))
+print("Unconstrained Tree - Test Accuracy:", round(tree_deep.score(X_test, y_test), 4))
+
+# Regularized tree with max depth
+tree_reg = DecisionTreeClassifier(max_depth=3, random_state=42)
+tree_reg.fit(X_train, y_train)
+print("Regularized Tree - Train Accuracy:", round(tree_reg.score(X_train, y_train), 4))
+print("Regularized Tree - Test Accuracy:", round(tree_reg.score(X_test, y_test), 4))</code></pre>
+
+                <div class="output-snippet">
+Unconstrained Tree - Train Accuracy: 1.0
+Unconstrained Tree - Test Accuracy: 0.84
+Regularized Tree - Train Accuracy: 0.865
+Regularized Tree - Test Accuracy: 0.81
+                </div>
+
+                <p>
+                    The unconstrained tree achieves a perfect <strong>1.0 (100%)</strong> on training data, but drops to <strong>84%</strong> on unseen test samples. In complex models like deep neural networks or gradient boosted trees, this gap can widen into catastrophic failures on live production data.
+                </p>
+
+                <h3 id="how-to-prevent-overfitting">How to prevent overfitting:</h3>
+                <ul>
+                    <li><strong>Always compare train vs validation curves:</strong> If training score is 98% and validation is 84%, your model is overfitting.</li>
+                    <li><strong>Apply regularization:</strong> Add L1/L2 penalties to linear models, restrict tree depths (<code>max_depth</code>, <code>min_samples_leaf</code>), or add dropout to neural networks.</li>
+                    <li><strong>Use K-Fold Cross-Validation:</strong> Evaluate performance across 5 or 10 distinct subsets of your data to ensure the score is stable.</li>
+                    <li><strong>Implement early stopping:</strong> Halt training as soon as validation loss stops improving.</li>
+                </ul>
+
+                <!-- 6. Reason 4: Your test set does not look like real life -->
+                <h2 id="reason-4-your-test-set-does-not-look-like-real-life">Reason 4: Your test set does not look like real life</h2>
+                <p>
+                    When you call <code>train_test_split(X, y, random_state=42)</code>, it randomly shuffles rows into two buckets. In textbook examples, this works cleanly. In the real world, random splitting often hides severe distribution mismatches.
+                </p>
+                <p>Three common split mistakes destroy production models:</p>
+                <ol>
+                    <li><strong>Random splits on time-series data:</strong> If your data involves user behavior, stock prices, or sales over time, a random split leaks future information into past predictions. The model learns today's patterns using tomorrow's data. When deployed, it cannot peek into the future, and performance plummets. Always split time-ordered data chronologically (train on January–October, test on November–December).</li>
+                    <li><strong>Group leakage:</strong> If you are predicting hospital patient readmission and the same patient visited the clinic five times, a random split places three visits in training and two in testing. The model memorizes that specific patient's biometric quirks rather than learning general disease indicators. Use <code>GroupKFold</code> to ensure all rows from one user or patient stay together.</li>
+                    <li><strong>Concept drift and distribution shift:</strong> Real-world conditions change. A model trained on pre-pandemic consumer shopping habits failed when purchasing behavior shifted overnight. Seasonal shifts, inflation, UI redesigns, and new competitor products constantly change incoming feature distributions.</li>
+                </ol>
+
+                <h3 id="how-to-fix-distribution-issues">How to fix it:</h3>
+                <ul>
+                    <li><strong>Use time-based validation:</strong> If records have a timestamp, train on past data and evaluate on the most recent month.</li>
+                    <li><strong>Group by entity:</strong> Split by <code>customer_id</code>, <code>device_id</code>, or <code>store_id</code> so unseen entities are tested.</li>
+                    <li><strong>Monitor live feature distributions:</strong> Track incoming feature means and missing-value rates in production using drift monitoring tools or periodic statistical checks.</li>
+                </ul>
+
+                <!-- 7. Reason 5: Measuring the wrong thing -->
+                <h2 id="reason-5-measuring-the-wrong-thing-and-having-no-baseline">Reason 5: Measuring the wrong thing and having no baseline</h2>
+                <p>
+                    Data science is not just an algorithmic benchmark; it is an economic decision engine. Every false prediction carries a tangible business cost.
+                </p>
+                <p>Consider two real-world scenarios:</p>
+                <ul>
+                    <li><strong>Scenario A (Sepsis detection in an ICU):</strong> A false positive means a doctor runs an extra blood test. A false negative means a patient dies of an undetected infection. In this setting, you want maximum Recall—even if precision drops.</li>
+                    <li><strong>Scenario B (Email spam filter):</strong> A false positive moves an important job offer into the junk folder. A false negative lets an annoying promotional email sit in the inbox. Here, high Precision is critical: you cannot afford to hide legitimate mail.</li>
+                </ul>
+                <p>
+                    Raw accuracy treats both types of mistakes as identical. If you optimize for accuracy, the model treats a fatal missed diagnosis with the exact same weight as a minor false alarm.
+                </p>
+                <p>
+                    Furthermore, many teams deploy models without comparing them against a <strong>simple heuristic baseline</strong>. If a complex neural network achieves 91% accuracy, but a three-line rule (such as <em>"if user account age &lt; 2 days, flag as suspicious"</em>) achieves 89% accuracy with zero infrastructure overhead, the simpler rule is often the superior engineering choice.
+                </p>
+
+                <!-- 8. Pre-deployment checklist -->
+                <h2 id="a-simple-pre-deployment-checklist">A simple pre-deployment checklist</h2>
+                <p>
+                    Before moving any machine learning model from a notebook into staging or production, run through this 10-step verification list:
+                </p>
+                <ol>
+                    <li><strong>Did you calculate the majority-class baseline?</strong> Confirm your model beats a <code>DummyClassifier</code> on precision, recall, and PR-AUC, not just accuracy.</li>
+                    <li><strong>Are all preprocessing steps inside a Pipeline?</strong> Ensure scalers, encoders, and imputers are fitted strictly on training data.</li>
+                    <li><strong>Did you audit for target leakage?</strong> Verify that every feature will actually be available at the exact moment of real-time inference.</li>
+                    <li><strong>Did you inspect the confusion matrix?</strong> Check the raw counts of false positives and false negatives to understand what mistakes the model makes.</li>
+                    <li><strong>Did you evaluate train vs validation score gap?</strong> Confirm the model is not severely overfitting its training data.</li>
+                    <li><strong>Did you split chronologically or by entity if needed?</strong> Use time-based splits for sequential data and <code>GroupKFold</code> for grouped records.</li>
+                    <li><strong>Did you tune the classification threshold?</strong> Adjust the probability cutoff to align with the business cost of false alarms versus missed cases.</li>
+                    <li><strong>Did you test edge cases and missing inputs?</strong> Confirm your pipeline gracefully handles null values, unexpected category strings, and extreme outliers.</li>
+                    <li><strong>Did you check performance across subgroups?</strong> Verify that accuracy does not collapse on specific user segments, geographies, or device types.</li>
+                    <li><strong>Do you have a live monitoring plan?</strong> Set up alerts to detect input drift, latency spikes, and prediction distribution changes after launch.</li>
+                </ol>
+
+                <!-- 9. Conclusion -->
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    High accuracy in a notebook is a starting point, not a guarantee. Real-world machine learning succeeds when data scientists treat evaluation as an adversarial stress-test rather than a quest for a high percentage score.
+                </p>
+                <p>
+                    Keep these three takeaways in mind:
+                </p>
+                <ul>
+                    <li><strong>Accuracy without class context is meaningless:</strong> On imbalanced data, evaluate Precision, Recall, and PR-AUC.</li>
+                    <li><strong>Guard against leakage relentlessly:</strong> Never fit transformers on full datasets, and build every workflow with scikit-learn Pipelines.</li>
+                    <li><strong>Match metrics to business consequences:</strong> Optimize for the specific mistakes your users cannot afford to make.</li>
+                </ul>
+
+                <!-- 10. Library versions note -->
+                <p class="small text-muted border-top pt-3 mt-4">
+                    <strong>Environment & Verification:</strong> All code examples above were executed in Python 3.11 with <code>scikit-learn 1.2.2</code>, <code>numpy 1.23.5</code>, and <code>pandas 2.2.3</code> using synthetic data generated via <code>random_state=42</code>.
+                </p>
+
+                <!-- 11. FAQ -->
+                <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+                <h3 id="faq-what-is-good-accuracy">What is a good accuracy score in machine learning?</h3>
+                <p>
+                    A good score depends entirely on the problem and the class distribution. In balanced two-class tasks, 85% might be strong. But in rare event detection (such as catching 0.1% fraudulent logins), a model that simply predicts "no fraud" achieves 99.9% accuracy while doing zero useful work. Compare your score against a simple baseline before judging.
+                </p>
+
+                <h3 id="faq-why-is-accuracy-misleading">Why is accuracy misleading?</h3>
+                <p>
+                    Accuracy treats all errors equally and divides total correct predictions by total instances. When one class vastly outnumbers another, a model can completely ignore the minority class, produce a sky-high accuracy, and completely fail at the real goal.
+                </p>
+
+                <h3 id="faq-which-metric-for-imbalanced-data">Which metric should I use for imbalanced data?</h3>
+                <p>
+                    Use Precision, Recall, and the F1-score (or PR-AUC / Average Precision). If missing a positive case is costly (such as undetected cancer), optimize for high Recall. If false alarms cause operational headaches (such as locking good customer accounts), prioritize high Precision.
+                </p>
+
+                <h3 id="faq-how-do-i-detect-data-leakage">How do I detect data leakage?</h3>
+                <p>
+                    Watch for suspiciously perfect validation scores (like 99.9%), audit your feature list to ensure no column contains future information created after the event, and always encapsulate preprocessing steps inside a scikit-learn <code>Pipeline</code> so test data never influences training statistics.
+                </p>
+
+            </div>
+
+            <!-- Share Buttons Bar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4 p-3 rounded-4 border" style="background-color: var(--card-bg);">
+                <span class="fw-semibold text-secondary small"><i class="fas fa-share-alt text-primary me-2"></i>Found this helpful? Share with your network:</span>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="blog-share-btn" data-share="linkedin" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="x" target="_blank" rel="noopener" aria-label="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="whatsapp" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button type="button" class="blog-share-btn" data-share="copy" aria-label="Copy link to clipboard"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+
+            <!-- Author Bio Card -->
+            <div class="blog-author-card d-flex align-items-center gap-3 my-4">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;" decoding="async">
+                <div>
+                    <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
+                    <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer & AI Automation Developer. Crafting practical AI workflows and high-ranking developer guides.</p>
+                    <div class="d-flex gap-3 small">
+                        <a href="../about.html" class="text-primary fw-semibold text-decoration-none">About Me →</a>
+                        <a href="../contact.html" class="text-primary fw-semibold text-decoration-none">Get in Touch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prev / Next Post Navigation -->
+            <div class="d-flex justify-content-between align-items-center my-4 py-3 border-top border-bottom">
+                <a href="../blog.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="fas fa-arrow-left me-1"></i> All Articles
+                </a>
+                <a href="gemini-4-argon-explained.html" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                    Next: Gemini 4 Argon Explained <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+
+            <!-- Call to Action Banner -->
+            <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                <div class="mb-3">
+                    <i class="fas fa-chart-line fa-3x text-primary"></i>
+                </div>
+                <h3 class="fw-bold mb-2">Need an ML Model That Works on Real Data, Not Just in a Notebook?</h3>
+                <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                    From automated data cleaning pipelines and leak-free feature engineering to production-grade predictive models and interactive dashboards, explore my Data Science and ML services.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">Explore Data Science Services</a>
+                    <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Discuss Your Project</a>
+                </div>
+            </div>
+
+            <!-- Related Posts Row -->
+            <div class="mt-5 pt-4 border-top">
+                <h4 class="fw-bold mb-4 text-center">Related Articles</h4>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">Data Science</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="data-cleaning-mistakes-ml.html" class="text-decoration-none text-dark">5 Data Cleaning Mistakes That Ruin Your ML Model</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Garbage in, garbage out. Discover the preprocessing errors and data leakage traps that secretly destroy predictive accuracy.</p>
+                            <a href="data-cleaning-mistakes-ml.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card p-4 bg-white rounded-4 shadow-sm h-100 d-flex flex-column">
+                            <span class="badge bg-light text-primary border rounded-pill align-self-start mb-2">AI Automation</span>
+                            <h5 class="fw-bold mb-2">
+                                <a href="gemini-4-argon-explained.html" class="text-decoration-none text-dark">Gemini 4 Argon Explained: Google's New Frontier AI Model</a>
+                            </h5>
+                            <p class="text-secondary small mb-3 flex-grow-1">Google's new flagship model can write up to 1 million tokens in one response. Here is what that means and who can use it.</p>
+                            <a href="gemini-4-argon-explained.html" class="text-primary fw-bold small text-decoration-none mt-auto">Read article →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="site-footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <a class="footer-brand fw-bold fs-3 text-white text-decoration-none" href="../index.html">AY<span class="text-primary">.</span></a>
+                    <p class="text-secondary small mt-2 mb-3" style="max-width: 380px;">
+                        Data Science Specialist, Technical Writer & AI Automation Developer. Transforming data into insights and workflows into automated engines.
+                    </p>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill footer-status-badge">
+                        <span class="status-pulse-dot" aria-hidden="true"></span>
+                        <span class="small text-white-50">Currently open for freelance work</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Quick Links</h6>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 footer-nav-links">
+                        <a href="../index.html" class="footer-link">Home</a>
+                        <a href="../about.html" class="footer-link">About</a>
+                        <a href="../qualifications.html" class="footer-link">Qualifications</a>
+                        <a href="../projects.html" class="footer-link">Projects</a>
+                        <a href="../achievements.html" class="footer-link">Achievements</a>
+                        <a href="../services.html" class="footer-link">Services</a>
+                        <a href="../blog.html" class="footer-link">Blog</a>
+                        <a href="../contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <h6 class="text-uppercase fw-semibold small tracking-wider text-white-50 mb-3">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3 footer-social-links">
+                        <a href="https://www.linkedin.com/in/anubhav-yadav-data-science/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+    <script defer src="../polish.js"></script>
+    <script defer src="../mobile.js"></script>
+    <script defer src="../cursor.js"></script>
+</body>
+</html>
