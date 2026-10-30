@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>LLM Evals Explained: Measuring RAG and Q&amp;A Bots | Anubhav Yadav</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A beginner-friendly guide to LLM evals: metrics for RAG and Q&amp;A bots, LLM-as-judge pitfalls, failure analysis, and lessons from building LLM-EvalHub.">
+    <meta name="author" content="Anubhav Yadav">
+    <meta name="keywords" content="LLM evals, LLM evaluation, RAG evaluation, LLM-as-a-judge, evaluate Q&amp;A bot, RAG metrics, faithfulness context recall">
+    <link rel="canonical" href="https://anubhav-yadav-portfolio-website.vercel.app/blog/llm-evals-rag-qa-bots-guide.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/llm-evals-rag-qa-bots-guide.html">
+    <meta property="og:title" content="LLM Evals Explained: Measuring RAG and Q&amp;A Bots | Anubhav Yadav">
+    <meta property="og:description" content="A beginner-friendly guide to LLM evals: metrics for RAG and Q&amp;A bots, LLM-as-judge pitfalls, failure analysis, and lessons from building LLM-EvalHub.">
+    <meta property="og:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/blog/llm-evals-banner.png">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://anubhav-yadav-portfolio-website.vercel.app/blog/llm-evals-rag-qa-bots-guide.html">
+    <meta name="twitter:title" content="LLM Evals Explained: Measuring RAG and Q&amp;A Bots | Anubhav Yadav">
+    <meta name="twitter:description" content="A beginner-friendly guide to LLM evals: metrics for RAG and Q&amp;A bots, LLM-as-judge pitfalls, failure analysis, and lessons from building LLM-EvalHub.">
+    <meta name="twitter:image" content="https://anubhav-yadav-portfolio-website.vercel.app/images/blog/llm-evals-banner.png">
+
+    <!-- Article Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "LLM Evals Explained: How to Measure RAG and Q&A Bots (What I Learned Building LLM-EvalHub)",
+      "description": "A beginner-friendly guide to LLM evals: metrics for RAG and Q&A bots, LLM-as-judge pitfalls, failure analysis, and lessons from building LLM-EvalHub.",
+      "image": "https://anubhav-yadav-portfolio-website.vercel.app/images/blog/llm-evals-banner.png",
+      "author": {
+        "@type": "Person",
+        "name": "Anubhav Yadav",
+        "url": "https://anubhav-yadav-portfolio-website.vercel.app/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Anubhav Yadav"
+      },
+      "datePublished": "2026-10-30",
+      "dateModified": "2026-10-30",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anubhav-yadav-portfolio-website.vercel.app/blog/llm-evals-rag-qa-bots-guide.html"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are LLM evals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LLM evals are systematic tests that measure how well a large language model or RAG application performs against a curated dataset. Instead of relying on manual inspection of a few demo prompts, evals score responses across standardized dimensions such as factual correctness, grounding against reference context, and answer relevance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between RAG evaluation and normal LLM evaluation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard LLM evaluation assesses a standalone model's generative ability and pre-trained knowledge. RAG evaluation evaluates a multi-stage system: the retriever (context recall, context precision, hit rate), the generator (faithfulness, correctness), and system behavior (latency, token costs). A failure in RAG can stem from poor retrieval, hallucination, or prompt confusion."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I trust LLM-as-a-judge?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can use an LLM as a judge for semantic nuances, but you cannot trust it blindly. LLM judges exhibit well-documented biases such as favoring the first answer (position bias), rewarding longer answers (verbosity bias), and preferring outputs from their own model family (self-preference). To use a judge reliably, you must calibrate it against human labels using Cohen's kappa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many test cases do I need for an eval dataset?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can start testing with 20 to 30 carefully curated cases covering common queries, edge cases, and unanswerable questions. For statistical confidence when comparing two prompts or models, aim for at least 30 to 50 paired cases. Evaluating fewer than 8 to 10 cases yields high statistical noise and underpowered comparisons."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which metric should I start with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For RAG systems, start with retrieval hit rate (or context recall) and generation faithfulness. If your retriever fails to surface the right passage, your generator cannot succeed. If your generator invents facts not found in the context, your system produces hallucinations."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../chatbot.css">
+    <link rel="stylesheet" href="../polish.css">
+    <link rel="stylesheet" href="../mobile.css">
+    <link rel="stylesheet" href="../cursor.css">
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20FC9SL9G3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20FC9SL9G3');
+    </script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <style>
+        .post-container {
+            max-width: 780px;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .post-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 100px;
+        }
+        .post-content h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.85rem;
+            scroll-margin-top: 100px;
+        }
+        .post-cover-img {
+            height: auto;
+            max-height: 420px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 16px;
+        }
+        .toc-card {
+            border: 1px solid rgba(13, 110, 253, 0.15);
+            background-color: var(--card-bg);
+        }
+        .toc-link {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+        .toc-link:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .code-snippet {
+            background-color: #1a1d21;
+            color: #e6edf3;
+            border-radius: 12px;
+            padding: 18px 22px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        [data-theme="dark"] .code-snippet {
+            background-color: #121417;
+            border-color: rgba(61, 139, 253, 0.2);
+        }
+        .output-snippet {
+            background-color: #0d1117;
+            color: #7ee787;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 0.85rem;
+            border-left: 4px solid #238636;
+            margin-bottom: 1.5rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .summary-box {
+            border: 1px solid rgba(13, 110, 253, 0.25);
+            background: linear-gradient(145deg, rgba(13, 110, 253, 0.04), rgba(0, 212, 255, 0.04));
+            border-radius: 16px;
+            padding: 24px;
+            margin: 2rem 0;
+        }
+        [data-theme="dark"] .summary-box {
+            background: linear-gradient(145deg, rgba(61, 139, 253, 0.08), rgba(0, 242, 254, 0.05));
+            border-color: rgba(61, 139, 253, 0.35);
+        }
+        .custom-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid rgba(13, 110, 253, 0.15);
+        }
+        .custom-table {
+            width: 100%;
+            margin-bottom: 0;
+            font-size: 0.92rem;
+            border-collapse: collapse;
+        }
+        .custom-table th {
+            background-color: rgba(13, 110, 253, 0.08);
+            color: var(--text-color);
+            padding: 12px 16px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .custom-table th {
+            background-color: rgba(61, 139, 253, 0.16);
+        }
+        [data-theme="dark"] .custom-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .inline-diagram-wrapper {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(13, 110, 253, 0.18);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            text-align: center;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .toc-link, .btn, .project-card {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="mainNav">
+        <div class="container position-relative">
+            <a class="navbar-brand fw-bold" href="../index.html">AY.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../qualifications.html">Qualifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../blog.html" aria-current="page">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0 theme-toggle-item">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary rounded-circle" aria-label="Toggle dark/light theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3 my-2 my-lg-0 nav-hire-item">
+                        <a href="../services.html" class="btn btn-primary btn-sm rounded-pill px-3 py-1 nav-hire-btn">Hire Me</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-scroll-progress" id="navScrollProgress" aria-hidden="true"></div>
+        </div>
+    </nav>
+
+    <!-- Post Article Header -->
+    <article class="py-5 mt-5" id="main-content">
+        <div class="container post-container">
+            
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="../index.html" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../blog.html" class="text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item active text-secondary" aria-current="page">LLM Evals Explained</li>
+                </ol>
+            </nav>
+
+            <!-- Meta details -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="badge bg-light text-primary border rounded-pill px-3 py-2 fw-semibold">Data Science</span>
+                <span class="text-secondary small"><i class="far fa-calendar me-1"></i> 30 Oct 2026</span>
+                <span class="text-secondary small"><i class="far fa-clock me-1"></i> 12 min read</span>
+            </div>
+
+            <!-- Single Main H1 -->
+            <h1 class="fw-bold mb-3 display-5">LLM Evals Explained: How to Measure RAG and Q&amp;A Bots (What I Learned Building LLM-EvalHub)</h1>
+
+            <!-- Excerpt Subhead -->
+            <p class="lead text-secondary mb-4">
+                "Looks good to me" is not an evaluation. Here is how to measure RAG and Q&amp;A bots properly, avoid judge biases, and close the loop between diagnosing failures and testing improvements.
+            </p>
+
+            <!-- Post Cover Image -->
+            <div class="rounded-4 overflow-hidden mb-4 shadow-sm border">
+                <picture>
+                    <source srcset="../images/blog/llm-evals-banner.webp" type="image/webp">
+                    <img src="../images/blog/llm-evals-banner.png" 
+                         alt="Illustration of an LLM evaluation pipeline with metrics and an improvement loop" 
+                         class="post-cover-img" 
+                         width="1200" 
+                         height="630">
+                </picture>
+            </div>
+
+            <!-- Table of Contents Container -->
+            <div class="toc-card p-4 rounded-4 shadow-sm mb-5" id="toc-container">
+                <h6 class="fw-bold text-primary mb-3"><i class="fas fa-list-ul me-2"></i> Table of Contents</h6>
+                <div id="toc-list" class="d-flex flex-column gap-2 small">
+                    <!-- Injected by script -->
+                </div>
+            </div>
+
+            <!-- Article Body Content -->
+            <div class="post-content text-secondary">
+
+                <!-- 1. Introduction -->
+                <h2 id="introduction-why-looks-good-in-the-demo-is-not-an-evaluation">Introduction: Why "It Looks Good in the Demo" Is Not an Evaluation</h2>
+                <p>
+                    When building a Retrieval-Augmented Generation (RAG) app or Q&amp;A bot, testing often begins casually: you draft a prompt, index two PDF documents, ask three questions in a web playground, and decide it works.
+                </p>
+                <p>
+                    Then real users arrive. Someone asks an edge-case query that retrieves the wrong policy chunk. Someone asks about an unmentioned topic, and the bot invents a fictional procedure. Tweak the prompt to patch that single query, and you risk silently breaking ten queries that worked yesterday. Checking three hand-picked prompts is an impression, not an evaluation.
+                </p>
+                <p>
+                    I am still learning this discipline myself, and building tools is how I am learning it. To explore these challenges empirically, I built an open-source evaluation platform: <a href="https://github.com/AnubhavDataSci25/LLM-EvalHub" target="_blank" rel="noopener noreferrer"><strong>LLM-EvalHub</strong></a>. In this guide, I share the practical lessons I learned: how to isolate pipeline layers, what metrics really mean, how to avoid LLM judge biases, and how to verify whether your modifications actually helped.
+                </p>
+
+                <!-- 2. Quick Summary Box -->
+                <h2 id="quick-summary-llm-evals-in-60-seconds">LLM evals in 60 seconds</h2>
+                <div class="summary-box">
+                    <ul class="mb-0">
+                        <li class="mb-2"><strong>The Core Shift:</strong> Traditional unit tests check binary pass/fail assertions. LLM evals measure distributions of open-ended quality over structured datasets because there is rarely one single correct string.</li>
+                        <li class="mb-2"><strong>Separate the Layers:</strong> Measure retrieval (did you surface the right passage?) independently from generation (did the model answer faithfully from it?). Conflating them leads to tuning prompts for retrieval failures.</li>
+                        <li class="mb-2"><strong>Unavailable Is Not Zero:</strong> If a test case lacks a reference answer, report correctness as unavailable rather than 0.0. Averaging missing values as zeroes corrupts model rankings.</li>
+                        <li class="mb-2"><strong>Calibrate LLM Judges:</strong> Judges suffer from position bias, verbosity inflation, and self-preference. Measure agreement against blind human labels using Cohen's kappa (&kappa;) before trusting their scores.</li>
+                        <li class="mb-0"><strong>Close the Product Loop:</strong> A leaderboard only shows who scored highest. A complete evaluation loop diagnoses failure root causes, applies configuration fixes, and verifies before/after verdicts.</li>
+                    </ul>
+                </div>
+
+                <!-- 3. What are LLM evals -->
+                <h2 id="what-are-llm-evals">What Are LLM Evals, and How Are They Different from Classic Testing?</h2>
+                <p>
+                    In deterministic software, unit tests check exact equality (<code>assert calculate_tax(100) == 10.0</code>). In classic machine learning, models predict fixed class labels evaluated against loss functions on test splits.
+                </p>
+                <p>
+                    Generative LLMs break both paradigms:
+                </p>
+                <ul>
+                    <li><strong>Open-ended outputs:</strong> If the ground truth is <em>"The warranty lasts for two years,"</em> a model might respond with <em>"Your device is protected for 24 months."</em> String equality fails despite perfect semantic accuracy.</li>
+                    <li><strong>Stochastic generation:</strong> Unless temperature is zero with fixed seeds, wording varies across runs.</li>
+                    <li><strong>Multi-dimensional quality:</strong> An answer can be polite and well-phrased while being factually wrong, or accurate while blowing past latency budgets.</li>
+                </ul>
+                <p>
+                    An <strong>LLM eval</strong> is a systematic testing framework consisting of: a curated dataset of inputs and reference answers, a harness executing candidates through identical prompt templates, and scoring evaluators that quantify performance across multiple dimensions.
+                </p>
+
+                <!-- 4. Three layers of RAG -->
+                <h2 id="the-three-layers-of-a-rag-or-qa-system">The Three Layers of a RAG or Q&amp;A System to Measure</h2>
+                <p>
+                    When a Q&amp;A bot produces a flawed answer, beginners almost always blame the generative model. They rewrite the prompt, add capital letters saying <em>"BE FACTUAL,"</em> and test again.
+                </p>
+                <p>
+                    In reality, a RAG application is a multi-stage pipeline. A failure at the retrieval step corrupts every downstream calculation. To measure a system cleanly, you must evaluate three distinct layers:
+                </p>
+                <ol>
+                    <li><strong>Retrieval Layer:</strong> Did the search mechanism (vector similarity, BM25, or hybrid search) locate the right passages from your knowledge base? If the retriever surfaces irrelevant text, the generator has no factual grounding.</li>
+                    <li><strong>Generation Layer:</strong> Given the retrieved context, did the LLM extract the correct facts, answer the question directly, and avoid inventing external claims?</li>
+                    <li><strong>System Layer:</strong> How does the system behave end-to-end? What is the wall-clock latency, token consumption, cost per query, and error rate?</li>
+                </ol>
+
+                <!-- Inline SVG Diagram: 3 Layers -->
+                <div class="inline-diagram-wrapper">
+                    <svg viewBox="0 0 740 220" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="diaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0d6efd"/>
+                                <stop offset="100%" stop-color="#00d4ff"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="740" height="220" rx="12" fill="var(--card-bg)" stroke="rgba(13, 110, 253, 0.2)" stroke-width="1"/>
+                        
+                        <!-- Flow Lines -->
+                        <line x1="110" y1="80" x2="190" y2="80" stroke="#3d8bfd" stroke-width="2.5"/>
+                        <line x1="290" y1="80" x2="370" y2="80" stroke="#3d8bfd" stroke-width="2.5"/>
+                        <line x1="470" y1="80" x2="550" y2="80" stroke="#3d8bfd" stroke-width="2.5"/>
+                        <polygon points="190,80 182,75 182,85" fill="#3d8bfd"/>
+                        <polygon points="370,80 362,75 362,85" fill="#3d8bfd"/>
+                        <polygon points="550,80 542,75 542,85" fill="#3d8bfd"/>
+
+                        <!-- Nodes -->
+                        <rect x="20" y="55" width="90" height="50" rx="8" fill="#1e242d" stroke="#3d8bfd" stroke-width="1.5"/>
+                        <text x="65" y="85" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8f9fa">Question</text>
+
+                        <rect x="190" y="55" width="100" height="50" rx="8" fill="#1e242d" stroke="#3d8bfd" stroke-width="1.5"/>
+                        <text x="240" y="85" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8f9fa">Retriever</text>
+                        <rect x="180" y="125" width="120" height="26" rx="6" fill="rgba(13, 110, 253, 0.15)" stroke="#3d8bfd" stroke-width="1"/>
+                        <text x="240" y="142" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#00d4ff">Hit Rate, Recall</text>
+
+                        <rect x="370" y="55" width="100" height="50" rx="8" fill="#1e242d" stroke="#3d8bfd" stroke-width="1.5"/>
+                        <text x="420" y="85" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8f9fa">Context</text>
+                        <rect x="360" y="125" width="120" height="26" rx="6" fill="rgba(13, 110, 253, 0.15)" stroke="#3d8bfd" stroke-width="1"/>
+                        <text x="420" y="142" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#00d4ff">Context Precision</text>
+
+                        <rect x="550" y="55" width="100" height="50" rx="8" fill="#1e242d" stroke="#00f2fe" stroke-width="1.5"/>
+                        <text x="600" y="85" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#f8f9fa">Generator</text>
+                        <rect x="535" y="125" width="130" height="26" rx="6" fill="rgba(0, 242, 254, 0.15)" stroke="#00f2fe" stroke-width="1"/>
+                        <text x="600" y="142" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#00f2fe">Faithfulness, F1</text>
+
+                        <rect x="20" y="175" width="700" height="30" rx="6" fill="rgba(108, 117, 125, 0.1)" stroke="rgba(108, 117, 125, 0.3)"/>
+                        <text x="370" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="500" fill="#adb5bd">
+                            SYSTEM LEVEL: Latency (ms), Token Usage, Provider Errors
+                        </text>
+                    </svg>
+                </div>
+
+                <!-- 5. Core Metrics Explained Simply -->
+                <h2 id="the-core-metrics-explained-simply">The Core Metrics, Explained Simply with Analogies</h2>
+                <p>
+                    Rather than relying on abstract formulas, here are the primary evaluation metrics explained with simple analogies:
+                </p>
+                <ul>
+                    <li><strong>Correctness:</strong> <em>The exam answer key.</em> Does the generated response state the same factual conclusions as the reference answer? Measured via token F1 overlap or a judge model.</li>
+                    <li><strong>Answer Relevance:</strong> <em>The job interview response.</em> Did the candidate answer the specific question asked, or did they pivot into an unrelated topic?</li>
+                    <li><strong>Faithfulness (Grounding):</strong> <em>The open-book test rule.</em> Are all claims in the response directly supported by the retrieved passages? If the model includes claims absent from the text, it is ungrounded (a hallucination).</li>
+                    <li><strong>Context Recall:</strong> <em>The detective's evidence sweep.</em> Did the retriever find all the necessary clues to answer the question completely?</li>
+                    <li><strong>Context Precision:</strong> <em>The signal-to-noise ratio.</em> Are the relevant snippets ranked at the very top of the retrieved context, or are they buried beneath irrelevant chunks?</li>
+                    <li><strong>Retrieval Hit Rate:</strong> <em>The library search.</em> Did the expected source document appear anywhere in the top-$k$ returned results? Binary: yes (1.0) or no (0.0).</li>
+                    <li><strong>Latency:</strong> <em>The stopwatch.</em> Total elapsed time before the user receives the answer.</li>
+                </ul>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>What it Checks</th>
+                                <th>Required Inputs</th>
+                                <th>Evaluator Kind</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>correctness</code></td>
+                                <td>Factual agreement with reference</td>
+                                <td>Question, Prediction, Expected Answer</td>
+                                <td>Deterministic (F1) or Judge</td>
+                            </tr>
+                            <tr>
+                                <td><code>answer_relevance</code></td>
+                                <td>Whether response addresses the question</td>
+                                <td>Question, Prediction</td>
+                                <td>Deterministic or Judge</td>
+                            </tr>
+                            <tr>
+                                <td><code>faithfulness</code></td>
+                                <td>Claims supported by retrieved context</td>
+                                <td>Retrieved Context, Prediction</td>
+                                <td>Deterministic or Judge</td>
+                            </tr>
+                            <tr>
+                                <td><code>context_precision</code></td>
+                                <td>Rank-weighted quality of chunks</td>
+                                <td>Retrieved Context, Expected Answer</td>
+                                <td>Deterministic</td>
+                            </tr>
+                            <tr>
+                                <td><code>context_recall</code></td>
+                                <td>Whether answer was retrievable</td>
+                                <td>Retrieved Context, Expected Answer</td>
+                                <td>Deterministic</td>
+                            </tr>
+                            <tr>
+                                <td><code>retrieval_hit_rate</code></td>
+                                <td>Presence of expected source in top-k</td>
+                                <td>Retrieved Sources, Expected Sources</td>
+                                <td>Deterministic</td>
+                            </tr>
+                            <tr>
+                                <td><code>latency</code></td>
+                                <td>Wall-clock execution time against budget</td>
+                                <td>Harness timer</td>
+                                <td>Measured (numeric ms)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 6. Deterministic vs LLM Judge -->
+                <h2 id="deterministic-metrics-vs-llm-as-a-judge">Deterministic Metrics vs. LLM-as-a-Judge</h2>
+                <p>
+                    Every evaluation workflow must choose between deterministic algorithms and model judges:
+                </p>
+                <ul>
+                    <li><strong>Deterministic (Lexical) Metrics:</strong> Fast, 100% reproducible, zero API cost, and executable offline. If you run them ten times, you get the exact same score ten times. However, because they rely on token overlap, they penalize valid paraphrases and synonyms.</li>
+                    <li><strong>LLM-as-a-Judge:</strong> A frontier model understands semantic equivalence and nuance. It recognizes that <em>"24 months"</em> matches <em>"2 years."</em> However, LLM judges are non-deterministic, cost money, add latency, and introduce well-documented cognitive biases.</li>
+                </ul>
+
+                <!-- 7. Traps of LLM judges and Calibration -->
+                <h2 id="the-traps-of-llm-judges-and-how-to-calibrate-them">The Traps of LLM Judges and How to Calibrate Them</h2>
+                <p>
+                    Using an LLM to evaluate another LLM introduces three well-documented systematic failure modes:
+                </p>
+                <ol>
+                    <li><strong>Position / Order Bias:</strong> In pairwise comparisons, judges systematically favor whichever candidate response appears first in the prompt (<a href="https://arxiv.org/abs/2306.05685" target="_blank" rel="noopener noreferrer">Zheng et al., 2023</a>; <a href="https://arxiv.org/abs/2305.17926" target="_blank" rel="noopener noreferrer">Wang et al., 2023</a>). Reversing the order often flips the outcome.</li>
+                    <li><strong>Verbosity Bias:</strong> Judges award higher scores to wordy, elaborate responses, even when a concise two-sentence answer was more direct and accurate.</li>
+                    <li><strong>Self-Preference:</strong> Models exhibit an empirical preference for outputs generated by models from their own family (<a href="https://arxiv.org/abs/2404.13076" target="_blank" rel="noopener noreferrer">Panickssery et al., 2024</a>).</li>
+                </ol>
+
+                <h3 id="calibrating-with-cohens-kappa">Calibrating with Cohen's Kappa</h3>
+                <p>
+                    To determine whether an LLM judge is reliable on your specific domain, you must <strong>calibrate</strong> it against human labels using <strong>Cohen's kappa (&kappa;)</strong> (<a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener noreferrer">Cohen, 1960</a>).
+                </p>
+                <p>
+                    Simple percentage agreement is misleading because two raters will agree on many cases purely by chance. Cohen's kappa subtracts that chance agreement:
+                </p>
+                <p>
+                    $$\kappa = \frac{P_o - P_e}{1 - P_e}$$
+                </p>
+                <p>
+                    Where $P_o$ is observed agreement, and $P_e$ is expected chance agreement. By convention (<a href="https://doi.org/10.2307/2529310" target="_blank" rel="noopener noreferrer">Landis and Koch, 1977</a>), &kappa; below 0.40 indicates poor agreement, 0.41–0.60 is moderate, 0.61–0.80 is substantial, and above 0.81 is near-perfect. Note that these bands are conventional heuristic boundaries, not universal ground truth. Furthermore, when calibrated against a single human, &kappa; measures agreement with that individual annotator, not absolute ground truth.
+                </p>
+                <p>
+                    <strong>The Small-Sample Guard:</strong> When evaluating fewer than 10 labeled cases, calculating &kappa; is statistically unreliable. A sound harness must report <code>insufficient_labels</code> rather than fabricating agreement.
+                </p>
+
+                <!-- 8. Building a good test set -->
+                <h2 id="building-a-good-test-set">Building a Good Test Set: Real Cases, Gold Passages, and Unanswerables</h2>
+                <p>
+                    An evaluation is only as trustworthy as the test set behind it. A robust benchmark requires four elements:
+                </p>
+                <ol>
+                    <li><strong>Realistic User Queries:</strong> Include conversational queries with typos, domain slang, and multi-part questions rather than sanitized synthetic phrases.</li>
+                    <li><strong>Gold Reference Answers:</strong> Verified factual answers approved by domain experts.</li>
+                    <li><strong>Reference Gold Passages:</strong> The exact source documents or paragraph IDs that contain the answer. This isolates retrieval evaluation from generation.</li>
+                    <li><strong>Deliberately Unanswerable Questions:</strong> Include 15% to 20% queries that your documentation cannot answer. A reliable production bot must decline politely (<em>"I do not have that information in my documentation"</em>). If your dataset lacks unanswerable queries, you can never penalize guessing or reward refusal.</li>
+                </ol>
+
+                <!-- 9. Why Did It Fail? Retrieval vs Generation -->
+                <h2 id="why-did-it-fail-retrieval-vs-generation">Why Did It Fail? Failure Taxonomy and Counterfactual Attribution</h2>
+                <p>
+                    Scoring 0.20 on correctness does not explain how to fix the application. In LLM-EvalHub, we formalized a <strong>ten-category failure taxonomy</strong> executed in a fixed chronological order:
+                </p>
+                <ul>
+                    <li><code>provider_error</code> / <code>timeout</code> / <code>empty_response</code>: Infrastructure and API failures.</li>
+                    <li><code>poor_retrieval</code>: Supporting context was never retrieved from the knowledge base.</li>
+                    <li><code>hallucination</code>: Generated content was absent from context and contradicted the reference.</li>
+                    <li><code>unsupported_claim</code>: Answer is partially grounded, but introduces unsupported assertions.</li>
+                    <li><code>incorrect_answer</code> / <code>missing_information</code> / <code>low_relevance</code>: Well-formed response that is wrong, incomplete, or off-topic.</li>
+                    <li><code>high_latency</code>: Correct response that exceeded the latency budget.</li>
+                </ul>
+                <p>
+                    <strong>Why ordering matters:</strong> If retrieval failed, your model had no factual basis to answer. Blaming the model for a hallucination sends engineers to edit prompt templates when the real fix is tuning chunking or retrieval parameters.
+                </p>
+
+                <h3 id="counterfactual-failure-attribution">Counterfactual Failure Attribution</h3>
+                <p>
+                    Observational scores describe what failed, but do not prove causality. Counterfactual attribution intervenes by re-running the failed work unit under controlled conditions:
+                </p>
+                <ul>
+                    <li><strong>ORIGINAL:</strong> The recorded failure from the standard run.</li>
+                    <li><strong>ORACLE_CONTEXT:</strong> Retrieved passages are replaced with gold reference text. Does the model succeed when retrieval is perfect?</li>
+                    <li><strong>NO_CONTEXT:</strong> Context is completely removed. Does the model answer from pre-trained memory alone?</li>
+                </ul>
+
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Verdict</th>
+                                <th>Condition Evidence</th>
+                                <th>Root Cause &amp; Remediation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>RETRIEVAL_CAUSED</code></td>
+                                <td>ORIGINAL fails &and; ORACLE passes</td>
+                                <td><strong>Retrieval bottleneck:</strong> Model succeeds with gold context. Fix retrieval: tune top-$k$, chunk overlap, or use hybrid search.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GENERATION_CAUSED</code></td>
+                                <td>ORIGINAL fails &and; ORACLE fails &and; NO_CONTEXT fails</td>
+                                <td><strong>Generation bottleneck:</strong> Model failed even with gold context. Refine prompt instructions, add few-shot examples, or upgrade model.</td>
+                            </tr>
+                            <tr>
+                                <td><code>PARAMETRIC_KNOWLEDGE</code></td>
+                                <td>ORIGINAL fails &and; ORACLE fails &and; NO_CONTEXT passes</td>
+                                <td><strong>Context-ignoring behavior:</strong> Model answered correctly without context, but was distracted by it. Enforce strict quote-based grounding constraints.</td>
+                            </tr>
+                            <tr>
+                                <td><code>NOT_CONTEXT_DEPENDENT</code></td>
+                                <td>ORIGINAL passes &and; NO_CONTEXT passes</td>
+                                <td><strong>Not testing RAG:</strong> Model answered from memory alone. Reported transparently so it is not mistaken for a retrieval success.</td>
+                            </tr>
+                            <tr>
+                                <td><code>NOT_ATTRIBUTABLE</code></td>
+                                <td>Missing reference context or trial error</td>
+                                <td>Cannot establish causality without gold reference passages. Safely reported rather than inferred.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 10. Did my change really help? -->
+                <h2 id="did-my-change-really-help">Did My Change Really Help? Noise and Statistics for Beginners</h2>
+                <p>
+                    If your average score moves from 0.74 to 0.77 across 20 cases after a prompt change, did your bot actually improve?
+                </p>
+                <p>
+                    Because LLM generation is non-deterministic, a +0.03 nudge on 20 samples can easily happen by pure chance. To prevent chasing noise, use four basic statistical practices:
+                </p>
+                <ul>
+                    <li><strong>Paired Comparisons:</strong> Always compare models or prompts on the <em>exact same test cases</em>. Subtracting paired results removes query difficulty variance.</li>
+                    <li><strong>Bootstrap Confidence Intervals:</strong> Take 1,000 random resamples of paired differences to compute a 95% confidence interval. If the interval crosses zero (e.g., <code>[-0.02, +0.08]</code>), the difference is not statistically significant.</li>
+                    <li><strong>Permutation Tests:</strong> Randomly flip delta signs across thousands of permutations to calculate the probability of seeing that score by chance. If $p > 0.05$, count the result as "unchanged."</li>
+                    <li><strong>Flag Underpowered Samples:</strong> Testing on fewer than 8 to 10 cases lacks statistical power to distinguish real effects from noise. Explicitly flag small samples rather than presenting them as conclusive.</li>
+                </ul>
+
+                <!-- 11. The Improvement Loop -->
+                <h2 id="the-improvement-loop">The Improvement Loop: From Measurement to Better Systems</h2>
+                <p>
+                    Most evaluation platforms stop at a static leaderboard. A production workflow requires closing the loop:
+                </p>
+
+                <!-- Inline SVG Diagram: 6-Stage Loop -->
+                <div class="inline-diagram-wrapper">
+                    <svg viewBox="0 0 740 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3d8bfd"/>
+                                <stop offset="100%" stop-color="#00f2fe"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="740" height="180" rx="12" fill="var(--card-bg)" stroke="rgba(13, 110, 253, 0.2)" stroke-width="1"/>
+                        
+                        <line x1="60" y1="90" x2="680" y2="90" stroke="#2a3240" stroke-width="3"/>
+                        <line x1="60" y1="90" x2="680" y2="90" stroke="url(#loopGrad)" stroke-width="3" stroke-dasharray="10 5"/>
+
+                        <circle cx="70" cy="90" r="28" fill="#181d26" stroke="#3d8bfd" stroke-width="2"/>
+                        <text x="70" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00d4ff">1</text>
+                        <text x="70" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f8f9fa">Evaluate</text>
+
+                        <circle cx="190" cy="90" r="28" fill="#181d26" stroke="#3d8bfd" stroke-width="2"/>
+                        <text x="190" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00d4ff">2</text>
+                        <text x="190" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f8f9fa">Compare</text>
+
+                        <circle cx="310" cy="90" r="28" fill="#181d26" stroke="#3d8bfd" stroke-width="2"/>
+                        <text x="310" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00d4ff">3</text>
+                        <text x="310" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f8f9fa">Diagnose</text>
+
+                        <circle cx="430" cy="90" r="28" fill="#181d26" stroke="#3d8bfd" stroke-width="2"/>
+                        <text x="430" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00d4ff">4</text>
+                        <text x="430" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f8f9fa">Recommend</text>
+
+                        <circle cx="550" cy="90" r="28" fill="#181d26" stroke="#3d8bfd" stroke-width="2"/>
+                        <text x="550" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00d4ff">5</text>
+                        <text x="550" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f8f9fa">Improve</text>
+
+                        <circle cx="670" cy="90" r="28" fill="#181d26" stroke="#00f2fe" stroke-width="2"/>
+                        <text x="670" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#00f2fe">6</text>
+                        <text x="670" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#00f2fe">Re-evaluate</text>
+
+                        <text x="370" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#3d8bfd" letter-spacing="1">
+                            THE CLOSED EVALUATION LOOP
+                        </text>
+                    </svg>
+                </div>
+
+                <ol>
+                    <li><strong>Evaluate:</strong> Run frozen experiment configurations over structured datasets across candidate models.</li>
+                    <li><strong>Compare:</strong> Compute paired deltas, sample sizes, and bootstrap confidence intervals against your baseline.</li>
+                    <li><strong>Diagnose:</strong> Trace failures through the taxonomy to identify root causes with linked evidence.</li>
+                    <li><strong>Recommend:</strong> Rank models using multi-objective weighting that preserves metric magnitudes.</li>
+                    <li><strong>Improve:</strong> Generate a follow-up experiment containing an isolated configuration tweak.</li>
+                    <li><strong>Re-evaluate:</strong> Re-run test cases (or failed cases only) to verify the fix solved the issue without regressions.</li>
+                </ol>
+
+                <!-- 12. What I learned building LLM-EvalHub -->
+                <h2 id="what-i-learned-building-llm-evalhub">What I Learned Building LLM-EvalHub</h2>
+                <p>
+                    Building <a href="https://github.com/AnubhavDataSci25/LLM-EvalHub" target="_blank" rel="noopener noreferrer"><strong>LLM-EvalHub</strong></a> taught me that the hardest part of evaluation is ensuring your instruments do not mislead you. Here are three lessons from the repository:
+                </p>
+
+                <h3 id="lesson-1-unavailable-is-not-zero">Lesson 1: Unavailable Is Not Zero</h3>
+                <p>
+                    In an early prototype, when a dataset row lacked a reference answer, the harness assigned correctness a score of <code>0.0</code>. When evaluating open-ended datasets, every model's aggregate score collapsed. Conflating "unknown" with "wrong" distorts model comparisons. If prerequisite data is missing, a metric must return <code>available: false</code> with a reason string and be omitted from aggregate means.
+                </p>
+
+                <h3 id="lesson-2-one-tokenizer-for-metrics-and-retrieval">Lesson 2: One Shared Tokenizer for Metrics and Retrieval</h3>
+                <p>
+                    Originally, deterministic metrics stemmed words (mapping "refunds" to "refund"), while the lexical retriever did not. The retriever failed to match documents, but <code>context_recall</code> credited them as matched. The metric and retriever were actively disagreeing about word identity.
+                </p>
+                <p>
+                    Unifying both behind a single shared tokenizer (<code>app/core/text.py</code>) produced significant improvements on the <code>rag_qa</code> benchmark pack:
+                </p>
+                <ul>
+                    <li><code>context_recall</code> moved from <strong>0.53 to 0.91</strong>.</li>
+                    <li><code>poor_retrieval</code> failure cases dropped from <strong>12 down to 2</strong>.</li>
+                </ul>
+
+                <h3 id="lesson-3-magnitude-preserving-normalization">Lesson 3: Magnitude-Preserving Normalization</h3>
+                <p>
+                    My first recommender applied min-max normalization across candidate models. When comparing two models, min-max collapses every metric to <code>0.0</code> and <code>1.0</code>. A tiny difference (0.90 vs. 0.88) was penalized identically to a huge gap (0.90 vs. 0.30). The solution was using measured quality values directly and scoring unbounded latency as <code>fastest / this</code>.
+                </p>
+
+                <h3 id="architecture-and-honest-limitations">Architecture and Honest Limitations</h3>
+                <p>
+                    LLM-EvalHub features a FastAPI backend, React + Vite frontend, LangGraph execution graph per work unit, 77 offline unit tests, six benchmark packs, and an offline test provider. Stated limitations: single-tenant without authentication, lexical metrics that under-credit paraphrasing, text-layer PDF parsing only, and single-annotator calibration that measures agreement with that person rather than absolute truth.
+                </p>
+
+                <!-- 13. Runnable Python Code Examples -->
+                <h2 id="hands-on-runnable-python-eval-code">Hands-on Runnable Python Code Examples</h2>
+                <p>
+                    Below are three self-contained Python examples demonstrating these concepts without external API keys.
+                </p>
+
+                <h3 id="example-1-deterministic-harness">Example 1: Deterministic Eval Harness ("Unavailable, Never Zero")</h3>
+                <p>
+                    This harness scores token F1 and retrieval hit rate at $k=2$. Case 6 lacks a reference answer; it is marked unavailable and omitted from the aggregate mean.
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># Example 1: Token F1 & Hit Rate with "Unavailable, Never Zero"
+def tokenize(text):
+    return [w.strip(".,!?:;\"'()[]{}") for w in text.lower().split() if w.strip(".,!?:;\"'()[]{}")]
+
+def token_f1(pred, ref):
+    p_tok, r_tok = tokenize(pred), tokenize(ref)
+    if not p_tok or not r_tok:
+        return 0.0
+    common = set(p_tok) & set(r_tok)
+    if not common:
+        return 0.0
+    prec = sum(min(p_tok.count(t), r_tok.count(t)) for t in common) / len(p_tok)
+    rec = sum(min(p_tok.count(t), r_tok.count(t)) for t in common) / len(r_tok)
+    return 2 * (prec * rec) / (prec + rec)
+
+def score_case(pred, ref, ret_srcs, exp_srcs, k=2):
+    corr = {"available": True, "score": round(token_f1(pred, ref), 4)} if ref else {"available": False, "score": None}
+    hit = 1.0 if any(s in ret_srcs[:k] for s in exp_srcs) else 0.0
+    return {"correctness": corr, "hit_rate": hit}
+
+dataset = [
+    ("Refunds take 3 to 5 business days.", "Refunds process within 3-5 business days.", ["doc_bill"], ["doc_bill"]),
+    ("Reset password from settings page.", "Go to settings to reset your password.", ["doc_auth"], ["doc_auth"]),
+    ("We support USD, EUR, and GBP.", "Supported currencies: USD, EUR, GBP.", ["doc_cur"], ["doc_cur"]),
+    ("Enterprise SLA guarantees 99.9% uptime.", "99.9% uptime SLA for enterprise.", ["doc_faq"], ["doc_sla"]),
+    ("Contact support at support@example.com", "Email support@example.com for help.", ["doc_help"], ["doc_help"]),
+    ("What are your business hours?", None, ["doc_hours"], ["doc_hours"]),  # Open-ended!
+]
+
+res = [score_case(p, r, ret, exp) for p, r, ret, exp in dataset]
+valid_c = [r["correctness"]["score"] for r in res if r["correctness"]["available"]]
+honest_mean = sum(valid_c) / len(valid_c)
+flawed_mean = sum(r["correctness"]["score"] or 0.0 for r in res) / len(res)
+
+print(f"Total: {len(res)}, Valid: {len(valid_c)}, Unavailable: {len(res) - len(valid_c)}")
+print(f"Honest Mean Correctness: {honest_mean:.4f}")
+print(f"Flawed (Zero-Filled) Mean: {flawed_mean:.4f}")
+print(f"Hit Rate @ k=2: {sum(r['hit_rate'] for r in res) / len(res):.4f}")</code></pre>
+
+                <div class="output-snippet">Total: 6, Valid: 5, Unavailable: 1
+Honest Mean Correctness: 0.5114
+Flawed (Zero-Filled) Mean: 0.4262
+Hit Rate @ k=2: 0.8333</div>
+
+                <h3 id="example-2-cohens-kappa-calibration">Example 2: Cohen's Kappa Judge Calibration with Safeguard</h3>
+                <p>
+                    This function calculates Cohen's kappa between human labels and judge ratings, returning <code>insufficient_labels</code> when $N &lt; 10$.
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># Example 2: Cohen's Kappa with Small-Sample Safeguard
+def cohen_kappa(rater_a, rater_b, min_labels=10):
+    n = len(rater_a)
+    if n < min_labels:
+        return {"status": "insufficient_labels", "kappa": None, "n": n}
+    
+    cats = sorted(list(set(rater_a) | set(rater_b)))
+    po = sum(1 for a, b in zip(rater_a, rater_b) if a == b) / n
+    pe = sum((rater_a.count(c) / n) * (rater_b.count(c) / n) for c in cats)
+    kappa = (po - pe) / (1.0 - pe) if pe < 1.0 else 1.0
+    return {"status": "ok", "po": round(po, 4), "pe": round(pe, 4), "kappa": round(kappa, 4), "n": n}
+
+# Small sample (N=6) triggers safeguard
+small_human = ["PASS", "PASS", "FAIL", "PASS", "FAIL", "PASS"]
+small_judge = ["PASS", "PASS", "PASS", "PASS", "FAIL", "PASS"]
+print("Small Sample (<10):", cohen_kappa(small_judge, small_human))
+
+# Calibrated sample (N=15)
+human = ["PASS", "PASS", "FAIL", "PASS", "FAIL", "PASS", "FAIL", "PASS", "PASS", "FAIL", "PASS", "FAIL", "PASS", "PASS", "FAIL"]
+judge = ["PASS", "PASS", "PASS", "PASS", "FAIL", "PASS", "FAIL", "PASS", "PASS", "FAIL", "FAIL", "FAIL", "PASS", "PASS", "FAIL"]
+res = cohen_kappa(judge, human)
+print(f"Calibrated Sample (N={res['n']}): Observed Po={res['po']}, Chance Pe={res['pe']}, Kappa={res['kappa']}")</code></pre>
+
+                <div class="output-snippet">Small Sample (<10): {'status': 'insufficient_labels', 'kappa': None, 'n': 6}
+Calibrated Sample (N=15): Observed Po=0.8667, Chance Pe=0.52, Kappa=0.7222</div>
+
+                <h3 id="example-3-paired-bootstrap-ci">Example 3: Paired Bootstrap Confidence Interval on Metric Deltas</h3>
+                <p>
+                    This snippet compares Model A and Model B across 12 paired cases using 1,000 bootstrap resamples to check if an improvement is statistically significant.
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># Example 3: Paired Bootstrap Confidence Interval (NumPy)
+import numpy as np
+np.random.seed(42)
+
+scores_a = np.array([0.72, 0.85, 0.60, 0.91, 0.45, 0.78, 0.88, 0.65, 0.52, 0.94, 0.70, 0.82])
+scores_b = np.array([0.78, 0.88, 0.62, 0.95, 0.58, 0.85, 0.90, 0.71, 0.50, 0.96, 0.77, 0.89])
+
+deltas = scores_b - scores_a
+boot_means = [np.mean(np.random.choice(deltas, size=len(deltas), replace=True)) for _ in range(1000)]
+
+ci_lower = np.percentile(boot_means, 2.5)
+ci_upper = np.percentile(boot_means, 97.5)
+is_sig = (ci_lower > 0) or (ci_upper < 0)
+
+print(f"Observed Mean Delta: {np.mean(deltas):+.4f}")
+print(f"95% Bootstrap CI: [{ci_lower:+.4f}, {ci_upper:+.4f}]")
+print(f"Verdict: {'Statistically Significant Improvement' if is_sig else 'Inconclusive / Unchanged'}")</code></pre>
+
+                <div class="output-snippet">Observed Mean Delta: +0.0475
+95% Bootstrap CI: [+0.0275, +0.0675]
+Verdict: Statistically Significant Improvement</div>
+
+                <p class="small text-muted border-top pt-3 mt-4">
+                    <strong>Environment &amp; Verification:</strong> Executed in Python 3.11.9 with NumPy 1.23.5. All printed outputs reflect real execution runs.
+                </p>
+
+                <!-- 14. Starter Checklist -->
+                <h2 id="a-starter-checklist-to-evaluate-your-rag-bot">A Starter Checklist to Evaluate Your Own RAG or Q&amp;A Bot</h2>
+                <p>
+                    Before pushing prompt changes or updating your retrieval settings, run through this 10-point checklist:
+                </p>
+                <ol>
+                    <li><strong>Curate a frozen benchmark dataset:</strong> Prepare at least 30 representative test cases before modifying prompts.</li>
+                    <li><strong>Measure retrieval and generation separately:</strong> Track context recall and hit rate independently from answer correctness.</li>
+                    <li><strong>Include unanswerable queries:</strong> Ensure at least 15% of queries cannot be answered by your knowledge base to test refusal behavior.</li>
+                    <li><strong>Treat missing reference scores as unavailable:</strong> Never average missing reference answers as 0.0.</li>
+                    <li><strong>Unify tokenization logic:</strong> Verify that tokenizer stemming and word boundaries match across retriever and metrics.</li>
+                    <li><strong>Calibrate LLM judges against human labels:</strong> Verify Cohen's kappa (&kappa; &gt; 0.60) before accepting judge scores.</li>
+                    <li><strong>Test for judge order and verbosity bias:</strong> Swap candidate positions to ensure judges do not merely prefer the first or longest response.</li>
+                    <li><strong>Use paired comparisons:</strong> Evaluate candidates on identical test cases rather than independent batches.</li>
+                    <li><strong>Compute confidence intervals:</strong> Verify that the 95% bootstrap interval on metric deltas does not cross zero before declaring victory.</li>
+                    <li><strong>Link failures to evidence:</strong> Ensure every failure record stores the question, retrieved context, and raw model response.</li>
+                </ol>
+
+                <!-- 15. Try It Yourself -->
+                <h2 id="try-it-yourself-quick-start">Try It Yourself: Quick Start with LLM-EvalHub</h2>
+                <p>
+                    You can spin up LLM-EvalHub locally in a few minutes without a GPU or paid API keys using the offline deterministic test provider:
+                </p>
+
+                <pre class="code-snippet overflow-x-auto my-3"><code># 1. Start the FastAPI backend
+cd backend
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp ../.env.example .env
+uvicorn app.main:app --reload --port 8000
+
+# 2. In a second terminal, start the React frontend
+cd frontend
+npm install
+npm run dev</code></pre>
+
+                <p>
+                    Open <code>http://localhost:5173</code> in your browser. Under <strong>Benchmark packs</strong>, install <strong>RAG QA</strong> (creates a 32-case dataset and indexes its handbook), select two models, and run an evaluation.
+                </p>
+                <p>
+                    <em>Note: The deterministic test provider exercises the pipeline offline; it is not a benchmark of model reasoning capability.</em>
+                </p>
+                <p>
+                    The project is open-source under the MIT license. Feel free to open issues or contribute benchmark packs on GitHub: <a href="https://github.com/AnubhavDataSci25/LLM-EvalHub" target="_blank" rel="noopener noreferrer"><strong>github.com/AnubhavDataSci25/LLM-EvalHub</strong></a>.
+                </p>
+
+                <!-- 16. Frequently Asked Questions -->
+                <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+                <h3 id="faq-what-are-llm-evals">What are LLM evals?</h3>
+                <p>
+                    LLM evals are structured benchmarks that score how well a language model or RAG application handles a curated set of prompts. Rather than judging an application by checking a few queries manually, evals measure statistical distributions of factual correctness, relevance, grounding, and latency across hundreds of test cases.
+                </p>
+
+                <h3 id="faq-difference-rag-evals">What is the difference between RAG evaluation and normal LLM evaluation?</h3>
+                <p>
+                    Standard LLM evals test a model's raw pre-trained knowledge and instruction-following capabilities. RAG evals test a multi-component system: the retriever (which chunks and surfaces context), the generator (which synthesizes an answer strictly from that context), and the operational latency of the combined pipeline.
+                </p>
+
+                <h3 id="faq-trust-llm-judge">Can I trust LLM-as-a-judge?</h3>
+                <p>
+                    Only after calibrating it. LLM judges understand semantic nuance, but they exhibit proven biases toward verbosity, answer ordering, and outputs generated by their own model family. You should always measure your judge's agreement against human-annotated samples using Cohen's kappa before using it as a decision-maker.
+                </p>
+
+                <h3 id="faq-how-many-test-cases">How many test cases do I need?</h3>
+                <p>
+                    You can start debugging with 20 to 30 well-constructed cases. To detect whether a prompt modification or model switch made a statistically significant improvement, aim for at least 30 to 50 paired cases. Testing on fewer than 8 to 10 cases yields high statistical noise and underpowered comparisons.
+                </p>
+
+                <h3 id="faq-which-metric-to-start">Which metric should I start with?</h3>
+                <p>
+                    For RAG applications, start by measuring <strong>retrieval hit rate</strong> (or context recall) and <strong>faithfulness</strong>. If your retriever does not locate the right document, your generator cannot succeed. If your generator creates claims unsupported by the retrieved text, you have a hallucination problem.
+                </p>
+
+                <!-- 17. Conclusion & CTA -->
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    Moving from interactive playgrounds to reliable production systems requires trading casual impressions for empirical measurements. Keep these three core principles in mind:
+                </p>
+                <ul>
+                    <li><strong>Isolate your components:</strong> Never debug a generator before verifying that your retriever delivered the required context.</li>
+                    <li><strong>Report missing data honestly:</strong> Never score unannotated test cases as zero; report unknown values as unavailable to keep aggregate leaderboards honest.</li>
+                    <li><strong>Verify improvements with statistics:</strong> Use paired comparisons and confidence intervals so you stop optimizing for random model stochasticity.</li>
+                </ul>
+
+                <!-- Call to Action Banner -->
+                <div class="mt-5 p-4 p-md-5 bg-white rounded-4 shadow-sm border text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-chart-pie fa-3x text-primary"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">Need Your RAG App or Chatbot Evaluated with Real Evidence?</h3>
+                    <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+                        From designing leak-free benchmark datasets and calibrating evaluation judges to diagnosing retrieval bottlenecks and building reliable AI workflows, explore my Data Science and AI Automation services.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="../services.html" class="btn btn-primary rounded-pill px-4 shadow">Explore AI &amp; Data Services</a>
+                        <a href="../contact.html" class="btn btn-outline-dark rounded-pill px-4">Discuss Your Project</a>
+                    </div>
+                </div>
+
+                <!-- 18. References -->
+                <h2 id="references" class="mt-5">References</h2>
+                <ul class="small text-secondary">
+                    <li class="mb-2">
+                        Cohen, J. (1960). "A Coefficient of Agreement for Nominal Scales." <em>Educational and Psychological Measurement</em>, 20(1), 37–46. <a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener noreferrer">doi:10.1177/001316446002000104</a>.
+                    </li>
+                    <li class="mb-2">
+                        Landis, J. R., &amp; Koch, G. G. (1977). "The Measurement of Observer Agreement for Categorical Data." <em>Biometrics</em>, 33(1), 159–174. <a href="https://doi.org/10.2307/2529310" target="_blank" rel="noopener noreferrer">doi:10.2307/2529310</a>.
+                    </li>
+                    <li class="mb-2">
+                        Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." <em>NeurIPS 2023</em>. <a href="https://arxiv.org/abs/2306.05685" target="_blank" rel="noopener noreferrer">arXiv:2306.05685</a>.
+                    </li>
+                    <li class="mb-2">
+                        Wang, P., Li, L., Chen, L., et al. (2023). "Large Language Models are not Fair Evaluators." <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2305.17926" target="_blank" rel="noopener noreferrer">arXiv:2305.17926</a>.
+                    </li>
+                    <li class="mb-2">
+                        Panickssery, A., Bowman, S. R., &amp; Shi, F. (2024). "LLM Evaluators Recognize and Favor Their Own Generations." <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2404.13076" target="_blank" rel="noopener noreferrer">arXiv:2404.13076</a>.
+                    </li>
+                    <li class="mb-2">
+                        Es, S., James, J., Espinosa-Anke, L., &amp; Schockaert, S. (2023). "RAGAS: Automated Evaluation of Retrieval Augmented Generation." <em>arXiv preprint</em>. <a href="https://arxiv.org/abs/2309.15217" target="_blank" rel="noopener noreferrer">arXiv:2309.15217</a>.
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Share Buttons Bar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 my-4 p-3 rounded-4 border" style="background-color: var(--card-bg);">
+                <span class="fw-semibold text-secondary small"><i class="fas fa-share-alt text-primary me-2"></i>Found this helpful? Share with your network:</span>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="blog-share-btn" data-share="linkedin" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="x" target="_blank" rel="noopener" aria-label="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="blog-share-btn" data-share="whatsapp" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button type="button" class="blog-share-btn" data-share="copy" aria-label="Copy link to clipboard"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+
+            <!-- Author Bio Card -->
+            <div class="blog-author-card d-flex align-items-center gap-3 my-4">
+                <img src="../images/profile.jpg" alt="Anubhav Yadav" class="rounded-circle" width="70" height="70" loading="lazy" style="object-fit: cover;" decoding="async">
+                <div>
+                    <h5 class="fw-bold mb-1">Anubhav Yadav</h5>
+                    <p class="text-secondary small mb-2">Data Science Specialist, Technical Writer &amp; AI Automation Developer. Building practical RAG systems, evaluation tools, and developer-centric technical guides.</p>
+                    <div class="d-flex gap-3 small">
+                        <a href="../about.html" class="text-primary fw-semibold text-decoration-none">About Me →</a>
+                        <a href="../contact.html" class="text-primary fw-semibold text-decoration-none">Get in Touch →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prev / Next Post Navigation -->
+            <div class="d-flex justify-content-between align-items-center my-4 py-3 border-top border-bottom">
+                <a href="../blog.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="fas fa-arrow-left me-1"></i> All Articles
+                </a>
+                <a href="ml-model-95-accuracy-still-fails.html" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                    Next: Why ML Models with 95% Accuracy Fail <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h4 class="fw-bold mb-2">Anubhav Yadav</h4>
+                    <p class="text-secondary small mb-0">Data Science Specialist, Technical Writer &amp; AI Automation Developer.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <a href="https://linkedin.com/in/anubhav-yadav-data-science" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AnubhavDataSci25" target="_blank" rel="noopener" class="footer-social-icon" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:anubhavyadav77ff@gmail.com" class="footer-social-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/919105579003?text=Hi%20Anubhav%2C%20I%20visited%20your%20portfolio." target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 Anubhav Yadav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Auto-Generate Table of Contents -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headings = document.querySelectorAll('.post-content h2');
+            const tocList = document.getElementById('toc-list');
+            const tocContainer = document.getElementById('toc-container');
+
+            if (headings.length > 0 && tocList) {
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        heading.id = `section-${index + 1}`;
+                    }
+                    const link = document.createElement('a');
+                    link.className = 'toc-link';
+                    link.href = `#${heading.id}`;
+                    link.innerHTML = `<i class="fas fa-chevron-right text-primary me-2" style="font-size: 0.75rem;"></i>${heading.textContent}`;
+                    tocList.appendChild(link);
+                });
+            } else if (tocContainer) {
+                tocContainer.style.display = 'none';
+            }
+        });
+    </script>
+    <script defer src="../polish.js"></script>
+    <script defer src="../mobile.js"></script>
+    <script defer src="../cursor.js"></script>
+</body>
+</html>
